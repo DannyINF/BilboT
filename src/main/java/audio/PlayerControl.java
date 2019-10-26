@@ -61,6 +61,8 @@ public class PlayerControl implements Command {
             return String.format("%02d:%02d", minutes, seconds);
     }
 
+    //TODO: Fix output
+
     //Prefix for all commands: /music
     //Example:  .play
     //Current commands
