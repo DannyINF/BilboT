@@ -110,19 +110,11 @@ public class PlayerControl implements Command {
                 boolean inAction = false;
                 try {
                     botchannel = event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()).getVoiceState().getChannel();
-                    System.out.println("BOTCHANNEL: " + botchannel.getName());
-                    System.out.println("USERCHANNEL: " + userVoiceChannel.getName());
-                    System.out.println(botchannel.equals(userVoiceChannel));
                 } catch (Exception ignored) {
                 }
                 if (botchannel != null) {
                     if (userVoiceChannel.equals(botchannel)) {
                         addon_available.add(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()));
-                        System.out.println("ID-SELF: " + event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()));
-                        System.out.println("----------------------------------------");
-                        for (Member member : addon_available) {
-                            System.out.println(event.getJDA().getSelfUser().getAsTag() + "-ADDON AVAILABLE (ONLINE-SelfSameVoice): " + member.getUser().getAsTag());
-                        }
                         inAction = true;
                     }
                 }
@@ -130,18 +122,10 @@ public class PlayerControl implements Command {
                     for (Member m : music_addons) {
                         if (m.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
                             addon_available.add(addon_available.size(), m);
-                            System.out.println("----------------------------------------");
-                            for (Member member : addon_available) {
-                                System.out.println(event.getJDA().getSelfUser().getAsTag() + "-ADDON AVAILABLE (OFFLINE): " + member.getUser().getAsTag());
-                            }
                         } else if (m.getOnlineStatus().equals(OnlineStatus.ONLINE)) {
                             if (m.getVoiceState().inVoiceChannel()) {
                                 if (m.getVoiceState().getChannel().equals(userVoiceChannel)) {
                                     addon_available.add(0, m);
-                                    System.out.println("----------------------------------------");
-                                    for (Member member : addon_available) {
-                                        System.out.println(event.getJDA().getSelfUser().getAsTag() + "-ADDON AVAILABLE (ONLINE-InSameVoice): " + member.getUser().getAsTag());
-                                    }
                                     inAction = true;
                                 }
                             } else {
@@ -150,22 +134,11 @@ public class PlayerControl implements Command {
                                 } else {
                                     addon_available.add(0, m);
                                 }
-                                System.out.println("----------------------------------------");
-                                for (Member member : addon_available) {
-                                    System.out.println(event.getJDA().getSelfUser().getAsTag() + "-ADDON AVAILABLE (ONLINE-Only): " + member.getUser().getAsTag());
-                                }
                             }
                         }
                     }
                 }
-
-                System.out.println("----------------------------------------");
-                for (Member m : addon_available) {
-                    System.out.println(event.getJDA().getSelfUser().getAsTag() + "-ADDON AVAILABLE (CONCLUSION): " + m.getUser().getAsTag());
-                }
-
                 if (!addon_available.isEmpty()) {
-                    System.out.println("FINALBOT: " + addon_available.get(0).getUser().getAsTag());
                     switch (addon_available.get(0).getUser().getId()) {
                         case "486085339530788894":
                             embed.setFooter("Player: Thorin", null);
