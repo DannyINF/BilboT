@@ -10,9 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Updating to v.2.3.2">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/target/classes/util/SECRETS.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/commands/cmdBotinfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/cmdBotinfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/core/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/core/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/core/commandParser$commandContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/core/commandParser$commandContainer.class" afterDir="false" />
@@ -280,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572090418838</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updating to v.2.3.2">
+      <created>1572095063618</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1572095063618</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">

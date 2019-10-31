@@ -85,38 +85,68 @@ class Main {
     private static void addCommands() {
         commandHandler.commands.put("map", new cmdMap());
         commandHandler.commands.put("maps", new cmdMap());
+
         commandHandler.commands.put("help", new cmdHelp());
+
         commandHandler.commands.put("botinfo", new cmdBotinfo());
+
         commandHandler.commands.put("rules", new cmdRules());
+
         commandHandler.commands.put("clear", new cmdClear());
+
         commandHandler.commands.put("talk", new cmdTalk());
+
         commandHandler.commands.put("xp", new cmdXp());
+
         commandHandler.commands.put("language", new cmdLanguage());
+
         commandHandler.commands.put("zitate", new cmdZitat());
+
         commandHandler.commands.put("report", new cmdReport());
+
         commandHandler.commands.put("search", new cmdSearch());
+
         commandHandler.commands.put("setprofile", new cmdSetProfile());
+
         commandHandler.commands.put("profile", new cmdProfile());
+
         commandHandler.commands.put("deleteroles", new cmdDeleteRoles());
+
         commandHandler.commands.put("coins", new cmdCoins());
+
         commandHandler.commands.put("music", new PlayerControl());
+
         commandHandler.commands.put("intro", new cmdIntro());
+
         commandHandler.commands.put("ban", new cmdBan());
+
         commandHandler.commands.put("kick", new cmdKick());
+
         commandHandler.commands.put("event", new cmdEvent());
+
         commandHandler.commands.put("newspaper", new cmdNewspaper());
+
         commandHandler.commands.put("jackpot", new cmdJackpot());
+
         commandHandler.commands.put("channel", new cmdChannel());
+
         commandHandler.commands.put("transfer", new cmdTransfer());
+
         commandHandler.commands.put("statistik", new cmdStats());
         commandHandler.commands.put("statistic", new cmdStats());
         commandHandler.commands.put("statistics", new cmdStats());
+
         commandHandler.commands.put("stats", new cmdStats());
+
         commandHandler.commands.put("roles", new cmdRole());
         commandHandler.commands.put("role", new cmdRole());
+
         commandHandler.commands.put("server modules", new cmdModules_Server());
+
         commandHandler.commands.put("server optimalsettings", new cmdOptimalSettings_Server());
+
         commandHandler.commands.put("server language", new cmdLanguage_Server());
+
         commandHandler.commands.put("exil", new cmdExil());
 
         commandHandler.commands.put("edit", new cmdEdit());
