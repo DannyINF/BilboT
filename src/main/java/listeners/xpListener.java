@@ -125,9 +125,8 @@ public class xpListener extends ListenerAdapter {
             answer2 = databaseHandler.database(event.getGuild().getId(), "select", arguments2);
 
             try {
-                assert answer2 != null;
                 coins = Integer.parseInt(answer2[0]);
-            } catch (Exception e) {
+            } catch (NullPointerException e) {
                 coins = 0;
             }
 
