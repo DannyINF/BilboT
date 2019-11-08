@@ -19,6 +19,7 @@ import static java.lang.Boolean.FALSE;
 
 
 public class joinListener extends ListenerAdapter {
+    //TODO: make the verification system reaction-based
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         String status1 = null;
         try {

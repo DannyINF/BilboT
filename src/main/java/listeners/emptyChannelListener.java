@@ -14,6 +14,8 @@ import java.util.TimerTask;
 
 public class emptyChannelListener extends ListenerAdapter {
 
+    //TODO: iclude this into music function
+
     private static void shouldLeaveFunction(Guild g, VoiceChannel c) {
         new Timer().schedule(new TimerTask() {
             @Override

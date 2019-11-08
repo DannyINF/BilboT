@@ -9,7 +9,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class cmdZitat implements Command {
+public class cmdQuote implements Command {
     @Override
     public boolean called() {
         return false;

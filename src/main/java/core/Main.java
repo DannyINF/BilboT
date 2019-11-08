@@ -26,6 +26,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+//TODO: Tidying up and simplifying the usage of databases
+//TODO: make command to export database to JSON-file for transfer
+
 class Main {
     private static JDABuilder builder;
 
@@ -34,7 +37,7 @@ class Main {
         builder.setToken(SECRETS.TOKEN);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.3.2"));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.3.3"));
 
         addListeners();
         addCommands();
@@ -100,7 +103,7 @@ class Main {
 
         commandHandler.commands.put("language", new cmdLanguage());
 
-        commandHandler.commands.put("zitate", new cmdZitat());
+        commandHandler.commands.put("zitate", new cmdQuote());
 
         commandHandler.commands.put("report", new cmdReport());
 

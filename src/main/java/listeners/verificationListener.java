@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class verificationListener extends ListenerAdapter {
+    //TODO: make it reaction-based
     @Override
     public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
         if (event.getMessage().getContentRaw().toLowerCase().equals("ich bin kein bot!")) {

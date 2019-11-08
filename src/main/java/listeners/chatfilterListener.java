@@ -34,7 +34,7 @@ public class chatfilterListener extends ListenerAdapter {
                     TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
                     String[] ban = {"pisser", "hure", "fick", "fotze", "brezelsalzabpopler",
                             "inzest", "bastard", "spast", "wichser", "wixxer", "\u5350", "afd",
-                            "cdu", "csu", "spd", "npd", "nsdap", "hitler"};
+                            "cdu", "csu", "spd", "npd", "nsdap", "hitler", "hodenkobold"};
                     StringBuilder sb = new StringBuilder();
                     boolean writeReport = false;
                     for (String filter : ban) {

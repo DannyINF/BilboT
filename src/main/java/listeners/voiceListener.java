@@ -186,15 +186,8 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
     }
 
     @Override
-    public void handleCombinedAudio(@NotNull CombinedAudio combinedAudio) {
-        byte[] b = combinedAudio.getAudioData(100);
-        for (byte by : b) {
-            System.out.println(by);
-        }
-    }
+    public void handleCombinedAudio(@NotNull CombinedAudio combinedAudio) { }
 
     @Override
-    public void handleUserAudio(@NotNull UserAudio userAudio) {
-
-    }
+    public void handleUserAudio(@NotNull UserAudio userAudio) { }
 }

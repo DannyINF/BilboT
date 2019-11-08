@@ -15,6 +15,8 @@ import java.util.Objects;
 
 public class introListener extends ListenerAdapter {
 
+    //TODO: include ScreamBot into BilboT
+
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
         SET_CHANNEL set_channel = CHANNEL.getSetChannel("spam", event.getGuild().getId());

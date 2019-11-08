@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class databaseHandler {
 
+    //TODO: simplify the handler and make it more viable for different commands
+
     /**
      * Databases:
      * <p>

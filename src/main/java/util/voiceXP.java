@@ -37,22 +37,24 @@ public class voiceXP {
                     giveXP.giveXPToMember(member, guild, xp);
 
                     //statistics
+                    if (membercount>1) {
+                        String[] arguments1 = {"users", "id = '" + member.getUser().getId() + "'", "1", "voicetime"};
+                        String[] answer1;
+                        answer1 = databaseHandler.database(guild.getId(), "select", arguments1);
+                        int voicetime;
+                        try {
+                            assert answer1 != null;
+                            voicetime = Integer.parseInt(answer1[0]);
+                        } catch (Exception e) {
+                            voicetime = 0;
+                        }
 
-                    String[] arguments1 = {"users", "id = '" + member.getUser().getId() + "'", "1", "voicetime"};
-                    String[] answer1;
-                    answer1 = databaseHandler.database(guild.getId(), "select", arguments1);
-                    int voicetime;
-                    try {
-                        assert answer1 != null;
-                        voicetime = Integer.parseInt(answer1[0]);
-                    } catch (Exception e) {
-                        voicetime = 0;
+                        int newVoicetime = voicetime + 1;
+
+                        String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "voicetime", String.valueOf(newVoicetime)};
+                        databaseHandler.database(guild.getId(), "update", arguments3);
                     }
 
-                    int newVoicetime = voicetime + 1;
-
-                    String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "voicetime", String.valueOf(newVoicetime)};
-                    databaseHandler.database(guild.getId(), "update", arguments3);
                 }
             }
             //}

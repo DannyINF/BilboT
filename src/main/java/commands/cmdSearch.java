@@ -216,6 +216,7 @@ public class cmdSearch implements Command {
                     clean = Jsoup.clean((doc.html().replace("\"", "").split("href=/watch?v=")[1].split("class")[0]), wl);
                     url = "https://i.ytimg.com/vi/" + clean + "/maxresdefault.jpg";
                     clean = "https://www.youtube.com/watch?v=" + clean;
+                    //TODO: finish this
                     break;
             }
 

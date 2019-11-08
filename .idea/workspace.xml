@@ -12,9 +12,18 @@
     <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Updating to v.2.3.2">
       <change afterPath="$PROJECT_DIR$/target/classes/util/SECRETS.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdZitat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdQuote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/emptyChannelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/emptyChannelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/core/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/core/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/core/commandParser$commandContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/core/commandParser$commandContainer.class" afterDir="false" />
     </list>
@@ -295,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572516934507</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixing bug where users couldn't receive coins on level-up">
+      <created>1573242308254</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1573242308254</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -322,7 +338,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updating to v.2.3.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating to v.2.3.2" />
+    <MESSAGE value="Fixing bug where users couldn't receive coins on level-up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing bug where users couldn't receive coins on level-up" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
