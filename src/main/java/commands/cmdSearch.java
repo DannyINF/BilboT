@@ -122,7 +122,6 @@ public class cmdSearch implements Command {
                         }
                     }, 4000);
                     siteurl = "https://" + country + ".wikipedia.org/wiki/" + sb.toString();
-                    System.out.println(siteurl);
                     // connecting to wikipedia
                     doc = Jsoup.connect(siteurl).get();
 
@@ -163,7 +162,6 @@ public class cmdSearch implements Command {
                         }
                     }, 4000);
                     siteurl = "https://lotr.fandom.com/wiki/" + sb.toString();
-                    System.out.println(siteurl);
                     // connecting to wikipedia
                     doc = Jsoup.connect(siteurl).get();
 
@@ -205,7 +203,6 @@ public class cmdSearch implements Command {
                         }
                     }, 4000);
                     siteurl = "https://www.youtube.com/results?search_query=" + sb.toString();
-                    System.out.println(siteurl);
                     // connecting to youtube
                     doc = Jsoup.connect(siteurl).get();
                     wl = Whitelist.simpleText();

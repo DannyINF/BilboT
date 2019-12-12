@@ -29,10 +29,6 @@ public class cmdRole implements Command {
         answer = core.databaseHandler.database("serversettings", "select", arguments);
 
         List<String> role_list;
-        assert answer != null;
-        for (String str : answer) {
-            System.out.println(str);
-        }
         if (answer[0] == null) {
             role_list = new ArrayList<>();
         } else {
@@ -93,7 +89,6 @@ public class cmdRole implements Command {
                             sb.append(str).append("<#>");
                         }
                         sb.append(create_role.getName().toLowerCase()).append(":").append(create_role.getId());
-                        System.out.println(sb.toString());
                         String[] arguments2 = {"ranks", "id = '" + event.getGuild().getId() + "'", "custom", "'" + sb.toString() + "'"};
                         try {
                             core.databaseHandler.database("serversettings", "update", arguments2);

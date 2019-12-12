@@ -13,11 +13,9 @@ import java.util.Objects;
 public class verificationListener extends ListenerAdapter {
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
-        System.out.println("Reaction!");
         if (event.getGuild().getDefaultChannel().equals(event.getChannel())) {
             Message msg;
             msg = event.getGuild().getDefaultChannel().retrieveMessageById(event.getMessageId()).complete();
-            System.out.println(msg.getContentRaw());
             if (msg.getContentRaw().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
                 String[] arguments2 = {"users", "id = '" + event.getUserId() + "'", "verified", "TRUE"};
                 try {
@@ -41,6 +39,5 @@ public class verificationListener extends ListenerAdapter {
                 }
             }
         }
-
     }
 }

@@ -173,8 +173,7 @@ public class selfJoinListener extends ListenerAdapter {
         for (String id : ids) {
             try {
                 tc.createPermissionOverride(Objects.requireNonNull(event.getGuild().getMemberById(id))).setAllow(channelperm).queue();
-            } catch (Exception e) {
-                System.out.println("Addon isn't on this server.");
+            } catch (Exception ignored) {
             }
         }
 

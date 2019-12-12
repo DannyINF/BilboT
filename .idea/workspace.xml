@@ -9,9 +9,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Updating to v.2.4.2">
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing a typo and a bug">
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdPropToDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdPropToDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -320,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576174977026</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixing a typo and a bug">
+      <created>1576176922963</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1576176922963</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -351,7 +362,8 @@
     <MESSAGE value="Updating to v.2.4.0" />
     <MESSAGE value="Updating to v.2.4.1" />
     <MESSAGE value="Updating to v.2.4.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating to v.2.4.2" />
+    <MESSAGE value="Fixing a typo and a bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing a typo and a bug" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

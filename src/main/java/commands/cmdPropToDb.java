@@ -32,7 +32,6 @@ public class cmdPropToDb implements Command {
                 String gid = g.getId();
                 for (Member m : g.getMembers()) {
                     String mid = m.getUser().getId();
-                    System.out.println(m.getEffectiveName());
                     try {
                         inputxp = new FileInputStream("Properties/XP/xp.properties");
                     } catch (FileNotFoundException e) {
@@ -88,11 +87,6 @@ public class cmdPropToDb implements Command {
                     } catch (Exception e) {
                         nextlogin = "0";
                     }
-                    System.out.println(xp);
-                    System.out.println(level);
-                    System.out.println(coins);
-                    System.out.println(streak);
-                    System.out.println(nextlogin);
 
                     try {
                         inputxp.close();
@@ -124,7 +118,6 @@ public class cmdPropToDb implements Command {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println(intro);
 
                     String[] args2 = {"users", "id", "'" + mid + "'", "language", "'de'", "country", "'de'",
                             "sex", "'m'", "profile", "''", "spammer", "FALSE", "verified", "FALSE"};
@@ -177,8 +170,7 @@ public class cmdPropToDb implements Command {
                     } catch (Exception e) {
                         try {
                             databaseHandler.database(event.getGuild().getId(), "insert", args3);
-                        } catch (SQLException e1) {
-                            System.out.println("here again");
+                        } catch (SQLException ignored) {
                         }
                     }
                 }

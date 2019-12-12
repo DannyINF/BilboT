@@ -122,13 +122,9 @@ public class LevelChecker {
 
         if (level <= 50L) {
             xp2 = Long.parseLong(String.valueOf(Math.pow(level, 2D)));
-            System.out.println(xp2);
             xp2 = xp2 * 12;
-            System.out.println(xp2);
             xp3 = 400 * level;
-            System.out.println(xp3);
             xp2 = xp2 + xp3;
-            System.out.println(xp2);
         } else {
             xp2 = level * 1500 - 25000;
         }
@@ -177,13 +173,9 @@ public class LevelChecker {
         } else {
             if (level <= 50) {
                 xp2 = Long.parseLong(String.valueOf(Math.pow(level, 2D)));
-                System.out.println(xp2);
                 xp2 = xp2 * 12;
-                System.out.println(xp2);
                 xp3 = 400 * level;
-                System.out.println(xp3);
                 xp2 = xp2 + xp3;
-                System.out.println(xp2);
             } else {
                 xp2 = level * 1500 - 25000;
             }
