@@ -5,6 +5,8 @@ import core.databaseHandler;
 import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emote;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -36,7 +38,7 @@ public class joinListener extends ListenerAdapter {
                 TextChannel welcome1 = event.getGuild().getDefaultChannel();
 
                 channelActions.getChannel(event, "log").sendMessage(messageActions.getLocalizedString("log_user_join", "server", event.getGuild().getId())
-                        .replace("[USER]", event.getUser().getName() + "#" + event.getUser().getDiscriminator())).queue();
+                        .replace("[USER]", event.getUser().getAsTag())).queue();
                 if (event.getMember().getUser().isBot() == FALSE) {
                     String[] arguments2 = {"users", "id = '" + event.getUser().getId() + "'", "1", "verified"};
                     String[] answer2 = null;
@@ -79,7 +81,7 @@ public class joinListener extends ListenerAdapter {
                         welcome1.sendMessage(":flag_de: Mae govannen " + event.getMember().getAsMention() + "! Um auf den Server zugreifen zu k\u00f6nnen, musst du dich erst verifizieren. " +
                                 "Klicke dafür auf das :white_check_mark:-Emoji unter dieser Nachricht.\n\n" +
                                 ":flag_gb: Mae govannen " + event.getMember().getAsMention() + "! In order to acces the server, you have to verify yourself first. " +
-                                "Therefore, you have to click the :white_check_mark: emoji below this message.").queue();
+                                "Therefore, you have to click the :white_check_mark: emoji below this message.").queue(msg -> msg.addReaction("✅").queue());
                     }
 
                 }
