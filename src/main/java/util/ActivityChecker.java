@@ -7,9 +7,11 @@ import net.dv8tion.jda.api.entities.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 public class ActivityChecker {
     public void activity(JDA jda) throws SQLException {
+        System.out.println("[ACTIVITY] called");
         for (Guild guild : jda.getGuilds()) {
 
             Role role1 = null;
@@ -55,41 +57,42 @@ public class ActivityChecker {
             }
 
             for (Member member : guild.getMembers()) {
-                if (!member.getUser().isBot() && !member.getRoles().contains(guild.getRolesByName("Vacation", true).get(0))) {
+                if (!member.getUser().isBot() && (!member.getRoles().contains(guild.getRolesByName("Vacation", true).get(0))
+                        || !member.getRoles().contains(guild.getRolesByName("YouTuber", true).get(0)))) {
                     String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "activity"};
                     String[] answer;
-                    answer = core.databaseHandler.database(guild.getId(), "select", arguments);
-
-                    long oldActivity = Long.parseLong(answer[0]);
+                    long oldActivity;
+                    try {
+                        answer = core.databaseHandler.database(guild.getId(), "select", arguments);
+                        if (answer == null)
+                            oldActivity = 120L;
+                        else
+                            oldActivity = Long.parseLong(answer[0]);
+                    } catch (Exception e) {
+                        oldActivity = 120L;
+                    }
 
                     List<Role> roles = member.getRoles();
 
                     if (!roles.contains(role1) && !roles.contains(role2)) {
-                        if (roles.contains(role3)) {
-                            if (oldActivity > 3600) {
+                        if (roles.contains(role3))
+                            if (oldActivity > 3600)
                                 oldActivity = 3600;
-                            }
-                        } else if (roles.contains(role4)) {
-                            if (oldActivity > 1500) {
+                        else if (roles.contains(role4))
+                            if (oldActivity > 1500)
                                 oldActivity = 1500;
-                            }
-                        } else if (roles.contains(role5)) {
-                            if (oldActivity > 1100) {
+                        else if (roles.contains(role5))
+                            if (oldActivity > 1100)
                                 oldActivity = 1100;
-                            }
-                        } else if (roles.contains(role6)) {
-                            if (oldActivity > 720) {
+                        else if (roles.contains(role6))
+                            if (oldActivity > 720)
                                 oldActivity = 720;
-                            }
-                        } else if (roles.contains(role7)) {
-                            if (oldActivity > 480) {
+                        else if (roles.contains(role7))
+                            if (oldActivity > 480)
                                 oldActivity = 480;
-                            }
-                        } else if (roles.contains(role8)) {
-                            if (oldActivity > 240) {
+                        else if (roles.contains(role8))
+                            if (oldActivity > 240)
                                 oldActivity = 240;
-                            }
-                        }
                     }
 
                     long newActivity = oldActivity - 4;
@@ -102,15 +105,12 @@ public class ActivityChecker {
 
                     if (newActivity < 1) {
                         String url = null;
-                        for (Invite inv : guild.retrieveInvites().complete()) {
-                            if (!inv.isTemporary() && inv.getInviter().equals(guild.getOwner().getUser())) {
+                        for (Invite inv : guild.retrieveInvites().complete())
+                            if (!inv.isTemporary() && Objects.equals(inv.getInviter(), Objects.requireNonNull(guild.getOwner()).getUser()))
                                 url = inv.getUrl();
-                            }
-                        }
 
-                        if (url == null) {
+                        if (url == null)
                             url = guild.retrieveInvites().complete().get(0).getUrl();
-                        }
 
                         EmbedBuilder embed = new EmbedBuilder();
                         embed.setColor(Color.RED);
@@ -122,6 +122,7 @@ public class ActivityChecker {
                         embed1.setColor(Color.RED);
                         embed1.setTitle("Kick!");
                         embed1.setDescription(member.getAsMention() + " wurde aufgrund von Inaktivit\u00e4t gekickt.");
+                        assert modlog != null;
                         modlog.sendMessage(embed1.build()).queue();
 
                         PrivateChannel channel = member.getUser().openPrivateChannel().complete();
@@ -146,6 +147,7 @@ public class ActivityChecker {
                         embed1.setTitle("Verwarnung f\u00fcr Inaktivit\u00e4t");
                         embed1.setDescription(member.getUser().getAsTag() + " wurde aufgrund von Inaktivit\u00e4t verwarnt.");
 
+                        assert modlog != null;
                         modlog.sendMessage(embed1.build()).queue();
 
                         PrivateChannel channel = member.getUser().openPrivateChannel().complete();
@@ -155,7 +157,6 @@ public class ActivityChecker {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }

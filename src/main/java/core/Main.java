@@ -32,12 +32,12 @@ import java.util.concurrent.TimeUnit;
 class Main {
     private static JDABuilder builder;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         builder = new JDABuilder(AccountType.BOT);
         builder.setToken(SECRETS.TOKEN);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.3.3"));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.4.0"));
 
         addListeners();
         addCommands();
@@ -51,6 +51,9 @@ class Main {
         }
 
         final JDA finalJDA = jda;
+
+        assert jda != null;
+        jda.awaitReady();
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
         ZonedDateTime nextRun = now.withHour(3).withMinute(30).withSecond(30);
@@ -75,7 +78,6 @@ class Main {
         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
         exec.scheduleAtFixedRate(() -> {
             try {
-                assert finalJDA != null;
                 voiceXP.giveVoiceXP(finalJDA);
             } catch (SQLException | InterruptedException e) {
                 e.printStackTrace();
