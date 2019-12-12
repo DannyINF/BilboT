@@ -6,18 +6,19 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.util.Objects;
 
 public class verificationListener extends ListenerAdapter {
     @Override
-    public void onMessageReactionAdd(@NotNull MessageReactionAddEvent event) {
+    public void onMessageReactionAdd(MessageReactionAddEvent event) {
+        System.out.println("Reaction!");
         if (event.getGuild().getDefaultChannel().equals(event.getChannel())) {
             Message msg;
             msg = event.getGuild().getDefaultChannel().retrieveMessageById(event.getMessageId()).complete();
-            if (msg.getContentDisplay().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("✅", event.getJDA()))) {
+            System.out.println(msg.getContentRaw());
+            if (msg.getContentRaw().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
                 String[] arguments2 = {"users", "id = '" + event.getUserId() + "'", "verified", "TRUE"};
                 try {
                     databaseHandler.database("usersettings", "update", arguments2);
