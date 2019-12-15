@@ -65,6 +65,28 @@ public class voiceListenerAddon extends ListenerAdapter {
                     event.getGuild().getAudioManager().setSendingHandler(null);
                     event.getGuild().getAudioManager().closeAudioConnection();
                 }
+            } else if (event.getChannelJoined().equals(event.getGuild().getAudioManager().getConnectedChannel())){
+                boolean onlyBotsHere = true;
+                boolean onlyBotsEverywhere = true;
+                for (Guild g : event.getJDA().getGuilds()) {
+                    if (g.getAudioManager().isConnected()) {
+                        for (Member m : Objects.requireNonNull(g.getAudioManager().getConnectedChannel()).getMembers()) {
+                            if (!m.getUser().isBot()) {
+                                onlyBotsEverywhere = false;
+                                if (g.equals(event.getGuild())) {
+                                    onlyBotsHere = false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (onlyBotsEverywhere) {
+                    event.getJDA().shutdown();
+                } else if (onlyBotsHere) {
+                    event.getGuild().getAudioManager().setSendingHandler(null);
+                    event.getGuild().getAudioManager().closeAudioConnection();
+                }
             }
         }
     }

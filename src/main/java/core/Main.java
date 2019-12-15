@@ -37,7 +37,7 @@ class Main {
         builder.setToken(SECRETS.TOKEN);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.5.0"));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.5.3"));
 
         addListeners();
         addCommands();

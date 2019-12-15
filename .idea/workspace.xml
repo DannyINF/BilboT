@@ -9,8 +9,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="v2.5.0">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding voiceListenerAddon to ScreamBot">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListenerAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListenerAddon.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -283,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576417067906</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="adding voiceListenerAddon to ScreamBot">
+      <created>1576417220550</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1576417220550</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -318,7 +329,8 @@
     <MESSAGE value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
     <MESSAGE value="Integrating ScreamBot into BilboT" />
     <MESSAGE value="v2.5.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="v2.5.0" />
+    <MESSAGE value="adding voiceListenerAddon to ScreamBot" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding voiceListenerAddon to ScreamBot" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

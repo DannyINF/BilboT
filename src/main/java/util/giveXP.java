@@ -13,13 +13,10 @@ public class giveXP {
             String[] answer;
             long currentXp;
             long xp;
-            double userboost = 1;
+            double userboost = 2; // Double-XP Event
             double channelboost = 1;
             double serverboost = 1;
             //TODO: Delete this after some time
-            /*if (member.getUser().getId().equals("401052059350204416")) {
-                userboost = 2;
-            }*/
 
             Role nitro = null;
 
