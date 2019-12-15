@@ -16,7 +16,7 @@ public class verificationListener extends ListenerAdapter {
         if (event.getGuild().getDefaultChannel().equals(event.getChannel())) {
             Message msg;
             msg = event.getGuild().getDefaultChannel().retrieveMessageById(event.getMessageId()).complete();
-            if (msg.getContentRaw().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
+            if (event.getChannel().getName().toLowerCase().contains("willkommen") && msg.getContentRaw().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
                 String[] arguments2 = {"users", "id = '" + event.getUserId() + "'", "verified", "TRUE"};
                 try {
                     databaseHandler.database("usersettings", "update", arguments2);
