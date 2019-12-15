@@ -7,7 +7,6 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.bandcamp.BandcampAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.http.HttpAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.vimeo.VimeoAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
@@ -30,7 +29,7 @@ import java.util.*;
 import java.util.logging.Level;
 
 public class PlayerControl implements Command {
-    private static final int DEFAULT_VOLUME = 35; //(0 - 100, where 100 is default max volume)
+    public static final int DEFAULT_VOLUME = 35; //(0 - 100, where 100 is default max volume)
 
     private final AudioPlayerManager playerManager;
     private final Map<String, GuildMusicManager> musicManagers;

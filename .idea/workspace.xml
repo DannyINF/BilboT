@@ -9,13 +9,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing a typo and a bug">
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdPropToDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdPropToDb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Removing of some lines of masterful debugging coughtSystem.out.printlncought">
+      <change afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/PlaylistCheckerScreamBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/GuildMusicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/GuildMusicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,70 +31,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ä</find>
-      <find>woechentliches-thema</find>
-      <find>📅</find>
-      <find>int newXP = (int) (Xp + time * userbooster);</find>
-      <find>userbooster</find>
-      <find>ü</find>
-      <find>ß</find>
-      <find>📋-voicelog</find>
-      <find>willkommen</find>
-      <find>logchannel</find>
-      <find>modlog</find>
-      <find>voicelog</find>
-      <find>k</find>
-      <find>ö</find>
-      <find>LATEST</find>
-      <find>OkHttp</find>
-      <find>while</find>
-      <find>music</find>
-      <find>net.dv8tion.jda.core</find>
-      <find>net.dv8tion.jda.bot</find>
-      <find>net.dv8tion.jda.api.entities.Channel;</find>
-      <find>import net.dv8tion.jda.internal.entities.Channel;</find>
-      <find>Channel</find>
-      <find>import net.dv8tion.jda.internal.TextChannel;</find>
-      <find>.getController().</find>
-      <find>.)</find>
-      <find>getController().</find>
-      <find>addSingleRoleToMember</find>
-      <find>removeSingleRoleFromMember</find>
-      <find>addSRoleToMember</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>10000</replace>
-      <replace>outputlang</replace>
-      <replace>inputxp</replace>
-      <replace>/map</replace>
-      <replace>&quot;</replace>
-      <replace>&quot;,</replace>
-      <replace>#####</replace>
-      <replace>new</replace>
-      <replace>📅-woechentliches-thema</replace>
-      <replace>\ud83d\udcc5</replace>
-      <replace>int newXP = (int) (Xp + time * userbooster * channelboost);</replace>
-      <replace>\u00FC</replace>
-      <replace>\u00DF</replace>
-      <replace>\u00E4</replace>
-      <replace>\ud83d\udccb-voicelog</replace>
-      <replace>\ud83d\udc65-willkommen</replace>
-      <replace>\uD83D\uDCD5-logchannel</replace>
-      <replace>oe</replace>
-      <replace>net.dv8tion.jda.api</replace>
-      <replace>net.dv8tion.jda.internal.entities.Channel;</replace>
-      <replace>import net.dv8tion.jda.internal.TextChannel;</replace>
-      <replace>TextChannel</replace>
-      <replace>import net.dv8tion.jda.api.entities.TextChannel;</replace>
-      <replace>.</replace>
-      <replace />
-      <replace>addSRoleToMember</replace>
-      <replace>removeRoleFromMember</replace>
-      <replace>addRoleToMember</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -145,11 +81,8 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="listeners" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -162,13 +95,16 @@
       <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\audio" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="listeners" />
       <recent name="util" />
       <recent name="audio" />
+      <recent name="listeners" />
       <recent name="commands" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="listeners" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -331,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576176922963</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Removing of some lines of masterful debugging coughtSystem.out.printlncought">
+      <created>1576177293503</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1576177293503</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -363,7 +306,8 @@
     <MESSAGE value="Updating to v.2.4.1" />
     <MESSAGE value="Updating to v.2.4.2" />
     <MESSAGE value="Fixing a typo and a bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing a typo and a bug" />
+    <MESSAGE value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
