@@ -9,13 +9,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Removing of some lines of masterful debugging coughtSystem.out.printlncought">
-      <change afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/PlaylistCheckerScreamBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/GuildMusicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/GuildMusicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="v2.5.0">
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1576177293503</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Integrating ScreamBot into BilboT">
+      <created>1576417023763</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1576417023763</updated>
+    </task>
+    <task id="LOCAL-00013" summary="v2.5.0">
+      <created>1576417067906</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1576417067906</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -307,7 +316,9 @@
     <MESSAGE value="Updating to v.2.4.2" />
     <MESSAGE value="Fixing a typo and a bug" />
     <MESSAGE value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
+    <MESSAGE value="Integrating ScreamBot into BilboT" />
+    <MESSAGE value="v2.5.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.5.0" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

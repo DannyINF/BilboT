@@ -75,5 +75,6 @@ public class initScreamBot extends ListenerAdapter {
     private static void addListeners() {
         builder.addEventListeners(new readyListener());
         builder.addEventListeners(new introListener());
+        builder.addEventListeners(new voiceListenerAddon());
     }
 }
