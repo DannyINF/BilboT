@@ -9,8 +9,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing bugs on ScreamBot">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="verification is only possible in the welcome channel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdHelp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -297,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576421971931</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="verification is only possible in the welcome channel">
+      <created>1576422950227</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1576422950227</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -334,7 +347,8 @@
     <MESSAGE value="v2.5.0" />
     <MESSAGE value="adding voiceListenerAddon to ScreamBot" />
     <MESSAGE value="Fixing bugs on ScreamBot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing bugs on ScreamBot" />
+    <MESSAGE value="verification is only possible in the welcome channel" />
+    <option name="LAST_COMMIT_MESSAGE" value="verification is only possible in the welcome channel" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

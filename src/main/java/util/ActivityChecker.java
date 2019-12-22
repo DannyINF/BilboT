@@ -57,8 +57,8 @@ public class ActivityChecker {
             }
 
             for (Member member : guild.getMembers()) {
-                if (!member.getUser().isBot() && (!member.getRoles().contains(guild.getRolesByName("Vacation", true).get(0))
-                        || !member.getRoles().contains(guild.getRolesByName("YouTuber", true).get(0)))) {
+                if (!member.getUser().isBot() && !member.getRoles().contains(guild.getRolesByName("Vacation", true).get(0))
+                        && !member.getRoles().contains(guild.getRolesByName("YouTuber", true).get(0))) {
                     String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "activity"};
                     String[] answer;
                     long oldActivity;

@@ -58,7 +58,6 @@ public class cmdXp implements Command {
                     case "ranking":
                         cmdXpRanking.action(args, event);
                         break;
-                    //TODO: give beenden, Level beachten, für Coins einfügen, Coins beachten
                     case "give":
                         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
                             long amount;

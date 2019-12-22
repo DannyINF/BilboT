@@ -66,13 +66,15 @@ public class introListener extends ListenerAdapter {
                             } catch (NullPointerException | SQLException ignored) { }
                         }
                     } else if (!isStarting){
-                        isStarting = true;
                         String intro;
                         String[] arguments = {"users", "id = '" + event.getMember().getUser().getId() + "'", "1", "intro"};
                         try {
                             intro = databaseHandler.database(event.getGuild().getId(), "select", arguments)[0].split("#")[0];
                             try {
-                                initScreamBot.main(SECRETS.TOKENSCREAM, event, event.getChannelJoined(), intro);
+                                if (!intro.equals("nothing")) {
+                                    isStarting = true;
+                                    initScreamBot.main(SECRETS.TOKENSCREAM, event, event.getChannelJoined(), intro);
+                                }
                             } catch (InterruptedException e) {
                                 isStarting = false;
                                 e.printStackTrace();
@@ -100,7 +102,8 @@ public class introListener extends ListenerAdapter {
                                 String[] arguments = {"users", "id = '" + event.getMember().getUser().getId() + "'", "1", "intro"};
                                 try {
                                     intro = databaseHandler.database(event.getGuild().getId(), "select", arguments)[0].split("#")[0];
-                                    playIntro(intro, guild, voiceChannel);
+                                    if (!intro.equals("nothing"))
+                                        playIntro(intro, guild, voiceChannel);
                                 } catch (NullPointerException | SQLException ignored) { }
 
                                 exec.shutdown();

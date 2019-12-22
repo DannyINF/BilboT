@@ -59,10 +59,8 @@ public class PlayerControl implements Command {
             return String.format("%02d:%02d", minutes, seconds);
     }
 
-    //TODO: Fix output
-
     //Prefix for all commands: /music
-    //Example:  .play
+    //Example:  /play
     //Current commands
     // join [name]  - Joins a voice channel that has the provided name
     // join [id]    - Joins a voice channel based on the provided id.

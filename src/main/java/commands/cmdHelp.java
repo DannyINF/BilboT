@@ -75,6 +75,7 @@ public class cmdHelp implements Command {
                                 "`/help`\n" +
                                 "`/intro`\n" +
                                 "`/kick`\n" +
+                                "`/language`\n" +
                                 "`/map`\n" +
                                 "`/music`\n" +
                                 "`/report`\n" +
