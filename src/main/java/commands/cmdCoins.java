@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -206,18 +207,23 @@ public class cmdCoins implements Command {
                     }
                     break;
                 default:
-                    ArrayList<String> args2 = new ArrayList<>();
-                    int i = 0;
-                    while (i < args.length - 2) {
+                    try {
+                        ArrayList<String> args2 = new ArrayList<>();
+                        int i = 0;
+                        while (i < args.length - 2) {
+                            args2.add(args[i]);
+                            args2.add(" ");
+                            i++;
+                        }
                         args2.add(args[i]);
-                        args2.add(" ");
-                        i++;
+                        String[] args3 = new String[args2.size()];
+                        args3 = args2.toArray(args3);
+                        Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getTextChannel());
+                        coins(event, member);
+                    } catch (Exception e) {
+                        coins(event, Objects.requireNonNull(event.getMember()));
                     }
-                    args2.add(args[i]);
-                    String[] args3 = new String[args2.size()];
-                    args3 = args2.toArray(args3);
-                    Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getTextChannel());
-                    coins(event, member);
+
                     break;
             }
         } else {
