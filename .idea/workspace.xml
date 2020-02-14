@@ -9,21 +9,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing activity and intro bugs">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_1_0_88.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_0_0_73.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/getUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/getUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/giveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/giveXP.java" afterDir="false" />
-    </list>
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing bugs, kind of hacky solution for lyrikabend and more" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577019103313</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixing bugs, kind of hacky solution for lyrikabend and more">
+      <created>1581687329222</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1581687329222</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -362,7 +355,8 @@
     <MESSAGE value="Fixing bugs on ScreamBot" />
     <MESSAGE value="verification is only possible in the welcome channel" />
     <MESSAGE value="Fixing activity and intro bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing activity and intro bugs" />
+    <MESSAGE value="Fixing bugs, kind of hacky solution for lyrikabend and more" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing bugs, kind of hacky solution for lyrikabend and more" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
