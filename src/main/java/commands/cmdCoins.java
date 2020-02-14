@@ -212,7 +212,6 @@ public class cmdCoins implements Command {
                         int i = 0;
                         while (i < args.length - 2) {
                             args2.add(args[i]);
-                            args2.add(" ");
                             i++;
                         }
                         args2.add(args[i]);
