@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import util.CHANNEL;
 import util.SET_CHANNEL;
+import util.STATIC;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -25,6 +26,10 @@ import java.util.Objects;
 //TODO: Check this out as well
 public class voiceListener extends ListenerAdapter implements AudioReceiveHandler {
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
+        if (STATIC.getIsLyrikabend() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+            if (!event.getMember().getUser().isBot())
+                event.getMember().mute(true).queue();
+        }
         if (event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).isEmpty()) {
             event.getGuild().createRole().setColor(Color.LIGHT_GRAY).setName(event.getChannelJoined().getName())
                     .setMentionable(true).setHoisted(false).complete();
@@ -71,6 +76,10 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
 
 
     public void onGuildVoiceLeave(@NotNull GuildVoiceLeaveEvent event) {
+        if (STATIC.getIsLyrikabend() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+            if (!event.getMember().getUser().isBot())
+                event.getMember().mute(false).queue();
+        }
         if (event.getGuild().getAudioManager().isConnected()) {
             if (event.getChannelLeft().equals(event.getGuild().getAudioManager().getConnectedChannel())) {
                 boolean onlyBots = true;
@@ -123,7 +132,15 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
     }
 
     public void onGuildVoiceMove(@NotNull GuildVoiceMoveEvent event) {
-        event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
+        if (STATIC.getIsLyrikabend() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+            if (!event.getMember().getUser().isBot())
+                event.getMember().mute(true).queue();
+        }
+        if (STATIC.getIsLyrikabend() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+            if (!event.getMember().getUser().isBot())
+                event.getMember().mute(false).queue();
+        }
+        /*event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
                 .getRolesByName(event.getChannelJoined().getName(), true).get(0)).queue();
         event.getGuild().removeRoleFromMember(event.getMember(), event.getGuild().getRolesByName(event.getChannelLeft().getName(), true).get(0)).queue();
         if (event.getChannelLeft().getName().equals("\uD83D\uDCDA-Lyrikecke")) {
@@ -132,7 +149,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
                 event.getGuild().removeRoleFromMember(event.getMember(),
                         event.getGuild().getRolesByName("mute", true).get(0)).queue();
             }
-        }
+        }*/
         String status = null;
         try {
             status = modulesChecker.moduleStatus("voice", event.getGuild().getId());

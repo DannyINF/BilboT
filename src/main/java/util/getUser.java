@@ -9,8 +9,11 @@ import java.util.TimerTask;
 public class getUser {
     public static Member getMemberFromInput(String[] args, User author, Guild guild, TextChannel tx) {
         Member member = null;
+        for (String str : args) {
+            System.out.println(str);
+        }
         try {
-            if (args[0].contains("<") && args[0].contains(">") && args[0].contains("@")) {
+            if (args[0].startsWith("<") && args[0].contains(">") && args[0].contains("@")) {
                 member = guild.getMemberById(args[0].replace("@", "").replace("<", "")
                         .replace(">", "").replace("!", ""));
                 return member;
@@ -23,18 +26,16 @@ public class getUser {
                         i++;
                     }
                     try {
-                        member = guild.getMembersByEffectiveName(sb.toString(), true).get(0);
+                        member = guild.getMemberById(sb.toString());
                         return member;
                     } catch (Exception e1) {
                         try {
-                            member = guild.getMemberById(sb.toString());
+                            member = guild.getMembersByEffectiveName(sb.toString(), true).get(0);
                             return member;
                         } catch (Exception e2) {
-                            try {
-                                member = guild.getMembersByName(sb.toString(), true).get(0);
-                                return member;
-                            } catch (Exception ignored) {
-                            }
+                            member = guild.getMembersByName(sb.toString(), true).get(0);
+                            return member;
+
                         }
                     }
 

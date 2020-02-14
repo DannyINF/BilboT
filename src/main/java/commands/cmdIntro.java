@@ -35,7 +35,24 @@ public class cmdIntro implements Command {
             case "s":
             case "set":
                 if (args[1].toLowerCase().equals("nothing")) {
-                    String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "''"};
+                    String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
+                    String[] answerIntrolist = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+                    String[] introlist;
+                    try {
+                        assert answerIntrolist != null;
+                        introlist = answerIntrolist[0].split("#")[1].split("&");
+                    } catch (Exception e) {
+                        introlist = null;
+                    }
+
+                    StringBuilder updatedIntros = new StringBuilder();
+
+                    updatedIntros.append(args[1]).append("#");
+                    for (String str : introlist) {
+                        updatedIntros.append(str).append("&");
+                    }
+
+                    String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "'" + updatedIntros.toString() + "'"};
                     core.databaseHandler.database(event.getGuild().getId(), "update", arguments4);
 
                     embed.setDescription(messageActions.getLocalizedString("intro_equiped", "user", event.getAuthor().getId())
@@ -124,7 +141,7 @@ public class cmdIntro implements Command {
             case "b":
             case "get":
             case "buy":
-                if (args[1].contains("common") || args[1].contains("rare") || args[1].contains("epic") || args[1].contains("legendary")) {
+                if (args[1].contains("common") || args[1].contains("rare") || args[1].contains("epic") || args[1].contains("legendary") || args[1].contains("custom")) {
                     // getting the user intros
                     String[] arguments2 = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
                     String[] answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments2);
@@ -200,8 +217,10 @@ public class cmdIntro implements Command {
                                         }
                                         break;
                                     case "custom":
-                                        prize = 15000;
-                                        if (Integer.parseInt(args[1].split("-")[1]) < 1 || Integer.parseInt(args[1].split("-")[1]) > 0) {
+                                        prize = 5000;
+                                        pl = "PL_epOfFugDag4MhC046KsXgG4eg9mVesk";
+                                        lenght = Integer.parseInt(PlaylistChecker.check(pl).get(0).toString());
+                                        if (Integer.parseInt(args[1].split("-")[1]) < 1 || Integer.parseInt(args[1].split("-")[1]) > lenght) {
                                             all_right = false;
                                         }
                                         break;
@@ -255,6 +274,8 @@ public class cmdIntro implements Command {
                                         prize = 50;
                                         break;
                                     case "rare":
+                                        pl = "PL_epOfFugDagG-R8IjY42YW2Qwy2S45jK";
+                                        lenght = Integer.parseInt(PlaylistChecker.check(pl).get(0).toString());
                                         win_int = ThreadLocalRandom.current().nextInt(1, lenght);
                                         award = "rare-" + win_int;
                                         prize = 100;
@@ -273,11 +294,7 @@ public class cmdIntro implements Command {
                                         award = "legendary-" + win_int;
                                         prize = 1000;
                                         break;
-                                    case "custom":
-                                        win_int = ThreadLocalRandom.current().nextInt(1, 0);
-                                        award = "custom-" + win_int;
-                                        prize = 5000;
-                                        break;
+
 
                                 }
                                 j = 0;

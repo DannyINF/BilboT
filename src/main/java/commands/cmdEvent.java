@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import util.STATIC;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -62,7 +63,7 @@ public class cmdEvent implements Command {
                 }
 
                 break;
-            case "start":
+            case "start":/*
                 if (voice == null) {
                     embed.setDescription("Du musst dich in einem VoiceChannel befinden!");
                 } else {
@@ -96,9 +97,21 @@ public class cmdEvent implements Command {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                }*/
+                if (event.getMember().getRoles().contains(event.getGuild().getRolesByName("Leser", true).get(0)) ||
+                    event.getMember().getRoles().contains(event.getGuild().getRolesByName("Vala", true).get(0)))   {
+                    STATIC.changeIsLyrikabend(true);
+                    for (Member member : event.getGuild().getVoiceChannelById("469209414218285057").getMembers()) {
+                        try {
+                            if (!member.getUser().isBot())
+                                member.mute(true).queue();
+                        } catch (Exception ignored) {
+                        }
+                    }
                 }
                 break;
             case "stop":
+                /*
                 if (voice == null) {
                     embed.setDescription("Du musst dich in einem VoiceChannel befinden!");
                 } else {
@@ -158,8 +171,21 @@ public class cmdEvent implements Command {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                }*/
+                if (event.getMember().getRoles().contains(event.getGuild().getRolesByName("Leser", true).get(0)) ||
+                        event.getMember().getRoles().contains(event.getGuild().getRolesByName("Vala", true).get(0)))   {
+                    STATIC.changeIsLyrikabend(false);
+
+                    for (Member member : event.getGuild().getVoiceChannelById("469209414218285057").getMembers()) {
+                        try {
+                            member.mute(false).queue();
+                        } catch (Exception ignored) {}
+
+
+                    }
                 }
                 break;
+                /*
             case "setup":
                 if (voice == null) {
                     embed.setDescription("Du musst dich in einem VoiceChannel befinden!");
@@ -175,11 +201,11 @@ public class cmdEvent implements Command {
 
                     embed.setDescription("Setup completed!");
                 }
-                break;
+                break;*/
             case "discussion":
             case "diskussion":
             case "d":
-                String target = null;
+                /*String target = null;
                 if (voice == null) {
                     embed.setDescription("Du musst dich in einem VoiceChannel befinden!");
                 } else {
@@ -229,14 +255,24 @@ public class cmdEvent implements Command {
                 diskussion.setTitle("EVENT LYRIKECKE");
                 diskussion.setDescription("Die Diskussionen sind " + target + " er\u00f6ffnet!");
                 assert voice != null;
-                event.getGuild().getTextChannelsByName(voice.getName(), true).get(0).sendMessage(diskussion.build()).queue();
+                event.getGuild().getTextChannelsByName(voice.getName(), true).get(0).sendMessage(diskussion.build()).queue();*/
+                if (STATIC.getIsLyrikabend()) {
+                    if (event.getMember().getRoles().contains(event.getGuild().getRolesByName("Leser", true).get(0)) ||
+                            event.getMember().getRoles().contains(event.getGuild().getRolesByName("Vala", true).get(0)))   {
+                        for (Member member : event.getGuild().getVoiceChannelById("469209414218285057").getMembers()) {
+                            try {
+                                member.mute(false).queue();
+                            } catch (Exception ignored) {}
+                        }
+                    }
+                }
                 break;
             case "narrator":
             case "erz\u00e4hler":
             case "geschichtenerz\u00e4hler":
             case "storyteller":
                 switch (args[2]) {
-                    case "get":
+                    /*case "get":
                         String[] arguments6 = {"events", "id = '" + event.getGuild().getId() + "'", "1", "narration"};
                         String[] answer6;
                         answer6 = core.databaseHandler.database("serversettings", "select", arguments6);
@@ -256,9 +292,9 @@ public class cmdEvent implements Command {
                             name_storyteller.append("nicht festgelegt");
                         }
                         embed.setDescription("Der Erz\u00E4hler ist momentan " + name_storyteller + "!");
-                        break;
+                        break;*/
                     case "set":
-                        String[] arguments2 = {"events", "id = '" + event.getGuild().getId() + "'", "1", "narration"};
+                        /*String[] arguments2 = {"events", "id = '" + event.getGuild().getId() + "'", "1", "narration"};
                         String[] answer2;
                         answer2 = core.databaseHandler.database("serversettings", "select", arguments2);
                         StringBuilder sb = new StringBuilder();
@@ -291,9 +327,25 @@ public class cmdEvent implements Command {
                             e.printStackTrace();
                         }
                         embed.setDescription("'" + sb.toString() + "'" + " ist nun Erz\u00E4hler!");
-                        event.getGuild().removeRoleFromMember(narrator, event.getGuild().getRolesByName("mute", true).get(0)).queue();
+                        event.getGuild().removeRoleFromMember(narrator, event.getGuild().getRolesByName("mute", true).get(0)).queue();*/
+                        if (STATIC.getIsLyrikabend()) {
+                            if (event.getMember().getRoles().contains(event.getGuild().getRolesByName("Leser", true).get(0)) ||
+                                    event.getMember().getRoles().contains(event.getGuild().getRolesByName("Vala", true).get(0)))   {
+                                try {
+                                    StringBuilder sb = new StringBuilder();
+                                    int i = 3;
+                                    while (i < args.length) {
+                                        sb.append(args[i]);
+                                        sb.append(" ");
+                                        i++;
+                                    }
+                                    Member member = util.getUser.getMemberFromInput(sb.toString().split(" "), event.getAuthor(), event.getGuild(), event.getTextChannel());
+                                    member.mute(false).queue();
+                                } catch (Exception ignored) {}
+                            }
+                        }
                         break;
-                    case "clear":
+                    /*case "clear":
                         String[] arguments5 = {"events", "id = '" + event.getGuild().getId() + "'", "1", "narration"};
                         String[] answer3;
                         answer3 = core.databaseHandler.database("serversettings", "select", arguments5);
@@ -325,8 +377,12 @@ public class cmdEvent implements Command {
                         }
                         embed.setDescription("Kein User ist mehr Erz\u00E4hler!");
 
-                        break;
+                        break;*/
+
+
+
                 }
+
                 break;
         }
         event.getTextChannel().sendMessage(embed.build()).queue();
