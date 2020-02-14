@@ -140,10 +140,10 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(false).queue();
         }
-        /*event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
+        event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
                 .getRolesByName(event.getChannelJoined().getName(), true).get(0)).queue();
         event.getGuild().removeRoleFromMember(event.getMember(), event.getGuild().getRolesByName(event.getChannelLeft().getName(), true).get(0)).queue();
-        if (event.getChannelLeft().getName().equals("\uD83D\uDCDA-Lyrikecke")) {
+        /*if (event.getChannelLeft().getName().equals("\uD83D\uDCDA-Lyrikecke")) {
             if (event.getMember().getRoles().contains(event.getGuild()
                     .getRolesByName("mute", true).get(0)) && !event.getMember().getUser().isBot()) {
                 event.getGuild().removeRoleFromMember(event.getMember(),

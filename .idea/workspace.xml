@@ -9,10 +9,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Fixing bugs, kind of hacky solution for lyrikabend and more">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="bugfix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -327,7 +326,21 @@
       <option name="project" value="LOCAL" />
       <updated>1581687356717</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="/coins is functioning now without providing an user">
+      <created>1581693133598</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1581693133598</updated>
+    </task>
+    <task id="LOCAL-00021" summary="bugfix">
+      <created>1581693274728</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1581693274728</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -367,7 +380,9 @@
     <MESSAGE value="verification is only possible in the welcome channel" />
     <MESSAGE value="Fixing activity and intro bugs" />
     <MESSAGE value="Fixing bugs, kind of hacky solution for lyrikabend and more" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing bugs, kind of hacky solution for lyrikabend and more" />
+    <MESSAGE value="/coins is functioning now without providing an user" />
+    <MESSAGE value="bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
