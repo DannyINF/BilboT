@@ -26,7 +26,7 @@ import java.util.Objects;
 //TODO: Check this out as well
 public class voiceListener extends ListenerAdapter implements AudioReceiveHandler {
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-        if (STATIC.getIsLyrikabend() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+        if (STATIC.getIsNarration() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(true).queue();
         }
@@ -76,7 +76,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
 
 
     public void onGuildVoiceLeave(@NotNull GuildVoiceLeaveEvent event) {
-        if (STATIC.getIsLyrikabend() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+        if (STATIC.getIsNarration() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(false).queue();
         }
@@ -132,11 +132,11 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
     }
 
     public void onGuildVoiceMove(@NotNull GuildVoiceMoveEvent event) {
-        if (STATIC.getIsLyrikabend() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+        if (STATIC.getIsNarration() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(true).queue();
         }
-        if (STATIC.getIsLyrikabend() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057"))) {
+        if (STATIC.getIsNarration() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(false).queue();
         }

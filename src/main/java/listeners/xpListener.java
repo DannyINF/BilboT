@@ -24,11 +24,7 @@ public class xpListener extends ListenerAdapter {
         int amount = event.getMessage().getContentRaw().length();
 
         // only the first 140 characters count
-        if (amount < 140) {
-            xp = amount;
-        } else {
-            xp = 140;
-        }
+        xp = Math.min(amount, 140);
 
         try {
             event.getMessage().getAttachments().get(0);
@@ -134,18 +130,20 @@ public class xpListener extends ListenerAdapter {
             long newCoins;
             if (newlevel > 50) {
                 newCoins = (25 * (newlevel - currentlevel)) + coins;
+                System.out.println(newCoins + " = (25 * (" + newlevel + " - " + currentlevel + ")) + " + coins + ";");
             } else {
                 int sum = 0;
                 if (newlevel < currentlevel) {
                     for (long i = currentlevel; i > newlevel; i--) {
-                        sum += i / 2;
+                        sum -= i / 2;
                     }
                 } else {
-                    for (long i = currentlevel; i < newlevel; i++) {
+                    for (long i = currentlevel+1; i < newlevel+1; i++) {
                         sum += i / 2;
                     }
                 }
                 newCoins = coins + sum;
+                System.out.println(newCoins + " = " + coins + " + " + sum + ";");
             }
 
             String[] arguments3 = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(newCoins)};

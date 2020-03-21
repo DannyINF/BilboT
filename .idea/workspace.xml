@@ -9,9 +9,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="bugfix">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding rolecheck, announcements&#10;reworking narration to vBETA2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/addonCommunicationListener.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/weeklyTopicAnnouncements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/announcements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +76,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BobaBot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ReadingBot" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -340,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581693274728</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="bugfixes v2">
+      <created>1581716146434</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1581716146434</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -382,7 +396,9 @@
     <MESSAGE value="Fixing bugs, kind of hacky solution for lyrikabend and more" />
     <MESSAGE value="/coins is functioning now without providing an user" />
     <MESSAGE value="bugfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugfix" />
+    <MESSAGE value="bugfixes v2" />
+    <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

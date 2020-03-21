@@ -13,8 +13,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import special.announcements;
 import util.ActivityChecker;
 import util.SECRETS;
+import util.STATIC;
 import util.voiceXP;
 
 import javax.security.auth.login.LoginException;
@@ -37,7 +39,7 @@ class Main {
         builder.setToken(SECRETS.TOKEN);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | v2.6.1"));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | " + STATIC.VERSION));
 
         addListeners();
         addCommands();
@@ -178,8 +180,8 @@ class Main {
         builder.addEventListeners(new selfJoinListener());
         builder.addEventListeners(new spamListener());
         builder.addEventListeners(new emptyChannelListener());
-        builder.addEventListeners(new addonCommunicationListener());
         builder.addEventListeners(new statisticsListener());
         builder.addEventListeners(new verificationListener());
+        builder.addEventListeners(new announcements());
     }
 }
