@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
@@ -145,7 +145,7 @@ public class messageActions {
 
     }
 
-    public static void neededChannel(GuildMemberLeaveEvent event, String channel) {
+    public static void neededChannel(GuildMemberRemoveEvent event, String channel) {
         Objects.requireNonNull(event.getGuild().getDefaultChannel()).sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())
                 .replace("[CHANNEL]", channel)).queue();
     }

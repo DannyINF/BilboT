@@ -3,7 +3,7 @@ package listeners;
 import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import util.CHANNEL;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class leaveListener extends ListenerAdapter {
 
 
-    public void onGuildMemberLeave(@NotNull GuildMemberLeaveEvent event) {
+    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         String status = null;
         try {
             status = modulesChecker.moduleStatus("leaving", event.getGuild().getId());

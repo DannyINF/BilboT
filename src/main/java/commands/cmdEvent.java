@@ -4,6 +4,7 @@ import core.messageActions;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -63,6 +64,7 @@ public class cmdEvent implements Command {
                     if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
                         STATIC.changeIsNarration(true);
                         STATIC.changeNarrationChannel(event.getMember().getVoiceState().getChannel());
+                        event.getGuild().getManager().setAfkTimeout(Guild.Timeout.SECONDS_3600).queue();
                         for (Member member : STATIC.getNarrationChannel().getMembers()) {
                             try {
                                 if (!member.getUser().isBot())
@@ -87,6 +89,7 @@ public class cmdEvent implements Command {
                         if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
                             STATIC.changeIsNarration(false);
                             STATIC.changeIsDiscussion(false);
+                            event.getGuild().getManager().setAfkTimeout(Guild.Timeout.SECONDS_300).queue();
 
                             for (Member member : event.getGuild().getMembers()) {
                                 try {
@@ -176,11 +179,12 @@ public class cmdEvent implements Command {
                     case "set":
                     case "add":
                         if (STATIC.getIsNarration()) {
-                            if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Reader", true).get(0)}, event.getMember()))   {
+                            if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
+                                    permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
                                 if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {//689597232319954966
                                     try {
                                         StringBuilder sb = new StringBuilder();
-                                        int i = 2;
+                                        int i = 3;
                                         while (i < args.length) {
                                             sb.append(args[i]);
                                             sb.append(" ");
@@ -210,7 +214,8 @@ public class cmdEvent implements Command {
                     case "remove":
                     case "delete":
                         if (STATIC.getIsNarration()) {
-                            if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Reader", true).get(0)}, event.getMember()))   {
+                            if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
+                                    permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
                                 if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
                                     try {
                                         StringBuilder sb = new StringBuilder();

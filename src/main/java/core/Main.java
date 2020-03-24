@@ -35,8 +35,7 @@ class Main {
     private static JDABuilder builder;
 
     public static void main(String[] args) throws InterruptedException {
-        builder = new JDABuilder(AccountType.BOT);
-        builder.setToken(SECRETS.TOKEN);
+        builder = JDABuilder.createDefault(SECRETS.TOKEN);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | " + STATIC.VERSION));

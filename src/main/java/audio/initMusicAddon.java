@@ -21,9 +21,8 @@ class initMusicAddon extends ListenerAdapter {
         WebSocketFactory ws = new WebSocketFactory();
         ws.setVerifyHostname(false);
 
-        builder = new JDABuilder(AccountType.BOT);
+        builder = JDABuilder.createDefault(token);
         builder.setWebsocketFactory(ws);
-        builder.setToken(token);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, " \u266A"));
@@ -80,7 +79,6 @@ class initMusicAddon extends ListenerAdapter {
     }
 
     private static void addCommands() {
-        commandHandler.commands.put("botinfo", new cmdBotinfo());
         commandHandler.commands.put("music", new PlayerControl());
     }
 
@@ -89,4 +87,5 @@ class initMusicAddon extends ListenerAdapter {
         builder.addEventListeners(new voiceListenerAddon());
         builder.addEventListeners(new commandsListener());
     }
+
 }

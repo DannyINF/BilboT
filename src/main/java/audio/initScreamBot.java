@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
 
@@ -20,9 +21,8 @@ public class initScreamBot extends ListenerAdapter {
         WebSocketFactory ws = new WebSocketFactory();
         ws.setVerifyHostname(false);
 
-        builder = new JDABuilder(AccountType.BOT);
+        builder = JDABuilder.createDefault(token);
         builder.setWebsocketFactory(ws);
-        builder.setToken(token);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, " RAAAAAAAAAAAAAAAAAAAAAH"));

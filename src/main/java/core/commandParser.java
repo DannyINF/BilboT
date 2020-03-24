@@ -9,7 +9,6 @@ import java.util.Collections;
 public class commandParser {
 
     public static commandContainer parser(String raw, MessageReceivedEvent event) {
-        //if (isReady.isReady(event.getGuild())) {
         String beheaded;
         beheaded = raw.replaceFirst(STATIC.PREFIX, "");
 
@@ -21,8 +20,6 @@ public class commandParser {
         split.subList(1, split.size()).toArray(args);
 
         return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
-        //}
-        //return null;
 
     }
 
@@ -36,10 +33,10 @@ public class commandParser {
         final String invoke;
 
         commandContainer(String rw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event) {
-            this.raw = rw;
-            this.beheaded = beheaded;
+            this.raw = rw.toLowerCase();
+            this.beheaded = beheaded.toLowerCase();
             this.splitBeheaded = splitBeheaded;
-            this.invoke = invoke;
+            this.invoke = invoke.toLowerCase();
             this.args = args;
             this.event = event;
         }
