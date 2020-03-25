@@ -9,9 +9,7 @@ import java.util.TimerTask;
 public class getUser {
     public static Member getMemberFromInput(String[] args, User author, Guild guild, TextChannel tx) {
         Member member = null;
-        for (String str : args) {
-            System.out.println(str);
-        }
+
         try {
             if (args[0].startsWith("<") && args[0].contains(">") && args[0].contains("@")) {
                 member = guild.getMemberById(args[0].replace("@", "").replace("<", "")

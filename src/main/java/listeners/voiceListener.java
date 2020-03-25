@@ -143,13 +143,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
         event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
                 .getRolesByName(event.getChannelJoined().getName(), true).get(0)).queue();
         event.getGuild().removeRoleFromMember(event.getMember(), event.getGuild().getRolesByName(event.getChannelLeft().getName(), true).get(0)).queue();
-        /*if (event.getChannelLeft().getName().equals("\uD83D\uDCDA-Lyrikecke")) {
-            if (event.getMember().getRoles().contains(event.getGuild()
-                    .getRolesByName("mute", true).get(0)) && !event.getMember().getUser().isBot()) {
-                event.getGuild().removeRoleFromMember(event.getMember(),
-                        event.getGuild().getRolesByName("mute", true).get(0)).queue();
-            }
-        }*/
+
         String status = null;
         try {
             status = modulesChecker.moduleStatus("voice", event.getGuild().getId());

@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import special.announcements;
 import util.ActivityChecker;
 import util.SECRETS;
@@ -35,7 +36,19 @@ class Main {
     private static JDABuilder builder;
 
     public static void main(String[] args) throws InterruptedException {
-        builder = JDABuilder.createDefault(SECRETS.TOKEN);
+        builder = JDABuilder.create(SECRETS.TOKEN,
+                GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                GatewayIntent.DIRECT_MESSAGE_TYPING,
+                GatewayIntent.DIRECT_MESSAGES,
+                GatewayIntent.GUILD_BANS,
+                GatewayIntent.GUILD_EMOJIS,
+                GatewayIntent.GUILD_INVITES,
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_MESSAGE_TYPING,
+                GatewayIntent.GUILD_PRESENCES,
+                GatewayIntent.GUILD_VOICE_STATES,
+                GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                GatewayIntent.GUILD_MESSAGES);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help help | " + STATIC.VERSION));

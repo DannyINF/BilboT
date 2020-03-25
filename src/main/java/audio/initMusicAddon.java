@@ -1,15 +1,15 @@
 package audio;
 
 import com.neovisionaries.ws.client.WebSocketFactory;
-import commands.cmdBotinfo;
-import core.commandHandler;
-import listeners.commandsListener;
+import core.commandHandlerMusic;
+import listeners.commandsMusicListener;
 import listeners.readyListener;
 import listeners.voiceListenerAddon;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
 
@@ -21,7 +21,11 @@ class initMusicAddon extends ListenerAdapter {
         WebSocketFactory ws = new WebSocketFactory();
         ws.setVerifyHostname(false);
 
-        builder = JDABuilder.createDefault(token);
+        builder = JDABuilder.create(token,
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_VOICE_STATES,
+                GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                GatewayIntent.GUILD_MESSAGES);
         builder.setWebsocketFactory(ws);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
@@ -79,13 +83,13 @@ class initMusicAddon extends ListenerAdapter {
     }
 
     private static void addCommands() {
-        commandHandler.commands.put("music", new PlayerControl());
+        commandHandlerMusic.commands.put("music", new PlayerControl());
     }
 
     private static void addListeners() {
         builder.addEventListeners(new readyListener());
         builder.addEventListeners(new voiceListenerAddon());
-        builder.addEventListeners(new commandsListener());
+        builder.addEventListeners(new commandsMusicListener());
     }
 
 }

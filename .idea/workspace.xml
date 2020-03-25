@@ -9,23 +9,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding rolecheck, announcements&#10;reworking narration to vBETA2">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_1_1_124.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/core/commandHandlerMusic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_32.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_38.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_1_0_88.xml" beforeDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="updating dependencies, fixing bugs @ music addons">
+      <change afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/commandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/commandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/messageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/messageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/leaveListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/leaveListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/special/announcements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/announcements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/getUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/getUser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,11 +82,8 @@
     <property name="settings.editor.selected.configurable" value="coverage" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="listeners" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -108,14 +96,17 @@
       <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\audio" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="listeners" />
       <recent name="core" />
       <recent name="util" />
       <recent name="audio" />
-      <recent name="listeners" />
       <recent name="commands" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="listeners" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -369,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584811926325</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="updating dependencies, fixing bugs @ music addons">
+      <created>1585068033823</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1585068033824</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView">
@@ -413,7 +411,8 @@
     <MESSAGE value="bugfix" />
     <MESSAGE value="bugfixes v2" />
     <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
+    <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating dependencies, fixing bugs @ music addons" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
