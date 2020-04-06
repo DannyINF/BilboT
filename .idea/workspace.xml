@@ -9,14 +9,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="updating dependencies, fixing bugs @ music addons">
-      <change afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="implementing GatewayIntents, minor bugfixes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/getUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/getUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/giveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/giveXP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,11 +77,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ReadingBot" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="coverage" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -367,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585068033824</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="implementing GatewayIntents, minor bugfixes">
+      <created>1585129070526</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1585129070526</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView">
@@ -412,7 +421,8 @@
     <MESSAGE value="bugfixes v2" />
     <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
     <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating dependencies, fixing bugs @ music addons" />
+    <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementing GatewayIntents, minor bugfixes" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

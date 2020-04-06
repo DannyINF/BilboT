@@ -16,7 +16,6 @@ public class giveXP {
             double userboost = 1; // Double-XP Event
             double channelboost = 1;
             double serverboost = 1;
-            //TODO: Delete this after some time
 
             Role nitro = null;
 

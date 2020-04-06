@@ -8,6 +8,8 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 import java.sql.SQLException;
 
+import static java.lang.Math.sqrt;
+
 public class voiceXP {
     public static void giveVoiceXP(JDA jda) throws SQLException, InterruptedException {
         for (Guild guild : jda.getGuilds()) {
@@ -28,11 +30,7 @@ public class voiceXP {
                 for (Member member : voiceChannel.getMembers()) {
                     long xp;
 
-                    if (membercount < 9) {
-                        xp = (long) (membercount * 2.5 * channelboost);
-                    } else {
-                        xp = (long) (20 * channelboost);
-                    }
+                    xp = (long) (sqrt(2520 * membercount - 671) / 9 - 43 / 9);
 
                     giveXP.giveXPToMember(member, guild, xp);
 
@@ -54,7 +52,6 @@ public class voiceXP {
                         String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "voicetime", String.valueOf(newVoicetime)};
                         databaseHandler.database(guild.getId(), "update", arguments3);
                     }
-
                 }
             }
             //}

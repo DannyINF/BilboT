@@ -185,6 +185,7 @@ public class PlayerControl implements Command {
     }
 
     void musicPlayer(TextChannel channel, Member member, Message msg, Guild guild, String[] args, EmbedBuilder embed, VoiceChannel userVoiceChannel) {
+        System.out.println("[" + guild.getSelfMember().getEffectiveName() + "]");
         GuildMusicManager mng = getMusicManager(guild);
         AudioPlayer player = mng.player;
         TrackScheduler scheduler = mng.scheduler;
@@ -369,7 +370,7 @@ public class PlayerControl implements Command {
                     String position = getTimestamp(currentTrack.getPosition());
                     String duration = getTimestamp(currentTrack.getDuration());
 
-                    String nowplaying = String.format("**Playing:** %s\n**Time:** [%s / %s]",
+                    String nowplaying = String.format("**Playing:** %s\n**Time:** [%s / %s] added by **" + currentTrack.getUserData() + "**",
                             title, position, duration);
                     embed.setDescription(nowplaying);
                     channel.sendMessage(embed.build()).queue();
@@ -416,7 +417,12 @@ public class PlayerControl implements Command {
                 channel.sendMessage(embed.build()).queue();
                 break;
         }
-        msg.delete().queue();
+        try {
+            msg.delete().queue();
+        } catch (Exception e) {
+            System.out.println("[ERROR] Message not found!");
+        }
+
     }
 
     private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, final boolean addPlaylist) {
@@ -431,7 +437,7 @@ public class PlayerControl implements Command {
         playerManager.loadItemOrdered(mng, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                String msg = "Adding to queue: " + track.getInfo().title;
+                String msg = "Adding to queue: " + track.getInfo().title + "\nAdded by **" + track.getUserData() + "**";
                 if (mng.player.getPlayingTrack() == null)
                     msg += "\nand the Player has started playing;";
 

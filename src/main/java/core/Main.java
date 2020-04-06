@@ -1,6 +1,7 @@
 package core;
 
 import audio.PlayerControl;
+import com.google.api.client.util.DateTime;
 import commands.*;
 import commands.server_settings.cmdLanguage_Server;
 import commands.server_settings.cmdModules_Server;
@@ -14,6 +15,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import special.announcements;
 import util.ActivityChecker;
 import util.SECRETS;
@@ -22,9 +24,8 @@ import util.voiceXP;
 
 import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
-import java.time.Duration;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -70,22 +71,22 @@ class Main {
         jda.awaitReady();
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
-        ZonedDateTime nextRun = now.withHour(3).withMinute(30).withSecond(30);
-        if (now.compareTo(nextRun) > 0)
-            nextRun = nextRun.plusDays(1);
+        ZonedDateTime nextActivityRun = now.withHour(3).withMinute(30).withSecond(30);
+        if (now.compareTo(nextActivityRun) > 0)
+            nextActivityRun = nextActivityRun.plusDays(1);
 
-        Duration duration = Duration.between(now, nextRun);
-        long initialDelay = duration.getSeconds();
+        Duration durationActivity = Duration.between(now, nextActivityRun);
+        long initialDelayActivity = durationActivity.getSeconds();
 
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(() -> {
+        ScheduledExecutorService schedulerActivity = Executors.newScheduledThreadPool(1);
+        schedulerActivity.scheduleAtFixedRate(() -> {
                     try {
                         new ActivityChecker().activity(finalJDA);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 },
-                initialDelay,
+                initialDelayActivity,
                 TimeUnit.DAYS.toSeconds(1),
                 TimeUnit.SECONDS);
 

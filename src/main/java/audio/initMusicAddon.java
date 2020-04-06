@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
+import java.util.Objects;
 
 class initMusicAddon extends ListenerAdapter {
     private static JDABuilder builder;
@@ -23,6 +24,8 @@ class initMusicAddon extends ListenerAdapter {
 
         builder = JDABuilder.create(token,
                 GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_EMOJIS,
+                GatewayIntent.GUILD_PRESENCES,
                 GatewayIntent.GUILD_VOICE_STATES,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS,
                 GatewayIntent.GUILD_MESSAGES);
@@ -57,13 +60,13 @@ class initMusicAddon extends ListenerAdapter {
             e.printStackTrace();
         }
         try {
-            member = jda.getGuildById(event.getGuild().getId()).getMember(jda.getUserById(event.getAuthor().getId()));
+            member = Objects.requireNonNull(jda.getGuildById(event.getGuild().getId())).getMember(Objects.requireNonNull(jda.getUserById(event.getAuthor().getId())));
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            message = jda.getGuildById(event.getGuild().getId()).getTextChannelById(event.getTextChannel().getId()).retrieveMessageById(event.getMessage().getId()).complete();
-            jda.getTextChannelById(event.getTextChannel().getId()).retrieveMessageById(event.getMessageId()).complete();
+            message = Objects.requireNonNull(Objects.requireNonNull(jda.getGuildById(event.getGuild().getId())).getTextChannelById(event.getTextChannel().getId())).retrieveMessageById(event.getMessage().getId()).complete();
+            Objects.requireNonNull(jda.getTextChannelById(event.getTextChannel().getId())).retrieveMessageById(event.getMessageId()).complete();
         } catch (Exception e) {
             e.printStackTrace();
         }

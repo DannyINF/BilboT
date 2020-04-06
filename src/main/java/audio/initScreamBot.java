@@ -23,7 +23,9 @@ public class initScreamBot extends ListenerAdapter {
 
         builder = JDABuilder.create(token,
                 GatewayIntent.GUILD_MEMBERS,
-                GatewayIntent.GUILD_VOICE_STATES);
+                GatewayIntent.GUILD_VOICE_STATES,
+                GatewayIntent.GUILD_EMOJIS,
+                GatewayIntent.GUILD_PRESENCES);
         builder.setWebsocketFactory(ws);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
