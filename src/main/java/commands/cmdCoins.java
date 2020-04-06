@@ -3,16 +3,22 @@ package commands;
 import core.messageActions;
 import core.modulesChecker;
 import core.permissionChecker;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import util.CHANNEL;
+import util.SET_CHANNEL;
 import util.getUser;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
@@ -139,14 +145,53 @@ public class cmdCoins implements Command {
                     break;
                 case "give":
                     if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
-                        long amount;
-                        Member member = null;
-                        MessageChannel channel = event.getChannel();
-                        if (args[1].contains("<") && args[1].contains(">") && args[1].contains("@")) {
+                        SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", event.getGuild().getId());
+                        if (set_channel.getMsg()) {
+                            messageActions.neededChannel(event);
+                        } else {
+                            TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
+                            long amount;
+                            Member member = null;
+                            MessageChannel channel = event.getChannel();
+                            if (args[1].contains("<") && args[1].contains(">") && args[1].contains("@")) {
+                                try {
+                                    member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", ""));
+                                } catch (Exception e) {
+                                    Message msg = channel.sendMessage("Gib bitte einen Nutzer an.").complete();
+                                    new Timer().schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            msg.delete().queue();
+                                        }
+                                    }, 5000);
+                                    break;
+                                }
+                            } else {
+                                try {
+                                    int i = 1;
+                                    StringBuilder sb = new StringBuilder();
+                                    while (i < args.length - 2) {
+                                        sb.append(args[i]);
+                                        sb.append(" ");
+                                        i++;
+                                    }
+                                    sb.append(args[i]);
+                                    member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
+                                } catch (Exception e) {
+                                    Message msg = channel.sendMessage("Nutzer nicht gefunden.").complete();
+                                    new Timer().schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            msg.delete().queue();
+                                        }
+                                    }, 5000);
+                                }
+                            }
+
                             try {
-                                member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", ""));
+                                amount = Long.parseLong(args[args.length - 1]);
                             } catch (Exception e) {
-                                Message msg = channel.sendMessage("Gib bitte einen Nutzer an.").complete();
+                                Message msg = channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").complete();
                                 new Timer().schedule(new TimerTask() {
                                     @Override
                                     public void run() {
@@ -155,54 +200,30 @@ public class cmdCoins implements Command {
                                 }, 5000);
                                 break;
                             }
-                        } else {
+
                             try {
-                                int i = 1;
-                                StringBuilder sb = new StringBuilder();
-                                while (i < args.length - 2) {
-                                    sb.append(args[i]);
-                                    sb.append(" ");
-                                    i++;
-                                }
-                                sb.append(args[i]);
-                                member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
+                                assert member != null;
+                                String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "coins"};
+                                String[] answer;
+                                answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+
+                                assert answer != null;
+                                long newcoins = Long.parseLong(answer[0]) + amount;
+
+                                EmbedBuilder embed = new EmbedBuilder();
+                                embed.setColor(Color.RED);
+                                NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
+                                embed.setDescription("**" + event.getAuthor().getAsTag() + "** hat dem Nutzer **" + member.getUser().getAsTag() + "**" +
+                                        " *" + numberFormat.format(amount) + "* Coins hinzugef\u00fcgt.");
+                                embed.setTimestamp(Instant.now());
+                                assert modlog != null;
+                                modlog.sendMessage(embed.build()).queue();
+
+                                String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoins)};
+                                core.databaseHandler.database(event.getGuild().getId(), "update", arguments3);
                             } catch (Exception e) {
-                                Message msg = channel.sendMessage("Nutzer nicht gefunden.").complete();
-                                new Timer().schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        msg.delete().queue();
-                                    }
-                                }, 5000);
+                                e.printStackTrace();
                             }
-                        }
-
-                        try {
-                            amount = Long.parseLong(args[args.length - 1]);
-                        } catch (Exception e) {
-                            Message msg = channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").complete();
-                            new Timer().schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    msg.delete().queue();
-                                }
-                            }, 5000);
-                            break;
-                        }
-
-                        try {
-                            assert member != null;
-                            String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "coins"};
-                            String[] answer;
-                            answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
-
-                            assert answer != null;
-                            long newcoins = Long.parseLong(answer[0]) + amount;
-
-                            String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoins)};
-                            core.databaseHandler.database(event.getGuild().getId(), "update", arguments3);
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     } else {
                         permissionChecker.noPower(event.getTextChannel());
