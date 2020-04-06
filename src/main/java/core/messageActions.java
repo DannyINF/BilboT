@@ -58,7 +58,7 @@ public class messageActions {
         }
         channelActions.getChannel(event, "cmdlog").sendMessage(
                 messageActions.getLocalizedString("log_command", "server", event.getGuild().getId())
-                        .replace("[COMMAND]", command).replace("[USER]", event.getAuthor().getAsTag())
+                        .replace("[COMMAND]", command).replace("[USER]", event.getAuthor().getAsTag().replace("[CHAT]", event.getTextChannel().getAsMention()))
         ).queue();
     }
 
