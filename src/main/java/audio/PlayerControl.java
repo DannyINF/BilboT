@@ -332,7 +332,7 @@ public class PlayerControl implements Command {
                         }
                     }
                 } else {
-                    permissionChecker.noPower(channel);
+                    permissionChecker.noPower(channel, member);
                 }
                 break;
             case "restart":

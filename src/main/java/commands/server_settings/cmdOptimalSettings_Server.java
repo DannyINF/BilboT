@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class cmdOptimalSettings_Server implements Command {
     @Override
@@ -40,12 +41,8 @@ public class cmdOptimalSettings_Server implements Command {
             embed1.setDescription("Deactivated verification, event");
             event.getTextChannel().sendMessage(embed1.build()).queue();
         } else {
-            permissionChecker.noPower(event.getTextChannel());
+            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
         }
-
     }
-
     //TODO: Überarbeitung
-
-
 }

@@ -92,7 +92,7 @@ public class cmdClear implements Command {
 
                 }
             } else {
-                permissionChecker.noPower(event.getTextChannel());
+                permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
             }
 
         } else {

@@ -27,7 +27,7 @@ public class cmdActivity implements Command {
 
             event.getTextChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();
         } else {
-            core.permissionChecker.noPower(event.getTextChannel());
+            core.permissionChecker.noPower(event.getTextChannel(), event.getMember());
         }
     }
 }

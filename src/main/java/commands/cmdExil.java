@@ -10,6 +10,7 @@ import util.getUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class cmdExil implements Command {
     @Override
@@ -50,7 +51,7 @@ public class cmdExil implements Command {
                 event.getTextChannel().sendMessage("Please provide an user.").queue();
             }
         } else {
-            permissionChecker.noPower(event.getTextChannel());
+            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
         }
 
     }

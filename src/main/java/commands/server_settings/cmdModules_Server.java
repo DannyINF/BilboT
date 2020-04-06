@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class cmdModules_Server implements Command {
 
@@ -125,7 +126,7 @@ public class cmdModules_Server implements Command {
             }
             event.getTextChannel().sendMessage(embed.build()).queue();
         } else {
-            permissionChecker.noPower(event.getTextChannel());
+            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
         }
 
     }

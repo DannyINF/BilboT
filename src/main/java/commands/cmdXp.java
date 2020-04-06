@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -143,7 +144,7 @@ public class cmdXp implements Command {
                                 }
                             }
                         } else {
-                            permissionChecker.noPower(event.getTextChannel());
+                            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
                         }
 
                         break;
@@ -163,7 +164,7 @@ public class cmdXp implements Command {
                             );
                             event.getTextChannel().sendMessage(embed.build()).queue();
                         } else {
-                            permissionChecker.noPower(event.getTextChannel());
+                            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
                         }
                         break;
                     default:

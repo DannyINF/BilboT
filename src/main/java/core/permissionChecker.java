@@ -25,7 +25,7 @@ public class permissionChecker {
         return hasRole;
     }
 
-    public static void noPower(TextChannel textChannel) {
-        textChannel.sendMessage("https://giphy.com/gifs/RX3vhj311HKLe").queue();
+    public static void noPower(TextChannel textChannel, Member member) {
+        textChannel.sendMessage(member.getAsMention() + " https://giphy.com/gifs/RX3vhj311HKLe").queue();
     }
 }

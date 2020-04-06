@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class cmdRules implements Command {
     @Override
@@ -79,7 +80,7 @@ public class cmdRules implements Command {
                 messageActions.moduleIsDeactivated(event, "rules");
             }
         } else {
-            permissionChecker.noPower(event.getTextChannel());
+            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
         }
 
 
