@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
-  </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="BilboT:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="implementing GatewayIntents, minor bugfixes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="test for discord webhook">
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initScreamBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/giveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/giveXP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -376,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585129070526</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="test for discord webhook">
+      <created>1586163548748</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1586163548749</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">
@@ -422,7 +426,8 @@
     <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
     <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
     <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementing GatewayIntents, minor bugfixes" />
+    <MESSAGE value="test for discord webhook" />
+    <option name="LAST_COMMIT_MESSAGE" value="test for discord webhook" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

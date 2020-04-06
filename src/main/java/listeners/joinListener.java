@@ -4,9 +4,6 @@ import core.channelActions;
 import core.databaseHandler;
 import core.messageActions;
 import core.modulesChecker;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Emote;
-import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -14,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import util.CHANNEL;
 import util.SET_CHANNEL;
 
-import java.awt.*;
 import java.sql.SQLException;
 
 import static java.lang.Boolean.FALSE;

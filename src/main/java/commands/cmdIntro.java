@@ -12,8 +12,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class cmdIntro implements Command {
 
-    private Integer lenght = 0;
-
     @Override
     public boolean called() {
         return false;
@@ -73,6 +71,7 @@ public class cmdIntro implements Command {
                         for (String str : introlist) {
                             if (str.equals(args[1])) {
                                 inChache = true;
+                                break;
                             }
                         }
                     }
@@ -169,6 +168,7 @@ public class cmdIntro implements Command {
                         while (j < introlist2.length) {
                             if (introlist2[j].equals(args[1])) {
                                 inChache = true;
+                                break;
                             }
                             j++;
                         }
@@ -179,6 +179,7 @@ public class cmdIntro implements Command {
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", "'" + args[1] + "'"));
                     } else {
                         String pl;
+                        Integer lenght = 0;
                         if (args[1].contains("-")) {
                             int prize = 0;
                             boolean all_right = true;
@@ -303,6 +304,7 @@ public class cmdIntro implements Command {
                                     while (j < introlist2.length) {
                                         if (introlist2[j].equals(award)) {
                                             finish = false;
+                                            break;
                                         }
                                         j++;
                                     }

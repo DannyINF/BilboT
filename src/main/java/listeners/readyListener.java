@@ -1,12 +1,9 @@
 package listeners;
 
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Invite;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class readyListener extends ListenerAdapter {
 

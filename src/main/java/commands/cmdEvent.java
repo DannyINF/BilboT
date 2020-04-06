@@ -3,11 +3,9 @@ package commands;
 import core.messageActions;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import util.STATIC;
 
@@ -15,8 +13,8 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class cmdEvent implements Command {
 
@@ -149,7 +147,7 @@ public class cmdEvent implements Command {
                                     STATIC.changeIsDiscussion(false);
 
                                     for (Member member : STATIC.getNarrationChannel().getMembers()) {
-                                        if (!Arrays.asList(STATIC.getReaders()).contains(member)) {
+                                        if (!Collections.singletonList(STATIC.getReaders()).contains(member)) {
                                             try {
                                                 member.mute(false).queue();
                                             } catch (Exception ignored) {}

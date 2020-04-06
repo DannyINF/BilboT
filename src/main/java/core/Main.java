@@ -1,7 +1,6 @@
 package core;
 
 import audio.PlayerControl;
-import com.google.api.client.util.DateTime;
 import commands.*;
 import commands.server_settings.cmdLanguage_Server;
 import commands.server_settings.cmdModules_Server;
@@ -9,13 +8,11 @@ import commands.server_settings.cmdOptimalSettings_Server;
 import commands.user_settings.cmdLanguage;
 import commands.user_settings.cmdProfile;
 import listeners.*;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import special.announcements;
 import util.ActivityChecker;
 import util.SECRETS;
@@ -25,7 +22,6 @@ import util.voiceXP;
 import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
 import java.time.*;
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -172,6 +168,8 @@ class Main {
         commandHandler.commands.put("edit", new cmdEdit());
 
         commandHandler.commands.put("proptodb", new cmdPropToDb());
+
+        commandHandler.commands.put("activity", new cmdActivity());
     }
 
     private static void addListeners() {

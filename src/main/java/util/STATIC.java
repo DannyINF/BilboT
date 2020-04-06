@@ -1,15 +1,13 @@
 package util;
 
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.8.7";
+    public static final String VERSION = "v2.9.0";
 
     public static final String PREFIX = "/";
 

@@ -1,9 +1,7 @@
 package listeners;
 
-import core.commandHandler;
 import core.commandHandlerMusic;
 import core.commandParser;
-import core.messageActions;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
