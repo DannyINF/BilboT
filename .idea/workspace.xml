@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding textchannel to command log">
-      <change afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="updating chatfilter">
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -403,7 +401,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586169317633</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="updating chatfilter">
+      <created>1586169760357</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1586169760357</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -429,7 +434,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updating to v.2.3.2" />
     <MESSAGE value="Fixing bug where users couldn't receive coins on level-up" />
     <MESSAGE value="Updating to v.2.4.0" />
     <MESSAGE value="Updating to v.2.4.1" />
@@ -454,7 +458,8 @@
     <MESSAGE value="adding &quot;You have no power here!&quot;" />
     <MESSAGE value="giving xp or coins logs in modlog" />
     <MESSAGE value="adding textchannel to command log" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding textchannel to command log" />
+    <MESSAGE value="updating chatfilter" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating chatfilter" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

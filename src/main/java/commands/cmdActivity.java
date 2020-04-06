@@ -22,6 +22,6 @@ public class cmdActivity implements Command {
         String[] data = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
         activity = Integer.parseInt(data[0]);
 
-        event.getTextChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivität von **" + numberFormat.format(activity) + "**.").queue();
+        event.getTextChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();
     }
 }
