@@ -7,7 +7,7 @@ import java.util.List;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.9.6";
+    public static final String VERSION = "v2.9.7";
 
     public static final String PREFIX = "/";
 

@@ -6,8 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="updating chatfilter">
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="little bugfix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -408,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586169760357</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="little bugfix">
+      <created>1586170508126</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1586170508126</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -434,7 +441,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing bug where users couldn't receive coins on level-up" />
     <MESSAGE value="Updating to v.2.4.0" />
     <MESSAGE value="Updating to v.2.4.1" />
     <MESSAGE value="Updating to v.2.4.2" />
@@ -459,7 +465,8 @@
     <MESSAGE value="giving xp or coins logs in modlog" />
     <MESSAGE value="adding textchannel to command log" />
     <MESSAGE value="updating chatfilter" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating chatfilter" />
+    <MESSAGE value="little bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="little bugfix" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
