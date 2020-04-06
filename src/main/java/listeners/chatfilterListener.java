@@ -32,9 +32,9 @@ public class chatfilterListener extends ListenerAdapter {
                     messageActions.neededChannel(event);
                 } else {
                     TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
-                    String[] ban = {"pisser", "hure", "fick", "fotze", "brezelsalzabpopler",
-                            "inzest", "bastard", "spast", "wichser", "wixxer", "\u5350", "afd",
-                            "cdu", "csu", "spd", "npd", "nsdap", "hitler", "hodenkobold"};
+                    String[] ban = {"pisser", "pissa", "hure", "fick", "fotze", "brezelsalzabpopler", "inzest", "bastard", "spast",
+                            "wichser", "wixxer", "\u5350", "npd", "nsdap", "hitler", "hodenkobold", "arschloch", "Milf", "slut",
+                            "Hurensohn", "Huhrensohn", "Mongo", "gay", "Schwuchtel", "Neger", "Nigga"};
                     StringBuilder sb = new StringBuilder();
                     boolean writeReport = false;
                     for (String filter : ban) {
@@ -62,20 +62,10 @@ public class chatfilterListener extends ListenerAdapter {
                         assert modlog != null;
                         modlog.sendMessage(embed.build()).queue();
                     }
-
-                    /*
-                    if (event.getMessage().getContentRaw().toLowerCase().contains("hodenkobold")) {
-                        event.getTextChannel().sendFile(new File("Bilder/Creepy/hodenkobold.png")).queue();
-                    }
-                    */
                 }
-
             }
-
         }
     }
-
-
 }
 
 //}

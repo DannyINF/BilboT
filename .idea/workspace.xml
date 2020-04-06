@@ -6,9 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="giving xp or coins logs in modlog">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/messageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/messageActions.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding textchannel to command log">
+      <change afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,8 +75,12 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="listeners" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\META-INF" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
+      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -94,11 +99,8 @@
       <recent name="audio" />
       <recent name="commands" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\resources\net\dv8tion\jda\core\entities" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src" />
-      <recent name="C:\Users\danny\IdeaProjects\BilboT\src\main\java\properties" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="listeners" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -394,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586168850862</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="adding textchannel to command log">
+      <created>1586169317633</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1586169317633</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -444,7 +453,8 @@
     <MESSAGE value="adding activity command" />
     <MESSAGE value="adding &quot;You have no power here!&quot;" />
     <MESSAGE value="giving xp or coins logs in modlog" />
-    <option name="LAST_COMMIT_MESSAGE" value="giving xp or coins logs in modlog" />
+    <MESSAGE value="adding textchannel to command log" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding textchannel to command log" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
