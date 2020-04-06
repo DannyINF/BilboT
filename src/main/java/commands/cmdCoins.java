@@ -204,6 +204,8 @@ public class cmdCoins implements Command {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        permissionChecker.noPower(event.getTextChannel());
                     }
                     break;
                 default:

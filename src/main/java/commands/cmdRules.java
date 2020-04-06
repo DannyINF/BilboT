@@ -78,6 +78,8 @@ public class cmdRules implements Command {
             } else {
                 messageActions.moduleIsDeactivated(event, "rules");
             }
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
 
 

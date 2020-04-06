@@ -39,6 +39,8 @@ public class cmdOptimalSettings_Server implements Command {
             embed1.setTitle("Optimal settings");
             embed1.setDescription("Deactivated verification, event");
             event.getTextChannel().sendMessage(embed1.build()).queue();
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
 
     }

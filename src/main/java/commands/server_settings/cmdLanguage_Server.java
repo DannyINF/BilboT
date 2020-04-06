@@ -45,6 +45,8 @@ public class cmdLanguage_Server implements Command {
                     event.getTextChannel().sendMessage(messageActions.getLocalizedString("lang_syntax_server", "server", event.getGuild().getId())).queue();
                 }
             }
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
     }
 

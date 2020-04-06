@@ -2,6 +2,7 @@ package commands;
 
 import core.messageActions;
 import core.modulesChecker;
+import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
@@ -47,7 +48,7 @@ public class cmdClear implements Command {
         status = modulesChecker.moduleStatus("clear", event.getGuild().getId());
         if (status.equals("activated")) {
             // only members with the permission "ADMINISTRATOR" are able to perform this command
-            if (Objects.requireNonNull(event.getGuild().getMemberById(event.getAuthor().getId())).hasPermission(Permission.ADMINISTRATOR)) {
+            if (core.permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
                 //getting number of msgs that shall be deleted
                 int num = getInt(args[0]);
                 if (num > 1 && num <= 100) {
@@ -90,6 +91,8 @@ public class cmdClear implements Command {
                     }
 
                 }
+            } else {
+                permissionChecker.noPower(event.getTextChannel());
             }
 
         } else {

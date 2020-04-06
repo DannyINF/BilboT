@@ -124,6 +124,8 @@ public class cmdModules_Server implements Command {
                         .replace("[STATUS]", status_str));
             }
             event.getTextChannel().sendMessage(embed.build()).queue();
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
 
     }

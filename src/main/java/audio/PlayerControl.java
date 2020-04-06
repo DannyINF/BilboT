@@ -14,12 +14,14 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import commands.Command;
+import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import net.dv8tion.jda.internal.requests.Route;
 import util.SECRETS;
 
 import java.awt.*;
@@ -312,20 +314,25 @@ public class PlayerControl implements Command {
                 channel.sendMessage(embed.build()).queue();
                 break;
             case "volume":
-                if (args.length == 1) {
-                    embed.setDescription("Current player volume: **" + player.getVolume() + "**");
-                    channel.sendMessage(embed.build()).queue();
-                } else {
-                    try {
-                        int newVolume = Math.max(10, Math.min(100, Integer.parseInt(args[1])));
-                        int oldVolume = player.getVolume();
-                        player.setVolume(newVolume);
-                        embed.setDescription("Player volume changed from `" + oldVolume + "` to `" + newVolume + "`");
+                if (permissionChecker.checkRole(new Role[]{guild.getRolesByName("Vala", true).get(0)}, member) ||
+                        permissionChecker.checkRole(new Role[]{guild.getRolesByName("Leser", true).get(0)}, member)) {
+                    if (args.length == 1) {
+                        embed.setDescription("Current player volume: **" + player.getVolume() + "**");
                         channel.sendMessage(embed.build()).queue();
-                    } catch (NumberFormatException e) {
-                        embed.setDescription("`" + args[1] + "` is not a valid integer. (10 - 100)");
-                        channel.sendMessage(embed.build()).queue();
+                    } else {
+                        try {
+                            int newVolume = Math.max(10, Math.min(100, Integer.parseInt(args[1])));
+                            int oldVolume = player.getVolume();
+                            player.setVolume(newVolume);
+                            embed.setDescription("Player volume changed from `" + oldVolume + "` to `" + newVolume + "`");
+                            channel.sendMessage(embed.build()).queue();
+                        } catch (NumberFormatException e) {
+                            embed.setDescription("`" + args[1] + "` is not a valid integer. (10 - 100)");
+                            channel.sendMessage(embed.build()).queue();
+                        }
                     }
+                } else {
+                    permissionChecker.noPower(channel);
                 }
                 break;
             case "restart":

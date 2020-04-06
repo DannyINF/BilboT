@@ -62,6 +62,8 @@ public class cmdKick implements Command {
 
                 }
             }
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
     }
 

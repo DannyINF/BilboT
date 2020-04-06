@@ -124,24 +124,29 @@ public class cmdXp implements Command {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        } else {
+                            permissionChecker.noPower(event.getTextChannel());
                         }
 
                         break;
                     case "next":
-                        String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "xp"};
+                        String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "2", "xp", "level"};
                         String[] answer;
                         answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
-
-                        long newxp = Long.parseLong(answer[0]);
-                        EmbedBuilder embed = new EmbedBuilder();
-                        embed.setColor(Color.ORANGE);
-                        embed.setTitle("Next level / next rank for " + event.getAuthor().getAsTag());
-                        NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
-                        embed.setDescription(
-                                "Next level: " + numberFormat.format(LevelChecker.nextLevel(newxp)) + " XP remaining\n" +
-                                        "Next rank: " + LevelChecker.nextRank(newxp)[1] + " (" + numberFormat.format(Long.parseLong(LevelChecker.nextRank(newxp)[0])) + " XP remaining)"
-                        );
-                        event.getTextChannel().sendMessage(embed.build()).queue();
+                        if (Integer.parseInt(answer[1])>=50) {
+                            long newxp = Long.parseLong(answer[0]);
+                            EmbedBuilder embed = new EmbedBuilder();
+                            embed.setColor(Color.ORANGE);
+                            embed.setTitle("Next level / next rank for " + event.getAuthor().getAsTag());
+                            NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
+                            embed.setDescription(
+                                    "Next level: " + numberFormat.format(LevelChecker.nextLevel(newxp)) + " XP remaining\n" +
+                                            "Next rank: " + LevelChecker.nextRank(newxp)[1] + " (" + numberFormat.format(Long.parseLong(LevelChecker.nextRank(newxp)[0])) + " XP remaining)"
+                            );
+                            event.getTextChannel().sendMessage(embed.build()).queue();
+                        } else {
+                            permissionChecker.noPower(event.getTextChannel());
+                        }
                         break;
                     default:
                         ArrayList<String> args2 = new ArrayList<>();

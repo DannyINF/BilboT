@@ -3,6 +3,7 @@ package core;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public class permissionChecker {
     public static boolean checkPermission(Permission[] permission, Member member) {
@@ -22,5 +23,9 @@ public class permissionChecker {
             }
         }
         return hasRole;
+    }
+
+    public static void noPower(TextChannel textChannel) {
+        textChannel.sendMessage("https://giphy.com/gifs/RX3vhj311HKLe").queue();
     }
 }

@@ -68,6 +68,8 @@ public class cmdBan implements Command {
                     modlog.sendMessage(embed1.build()).queue(msg -> event.getGuild().ban(user, delay, sb.toString()).queue());
                 }
             }
+        } else {
+            permissionChecker.noPower(event.getTextChannel());
         }
     }
 }

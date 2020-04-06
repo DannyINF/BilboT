@@ -6,16 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="test for discord webhook">
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding activity command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsMusicListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/readyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdKick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -380,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586163548749</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="adding activity command">
+      <created>1586166818564</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1586166818565</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -427,7 +438,8 @@
     <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
     <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
     <MESSAGE value="test for discord webhook" />
-    <option name="LAST_COMMIT_MESSAGE" value="test for discord webhook" />
+    <MESSAGE value="adding activity command" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding activity command" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
