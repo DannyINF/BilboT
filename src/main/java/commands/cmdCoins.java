@@ -133,7 +133,7 @@ public class cmdCoins implements Command {
 
                                     String[] argumentsUpdateMember = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoinsMember)};
                                     core.databaseHandler.database(event.getGuild().getId(), "update", argumentsUpdateMember);
-                                    event.getChannel().sendMessage(event.getAuthor().getAsTag() + " hat an " + member.getUser().getAsTag() + " " + amount + " Coins verschenkt.").complete();
+                                    event.getChannel().sendMessage("**" + event.getAuthor().getAsTag() + "** hat an **" + member.getUser().getAsTag() + "** `" + amount + "` Coins verschenkt.").complete();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -214,7 +214,7 @@ public class cmdCoins implements Command {
                                 embed.setColor(Color.RED);
                                 NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
                                 embed.setDescription("**" + event.getAuthor().getAsTag() + "** hat dem Nutzer **" + member.getUser().getAsTag() + "**" +
-                                        " *" + numberFormat.format(amount) + "* Coins hinzugef\u00fcgt.");
+                                        " `" + numberFormat.format(amount) + "` Coins hinzugef\u00fcgt.");
                                 embed.setTimestamp(Instant.now());
                                 assert modlog != null;
                                 modlog.sendMessage(embed.build()).queue();

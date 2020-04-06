@@ -130,7 +130,7 @@ public class cmdXp implements Command {
                                     embed.setColor(Color.RED);
                                     NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
                                     embed.setDescription("**" + event.getAuthor().getAsTag() + "** hat dem Nutzer **" + member.getUser().getAsTag() + "**" +
-                                            " *" + numberFormat.format(amount) + "* XP hinzugef\u00fcgt.");
+                                            " `" + numberFormat.format(amount) + "` XP hinzugef\u00fcgt.");
                                     embed.setTimestamp(Instant.now());
                                     assert modlog != null;
                                     modlog.sendMessage(embed.build()).queue();

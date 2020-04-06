@@ -6,7 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="permission fix for activity check" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Test02">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -420,7 +424,21 @@
       <option name="project" value="LOCAL" />
       <updated>1586173177090</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Test">
+      <created>1586173313151</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1586173313151</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Test02">
+      <created>1586173490454</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1586173490454</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView">
@@ -446,8 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updating to v.2.4.1" />
-    <MESSAGE value="Updating to v.2.4.2" />
     <MESSAGE value="Fixing a typo and a bug" />
     <MESSAGE value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
     <MESSAGE value="Integrating ScreamBot into BilboT" />
@@ -471,7 +487,9 @@
     <MESSAGE value="updating chatfilter" />
     <MESSAGE value="little bugfix" />
     <MESSAGE value="permission fix for activity check" />
-    <option name="LAST_COMMIT_MESSAGE" value="permission fix for activity check" />
+    <MESSAGE value="Test" />
+    <MESSAGE value="Test02" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test02" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
