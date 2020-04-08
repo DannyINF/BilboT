@@ -6,21 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Kleine Formatierungsänderungen bei /coins gift;  /coins give und /xp give">
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdKick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="Erwähnung bei &quot;You have no power here!&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/permissionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/announcements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/announcements.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -456,7 +445,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586173919727</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Erwähnung bei &quot;You have no power here!&quot;">
+      <created>1586178816944</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1586178816944</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView">
@@ -482,7 +478,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removing of some lines of masterful debugging coughtSystem.out.printlncought" />
     <MESSAGE value="Integrating ScreamBot into BilboT" />
     <MESSAGE value="v2.5.0" />
     <MESSAGE value="adding voiceListenerAddon to ScreamBot" />
@@ -507,7 +502,8 @@
     <MESSAGE value="Test" />
     <MESSAGE value="Test02" />
     <MESSAGE value="Kleine Formatierungsänderungen bei /coins gift;  /coins give und /xp give" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kleine Formatierungsänderungen bei /coins gift;  /coins give und /xp give" />
+    <MESSAGE value="Erwähnung bei &quot;You have no power here!&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Erwähnung bei &quot;You have no power here!&quot;" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
