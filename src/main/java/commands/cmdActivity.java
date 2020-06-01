@@ -3,7 +3,7 @@ package commands;
 import core.permissionChecker;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -15,9 +15,9 @@ public class cmdActivity implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
-            Member member = util.getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getTextChannel());
+            Member member = util.getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
             int activity = 0;
             NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
@@ -25,9 +25,9 @@ public class cmdActivity implements Command {
             String[] data = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
             activity = Integer.parseInt(data[0]);
 
-            event.getTextChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();
+            event.getChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();
         } else {
-            core.permissionChecker.noPower(event.getTextChannel(), event.getMember());
+            core.permissionChecker.noPower(event.getChannel(), event.getMember());
         }
     }
 }

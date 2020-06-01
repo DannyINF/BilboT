@@ -3,7 +3,7 @@ package commands;
 import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ public class cmdQuote implements Command {
 
     //TODO: Update + database
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
         status = modulesChecker.moduleStatus("quotes", event.getGuild().getId());
         if (status.equals("activated")) {

@@ -4,7 +4,7 @@ package commands;
 import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.STATIC;
 
 public class cmdBotinfo implements Command {
@@ -17,7 +17,7 @@ public class cmdBotinfo implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         String status = null;
 
         // checking for activation
@@ -43,7 +43,7 @@ public class cmdBotinfo implements Command {
             EmbedBuilder embed = new EmbedBuilder();
             embed.setTitle("INFORMATION");
             embed.setDescription("\n\nOwner: MoorhuhnHD\nVersion: " + STATIC.VERSION + out + "Insgesamte Nutzeranzahl: " + members);
-            event.getTextChannel().sendMessage(embed.build()).queue();
+            event.getChannel().sendMessage(embed.build()).queue();
 
         } else {
             messageActions.moduleIsDeactivated(event, "botinfo");

@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class cmdClear implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
 
         // checking for activation
@@ -54,7 +54,7 @@ public class cmdClear implements Command {
                 if (num > 1 && num <= 100) {
                     try {
                         // getting all msgs of the textchannel
-                        MessageHistory history = new MessageHistory(event.getTextChannel());
+                        MessageHistory history = new MessageHistory(event.getChannel());
                         List<Message> msgs;
 
                         event.getMessage().delete().queue();
@@ -63,7 +63,7 @@ public class cmdClear implements Command {
                         msgs = history.retrievePast(num).complete();
 
                         // deleting all messages from "msgs"
-                        event.getTextChannel().deleteMessages(msgs).queue();
+                        event.getChannel().deleteMessages(msgs).queue();
 
                         // preparing and sending msg (information: how many msgs were deleted)
                         EmbedBuilder embed = new EmbedBuilder();
@@ -71,7 +71,7 @@ public class cmdClear implements Command {
                         embed.setColor(Color.red);
                         embed.setDescription(messageActions.getLocalizedString("clear_deleted_msg", "user", event.getAuthor().getId())
                                 .replace("[COUNT]", args[0]));
-                        Message msg = event.getTextChannel().sendMessage(embed.build()).complete();
+                        Message msg = event.getChannel().sendMessage(embed.build()).complete();
 
                         // destroying itself after 3 seconds
                         new Timer().schedule(new TimerTask() {
@@ -85,14 +85,14 @@ public class cmdClear implements Command {
                     }
                 } else {
                     if (num < 1) {
-                        event.getTextChannel().sendMessage(error.setDescription(messageActions.getLocalizedString("clear_error_no_number", "user", event.getAuthor().getId())).build()).queue();
+                        event.getChannel().sendMessage(error.setDescription(messageActions.getLocalizedString("clear_error_no_number", "user", event.getAuthor().getId())).build()).queue();
                     } else {
-                        event.getTextChannel().sendMessage(error.setDescription(messageActions.getLocalizedString("clear_error_wrong_number", "user", event.getAuthor().getId())).build()).queue();
+                        event.getChannel().sendMessage(error.setDescription(messageActions.getLocalizedString("clear_error_wrong_number", "user", event.getAuthor().getId())).build()).queue();
                     }
 
                 }
             } else {
-                permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+                permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
             }
 
         } else {

@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.SET_CHANNEL;
 import util.getUser;
@@ -33,7 +33,7 @@ public class cmdCoins implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
 
         // checking for activation
@@ -226,7 +226,7 @@ public class cmdCoins implements Command {
                             }
                         }
                     } else {
-                        permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+                        permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
                     }
                     break;
                 default:
@@ -240,7 +240,7 @@ public class cmdCoins implements Command {
                         args2.add(args[i]);
                         String[] args3 = new String[args2.size()];
                         args3 = args2.toArray(args3);
-                        Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getTextChannel());
+                        Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
                         coins(event, member);
                     } catch (Exception e) {
                         coins(event, Objects.requireNonNull(event.getMember()));
@@ -254,7 +254,7 @@ public class cmdCoins implements Command {
     }
 
 
-    private void coins(MessageReceivedEvent event, Member member) throws SQLException {
+    private void coins(GuildMessageReceivedEvent event, Member member) throws SQLException {
 
         String coins;
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
@@ -269,7 +269,7 @@ public class cmdCoins implements Command {
         } catch (Exception e) {
             coins = "0";
         }
-        event.getTextChannel().sendMessage(messageActions.getLocalizedString("coins_msg", "user", event.getAuthor().getId())
+        event.getChannel().sendMessage(messageActions.getLocalizedString("coins_msg", "user", event.getAuthor().getId())
                 .replace("[USER]", member.getUser().getAsTag()).replace("[COINS]", numberFormat.format(Integer.parseInt(coins)))).queue();
 
     }

@@ -2,7 +2,7 @@ package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class cmdRole implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         String command;
         String role;
         EmbedBuilder embed = new EmbedBuilder();

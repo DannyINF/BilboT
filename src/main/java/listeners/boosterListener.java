@@ -8,7 +8,7 @@ package listeners;
 //    private OutputStream output1 = null;
 //
 //
-//    public void onMessageReceived(MessageReceivedEvent event) {
+//    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 //        String boostertime;
 //        try {
 //            input1 = new FileInputStream("Properties/XP/xp.properties");

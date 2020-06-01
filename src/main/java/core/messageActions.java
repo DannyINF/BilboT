@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 
 import java.awt.*;
@@ -17,8 +17,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class messageActions {
-    public static void selfDestroyMSG(Message msg, int time_in_millis, MessageReceivedEvent event) {
-        Message send = event.getTextChannel().sendMessage(msg).complete();
+    public static void selfDestroyMSG(Message msg, int time_in_millis, GuildMessageReceivedEvent event) {
+        Message send = event.getChannel().sendMessage(msg).complete();
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -28,8 +28,8 @@ public class messageActions {
         }, time_in_millis);
     }
 
-    public static void selfDestroyEmbedMSG(MessageEmbed msg, int time_in_millis, MessageReceivedEvent event) {
-        Message send = event.getTextChannel().sendMessage(msg).complete();
+    public static void selfDestroyEmbedMSG(MessageEmbed msg, int time_in_millis, GuildMessageReceivedEvent event) {
+        Message send = event.getChannel().sendMessage(msg).complete();
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -50,7 +50,7 @@ public class messageActions {
         }, time_in_millis);
     }
 
-    public static void logCommand(MessageReceivedEvent event) {
+    public static void logCommand(GuildMessageReceivedEvent event) {
         StringBuilder command = new StringBuilder();
         for (String s : event.getMessage().getContentRaw().split(" ")) {
             command.append(s);
@@ -58,7 +58,7 @@ public class messageActions {
         }
         channelActions.getChannel(event, "cmdlog").sendMessage(
                 messageActions.getLocalizedString("log_command", "server", event.getGuild().getId())
-                        .replace("[COMMAND]", command).replace("[USER]", event.getAuthor().getAsTag()).replace("[CHAT]", event.getTextChannel().getAsMention())
+                        .replace("[COMMAND]", command).replace("[USER]", event.getAuthor().getAsTag()).replace("[CHAT]", event.getChannel().getAsMention())
         ).queue();
     }
 
@@ -110,8 +110,8 @@ public class messageActions {
         return localizedString;
     }
 
-    public static void neededChannel(MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())).queue();
+    public static void neededChannel(GuildMessageReceivedEvent event) {
+        event.getChannel().sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())).queue();
     }
 
     public static void neededChannel(GuildBanEvent event, String channel) {
@@ -160,13 +160,13 @@ public class messageActions {
                 .replace("[CHANNEL]", channel)).queue();
     }
 
-    public static void moduleIsDeactivated(MessageReceivedEvent event, String module) {
+    public static void moduleIsDeactivated(GuildMessageReceivedEvent event, String module) {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(getLocalizedString("modules_title", "server", event.getGuild().getId()));
         embed.setColor(Color.RED);
         embed.setDescription(getLocalizedString("modules_is_deactivated", "server", event.getGuild().getId())
                 .replace("[MODUL]", module));
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessage(embed.build()).queue();
     }
 
 

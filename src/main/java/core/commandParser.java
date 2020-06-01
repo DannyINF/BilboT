@@ -1,6 +1,6 @@
 package core;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.STATIC;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class commandParser {
 
-    public static commandContainer parser(String raw, MessageReceivedEvent event) {
+    public static commandContainer parser(String raw, GuildMessageReceivedEvent event) {
         String beheaded;
         beheaded = raw.replaceFirst(STATIC.PREFIX, "");
 
@@ -26,13 +26,13 @@ public class commandParser {
     public static class commandContainer {
 
         public final String[] args;
-        public final MessageReceivedEvent event;
+        public final GuildMessageReceivedEvent event;
         final String raw;
         final String beheaded;
         final String[] splitBeheaded;
         final String invoke;
 
-        commandContainer(String rw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event) {
+        commandContainer(String rw, String beheaded, String[] splitBeheaded, String invoke, String[] args, GuildMessageReceivedEvent event) {
             this.raw = rw.toLowerCase();
             this.beheaded = beheaded.toLowerCase();
             this.splitBeheaded = splitBeheaded;

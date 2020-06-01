@@ -4,7 +4,7 @@ import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
@@ -23,7 +23,7 @@ public class cmdSearch implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws IOException, SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws IOException, SQLException {
         String status;
 
         // checking for activation
@@ -58,7 +58,7 @@ public class cmdSearch implements Command {
 
                     // sending "search" msg
 
-                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    Message msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -113,7 +113,7 @@ public class cmdSearch implements Command {
 
                     // sending "search" msg
 
-                    msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -153,7 +153,7 @@ public class cmdSearch implements Command {
 
                     // sending "search" msg
 
-                    msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -194,7 +194,7 @@ public class cmdSearch implements Command {
 
                     // sending "search" msg
 
-                    msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -237,7 +237,7 @@ public class cmdSearch implements Command {
                 embed.setTitle(site + ": " + sb.toString());
                 embed.addField("Source:", "[" + siteurl + "](" + siteurl + ")", true);
                 embed.setTimestamp(OffsetDateTime.now());
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
             }
 
         } else {

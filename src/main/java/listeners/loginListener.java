@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,8 +18,8 @@ import static core.databaseHandler.database;
 
 public class loginListener extends ListenerAdapter {
     @Override
-    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        String topic = event.getTextChannel().getTopic() + "";
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+        String topic = event.getChannel().getTopic() + "";
         if (!topic.contains("{SPAM}")) {
             MessageEmbed emsg = login(event.getGuild().getId(), event.getAuthor());
             if (emsg != null) {

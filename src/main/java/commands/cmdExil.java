@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.getUser;
 
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ public class cmdExil implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember())) {
             if (args.length > 0) {
-                Member member = getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getTextChannel());
+                Member member = getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
                 Role exil = event.getGuild().getRolesByName("exil", true).get(0);
                 List<Role> rolelist = new ArrayList<>();
                 rolelist.add(event.getGuild().getRolesByName("dark-memes", true).get(0));
@@ -48,10 +48,10 @@ public class cmdExil implements Command {
                 event.getGuild().addRoleToMember(member, exil).queue();
 
             } else {
-                event.getTextChannel().sendMessage("Please provide an user.").queue();
+                event.getChannel().sendMessage("Please provide an user.").queue();
             }
         } else {
-            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+            permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
 
     }

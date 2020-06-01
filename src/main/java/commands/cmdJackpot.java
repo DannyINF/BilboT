@@ -1,7 +1,7 @@
 package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.*;
@@ -22,8 +22,8 @@ public class cmdJackpot implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        if (event.getTextChannel().getName().equals("jackpot")) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
+        if (event.getChannel().getName().equals("jackpot")) {
             int count_lose = 0;
             if (args.length < 1) {
                 count_lose++;
@@ -67,7 +67,7 @@ public class cmdJackpot implements Command {
     }
 
 
-    private void jackpot(MessageReceivedEvent event, int real_lose) {
+    private void jackpot(GuildMessageReceivedEvent event, int real_lose) {
         OutputStream output1;
         try {
             output1 = new FileOutputStream("Properties/Jackpot/jackpot.properties");
@@ -163,17 +163,17 @@ public class cmdJackpot implements Command {
         win.setTitle("Gewinn");
         win.setDescription(event.getAuthor().getAsMention() + " hat einen Tier-" + tier + "-Gewinn! \n" +
                 gewinnstr);
-        event.getTextChannel().sendMessage(win.build()).queue();
+        event.getChannel().sendMessage(win.build()).queue();
 
 
     }
 
-    private void error(Object description, MessageReceivedEvent event) {
+    private void error(Object description, GuildMessageReceivedEvent event) {
         EmbedBuilder error = new EmbedBuilder();
         error.setDescription(description.toString());
         error.setTitle("Error");
         error.setColor(Color.RED);
-        event.getTextChannel().sendMessage(error.build()).queue();
+        event.getChannel().sendMessage(error.build()).queue();
     }
 
     private String winclass(int winning_class) {

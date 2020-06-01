@@ -1,6 +1,6 @@
 package commands;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class cmdTalk implements Command {
 
@@ -10,14 +10,14 @@ public class cmdTalk implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         if (event.getAuthor().getId().equals("277746420281507841")) {
             StringBuilder sb = new StringBuilder();
             for (String str : args) {
                 sb.append(str);
                 sb.append(" ");
             }
-            event.getTextChannel().sendMessage(sb.toString()).queue();
+            event.getChannel().sendMessage(sb.toString()).queue();
         }
     }
 

@@ -2,12 +2,13 @@ package core;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.Objects;
 
 public class channelActions {
-    public static TextChannel getChannel(MessageReceivedEvent event, String name) {
+    public static TextChannel getChannel(GuildMessageReceivedEvent event, String name) {
         try {
             String[] selectArgs = {"channels", "id = '" + event.getGuild().getId() + "'", "1", name};
             String id = Objects.requireNonNull(databaseHandler.database("serversettings", "select", selectArgs))[0];

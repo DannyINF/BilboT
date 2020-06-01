@@ -1,7 +1,7 @@
 package special;
 
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.FileInputStream;
@@ -17,10 +17,10 @@ class lotrQuizMaster extends ListenerAdapter {
     // --Commented out by Inspection (13.12.2018 22:15):private OutputStream output = null;
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 
         if (!event.getAuthor().isBot()) {
-            if (event.getTextChannel().getName().contains("user-quiz-")) {
+            if (event.getChannel().getName().contains("user-quiz-")) {
                 int i = 0;
                 int y = 0;
                 StringBuilder sb = new StringBuilder();
@@ -36,7 +36,7 @@ class lotrQuizMaster extends ListenerAdapter {
                 String[] channels = sb.toString().split("###");
                 while (i < channels.length) {
 
-                    if (event.getTextChannel().getName().equals(channels[i])) {
+                    if (event.getChannel().getName().equals(channels[i])) {
                         try {
                             input = new FileInputStream("Properties/Quiz/quizmaster.properties");
                             prop.load(input);
@@ -50,10 +50,10 @@ class lotrQuizMaster extends ListenerAdapter {
                             e.printStackTrace();
                         }
                         if (event.getMessage().getContentRaw().toLowerCase().equals(right_answer.toLowerCase())) {
-                            event.getTextChannel().sendMessage("Deine Antwort war richtig!").queue();
+                            event.getChannel().sendMessage("Deine Antwort war richtig!").queue();
 
                         } else {
-                            event.getTextChannel().sendMessage("Deine Antwort war falsch!").queue();
+                            event.getChannel().sendMessage("Deine Antwort war falsch!").queue();
                         }
                     }
                     i++;

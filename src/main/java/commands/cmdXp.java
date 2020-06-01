@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.LevelChecker;
 import util.SET_CHANNEL;
@@ -28,7 +28,7 @@ import java.util.TimerTask;
 
 public class cmdXp implements Command {
 
-    private static void xp(MessageReceivedEvent event, Member xpmember) throws SQLException {
+    private static void xp(GuildMessageReceivedEvent event, Member xpmember) throws SQLException {
 
         String strmember;
         strmember = xpmember.getUser().getAsTag();
@@ -41,7 +41,7 @@ public class cmdXp implements Command {
         String[] data = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
         xp = data[0];
         level = data[1];
-        event.getTextChannel().sendMessage(messageActions.getLocalizedString("xp_msg", "user", event.getAuthor().getId())
+        event.getChannel().sendMessage(messageActions.getLocalizedString("xp_msg", "user", event.getAuthor().getId())
                 .replace("[USER]", strmember).replace("[LEVEL]", numberFormat.format(Integer.parseInt(level)))
                 .replace("[XP]", numberFormat.format(Integer.parseInt(xp)))).queue();
 
@@ -53,7 +53,7 @@ public class cmdXp implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
         status = modulesChecker.moduleStatus("xp", event.getGuild().getId());
         if (status.equals("activated")) {
@@ -144,27 +144,48 @@ public class cmdXp implements Command {
                                 }
                             }
                         } else {
-                            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+                            permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
                         }
 
                         break;
                     case "next":
-                        String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "2", "xp", "level"};
-                        String[] answer;
-                        answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
-                        if (Integer.parseInt(answer[1])>=50) {
+                        try {
+                            String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "2", "xp", "level"};
+                            String[] answer;
+                            answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+                            assert answer != null;
                             long newxp = Long.parseLong(answer[0]);
+                            long level = Long.parseLong(answer[1]);
+
+                            Color color;
+                            if (level > 1049) {
+                                color = Color.decode("#ca2a1a");
+                            } else if (level > 749)
+                                color = Color.decode("#bf3636");
+                            else if (level > 499)
+                                color = Color.decode("#f25511");
+                            else if (level > 299)
+                                color = Color.decode("#f3730d");
+                            else if (level > 149)
+                                color = Color.decode("#e68f0a");
+                            else if (level > 49)
+                                color = Color.decode("#f7bf16");
+                            else if (level > 9)
+                                color = Color.decode("#fff53d");
+                            else
+                                color = Color.decode("#fff9ba");
+
                             EmbedBuilder embed = new EmbedBuilder();
-                            embed.setColor(Color.ORANGE);
+                            embed.setColor(color);
                             embed.setTitle("Next level / next rank for " + event.getAuthor().getAsTag());
                             NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
                             embed.setDescription(
                                     "Next level: " + numberFormat.format(LevelChecker.nextLevel(newxp)) + " XP remaining\n" +
                                             "Next rank: " + LevelChecker.nextRank(newxp)[1] + " (" + numberFormat.format(Long.parseLong(LevelChecker.nextRank(newxp)[0])) + " XP remaining)"
                             );
-                            event.getTextChannel().sendMessage(embed.build()).queue();
-                        } else {
-                            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+                            event.getChannel().sendMessage(embed.build()).queue();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                         break;
                     default:
@@ -178,7 +199,7 @@ public class cmdXp implements Command {
                         args2.add(args[i]);
                         String[] args3 = new String[args2.size()];
                         args3 = args2.toArray(args3);
-                        Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getTextChannel());
+                        Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
                         xp(event, member);
 
                         break;
@@ -186,8 +207,6 @@ public class cmdXp implements Command {
             } catch (Exception e) {
                 xp(event, event.getMember());
             }
-
-
         } else {
             messageActions.moduleIsDeactivated(event, "xp");
         }

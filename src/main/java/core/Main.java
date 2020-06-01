@@ -127,6 +127,7 @@ class Main {
         commandHandler.commands.put("profile", new cmdProfile());
 
         commandHandler.commands.put("deleteroles", new cmdDeleteRoles());
+        commandHandler.commands.put("createroles", new cmdCreateRoles());
 
         commandHandler.commands.put("coins", new cmdCoins());
 

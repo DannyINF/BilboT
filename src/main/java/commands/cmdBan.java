@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.SET_CHANNEL;
 import util.getUser;
@@ -23,7 +23,7 @@ public class cmdBan implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         // only members with the ban permission are able to ban using this command
         if (permissionChecker.checkPermission(new Permission[]{Permission.BAN_MEMBERS}, event.getMember())) {
             SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", event.getGuild().getId());
@@ -37,7 +37,7 @@ public class cmdBan implements Command {
                 args2.add(args[0]);
                 String[] args3 = new String[args2.size()];
                 args3 = args2.toArray(args3);
-                Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getTextChannel());
+                Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
                 User user = member.getUser();
                 int delay = Integer.parseInt(args[1]);
 
@@ -68,7 +68,7 @@ public class cmdBan implements Command {
 
             }
         } else {
-            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+            permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
     }
 }

@@ -1,6 +1,6 @@
 package listeners;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class statisticsListener extends ListenerAdapter {
     @Override
-    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         String[] arguments1 = {"users", "id = '" + event.getAuthor().getId() + "'", "3", "words", "msg", "chars"};
         String[] answer1 = null;
         try {

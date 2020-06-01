@@ -2,7 +2,7 @@ package commands;
 
 import core.messageActions;
 import core.modulesChecker;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 class cmdXpRanking {
 
-    public static void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public static void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status = modulesChecker.moduleStatus("xp", event.getGuild().getId());
         if (status.equals("activated")) {
             int start;
@@ -146,7 +146,7 @@ class cmdXpRanking {
             }
             sb.append("```");
 
-            event.getTextChannel().sendMessage(sb.toString()).queue();
+            event.getChannel().sendMessage(sb.toString()).queue();
 
         } else {
             messageActions.moduleIsDeactivated(event, "xp");

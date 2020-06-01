@@ -29,7 +29,8 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
         if (STATIC.getIsNarration() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
             if (!event.getMember().getUser().isBot())
                 event.getMember().mute(true).queue();
-        }
+        } else if (Objects.requireNonNull(event.getMember().getVoiceState()).isGuildMuted())
+            event.getMember().mute(false).queue();
         if (event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).isEmpty()) {
             event.getGuild().createRole().setColor(Color.LIGHT_GRAY).setName(event.getChannelJoined().getName())
                     .setMentionable(true).setHoisted(false).complete();

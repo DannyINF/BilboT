@@ -1,6 +1,6 @@
 package special;
 
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class xpGewinne extends ListenerAdapter {
@@ -9,7 +9,7 @@ public class xpGewinne extends ListenerAdapter {
 
     // --Commented out by Inspection (13.12.2018 22:15):int i = 0;
 
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         /*
         String status = null;
         try {
@@ -41,7 +41,7 @@ public class xpGewinne extends ListenerAdapter {
             i++;
             OutputStream output = null;
             if (i >= 3000) {
-                if (!event.getTextChannel().getName().toLowerCase().contains("chat") && !event.getTextChannel().getName().toLowerCase().contains("diskussion")) {
+                if (!event.getChannel().getName().toLowerCase().contains("chat") && !event.getChannel().getName().toLowerCase().contains("diskussion")) {
                     i++;
                 } else {
                     i=0;
@@ -85,7 +85,7 @@ public class xpGewinne extends ListenerAdapter {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    event.getTextChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessage(embed.build()).queue();
                 }
             }
             try {

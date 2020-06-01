@@ -19,7 +19,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
 import net.dv8tion.jda.internal.requests.Route;
 import util.SECRETS;
@@ -80,7 +80,7 @@ public class PlayerControl implements Command {
     // repeat       - Makes the player repeat the currently playing song
     // reset        - Completely resets the player, fixing all errors and clearing the queue.
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(33, 237, 90));
         embed.setTitle("Music");
@@ -144,7 +144,7 @@ public class PlayerControl implements Command {
                                 initMusicAddon.main(SECRETS.TOKENTHORIN, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486085339530788894")) {
-                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
                                 }
                             }
                             break;
@@ -154,7 +154,7 @@ public class PlayerControl implements Command {
                                 initMusicAddon.main(SECRETS.TOKENBALIN, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089278019993611")) {
-                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
                                 }
                             }
                             break;
@@ -164,20 +164,20 @@ public class PlayerControl implements Command {
                                 initMusicAddon.main(SECRETS.TOKENBOMBUR, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089728437780480")) {
-                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
                                 }
                             }
                             break;
                         case "441962292297596928":
                             embed.setFooter("Player: BilboT-BETA", null);
                             if (event.getJDA().getSelfUser().getId().equals("441962292297596928")) {
-                                musicPlayer(event.getTextChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
                             }
                             break;
                         case "393375474056953856":
                             embed.setFooter("Player: BilboT", null);
                             if (event.getJDA().getSelfUser().getId().equals("393375474056953856")) {
-                                musicPlayer(event.getTextChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
                             }
                             break;
                     }
@@ -259,7 +259,7 @@ public class PlayerControl implements Command {
                             }
                         }
                     }
-                    loadAndPlay(mng, channel, args[1], false);
+                    loadAndPlay(mng, channel, args[1], member.getUser(), false);
                 }
                 break;
             case "pplay":
@@ -276,7 +276,7 @@ public class PlayerControl implements Command {
                     }
                 }
                 if (args.length == 2) {
-                    loadAndPlay(mng, channel, args[1], true);
+                    loadAndPlay(mng, channel, args[1], member.getUser(), true);
                 } else {
                     embed.setDescription("A second argument is needed.");
                     channel.sendMessage(embed.build()).queue();
@@ -432,7 +432,7 @@ public class PlayerControl implements Command {
 
     }
 
-    private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, final boolean addPlaylist) {
+    private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, User user, final boolean addPlaylist) {
         final String trackUrl;
 
         //Strip <>'s that prevent discord from embedding link resources
@@ -444,6 +444,7 @@ public class PlayerControl implements Command {
         playerManager.loadItemOrdered(mng, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
+                track.setUserData(user.getAsTag());
                 String msg = "Adding to queue: " + track.getInfo().title + "\nAdded by **" + track.getUserData() + "**";
                 if (mng.player.getPlayingTrack() == null)
                     msg += "\nand the Player has started playing;";

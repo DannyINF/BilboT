@@ -1,7 +1,7 @@
 package special;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import util.STATIC;
 
@@ -11,8 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class announcements extends ListenerAdapter {
 
-    public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getTextChannel().getName().toLowerCase().contains("chat") && !event.getTextChannel().getName().toLowerCase().contains("diskussion")) {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        if (event.getChannel().getName().toLowerCase().contains("chat") && !event.getChannel().getName().toLowerCase().contains("diskussion")) {
             int i = STATIC.getAnnouncement();
             if (i >= 250) {
                 EmbedBuilder embed = new EmbedBuilder();
@@ -60,11 +60,11 @@ public class announcements extends ListenerAdapter {
                         break;
 
                 }
-                if (!event.getTextChannel().getName().toLowerCase().contains("\uD83D\uDCAC-chat") && !event.getTextChannel().getName().toLowerCase().contains("diskussion")) {
+                if (!event.getChannel().getName().toLowerCase().contains("\uD83D\uDCAC-chat") && !event.getChannel().getName().toLowerCase().contains("diskussion")) {
                     STATIC.changeAnnouncement(1);
                 } else {
                     STATIC.changeAnnouncement(-i);
-                    event.getTextChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessage(embed.build()).queue();
                 }
 
             } else {

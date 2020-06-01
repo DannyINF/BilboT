@@ -3,7 +3,7 @@ package commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import util.getUser;
 
@@ -19,9 +19,9 @@ public class cmdStats implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         Member member;
-        TextChannel channel = event.getTextChannel();
+        TextChannel channel = event.getChannel();
         if (args.length > 0) {
             ArrayList<String> args2 = new ArrayList<>();
             int i = 0;
@@ -83,7 +83,7 @@ public class cmdStats implements Command {
         embed.setFooter("seit dem 10.06.2019", null);
         embed.setTimestamp(new CurrentDatetime().getCurrentTimestamp().toLocalDateTime().atZone(ZoneId.of("Europe/Berlin")));
         embed.setDescription("Words: " + words + "\nMessages: " + msg + "\nCharacters: " + chars + "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessage(embed.build()).queue();
 
     }
 }

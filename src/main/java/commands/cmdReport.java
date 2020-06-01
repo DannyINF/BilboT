@@ -4,7 +4,7 @@ import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.SET_CHANNEL;
 
@@ -18,7 +18,7 @@ public class cmdReport implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
         status = modulesChecker.moduleStatus("report", event.getGuild().getId());
         if (status.equals("activated")) {
@@ -50,7 +50,7 @@ public class cmdReport implements Command {
                     error.setColor(Color.red);
                     error.setTitle(messageActions.getLocalizedString("report_syntax", "user", event.getAuthor().getId()));
                     error.setDescription(messageActions.getLocalizedString("report_help", "user", event.getAuthor().getId()));
-                    event.getTextChannel().sendMessage(error.build()).queue();
+                    event.getChannel().sendMessage(error.build()).queue();
                 }
             }
 

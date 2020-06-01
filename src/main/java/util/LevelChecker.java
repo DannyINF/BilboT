@@ -26,51 +26,57 @@ public class LevelChecker {
         String part1 = String.valueOf(display_lvl * 10);
         String part2 = String.valueOf(display_lvl * 10 + 9);
 
-        if (level > 499) {
+        if (level > 1049) {
             role = "Maia";
-            part1 = "500";
+            part1 = "1050";
             part2 = "\u221E";
-        } else if (level > 299) {
+        } else if (level > 749)
             role = "Calaquende";
-        } else if (level > 149) {
+        else if (level > 499)
             role = "Moriquende";
-        } else if (level > 49) {
-            role = "Dunadan";
-        } else {
-            role = "Adan";
-        }
+        else if (level > 299)
+          role = "Peredhel";
+        else if (level > 149)
+          role = "D\u00fanadan";
+        else if (level > 49)
+          role = "Adan";
+        else if (level > 9)
+          role = "Hobbit";
+        else
+          role = "Dr\u00faadan";
 
-        if (!member.getRoles().contains(guild.getRolesByName("Level " + part1 + " bis " + part2, true).get(0))) {
+
+        if (!member.getRoles().contains(guild.getRolesByName("Level " + part1 + " bis Level " + part2, true).get(0))) {
             for (int i = 0; i < 50; i++) {
-                if (member.getRoles().contains(guild.getRolesByName("Level " + (i * 10) + " bis " + (i * 10 + 9), true).get(0))) {
+                if (member.getRoles().contains(guild.getRolesByName("Level " + (i * 10) + " bis Level " + (i * 10 + 9), true).get(0))) {
                     try {
                         guild.removeRoleFromMember(member, guild
-                                .getRolesByName("Level " + (i * 10) + " bis " + (i * 10 + 9), true).get(0)).queue();
+                                .getRolesByName("Level " + (i * 10) + " bis Level " + (i * 10 + 9), true).get(0)).queue();
                     } catch (Exception ignored) {
                     }
                 }
             }
 
-            if (member.getRoles().contains(guild.getRolesByName("Level 500 bis \u221E", true).get(0))) {
+            if (member.getRoles().contains(guild.getRolesByName("Level 1050 bis Level \u221E", true).get(0))) {
                 try {
                     guild.removeRoleFromMember(member, guild
-                            .getRolesByName("Level 500 bis \u221E", true).get(0)).queue();
+                            .getRolesByName("Level 1050 bis Level \u221E", true).get(0)).queue();
                 } catch (Exception ignored) {
                 }
             }
 
             if (!member.getRoles().contains(guild.getRolesByName("BilboT-Add-Ons", true).get(0))) {
                 try {
-                    if (level > 499) {
+                    if (level > 1049) {
                         try {
                             guild.addRoleToMember(member, guild
-                                    .getRolesByName("Level 500 bis \u221E", true).get(0)).queue();
+                                    .getRolesByName("Level 1050 bis Level \u221E", true).get(0)).queue();
                         } catch (Exception ignored) {
                         }
                     } else {
                         try {
                             guild.addRoleToMember(member, guild
-                                    .getRolesByName("Level " + (display_lvl * 10) + " bis " + (display_lvl * 10 + 9), true).get(0)).queue();
+                                    .getRolesByName("Level " + (display_lvl * 10) + " bis Level " + (display_lvl * 10 + 9), true).get(0)).queue();
                         } catch (Exception ignored) {
                         }
                     }
@@ -80,7 +86,7 @@ public class LevelChecker {
         }
 
         if (!member.getRoles().contains(guild.getRolesByName(role, true).get(0))) {
-            String[] role_names = {"Maia", "Calaquende", "Moriquende", "Dunadan", "Adan"};
+            String[] role_names = {"Maia", "Calaquende", "Moriquende", "Peredhel", "D\u00fanadan", "Adan", "Hobbit", "Dr\u00faadan"};
             for (String role_name : role_names) {
                 if (member.getRoles().contains(guild.getRolesByName(role_name, true).get(0))) {
                     try {
@@ -104,16 +110,9 @@ public class LevelChecker {
     public static long nextLevel(long xp) {
         long xpToLevel;
         long level;
-        double level2;
         long xp2;
-        long xp3;
         if (xp <= 50000L) {
-            level = 3 * xp;
-            level += 10000;
-            level2 = Math.sqrt(Double.parseDouble(String.valueOf(level)));
-            level2 = level2 - 100;
-            level2 = level2 / 6;
-            level = (long) (Math.ceil(level2));
+            level = (int) (Math.sqrt(3 * xp + 10000) - 100) / 6;
         } else {
             level = (xp + 25000) / 1500;
         }
@@ -121,10 +120,7 @@ public class LevelChecker {
         level++;
 
         if (level <= 50L) {
-            xp2 = Long.parseLong(String.valueOf(Math.pow(level, 2D)));
-            xp2 = xp2 * 12;
-            xp3 = 400 * level;
-            xp2 = xp2 + xp3;
+            xp2 = ((((level * 6) + 100) * ((level * 6) + 100)) - 10000) / 3;
         } else {
             xp2 = level * 1500 - 25000;
         }
@@ -138,7 +134,6 @@ public class LevelChecker {
         long xpToRank;
         long level;
         long xp2;
-        long xp3;
         String rank;
 
 
@@ -149,39 +144,43 @@ public class LevelChecker {
         }
 
 
-        if (level < 50L) {
-            rank = "Dunadan";
+        if (level < 10) {
+            rank = "Hobbit";
+            level = 10;
+        } else if (level < 50) {
+            rank = "Adan";
             level = 50;
         } else if (level < 150) {
-            rank = "Moriquende";
+            rank = "D\u00fanadan";
             level = 150;
         } else if (level < 300) {
-            rank = "Calaquende";
+            rank = "Peredhel";
             level = 300;
         } else if (level < 500) {
-            rank = "Maia";
+            rank = "Moriquende";
             level = 500;
+        } else if (level < 750) {
+            rank = "Calaquende";
+            level = 750;
+        } else if (level < 1050) {
+            rank = "Maia";
+            level = 1050;
         } else {
-            rank = "max";
+            rank = "H\u00f6chster Rang erreicht!";
             level = -1;
         }
 
-        //TODO: Make /xp next work for users with less than 50 levels
-
-        if (level < 0L) {
+        if (level < 0L)
             xpToRank = -1;
-        } else {
-            if (level <= 50) {
-                xp2 = Long.parseLong(String.valueOf(Math.pow(level, 2D)));
-                xp2 = xp2 * 12;
-                xp3 = 400 * level;
-                xp2 = xp2 + xp3;
-            } else {
+        else {
+            if (level == 10)
+                xp2 = 5200L;
+            else if (level == 50)
+                xp2 = 50000L;
+            else
                 xp2 = level * 1500 - 25000;
-            }
             xpToRank = xp2 - xp;
         }
-
 
         return new String[]{String.valueOf(xpToRank), rank};
     }

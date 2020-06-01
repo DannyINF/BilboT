@@ -7,7 +7,7 @@ import listeners.readyListener;
 import listeners.voiceListenerAddon;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 class initMusicAddon extends ListenerAdapter {
     private static JDABuilder builder;
 
-    static void main(String token, String[] args, MessageReceivedEvent event, EmbedBuilder embed, VoiceChannel userVoiceChannel) throws InterruptedException {
+    static void main(String token, String[] args, GuildMessageReceivedEvent event, EmbedBuilder embed, VoiceChannel userVoiceChannel) throws InterruptedException {
 
         WebSocketFactory ws = new WebSocketFactory();
         ws.setVerifyHostname(false);
@@ -55,7 +55,7 @@ class initMusicAddon extends ListenerAdapter {
         VoiceChannel voiceChannel = null;
 
         try {
-            textChannel = jda.getTextChannelById(event.getTextChannel().getId());
+            textChannel = jda.getTextChannelById(event.getChannel().getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,8 +65,8 @@ class initMusicAddon extends ListenerAdapter {
             e.printStackTrace();
         }
         try {
-            message = Objects.requireNonNull(Objects.requireNonNull(jda.getGuildById(event.getGuild().getId())).getTextChannelById(event.getTextChannel().getId())).retrieveMessageById(event.getMessage().getId()).complete();
-            Objects.requireNonNull(jda.getTextChannelById(event.getTextChannel().getId())).retrieveMessageById(event.getMessageId()).complete();
+            message = Objects.requireNonNull(Objects.requireNonNull(jda.getGuildById(event.getGuild().getId())).getTextChannelById(event.getChannel().getId())).retrieveMessageById(event.getMessage().getId()).complete();
+            Objects.requireNonNull(jda.getTextChannelById(event.getChannel().getId())).retrieveMessageById(event.getMessageId()).complete();
         } catch (Exception e) {
             e.printStackTrace();
         }

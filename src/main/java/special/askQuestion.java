@@ -3,7 +3,7 @@ package special;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.*;
 import java.util.Properties;
@@ -18,7 +18,7 @@ class askQuestion {
     private static InputStream input = null;
     private static InputStream input2 = null;
 
-    public static void createQuestion(MessageReceivedEvent event, long id, Member member) {
+    public static void createQuestion(GuildMessageReceivedEvent event, long id, Member member) {
         event.getGuild().getTextChannelById(id).putPermissionOverride(member).setDeny(Permission.MESSAGE_WRITE).complete();
         int questiontype = ThreadLocalRandom.current().nextInt(1, 11);
         String right_answer;

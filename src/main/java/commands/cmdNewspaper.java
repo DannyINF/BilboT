@@ -2,7 +2,7 @@ package commands;
 
 import core.messageActions;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.*;
@@ -20,7 +20,7 @@ public class cmdNewspaper implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(messageActions.getLocalizedString("newspaper_title", "user", event.getAuthor().getId()));
         switch (args[0]) {
@@ -119,7 +119,7 @@ public class cmdNewspaper implements Command {
                 break;
 
         }
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessage(embed.build()).queue();
     }
 
 

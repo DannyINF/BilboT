@@ -1,7 +1,7 @@
 package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ public class cmdSetProfile implements Command {
 
     // TODO: Update
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         String alter, name, herkunft, user, kurzbeschreibung;
         StringBuilder beschreibung = new StringBuilder();
         EmbedBuilder embed = new EmbedBuilder();
@@ -63,7 +63,7 @@ public class cmdSetProfile implements Command {
             embed.setTitle("Profil erstellt!");
             embed.setTitle("Es wurde ein Profil f\u00FCr " + event.getAuthor().getName() + " erstellt!");
         }
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessage(embed.build()).queue();
 
     }
 

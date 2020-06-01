@@ -12,6 +12,7 @@ import util.CHANNEL;
 import util.SET_CHANNEL;
 
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Boolean.FALSE;
 
@@ -77,7 +78,7 @@ public class joinListener extends ListenerAdapter {
                         welcome1.sendMessage(":flag_de: Mae govannen " + event.getMember().getAsMention() + "! Um auf den Server zugreifen zu k\u00f6nnen, musst du dich erst verifizieren. " +
                                 "Klicke daf\u00fcr auf das :white_check_mark:-Emoji unter dieser Nachricht.\n\n" +
                                 ":flag_gb: Mae govannen " + event.getMember().getAsMention() + "! In order to access the server, you have to verify yourself first. " +
-                                "Therefore, you have to click the :white_check_mark: emoji below this message.").queue(msg -> msg.addReaction("\u2705").queue());
+                                "Therefore, you have to click the :white_check_mark: emoji below this message.").queueAfter(3, TimeUnit.SECONDS, msg -> msg.addReaction("\u2705").queue());
                     }
 
                 }

@@ -3,7 +3,7 @@ package commands;
 import core.databaseHandler;
 import core.messageActions;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.PlaylistChecker;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ public class cmdIntro implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
 
         // preparing msg
         EmbedBuilder embed = new EmbedBuilder();
@@ -344,7 +344,7 @@ public class cmdIntro implements Command {
                 }
                 break;
         }
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessage(embed.build()).queue();
     }
 
 

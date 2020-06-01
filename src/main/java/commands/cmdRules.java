@@ -5,7 +5,7 @@ import core.modulesChecker;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ public class cmdRules implements Command {
 
     //TODO: Update to database-usage
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
             String status;
             status = modulesChecker.moduleStatus("rules", event.getGuild().getId());
@@ -61,26 +61,26 @@ public class cmdRules implements Command {
 
                 embed.setTitle("\u00A71 G\u00FCltigkeit des Regelwerks\n");
                 embed.setDescription(paragraf1);
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
                 embed.setTitle("\u00A72 Durchsetzung des Regelwerks\n");
                 embed.setDescription(paragraf2);
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
                 embed.setTitle("\u00A73 Verhalten in Text Channels\n");
                 embed.setDescription(paragraf3);
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
                 embed.setTitle("\u00A74 Verhalten in Voice Channels\n");
                 embed.setDescription(paragraf4);
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
                 embed.setTitle("\u00A75 Sonstiges\n");
                 embed.setDescription(paragraf5);
-                event.getTextChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessage(embed.build()).queue();
 
 
             } else {
                 messageActions.moduleIsDeactivated(event, "rules");
             }
         } else {
-            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+            permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
 
 

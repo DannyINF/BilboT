@@ -5,7 +5,7 @@ import core.messageActions;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class cmdModules_Server implements Command {
 
-    private static String[] modules(MessageReceivedEvent event, String module, String status) throws SQLException {
+    private static String[] modules(GuildMessageReceivedEvent event, String module, String status) throws SQLException {
         String modul = null;
         switch (module) {
             case "event":
@@ -82,7 +82,7 @@ public class cmdModules_Server implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
             String condition = null;
             String module = null;
@@ -124,9 +124,9 @@ public class cmdModules_Server implements Command {
                 embed.setDescription(messageActions.getLocalizedString("modules_status", "server", event.getGuild().getId()).replace("[MODUL]", answer[0])
                         .replace("[STATUS]", status_str));
             }
-            event.getTextChannel().sendMessage(embed.build()).queue();
+            event.getChannel().sendMessage(embed.build()).queue();
         } else {
-            permissionChecker.noPower(event.getTextChannel(), Objects.requireNonNull(event.getMember()));
+            permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
 
     }

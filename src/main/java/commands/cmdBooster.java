@@ -13,7 +13,7 @@ package commands;
 //
 //// --Commented out by Inspection START (13.12.2018 22:15):
 ////    @Override
-////    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+////    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
 ////        int booster = Integer.parseInt(args[0]);
 ////        System.out.println(booster);
 ////        String time = LocalDateTime.now().plusHours(Integer.parseInt(args[1])).toString();
@@ -34,7 +34,7 @@ package commands;
 // --Commented out by Inspection STOP (13.12.2018 22:15)
 
 //    @Override
-//    public void executed(MessageReceivedEvent event) {
+//    public void executed(GuildMessageReceivedEvent event) {
 //
 //        messageActions.logCommand(event);    }
 //

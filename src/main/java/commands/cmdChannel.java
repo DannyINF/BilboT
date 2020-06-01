@@ -1,7 +1,7 @@
 package commands;
 
 import core.databaseHandler;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.sql.SQLException;
 
@@ -12,7 +12,7 @@ public class cmdChannel implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         switch (args[0].toLowerCase()) {
             case "set":
                 String channeltype = args[1];
@@ -23,7 +23,7 @@ public class cmdChannel implements Command {
                     String[] updateArgs = {"channels", "id = '" + event.getGuild().getId() + "'", channeltype, "'" + channel + "'"};
                     databaseHandler.database("serversettings", "update", updateArgs);
                 } else {
-                    event.getTextChannel().sendMessage("Wrong channeltype!").queue();
+                    event.getChannel().sendMessage("Wrong channeltype!").queue();
                 }
 
                 break;

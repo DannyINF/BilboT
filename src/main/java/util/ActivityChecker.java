@@ -22,6 +22,9 @@ public class ActivityChecker {
             Role role6 = null;
             Role role7 = null;
             Role role8 = null;
+            Role role9 = null;
+            Role role10 = null;
+            Role role11 = null;
 
             try {
                 role1 = guild.getRolesByName("Ilúvatar", true).get(0);
@@ -29,10 +32,6 @@ public class ActivityChecker {
             }
             try {
                 role2 = guild.getRolesByName("Vala", true).get(0);
-            } catch (Exception ignored) {
-            }
-            try {
-                role3 = guild.getRolesByName("Edhel Aglareb", true).get(0);
             } catch (Exception ignored) {
             }
             try {
@@ -48,11 +47,23 @@ public class ActivityChecker {
             } catch (Exception ignored) {
             }
             try {
-                role7 = guild.getRolesByName("Dunadan", true).get(0);
+                role7 = guild.getRolesByName("Peredhel", true).get(0);
             } catch (Exception ignored) {
             }
             try {
-                role8 = guild.getRolesByName("Adan", true).get(0);
+                role8 = guild.getRolesByName("Dúnadan", true).get(0);
+            } catch (Exception ignored) {
+            }
+            try {
+                role9 = guild.getRolesByName("Adan", true).get(0);
+            } catch (Exception ignored) {
+            }
+            try {
+                role10 = guild.getRolesByName("Hobbit", true).get(0);
+            } catch (Exception ignored) {
+            }
+            try {
+                role11 = guild.getRolesByName("Drúadan", true).get(0);
             } catch (Exception ignored) {
             }
 
@@ -88,11 +99,20 @@ public class ActivityChecker {
                             if (oldActivity > 720)
                                 oldActivity = 720;
                         else if (roles.contains(role7))
+                            if (oldActivity > 600)
+                                oldActivity = 600;
+                        else if (roles.contains(role8))
                             if (oldActivity > 480)
                                 oldActivity = 480;
-                        else if (roles.contains(role8))
+                        else if (roles.contains(role9))
+                            if (oldActivity > 320)
+                                oldActivity = 320;
+                        else if (roles.contains(role10))
                             if (oldActivity > 240)
                                 oldActivity = 240;
+                        else if (roles.contains(role11))
+                            if (oldActivity > 160)
+                                oldActivity = 160;
                     }
 
                     long newActivity = oldActivity - 4;

@@ -4,7 +4,7 @@ import core.databaseHandler;
 import core.messageActions;
 import core.modulesChecker;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import util.giveXP;
@@ -17,9 +17,9 @@ import java.util.TimerTask;
 public class xpListener extends ListenerAdapter {
 
     /**
-     * @param event MessageReceivedEvent
+     * @param event GuildMessageReceivedEvent
      */
-    private static void giveXP(MessageReceivedEvent event) throws SQLException {
+    private static void giveXP(GuildMessageReceivedEvent event) throws SQLException {
         int xp;
         int amount = event.getMessage().getContentRaw().length();
 
@@ -33,10 +33,10 @@ public class xpListener extends ListenerAdapter {
         }
 
         // different multiplicators for different channels
-        String channelname = event.getTextChannel().getName();
+        String channelname = event.getChannel().getName();
         String channeltopic;
         try {
-            channeltopic = event.getTextChannel().getTopic();
+            channeltopic = event.getChannel().getTopic();
             assert channeltopic != null;
             if (channeltopic.isEmpty()) {
                 throw new Exception();
@@ -56,7 +56,7 @@ public class xpListener extends ListenerAdapter {
             }
         }
 
-        if (event.getGuild().getCategoriesByName("\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550| INFO |\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550", true).get(0).getTextChannels().contains(event.getTextChannel())) {
+        if (event.getGuild().getCategoriesByName("\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550| INFO |\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550", true).get(0).getTextChannels().contains(event.getChannel())) {
             xp = 0;
         }
 
@@ -65,9 +65,9 @@ public class xpListener extends ListenerAdapter {
     //}
 
     /**
-     * @param event MessageReceivedEvent
+     * @param event GuildMessageReceivedEvent
      */
-    private static void checkLevel(MessageReceivedEvent event) throws SQLException {
+    private static void checkLevel(GuildMessageReceivedEvent event) throws SQLException {
         long currentlevel;
         long currentXp;
 
@@ -152,7 +152,7 @@ public class xpListener extends ListenerAdapter {
             // creating level-up msg
             if (!event.getAuthor().isBot()) {
 
-                Message msg = event.getTextChannel().sendMessage(messageActions.getLocalizedString("xp_level_up", "user", event.getAuthor().getId())
+                Message msg = event.getChannel().sendMessage(messageActions.getLocalizedString("xp_level_up", "user", event.getAuthor().getId())
                         .replace("[USER]", event.getAuthor().getAsMention()).replace("[LEVEL]", String.valueOf(newlevel))).complete();
                 // msg deletes itself after 15000 milliseconds
                 if (!(newlevel == 50 || newlevel == 150 || newlevel == 300 || newlevel == 500)) {
@@ -171,7 +171,7 @@ public class xpListener extends ListenerAdapter {
         databaseHandler.database(event.getGuild().getId(), "update", arguments4);
     }
 
-    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         //if (isReady.isReady(event.getGuild())) {
         try {
             Thread.sleep(1000);

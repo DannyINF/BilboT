@@ -3,7 +3,7 @@ package commands.user_settings;
 import commands.Command;
 import core.messageActions;
 import core.modulesChecker;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -38,7 +38,7 @@ public class cmdProfile implements Command {
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         String status;
         status = modulesChecker.moduleStatus("profile", event.getGuild().getId());
         if (status.equals("activated")) try {
@@ -92,7 +92,7 @@ public class cmdProfile implements Command {
             g.drawImage(circle, 0, 0, null);
             g.dispose();
             ImageIO.write(source, "JPEG", new File("Bilder/Profiles/" + event.getAuthor().getId() + ".jpg"));
-            event.getTextChannel().sendFile(new File("Bilder/Profiles/" + event.getAuthor().getId() + ".jpg")).queue();
+            event.getChannel().sendFile(new File("Bilder/Profiles/" + event.getAuthor().getId() + ".jpg")).queue();
         } catch (Exception e) {
             e.printStackTrace();
         }

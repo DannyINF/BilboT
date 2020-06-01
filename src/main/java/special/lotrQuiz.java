@@ -2,7 +2,7 @@ package special;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 class lotrQuiz extends ListenerAdapter {
@@ -16,7 +16,7 @@ class lotrQuiz extends ListenerAdapter {
 //    private static OutputStream output = null;
 // --Commented out by Inspection STOP (13.12.2018 22:15)
 
-    private static TextChannel createQuizChannel(MessageReceivedEvent event) {
+    private static TextChannel createQuizChannel(GuildMessageReceivedEvent event) {
         TextChannel text = event.getGuild().getCategoriesByName("quiz", true).get(0).createTextChannel("user-quiz-" + event.getAuthor().getName())
                 .setTopic("Quizchannel f\u00FCr " + event.getAuthor().getName()).complete();
         text.createPermissionOverride(event.getGuild().getPublicRole())
@@ -32,7 +32,7 @@ class lotrQuiz extends ListenerAdapter {
         return text;
     }
 
-    private static void postManual(MessageReceivedEvent event, long id) {
+    private static void postManual(GuildMessageReceivedEvent event, long id) {
         event.getGuild().getTextChannelById(id).sendMessage(
                 "Herzlich willkommen beim Herr-Der-Ringe-Quiz des HdR-Forum-Discords.\n" +
                         "\nIn diesem Channel kannst du das Quiz absolvieren und in der Rangliste aufsteigen.\n" +
@@ -47,15 +47,15 @@ class lotrQuiz extends ListenerAdapter {
         ).queue();
     }
 
-    private static void postInterrupt(MessageReceivedEvent event, long id) {
+    private static void postInterrupt(GuildMessageReceivedEvent event, long id) {
         event.getGuild().getTextChannelById(id).sendMessage(
                 "\n\n--------------------------------------------------------------------------------------------------------------------------------------\n\n"
         ).queue();
     }
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        String channel = event.getTextChannel().getName();
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        String channel = event.getChannel().getName();
 
         //check quiz channel
         if (channel.equals("quiz")) {
