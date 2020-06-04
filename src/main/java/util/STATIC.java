@@ -2,12 +2,13 @@ package util;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.internal.utils.tuple.Pair;
 
 import java.util.List;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.10.5";
+    public static final String VERSION = "v2.10.6";
 
     public static final String PREFIX = "/";
 
@@ -70,7 +71,24 @@ public class STATIC {
         return announcement;
     }
 
+    private static List<Pair> commandSpammer = null;
 
+    public static int addCommandSpammer(String id) {
+        int index = 0;
+        for (Pair pair : commandSpammer) {
+            if (pair.getLeft().equals(id)) {
+                int uses = Integer.parseInt((String) pair.getRight()) + 1;
+                if (uses >= 3)
+                        uses = 0;
+                commandSpammer.remove(index);
+                commandSpammer.add(Pair.of(id, uses));
+                return uses;
+            }
+            index++;
+        }
+        commandSpammer.add(Pair.of(id, 1));
+        return 1;
+    }
 }
 
 
