@@ -173,6 +173,8 @@ public class xpListener extends ListenerAdapter {
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         //if (isReady.isReady(event.getGuild())) {
+        if (event.getAuthor().isFake())
+            return;
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

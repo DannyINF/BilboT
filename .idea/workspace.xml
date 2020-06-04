@@ -6,9 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="QoL-Changes; MessageReceivedEvent -&gt; GuildMessageReceivedEvent">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="#38; #41 fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/commandsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -466,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591025245788</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="#38; #41 fixed">
+      <created>1591279681711</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1591279681711</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -492,7 +498,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding voiceListenerAddon to ScreamBot" />
     <MESSAGE value="Fixing bugs on ScreamBot" />
     <MESSAGE value="verification is only possible in the welcome channel" />
     <MESSAGE value="Fixing activity and intro bugs" />
@@ -517,7 +522,8 @@
     <MESSAGE value="Erwähnung bei &quot;You have no power here!&quot;" />
     <MESSAGE value="Announcements wurden erneuert und angepasst" />
     <MESSAGE value="QoL-Changes; MessageReceivedEvent -&gt; GuildMessageReceivedEvent" />
-    <option name="LAST_COMMIT_MESSAGE" value="QoL-Changes; MessageReceivedEvent -&gt; GuildMessageReceivedEvent" />
+    <MESSAGE value="#38; #41 fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="#38; #41 fixed" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

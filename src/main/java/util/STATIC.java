@@ -4,11 +4,12 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.10.6";
+    public static final String VERSION = "v2.10.8";
 
     public static final String PREFIX = "/";
 
@@ -20,7 +21,7 @@ public class STATIC {
 
     private static boolean isDiscussion = false;
 
-    private static List<Member> readers = null;
+    private static List<Member> readers = new ArrayList<>();
 
     public static void changeIsNarration(boolean state) {
         isNarration = state;
@@ -71,21 +72,24 @@ public class STATIC {
         return announcement;
     }
 
-    private static List<Pair> commandSpammer = null;
+    private static List<Pair<String, Integer>> commandSpammer = new ArrayList<>();
 
     public static int addCommandSpammer(String id) {
         int index = 0;
-        for (Pair pair : commandSpammer) {
-            if (pair.getLeft().equals(id)) {
-                int uses = Integer.parseInt((String) pair.getRight()) + 1;
-                if (uses >= 3)
+        try {
+            for (Pair pair : commandSpammer) {
+                if (pair.getLeft().equals(id)) {
+                    int uses = (int) pair.getRight() + 1;
+                    if (uses >= 3)
                         uses = 0;
-                commandSpammer.remove(index);
-                commandSpammer.add(Pair.of(id, uses));
-                return uses;
+                    commandSpammer.remove(index);
+                    commandSpammer.add(Pair.of(id, uses));
+                    return uses;
+                }
+                index++;
             }
-            index++;
-        }
+        } catch (Exception ignored) {}
+
         commandSpammer.add(Pair.of(id, 1));
         return 1;
     }
