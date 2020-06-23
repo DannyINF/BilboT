@@ -1,14 +1,15 @@
 package listeners;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.javatuples.Triplet;
 import org.jetbrains.annotations.NotNull;
+import util.STATIC;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -21,7 +22,12 @@ public class loginListener extends ListenerAdapter {
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         String topic = event.getChannel().getTopic() + "";
         if (!topic.contains("{SPAM}")) {
-            MessageEmbed emsg = login(event.getGuild().getId(), event.getAuthor());
+            MessageEmbed emsg = null;
+            try {
+                emsg = login(event.getGuild().getId(), event.getAuthor());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (emsg != null) {
                 messageActions.selfDestroyEmbedMSG(emsg, 3000, event);
             }
@@ -30,22 +36,21 @@ public class loginListener extends ListenerAdapter {
 
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-        MessageEmbed emsg = login(event.getGuild().getId(), event.getMember().getUser());
+        MessageEmbed emsg = null;
+        try {
+            emsg = login(event.getGuild().getId(), event.getMember().getUser());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if (emsg != null) {
             messageActions.selfDestroyEmbedMSG(emsg, 3000, event);
         }
     }
 
-    private MessageEmbed login(String guild_id, User author) {
+    private MessageEmbed login(String guild_id, User author) throws SQLException {
         MessageEmbed emsg = null;
         if (!author.isBot()) {
-            String status = "deactivated";
-            try {
-                status = modulesChecker.moduleStatus("xp", guild_id);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            if (status.equals("activated")) {
+
 
                 int loginint = LocalDate.now().getDayOfYear() + LocalDate.now().getYear() * 365;
                 int next_loginint = LocalDate.now().plusDays(1).getDayOfYear() + LocalDate.now().plusDays(1).getYear() * 365;
@@ -55,7 +60,7 @@ public class loginListener extends ListenerAdapter {
                 String[] selectArgs = {"users", "id = '" + author.getId() + "'", "2", "nextlogin", "loginstreak"};
                 String[] answer = {};
                 try {
-                    answer = database(guild_id, "select", selectArgs);
+                    answer = database(guild_id, "select nextlogin, loginstreak from users where id = '" + author.getId() + "'");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -80,50 +85,45 @@ public class loginListener extends ListenerAdapter {
 
                 if (loginint >= getint) {
 
-                    String[] arguments = {"users", "id = '" + author.getId() + "'", "1", "activity"};
-                    String[] answer3 = null;
+                    STATIC.exec.execute(() -> {
+                        String[] arguments = {"users", "id = '" + author.getId() + "'", "1", "activity"};
+                        String[] answer3 = null;
+                        try {
+                            answer3 = core.databaseHandler.database(guild_id, "select activity from users where id = '" + author.getId() + "'");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                        assert answer3 != null;
+                        long activity = Long.parseLong(answer3[0]);
+
+                        long newActivity;
+
+                        if (activity < 120) {
+                            newActivity = 120;
+                        } else {
+                            newActivity = activity + 5;
+                        }
+
+                        String[] arguments2 = {"users", "id = '" + author.getId() + "'", "activity", String.valueOf(newActivity)};
+                        try {
+                            core.databaseHandler.database(guild_id, "update users set activity = " + activity + " where id = '" + author.getId() + "'");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    long Xp;
+
+                    Triplet answer2 = STATIC.getExperienceUser(author.getId(), guild_id);
                     try {
-                        answer3 = core.databaseHandler.database(guild_id, "select", arguments);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    assert answer3 != null;
-                    long activity = Long.parseLong(answer3[0]);
-
-                    long newActivity;
-
-                    if (activity < 120) {
-                        newActivity = 120;
-                    } else {
-                        newActivity = activity + 5;
-                    }
-
-                    String[] arguments2 = {"users", "id = '" + author.getId() + "'", "activity", String.valueOf(newActivity)};
-                    try {
-                        core.databaseHandler.database(guild_id, "update", arguments2);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    int Xp;
-
-                    String[] selectArgs2 = {"users", "id = '" + author.getId() + "'", "1", "xp"};
-                    String[] answer2 = {};
-                    try {
-                        answer2 = database(guild_id, "select", selectArgs2);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        assert answer2 != null;
-                        Xp = Integer.parseInt(answer2[0]);
+                        Xp = (Long) answer2.getValue0();
                     } catch (Exception e) {
                         Xp = 0;
                     }
 
-                    int newXP;
-                    int streakboost;
+                    long newXP;
+                    long streakboost;
                     if (streak < 8) {
                         streakboost = 30 + streak * 10;
                     } else {
@@ -132,13 +132,7 @@ public class loginListener extends ListenerAdapter {
 
                     newXP = streakboost + Xp;
 
-                    String[] updateArgs = {"users", "id = '" + author.getId() + "'", "xp", String.valueOf(newXP), "nextlogin",
-                            String.valueOf(next_loginint), "loginstreak", String.valueOf(streak)};
-                    try {
-                        database(guild_id, "update", updateArgs);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    STATIC.updateExperienceUser(author.getId(), guild_id, streakboost, 0L, 0L);
 
                     EmbedBuilder msg = new EmbedBuilder();
                     msg.setColor(Color.GREEN);
@@ -146,7 +140,18 @@ public class loginListener extends ListenerAdapter {
                     msg.setDescription(messageActions.getLocalizedString("login_msg", "server", guild_id)
                             .replace("[USER]", author.getAsMention()).replace("[XP]", String.valueOf(streakboost)));
                     emsg = msg.build();
-                }
+
+                    int finalStreak = streak;
+                    STATIC.exec.execute(() -> {
+                        String[] updateArgs = {"users", "id = '" + author.getId() + "'", "xp", String.valueOf(newXP), "nextlogin",
+                                String.valueOf(next_loginint), "loginstreak", String.valueOf(finalStreak)};
+                        try {
+                            database(guild_id, "update users set xp = " + newXP + ", nextlogin = " + next_loginint + ", loginstreak = " + finalStreak + " where id = '" + author.getId() + "'");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
             }
         }
         return emsg;

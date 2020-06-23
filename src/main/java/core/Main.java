@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import special.announcements;
 import util.ActivityChecker;
@@ -22,12 +23,15 @@ import util.voiceXP;
 import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
 import java.time.*;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 //TODO: Tidying up and simplifying the usage of databases
 //TODO: make command to export database to JSON-file for transfer
+//TODO: comment fucking everything
+//TODO: more efficient loading of information (only safe / one-time-pull)
 
 class Main {
     private static JDABuilder builder;
@@ -66,6 +70,9 @@ class Main {
         assert jda != null;
         jda.awaitReady();
 
+        STATIC.setVerified(new Role[]{Objects.requireNonNull(jda.getGuildById(388969412889411585L)).getRolesByName("verified", true).get(0)});
+        STATIC.setCam(new Role[]{Objects.requireNonNull(jda.getGuildById(388969412889411585L)).getRolesByName("Cam", true).get(0)});
+
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
         ZonedDateTime nextActivityRun = now.withHour(3).withMinute(30).withSecond(30);
         if (now.compareTo(nextActivityRun) > 0)
@@ -90,7 +97,7 @@ class Main {
         exec.scheduleAtFixedRate(() -> {
             try {
                 voiceXP.giveVoiceXP(finalJDA);
-            } catch (SQLException | InterruptedException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
             System.out.println(ZonedDateTime.now());
@@ -167,8 +174,6 @@ class Main {
         commandHandler.commands.put("exil", new cmdExil());
 
         commandHandler.commands.put("edit", new cmdEdit());
-
-        commandHandler.commands.put("proptodb", new cmdPropToDb());
 
         commandHandler.commands.put("activity", new cmdActivity());
     }

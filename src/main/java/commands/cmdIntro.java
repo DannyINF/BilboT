@@ -33,8 +33,7 @@ public class cmdIntro implements Command {
             case "s":
             case "set":
                 if (args[1].toLowerCase().equals("nothing")) {
-                    String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
-                    String[] answerIntrolist = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+                    String[] answerIntrolist = core.databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getAuthor().getId() + "'");
                     String[] introlist;
                     try {
                         assert answerIntrolist != null;
@@ -50,14 +49,12 @@ public class cmdIntro implements Command {
                         updatedIntros.append(str).append("&");
                     }
 
-                    String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "'" + updatedIntros.toString() + "'"};
-                    core.databaseHandler.database(event.getGuild().getId(), "update", arguments4);
+                    core.databaseHandler.database(event.getGuild().getId(), "update users set intro = '" + updatedIntros.toString() + "' where id = '" + event.getAuthor().getId() + "'");
 
                     embed.setDescription(messageActions.getLocalizedString("intro_equiped", "user", event.getAuthor().getId())
                             .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", args[1]));
                 } else {
-                    String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
-                    String[] answerIntrolist = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+                    String[] answerIntrolist = core.databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getAuthor().getId() + "'");
                     String[] introlist;
                     try {
                         assert answerIntrolist != null;
@@ -84,8 +81,7 @@ public class cmdIntro implements Command {
                             updatedIntros.append(str).append("&");
                         }
 
-                        String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "'" + updatedIntros.toString() + "'"};
-                        core.databaseHandler.database(event.getGuild().getId(), "update", arguments4);
+                        core.databaseHandler.database(event.getGuild().getId(), "update users set intro = '" + updatedIntros.toString() + "' where id = '" + event.getAuthor().getId() + "'");
 
                         embed.setDescription(messageActions.getLocalizedString("intro_equiped", "user", event.getAuthor().getId())
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", args[1]));
@@ -104,10 +100,10 @@ public class cmdIntro implements Command {
             case "inventory":
             case "c":
             case "cache":
-                String[] arguments1 = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
                 String[] introlist1;
                 try {
-                    introlist1 = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select", arguments1))[0].split("#")[1].split("&");
+                    introlist1 = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getAuthor().getId() + "'"))[0]
+                            .split("#")[1].split("&");
                 } catch (Exception e) {
                     introlist1 = null;
                 }
@@ -142,8 +138,7 @@ public class cmdIntro implements Command {
             case "buy":
                 if (args[1].contains("common") || args[1].contains("rare") || args[1].contains("epic") || args[1].contains("legendary") || args[1].contains("custom")) {
                     // getting the user intros
-                    String[] arguments2 = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "intro"};
-                    String[] answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments2);
+                    String[] answer = core.databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getAuthor().getId() + "'");
                     String[] introlist2;
                     try {
                         assert answer != null;
@@ -152,9 +147,8 @@ public class cmdIntro implements Command {
                         introlist2 = null;
                     }
                     // getting the coins of the user
-                    String[] arguments3 = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "coins"};
                     String[] answer3;
-                    answer3 = core.databaseHandler.database(event.getGuild().getId(), "select", arguments3);
+                    answer3 = core.databaseHandler.database(event.getGuild().getId(), "select coins from users where id = '" + event.getAuthor().getId() + "'");
                     int coins;
                     try {
                         assert answer3 != null;
@@ -249,15 +243,12 @@ public class cmdIntro implements Command {
                                     }
                                 }
                                 newIntros.append(args[1]);
-                                String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "'" + newIntros.toString() + "'"};
-                                String[] argumentsi4 = {"users", "intro", "'" + newIntros.toString() + "'"};
                                 try {
-                                    core.databaseHandler.database(event.getGuild().getId(), "update", arguments4);
+                                    core.databaseHandler.database(event.getGuild().getId(), "update users set intro = '" + newIntros.toString() + "' where id = '" + event.getAuthor().getId() + "'");
                                 } catch (Exception e) {
-                                    core.databaseHandler.database(event.getGuild().getId(), "insert", argumentsi4);
+                                    core.databaseHandler.database(event.getGuild().getId(), "insert into users (intro) values ('" + newIntros.toString() + "')");
                                 }
-                                String[] arguments5 = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(coins - prize)};
-                                core.databaseHandler.database(event.getGuild().getId(), "update", arguments5);
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + (coins - prize) + " where id = '" + event.getAuthor().getId() + "'");
                                 embed.setDescription(messageActions.getLocalizedString("intro_bought_success", "user", event.getAuthor().getId())
                                         .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", "'" + args[1] + "'"));
                             }
@@ -327,10 +318,8 @@ public class cmdIntro implements Command {
                                     }
                                 }
                                 newIntros.append(award);
-                                String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "intro", "'" + newIntros.toString() + "'"};
-                                core.databaseHandler.database(event.getGuild().getId(), "update", arguments4);
-                                String[] arguments5 = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(coins - prize)};
-                                core.databaseHandler.database(event.getGuild().getId(), "update", arguments5);
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set intro = '" + newIntros.toString() + "' where id = '" + event.getAuthor().getId() + "'");
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + (coins - prize) + " where id = '" + event.getAuthor().getId() + "'");
                                 assert award != null;
                                 embed.setDescription(messageActions.getLocalizedString("intro_bought_success", "user", event.getAuthor().getId())
                                         .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", award));

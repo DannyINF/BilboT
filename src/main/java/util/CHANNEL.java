@@ -12,8 +12,7 @@ public class CHANNEL {
         boolean msg;
 
         try {
-            String[] selectArgs = {"channels", "id = '" + id + "'", "1", channel};
-            channelid = Objects.requireNonNull(databaseHandler.database("serversettings", "select", selectArgs))[0];
+            channelid = Objects.requireNonNull(databaseHandler.database("serversettings", "select " + channel + " from channels where id = '" + id + "'"))[0];
             msg = false;
         } catch (Exception e) {
             msg = true;

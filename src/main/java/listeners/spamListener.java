@@ -21,10 +21,8 @@ public class spamListener extends ListenerAdapter {
                 }
                 k--;
             }
-            if (list == null) {
+            if (list == null)
                 return;
-            }
-
 
             int i = 0;
             int counter = 0;
@@ -42,11 +40,10 @@ public class spamListener extends ListenerAdapter {
                         string2 = list.get(i).toString().replace(string3, "")
                                 .substring(0, list.get(i).toString().replace(string3, "")
                                         .length() - 20);
-                        if (!string1.equals(string2)) {
+                        if (!string1.equals(string2))
                             counter = 0;
-                        } else if (string1.equals(string2)) {
+                        else
                             counter++;
-                        }
                         size++;
                     }
                     if (counter > maxcounter) {
@@ -58,11 +55,9 @@ public class spamListener extends ListenerAdapter {
                     }
                 }
                 if (!event.getAuthor().isBot() && !event.getChannel().getName().contains("spam")) {
-                    //TODO: Don't make this as command.
                     if (maxcounter > 3) {
-                        event.getChannel().sendMessage("/ban " + event.getAuthor().getAsMention() + " 1 " +
-                                messageActions.getLocalizedString("spam_reason", "user", event.getAuthor()
-                                        .getId()).replace("[MESSAGE]", string1)).queue();
+                        new commands.cmdBan().action(new String[]{event.getAuthor().getAsMention(), "1",
+                                messageActions.getLocalizedString("spam_reason", "user", event.getAuthor().getId()).replace("[MESSAGE]", string1)}, event);
                     } else if (maxcounter > 2) {
                         MessageBuilder builder = new MessageBuilder();
                         builder.setContent(messageActions.getLocalizedString("spam_warn2", "user", event.getAuthor().getId())

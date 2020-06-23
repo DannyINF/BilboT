@@ -71,8 +71,7 @@ public class cmdModules_Server implements Command {
                 modul = "verification";
                 break;
         }
-        String[] arguments = {"modules", "id = '" + event.getGuild().getId() + "'", modul, status};
-        core.databaseHandler.database("serversettings", "update", arguments);
+        core.databaseHandler.database("serversettings", "update modules set " + modul + " = " + status + " where id = '" + event.getGuild().getId() + "'");
         return new String[]{modul, status};
     }
 

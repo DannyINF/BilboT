@@ -13,20 +13,18 @@ import java.util.Objects;
 public class verificationListener extends ListenerAdapter {
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
-        if (event.getGuild().getDefaultChannel().equals(event.getChannel())) {
+        if (Objects.equals(event.getGuild().getDefaultChannel(), event.getChannel())) {
             Message msg;
             msg = event.getGuild().getDefaultChannel().retrieveMessageById(event.getMessageId()).complete();
-            if (event.getChannel().getName().toLowerCase().contains("willkommen") && msg.getContentRaw().contains(event.getUser().getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
-                String[] arguments2 = {"users", "id = '" + event.getUserId() + "'", "verified", "TRUE"};
+            if (event.getChannel().getName().toLowerCase().contains("willkommen") && msg.getContentRaw().contains(Objects.requireNonNull(event.getUser()).getAsMention()) && event.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("\u2705", event.getJDA()))) {
                 try {
-                    databaseHandler.database("usersettings", "update", arguments2);
+                    databaseHandler.database("usersettings", "update users set verified = TRUE where id = '" + event.getUserId() + "'");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 for (Guild guild : event.getUser().getMutualGuilds()) {
-                    String[] arguments3 = {"users", "id = '" + event.getUserId() + "'", "verifystatus", "TRUE"};
                     try {
-                        databaseHandler.database(guild.getId(), "update", arguments3);
+                        databaseHandler.database(guild.getId(), "update users set verifystatus = TRUE where id = '" + event.getUserId() + "'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

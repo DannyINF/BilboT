@@ -86,10 +86,9 @@ public class messageActions {
                 table_name = "users";
                 break;
         }
-        String[] arguments = {table_name, "id = '" + id + "'", "2", "language", "country"};
 
         try {
-            answer = databaseHandler.database(db_name, "select", arguments);
+            answer = databaseHandler.database(db_name, "select language, country from " + table_name + " where id = '" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -58,44 +58,35 @@ public class databaseHandler {
      * - ranks(id varchar(20), rank1 varchar(20), rank1_color varchar(7), rank2 varchar(20), rank2_color varchar(7),
      * rank3 varchar(20), rank3_color varchar(7), rank4 varchar(20), rank4_color varchar(7), rank5 varchar(20),
      * rank5_color varchar(7), owner varchar(20), owner_color varchar(7), admin varchar(20), admin_color varchar(7),
-     * moderator varchar(20), moderator_color varchar(7), supporter varchar(20), support_color varchar(7), custom clob(64000)) //TODO: fully implement custom
+     * moderator varchar(20), moderator_color varchar(7), supporter varchar(20), support_color varchar(7), custom clob(64000))
      * - channels(id varchar(20), spam varchar(20), modlog varchar(20), log varchar(20), voicelog varchar(20), cmdlog varchar(20))
      * - events(id varchar(20), narration clob(2000))
      * <p>
      * usersettings
      * - users(id varchar(20), language varchar(20), country varchar(20), sex varchar(20), profile clob(64000), spammer boolean, verified boolean)
      */
-    private Connection conn;
+    public static Connection conn;
 
-    /**
-     * @param database input the database you want to address
-     * @param usage    give your choice of action
-     * @param args     arguments that are used in later functions
-     */
-    public static String[] database(String database, String usage, String[] args) throws SQLException {
+    public static String[] database(String database, String statement_string) throws SQLException {
         databaseHandler app = new databaseHandler();
 
         app.connectionToDerby(database);
+        Statement statement = conn.createStatement();
+        if (statement_string.split(" ")[0].toLowerCase().equals("select")) {
+            ResultSet resultSet = statement.executeQuery(statement_string);
+            ArrayList<String> list = new ArrayList<>();
+            while (resultSet.next()) {
+                for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                    list.add(resultSet.getString(i));
+                }
+            }
+            String[] result = new String[list.size()];
+            list.toArray(result);
 
-        switch (usage) {
-            case "create":
-                app.createDbUsage(args);
-                break;
-            case "insert":
-                app.insertDbUsage(args);
-                break;
-            case "update":
-                app.updateDbUsage(args);
-                break;
-            case "drop":
-                app.dropDbUsage(args);
-                break;
-            case "alter":
-                app.alterDbUsage(args);
-                break;
-            case "select":
-                return app.selectDbUsage(args);
+            return result;
         }
+
+        statement.execute(statement_string);
         return null;
     }
 
@@ -108,148 +99,4 @@ public class databaseHandler {
         DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
         conn = DriverManager.getConnection(dbUrl);
     }
-
-    /**
-     * @param args 0: table name; 1: row name; 2: data type
-     */
-    private void alterDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        while (i < args.length - 3) {
-            sb.append(args[i]);
-            sb.append(", ");
-            i += 2;
-        }
-        sb.append(args[i]);
-        StringBuilder sb2 = new StringBuilder();
-        int k = 2;
-        while (k < args.length - 2) {
-            sb2.append(args[k]);
-            sb2.append(", ");
-            k += 2;
-        }
-        sb2.append(args[k]);
-        statement.executeUpdate("alter table " + args[0] + " add column " + args[1] + " " + args[2]);
-    }
-
-    /**
-     * @param args 0: table name; 1+: values
-     */
-    private void insertDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-
-
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        while (i < args.length - 3) {
-            sb.append(args[i]);
-            sb.append(", ");
-            i += 2;
-        }
-        sb.append(args[i]);
-        StringBuilder sb2 = new StringBuilder();
-        int k = 2;
-        while (k < args.length - 2) {
-            sb2.append(args[k]);
-            sb2.append(", ");
-            k += 2;
-        }
-        sb2.append(args[k]);
-        statement.executeUpdate("insert into " + args[0] + "(" + sb.toString() + ") values (" + sb2.toString() + ")");
-    }
-
-    /**
-     * @param args 0: name of table; 1+: arguments for table
-     */
-    private void createDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        while (i < args.length - 1) {
-            sb.append(args[i]);
-            sb.append(", ");
-            i++;
-        }
-        sb.append(args[i]);
-        statement.executeUpdate("Create table " + args[0] + " (" + sb.toString() + ")");
-
-        statement.executeQuery("SELECT * FROM " + args[0]);
-
-
-    }
-
-    /**
-     * @param args 0: target table; 1: condition; 2+: changes;
-     */
-    private void updateDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-
-        StringBuilder sb = new StringBuilder();
-        int i = 2;
-        while (i < args.length - 2) {
-            sb.append(args[i]);
-            i++;
-            sb.append(" = ");
-            sb.append(args[i]);
-            i++;
-            sb.append(", ");
-        }
-        sb.append(args[i]);
-        i++;
-        sb.append(" = ");
-        sb.append(args[i]);
-        StringBuilder where = new StringBuilder();
-        if (args[1].length() > 3) {
-            where.append(" where ").append(args[1]);
-        }
-
-        statement.executeUpdate("update " + args[0] + " set " + sb.toString() + where.toString());
-
-    }
-
-    /**
-     * @param args 0: table name; 1: condition; 2: size of arguments; 3+: column names
-     */
-    private String[] selectDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-        ResultSet resultSet;
-
-        StringBuilder sb = new StringBuilder();
-        int i = 3;
-        while (i < args.length - 1) {
-            sb.append(args[i]);
-            sb.append(", ");
-            i++;
-        }
-        sb.append(args[i]);
-        StringBuilder where = new StringBuilder();
-        if (args[1].length() > 3) {
-            where.append(" where ").append(args[1]);
-        }
-        resultSet = statement.executeQuery("select " + sb.toString() + " from " + args[0] + where.toString());
-        String[] rsIDs = new String[Integer.parseInt(args[2])]; // decide the size
-        ArrayList<String> list = new ArrayList<>();
-        while (resultSet.next()) {
-            for (i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
-                list.add(resultSet.getString(i));
-            }
-        }
-        list.toArray(rsIDs);
-
-        return rsIDs;
-    }
-
-    /**
-     * @param args 0: table name
-     */
-    private void dropDbUsage(String[] args) throws SQLException {
-        Statement statement = conn.createStatement();
-
-        statement.executeUpdate("drop table " + args[0]);
-
-    }
-
-    //TODO: delete
 }

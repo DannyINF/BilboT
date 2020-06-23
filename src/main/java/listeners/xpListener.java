@@ -2,11 +2,12 @@ package listeners;
 
 import core.databaseHandler;
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.javatuples.Triplet;
 import org.jetbrains.annotations.NotNull;
+import util.STATIC;
 import util.giveXP;
 
 import java.sql.SQLException;
@@ -68,60 +69,49 @@ public class xpListener extends ListenerAdapter {
      * @param event GuildMessageReceivedEvent
      */
     private static void checkLevel(GuildMessageReceivedEvent event) throws SQLException {
+        if (core.permissionChecker.checkRole(STATIC.getCam(), event.getMember()))
+            return;
+
         long currentlevel;
         long currentXp;
 
         // getting level and xp of the user
-        String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "2", "xp", "level"};
-        String[] answer;
-
-        answer = databaseHandler.database(event.getGuild().getId(), "select", arguments);
+        Triplet answer = STATIC.getExperienceUser(event.getAuthor().getId(), event.getGuild().getId());
 
         try {
-            assert answer != null;
-            currentXp = Integer.parseInt(answer[0]);
+            currentXp = (Long) answer.getValue0();
         } catch (Exception e) {
             currentXp = 0;
         }
         try {
-            currentlevel = Integer.parseInt(answer[1]);
+            currentlevel = (Long) answer.getValue1();
         } catch (Exception e) {
             currentlevel = 0;
         }
 
         long newlevel = util.LevelChecker.checker(event.getMember(), event.getGuild(), currentXp);
 
+        STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, newlevel - currentlevel, 0L);
+
         // if your current xp are bigger than the xp needed for the next level you receive a level up
         if (newlevel != currentlevel) {
 
             if (newlevel > currentlevel) {
-                String[] arguments3 = {"users", "id = '" + Objects.requireNonNull(event.getMember()).getUser().getId() + "'", "1", "activity"};
-                String[] answer3 = null;
-                try {
-                    answer3 = databaseHandler.database(event.getGuild().getId(), "select", arguments3);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                STATIC.exec.execute(() -> {
 
-                assert answer3 != null;
-                long newActivity = Long.parseLong(answer3[0]) + 5;
+                    try {
+                        databaseHandler.database(event.getGuild().getId(), "update users set activity = activity + 5 where id = '" + event.getMember().getId() + "'");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
 
-                String[] arguments2 = {"users", "id = '" + event.getMember().getUser().getId() + "'", "activity", String.valueOf(newActivity)};
-                try {
-                    databaseHandler.database(event.getGuild().getId(), "update", arguments2);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
 
-            int coins;
-
-            String[] arguments2 = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "coins"};
-            String[] answer2;
-            answer2 = databaseHandler.database(event.getGuild().getId(), "select", arguments2);
+            long coins;
 
             try {
-                coins = Integer.parseInt(answer2[0]);
+                coins = (Long) answer.getValue2();
             } catch (NullPointerException e) {
                 coins = 0;
             }
@@ -130,9 +120,9 @@ public class xpListener extends ListenerAdapter {
             long newCoins;
             if (newlevel > 50) {
                 newCoins = (25 * (newlevel - currentlevel)) + coins;
-                System.out.println(newCoins + " = (25 * (" + newlevel + " - " + currentlevel + ")) + " + coins + ";");
+                STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, (25 * (newlevel - currentlevel)));
             } else {
-                int sum = 0;
+                long sum = 0;
                 if (newlevel < currentlevel) {
                     for (long i = currentlevel; i > newlevel; i--) {
                         sum -= i / 2;
@@ -142,20 +132,17 @@ public class xpListener extends ListenerAdapter {
                         sum += i / 2;
                     }
                 }
+                STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, sum);
                 newCoins = coins + sum;
                 System.out.println(newCoins + " = " + coins + " + " + sum + ";");
             }
-
-            String[] arguments3 = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(newCoins)};
-            databaseHandler.database(event.getGuild().getId(), "update", arguments3);
-
             // creating level-up msg
             if (!event.getAuthor().isBot()) {
 
                 Message msg = event.getChannel().sendMessage(messageActions.getLocalizedString("xp_level_up", "user", event.getAuthor().getId())
                         .replace("[USER]", event.getAuthor().getAsMention()).replace("[LEVEL]", String.valueOf(newlevel))).complete();
                 // msg deletes itself after 15000 milliseconds
-                if (!(newlevel == 50 || newlevel == 150 || newlevel == 300 || newlevel == 500)) {
+                if (!(newlevel == 10 || newlevel == 50 || newlevel == 150 || newlevel == 300 || newlevel == 500 || newlevel == 750 || newlevel == 1050)) {
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
@@ -165,10 +152,26 @@ public class xpListener extends ListenerAdapter {
                 }
 
             }
+
+            STATIC.exec.execute(() -> {
+                try {
+                    databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newCoins + " where id = '" + event.getAuthor().getId() + "'");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+
+
+
         }
-        // storing level
-        String[] arguments4 = {"users", "id = '" + event.getAuthor().getId() + "'", "level", String.valueOf(newlevel)};
-        databaseHandler.database(event.getGuild().getId(), "update", arguments4);
+        STATIC.exec.execute(() -> {
+            // storing level
+            try {
+                databaseHandler.database(event.getGuild().getId(), "update users set level = " + newlevel + " where id = '" + event.getAuthor().getId() + "'");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
@@ -176,60 +179,45 @@ public class xpListener extends ListenerAdapter {
         if (event.getAuthor().isFake())
             return;
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "id"};
-        String[] args2 = {"users", "id", "'" + event.getAuthor().getId() + "'", "language", "'en'", "country", "'gb'",
-                "sex", "'m'", "profile", "''", "spammer", "FALSE", "FALSE"};
-        String[] args3 = {"users", "id", "'" + event.getAuthor().getId() + "'", "xp", "0", "level", "0", "coins", "0",
-                "ticket", "0", "intro", "''", "profile", "''", "words", "0", "msg", "0", "chars", "0",
-                "voicetime", "0", "reports", "0", "moderations", "0", "loginstreak", "0", "nextlogin", "0",
-                "verifystatus", "TRUE", "activity", "120", "banlog", "''"};
-        try {
-            String test = Objects.requireNonNull(databaseHandler.database("usersettings", "select", arguments))[0];
+            String test = Objects.requireNonNull(databaseHandler.database("usersettings", "select id from users where id = '" + event.getAuthor().getId() + "'"))[0];
             if (test == null) {
                 try {
-                    databaseHandler.database("usersettings", "insert", args2);
+                    databaseHandler.database("usersettings", "insert into users (id, language, country, sex, profile, spammer, verified) values " +
+                            "('" + event.getAuthor().getId() + "', 'de', 'de', 'm', '', FALSE, FALSE)");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
             }
         } catch (Exception e) {
             try {
-                databaseHandler.database("usersettings", "insert", args2);
+                databaseHandler.database("usersettings", "insert into users (id, language, country, sex, profile, spammer, verified) values " +
+                        "('" + event.getAuthor().getId() + "', 'de', 'de', 'm', '', FALSE, FALSE)");
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
         }
 
         try {
-            String test = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select", arguments))[0];
+            String test = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select id from users where id = '" + event.getAuthor().getId() + "'"))[0];
             if (test == null) {
                 try {
-                    databaseHandler.database(event.getGuild().getId(), "insert", args3);
+                    databaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
+                            "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog) values (" +
+                            "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '')");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
             }
         } catch (Exception e) {
             try {
-                databaseHandler.database(event.getGuild().getId(), "insert", args3);
+                databaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
+                        "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog) values (" +
+                        "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '')");
             } catch (SQLException ignored) {
             }
         }
 
-        String status = "deactivated";
 
-        try {
-            status = modulesChecker.moduleStatus("xp", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        if (status.equals("activated")) {
 
             try {
                 giveXP(event);
@@ -241,6 +229,6 @@ public class xpListener extends ListenerAdapter {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 }

@@ -2,6 +2,9 @@ package util;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+
+import java.util.List;
 
 public class LevelChecker {
     public static long checker(Member member, Guild guild, long xp) {
@@ -16,11 +19,10 @@ public class LevelChecker {
         String str_lvl = "0" + level;
 
         long display_lvl;
-        if (str_lvl.length() < 3) {
+        if (str_lvl.length() < 3)
             display_lvl = 0;
-        } else {
+        else
             display_lvl = Integer.parseInt(str_lvl.substring(1, str_lvl.length() - 1));
-        }
 
         String role;
         String part1 = String.valueOf(display_lvl * 10);
@@ -47,8 +49,9 @@ public class LevelChecker {
 
 
         if (!member.getRoles().contains(guild.getRolesByName("Level " + part1 + " bis Level " + part2, true).get(0))) {
-            for (int i = 0; i < 50; i++) {
-                if (member.getRoles().contains(guild.getRolesByName("Level " + (i * 10) + " bis Level " + (i * 10 + 9), true).get(0))) {
+            List<Role> memberroles = member.getRoles();
+            for (int i = 0; i < 105; i++) {
+                if (memberroles.contains(guild.getRolesByName("Level " + (i * 10) + " bis Level " + (i * 10 + 9), true).get(0))) {
                     try {
                         guild.removeRoleFromMember(member, guild
                                 .getRolesByName("Level " + (i * 10) + " bis Level " + (i * 10 + 9), true).get(0)).queue();

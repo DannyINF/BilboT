@@ -21,8 +21,7 @@ public class cmdActivity implements Command {
             int activity = 0;
             NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
-            String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "activity"};
-            String[] data = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+            String[] data = core.databaseHandler.database(event.getGuild().getId(), "select activity from users where id = '" + member.getId() + "'");
             activity = Integer.parseInt(data[0]);
 
             event.getChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();

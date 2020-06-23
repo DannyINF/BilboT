@@ -23,12 +23,10 @@ public class cmdOptimalSettings_Server implements Command {
             String[] activation = {"search", "clear", "language", "xp", "report", "welcome", "rules", "botinfo", "chatfilter", "joining", "leaving", "voice", "maps", "intro", "addons"};
             String[] deactivation = {"verification", "event"};
             for (String module : activation) {
-                String[] arguments = {"modules", "id = '" + event.getGuild().getId() + "'", module, "'activated'"};
-                core.databaseHandler.database("serversettings", "update", arguments);
+                core.databaseHandler.database("serversettings", "update modules set " + module + " = 'activated' where id = '" + event.getGuild().getId() + "'");
             }
             for (String module : deactivation) {
-                String[] arguments = {"modules", "id = '" + event.getGuild().getId() + "'", module, "'deactivated'"};
-                core.databaseHandler.database("serversettings", "update", arguments);
+                core.databaseHandler.database("serversettings", "update modules set " + module + " = 'deactivated' where id = '" + event.getGuild().getId() + "'");
             }
             EmbedBuilder embed = new EmbedBuilder();
             embed.setColor(Color.GREEN);

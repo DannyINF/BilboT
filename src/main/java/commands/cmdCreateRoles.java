@@ -28,11 +28,9 @@ public class cmdCreateRoles implements Command {
             while (rangzahl <= 1040) {
                 partner = rangzahl + 9;
                 raenge.add("Level " + rangzahl + " bis Level " + partner);
-                System.out.println("Added Level " + rangzahl + " bis Level " + partner);
                 rangzahl += 10;
             }
             raenge.add("Level 1050 bis \u221e");
-            System.out.println("Added Level 1050 bis \u221e");
 
             ArrayList<String> loreraenge = new ArrayList<>();
             loreraenge.add("Drúadan");

@@ -20,7 +20,7 @@ public class selfJoinListener extends ListenerAdapter {
         //    e.printStackTrace();
         //}
         //}
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -28,14 +28,16 @@ public class selfJoinListener extends ListenerAdapter {
         String[] createArgs3 = {"addons", "id varchar(20)", "screambot boolean", "music1 boolean",
                 "music2 boolean", "music3 boolean", "embed boolean", "roles boolean", "kirinki boolean", "muede boolean", "defender boolean"};
         try {
-            core.databaseHandler.database("serversettings", "create", createArgs3);
+            core.databaseHandler.database("serversettings", "create table addons (id varchar(20), screambot boolean, music1 boolean, music2 boolean, " +
+                    "music3 boolean, embed boolean, roles boolean, kirinki boolean, muede boolean, defender boolean);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
         String[] insertArgs2 = {"addons", "id", "'" + event.getGuild().getId() + "'", "screambot", "FALSE", "music1", "FALSE",
                 "music2", "FALSE", "music3", "FALSE", "embed", "FALSE", "roles", "FALSE", "kirinki", "FALSE", "defender", "FALSE"};
         try {
-            core.databaseHandler.database("serversettings", "insert", insertArgs2);
+            core.databaseHandler.database("serversettings", "insert into addons (id, screambot, music1, music2, musci3, embed, roles, kirinki, defender) values " +
+                    "'" + event.getGuild().getId() + "', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -177,6 +179,6 @@ public class selfJoinListener extends ListenerAdapter {
             }
         }
 
-        tc.createPermissionOverride(event.getGuild().getPublicRole()).setDeny(channelperm).queue();
+        tc.createPermissionOverride(event.getGuild().getPublicRole()).setDeny(channelperm).queue();*/
     }
 }

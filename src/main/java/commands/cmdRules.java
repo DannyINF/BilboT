@@ -1,7 +1,6 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -21,9 +20,6 @@ public class cmdRules implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
-            String status;
-            status = modulesChecker.moduleStatus("rules", event.getGuild().getId());
-            if (status.equals("activated")) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setColor(Color.red);
                 String paragraf1 =
@@ -76,9 +72,6 @@ public class cmdRules implements Command {
                 event.getChannel().sendMessage(embed.build()).queue();
 
 
-            } else {
-                messageActions.moduleIsDeactivated(event, "rules");
-            }
         } else {
             permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }

@@ -20,8 +20,7 @@ public class cmdChannel implements Command {
                         .replace("#", "");
                 if (channeltype.equals("log") || channeltype.equals("modlog") || channeltype.equals("spam") ||
                         channeltype.equals("voicelog") || channeltype.equals("cmdlog")) {
-                    String[] updateArgs = {"channels", "id = '" + event.getGuild().getId() + "'", channeltype, "'" + channel + "'"};
-                    databaseHandler.database("serversettings", "update", updateArgs);
+                    databaseHandler.database("serversettings", "update channels set " + channeltype + " = '" + channel + "' where id = '" + event.getGuild().getId() + "'");
                 } else {
                     event.getChannel().sendMessage("Wrong channeltype!").queue();
                 }

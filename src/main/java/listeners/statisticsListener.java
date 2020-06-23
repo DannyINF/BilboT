@@ -9,10 +9,9 @@ import java.sql.SQLException;
 public class statisticsListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        String[] arguments1 = {"users", "id = '" + event.getAuthor().getId() + "'", "3", "words", "msg", "chars"};
         String[] answer1 = null;
         try {
-            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select", arguments1);
+            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select words, msg, chars from users where id = '" + event.getAuthor().getId() + "'");
         } catch (SQLException ignored) {
         }
         int words;
@@ -40,9 +39,8 @@ public class statisticsListener extends ListenerAdapter {
         int newMsg = msg + 1;
         int newChars = chars + event.getMessage().getContentRaw().length();
 
-        String[] arguments3 = {"users", "id = '" + event.getAuthor().getId() + "'", "words", String.valueOf(newWords), "msg", String.valueOf(newMsg), "chars", String.valueOf(newChars)};
         try {
-            core.databaseHandler.database(event.getGuild().getId(), "update", arguments3);
+            core.databaseHandler.database(event.getGuild().getId(), "update users set words = " + newWords + ", msg = " + newMsg + ", chars = " + newChars + " where id = '" + event.getAuthor().getId() + "'");
         } catch (SQLException ignored) {
         }
     }

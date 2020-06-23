@@ -34,9 +34,8 @@ public class cmdLanguage_Server implements Command {
             } else {
                 if (language.equals("de_de") || language.equals("de_bay") || language.equals("de_swg") ||
                         language.equals("de_msf") || language.equals("en_gb") || language.equals("de_sac")) {
-                    String[] argsLang = {"msgs", "id = '" + event.getGuild().getId() + "'",
-                            "language", "'" + language.split("_")[0] + "'", "country", "'" + language.split("_")[1].toUpperCase() + "'"};
-                    databaseHandler.database("serversettings", "update", argsLang);
+                    databaseHandler.database("serversettings", "update msgs set language = '" + language.split("_")[0] + "', " +
+                            "country = '" + language.split("_")[1].toUpperCase() + "' where id = '" + event.getGuild().getId() + "'");
                     embed.setDescription(messageActions.getLocalizedString("lang_set_server", "server", event.getGuild().getId()));
                     event.getChannel().sendMessage(embed.build()).queue();
                     Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId())).modifyNickname(

@@ -1,17 +1,17 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.javatuples.Triplet;
 import util.CHANNEL;
 import util.SET_CHANNEL;
+import util.STATIC;
 import util.getUser;
 
 import java.awt.*;
@@ -21,8 +21,7 @@ import java.text.NumberFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class cmdCoins implements Command {
@@ -34,11 +33,7 @@ public class cmdCoins implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
 
-        // checking for activation
-        status = modulesChecker.moduleStatus("xp", event.getGuild().getId());
-        if (status.equals("activated")) {
 
             String argument;
             try {
@@ -46,14 +41,10 @@ public class cmdCoins implements Command {
             } catch (Exception e) {
                 argument = "-1-1-";
             }
-
+            Triplet answerStart = STATIC.getExperienceUser(event.getAuthor().getId(), event.getGuild().getId());
             switch (argument) {
                 case "gift":
-                    String[] argumentsStart = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "level"};
-                    String[] answerStart;
-                    answerStart = core.databaseHandler.database(event.getGuild().getId(), "select", argumentsStart);
-                    assert answerStart != null;
-                    if (Integer.parseInt(answerStart[0]) >= 50) {
+                    if ((Long) answerStart.getValue1() >= 50) {
                         long amount;
                         Member member = null;
                         MessageChannel channel = event.getChannel();
@@ -61,13 +52,7 @@ public class cmdCoins implements Command {
                             try {
                                 member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", "").replace("!", ""));
                             } catch (Exception e) {
-                                Message msg = channel.sendMessage("Gib bitte einen Nutzer an.").complete();
-                                new Timer().schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        msg.delete().queue();
-                                    }
-                                }, 5000);
+                                channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                                 break;
                             }
                         } else {
@@ -82,65 +67,49 @@ public class cmdCoins implements Command {
                                 sb.append(args[i]);
                                 member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
                             } catch (Exception e) {
-                                Message msg = channel.sendMessage("Nutzer nicht gefunden.").complete();
-                                new Timer().schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        msg.delete().queue();
-                                    }
-                                }, 5000);
+                                channel.sendMessage("Nutzer nicht gefunden.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                             }
                         }
 
                         try {
                             amount = Long.parseLong(args[args.length - 1]);
                         } catch (Exception e) {
-                            Message msg = channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").complete();
-                            new Timer().schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    msg.delete().queue();
-                                }
-                            }, 5000);
+                            channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                             break;
                         }
 
                         if (amount < 0) {
-                            channel.sendMessage("Du kannst nicht weniger als 0 Coins verschenken!").complete();
+                            channel.sendMessage("Du kannst nicht weniger als 0 Coins verschenken!").queue();
                         } else {
                             try {
-                                String[] argumentsSelectAuthor = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "coins"};
-                                String[] answerSelectAuthor;
-                                answerSelectAuthor = core.databaseHandler.database(event.getGuild().getId(), "select", argumentsSelectAuthor);
-
-                                assert answerSelectAuthor != null;
-                                if (Long.parseLong(answerSelectAuthor[0]) < amount) {
-                                    channel.sendMessage("Du kannst nicht mehr Coins verschenken, als du besitzt!").complete();
+                                if ((Long)answerStart.getValue2() < amount) {
+                                    channel.sendMessage("Du kannst nicht mehr Coins verschenken, als du besitzt!").queue();
                                 } else {
-                                    long newcoinsAuthor = Long.parseLong(answerSelectAuthor[0]) - amount;
+                                    long newcoinsAuthor = (Long) answerStart.getValue2() - amount;
 
-                                    String[] argumentsUpdateAuthor = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(newcoinsAuthor)};
-                                    core.databaseHandler.database(event.getGuild().getId(), "update", argumentsUpdateAuthor);
-
+                                    STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, -amount);
 
                                     assert member != null;
-                                    String[] argumentsSelectMember = {"users", "id = '" + member.getUser().getId() + "'", "1", "coins"};
-                                    String[] answerSelectMember;
-                                    answerSelectMember = core.databaseHandler.database(event.getGuild().getId(), "select", argumentsSelectMember);
+                                    Triplet answerSelectMember = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
 
-                                    assert answerSelectMember != null;
-                                    long newcoinsMember = Long.parseLong(answerSelectMember[0]) + amount;
+                                    long newcoinsMember = (Long) answerSelectMember.getValue2() + amount;
+
+                                    STATIC.updateExperienceUser(member.getId(), event.getGuild().getId(), 0L, 0L, amount);
+
+                                    event.getChannel().sendMessage("**" + event.getAuthor().getAsTag() + "** hat an **" + member.getUser().getAsTag() + "** `" + amount + "` Coins verschenkt.").queue();
+
+                                    String[] argumentsUpdateAuthor = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(newcoinsAuthor)};
+                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsAuthor + " where id = '" + event.getAuthor().getId() + "'");
 
                                     String[] argumentsUpdateMember = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoinsMember)};
-                                    core.databaseHandler.database(event.getGuild().getId(), "update", argumentsUpdateMember);
-                                    event.getChannel().sendMessage("**" + event.getAuthor().getAsTag() + "** hat an **" + member.getUser().getAsTag() + "** `" + amount + "` Coins verschenkt.").complete();
+                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsMember + " where id = '" + member.getId() + "'");
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     } else {
-                        event.getChannel().sendMessage("Du musst mindestens Level 50 erreicht haben!").complete();
+                        event.getChannel().sendMessage("Du musst mindestens Level 50 erreicht haben!").queue();
                     }
                     break;
                 case "give":
@@ -157,13 +126,7 @@ public class cmdCoins implements Command {
                                 try {
                                     member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", ""));
                                 } catch (Exception e) {
-                                    Message msg = channel.sendMessage("Gib bitte einen Nutzer an.").complete();
-                                    new Timer().schedule(new TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            msg.delete().queue();
-                                        }
-                                    }, 5000);
+                                    channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                                     break;
                                 }
                             } else {
@@ -178,37 +141,24 @@ public class cmdCoins implements Command {
                                     sb.append(args[i]);
                                     member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
                                 } catch (Exception e) {
-                                    Message msg = channel.sendMessage("Nutzer nicht gefunden.").complete();
-                                    new Timer().schedule(new TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            msg.delete().queue();
-                                        }
-                                    }, 5000);
+                                    channel.sendMessage("Nutzer nicht gefunden.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                                 }
                             }
 
                             try {
                                 amount = Long.parseLong(args[args.length - 1]);
                             } catch (Exception e) {
-                                Message msg = channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").complete();
-                                new Timer().schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        msg.delete().queue();
-                                    }
-                                }, 5000);
+                                channel.sendMessage("Gib bitte die Anzahl an Coins an, die du hinzuf\u00fcgen willst.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                                 break;
                             }
 
                             try {
                                 assert member != null;
-                                String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "coins"};
-                                String[] answer;
-                                answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+                                Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
 
-                                assert answer != null;
-                                long newcoins = Long.parseLong(answer[0]) + amount;
+                                long newcoins = (Long) answer.getValue2() + amount;
+
+                                STATIC.updateExperienceUser(member.getId(), event.getGuild().getId(), 0L, 0L, amount);
 
                                 EmbedBuilder embed = new EmbedBuilder();
                                 embed.setColor(Color.RED);
@@ -220,7 +170,7 @@ public class cmdCoins implements Command {
                                 modlog.sendMessage(embed.build()).queue();
 
                                 String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoins)};
-                                core.databaseHandler.database(event.getGuild().getId(), "update", arguments3);
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoins + " where id = '" + member.getId() + "'");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -248,9 +198,7 @@ public class cmdCoins implements Command {
 
                     break;
             }
-        } else {
-            messageActions.moduleIsDeactivated(event, "xp");
-        }
+
     }
 
 
@@ -260,12 +208,9 @@ public class cmdCoins implements Command {
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
         // sending msg with number of coins
-        String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "coins"};
-        String[] answer;
-        answer = core.databaseHandler.database(event.getGuild().getId(), "select", arguments);
+        Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
         try {
-            assert answer != null;
-            coins = answer[0];
+            coins = String.valueOf(answer.getValue2());
         } catch (Exception e) {
             coins = "0";
         }

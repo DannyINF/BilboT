@@ -17,9 +17,8 @@ public class banListener extends ListenerAdapter {
 
 
     public void onGuildBan(@NotNull GuildBanEvent event) {
-        String[] arguments3 = {"users", "id = '" + event.getUser().getId() + "'", "verifystatus", "FALSE"};
         try {
-            databaseHandler.database(event.getGuild().getId(), "update", arguments3);
+            databaseHandler.database(event.getGuild().getId(), "update users set verifystatus = FALSE where id = '" + event.getUser().getId() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }

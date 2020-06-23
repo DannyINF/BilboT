@@ -1,7 +1,6 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -11,10 +10,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class cmdClear implements Command {
@@ -42,11 +40,6 @@ public class cmdClear implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
-
-        // checking for activation
-        status = modulesChecker.moduleStatus("clear", event.getGuild().getId());
-        if (status.equals("activated")) {
             // only members with the permission "ADMINISTRATOR" are able to perform this command
             if (core.permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
                 //getting number of msgs that shall be deleted
@@ -55,12 +48,12 @@ public class cmdClear implements Command {
                     try {
                         // getting all msgs of the textchannel
                         MessageHistory history = new MessageHistory(event.getChannel());
-                        List<Message> msgs;
+                        List<Message> msgs = new ArrayList<>();
 
                         event.getMessage().delete().queue();
 
                         // storing the last x messages in the list msgs (x equals the number from args[0])
-                        msgs = history.retrievePast(num).complete();
+                        history.retrievePast(num).complete();
 
                         // deleting all messages from "msgs"
                         event.getChannel().deleteMessages(msgs).queue();
@@ -71,15 +64,7 @@ public class cmdClear implements Command {
                         embed.setColor(Color.red);
                         embed.setDescription(messageActions.getLocalizedString("clear_deleted_msg", "user", event.getAuthor().getId())
                                 .replace("[COUNT]", args[0]));
-                        Message msg = event.getChannel().sendMessage(embed.build()).complete();
-
-                        // destroying itself after 3 seconds
-                        new Timer().schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                msg.delete().queue();
-                            }
-                        }, 3000);
+                        event.getChannel().sendMessage(embed.build()).queue(msg -> msg.delete().queueAfter(3, TimeUnit.SECONDS));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -94,10 +79,7 @@ public class cmdClear implements Command {
             } else {
                 permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
             }
-
-        } else {
-            messageActions.moduleIsDeactivated(event, "clear");
-        }
+            
 
     }
 

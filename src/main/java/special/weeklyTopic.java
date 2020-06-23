@@ -1,6 +1,5 @@
 package special;
 
-import core.modulesChecker;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -21,15 +20,8 @@ class weeklyTopic extends ListenerAdapter {
     private InputStream input3 = null;
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        String status = "deactivated";
-        try {
-            status = modulesChecker.moduleStatus("event", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         // checks activation
-        if (status.equals("activated")) {
             int i = 0;
 
             int thisweek = LocalDate.now().getDayOfYear() / 7;
@@ -171,7 +163,7 @@ class weeklyTopic extends ListenerAdapter {
                     e.printStackTrace();
                 }
 
-            }
+
         }
 
     }

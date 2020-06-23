@@ -9,6 +9,8 @@ import util.getUser;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
@@ -38,10 +40,9 @@ public class cmdStats implements Command {
             member = event.getMember();
         }
         assert member != null;
-        String[] arguments1 = {"users", "id = '" + member.getUser().getId() + "'", "4", "words", "msg", "chars", "voicetime"};
         String[] answer1 = null;
         try {
-            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select", arguments1);
+            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime from users where id = '" + member.getId() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +83,8 @@ public class cmdStats implements Command {
         embed.setTitle("Statistiken f\u00fcr " + member.getUser().getAsTag());
         embed.setFooter("seit dem 10.06.2019", null);
         embed.setTimestamp(new CurrentDatetime().getCurrentTimestamp().toLocalDateTime().atZone(ZoneId.of("Europe/Berlin")));
-        embed.setDescription("Words: " + words + "\nMessages: " + msg + "\nCharacters: " + chars + "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
+        NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
+        embed.setDescription("Words: " + numberFormat.format(words) + "\nMessages: " + numberFormat.format(msg) + "\nCharacters: " + numberFormat.format(chars) + "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
         event.getChannel().sendMessage(embed.build()).queue();
 
     }

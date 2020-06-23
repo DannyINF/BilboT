@@ -19,7 +19,7 @@ public class onlineListener extends ListenerAdapter {
 
             assert log != null;
             log.sendMessage(messageActions.getLocalizedString("log_user_changed_status", "server", event.getGuild().getId())
-                    .replace("[USER]", event.getMember().getEffectiveName() + "#" + event.getMember().getUser().getDiscriminator())
+                    .replace("[USER]", event.getMember().getUser().getAsTag())
                     .replace("[OLD-STATUS]", event.getOldOnlineStatus().getKey()).replace("[NEW-STATUS]", event.getNewOnlineStatus().getKey())).queue();
         }
     }

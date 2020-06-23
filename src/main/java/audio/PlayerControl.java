@@ -187,7 +187,6 @@ public class PlayerControl implements Command {
     }
 
     void musicPlayer(TextChannel channel, Member member, Message msg, Guild guild, String[] args, EmbedBuilder embed, VoiceChannel userVoiceChannel) {
-        System.out.println("[" + guild.getSelfMember().getEffectiveName() + "]");
         GuildMusicManager mng = getMusicManager(guild);
         AudioPlayer player = mng.player;
         TrackScheduler scheduler = mng.scheduler;
@@ -426,8 +425,7 @@ public class PlayerControl implements Command {
         }
         try {
             msg.delete().queue();
-        } catch (Exception e) {
-            System.out.println("[ERROR] Message not found!");
+        } catch (Exception ignored) {
         }
 
     }

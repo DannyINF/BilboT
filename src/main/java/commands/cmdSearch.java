@@ -1,7 +1,6 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -24,20 +23,15 @@ public class cmdSearch implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws IOException, SQLException {
-        String status;
 
-        // checking for activation
-        status = modulesChecker.moduleStatus("search", event.getGuild().getId());
-        if (status.equals("activated")) {
             EmbedBuilder embed = new EmbedBuilder();
             StringBuilder sb = new StringBuilder();
             String clean = null;
             String site = null;
             String url = null;
             String siteurl = null;
-            String[] arguments = {"users", "id = '" + event.getAuthor().getId() + "'", "1", "language"};
             String[] answer;
-            answer = core.databaseHandler.database("usersettings", "select", arguments);
+            answer = core.databaseHandler.database("usersettings", "select language from users where id = '" + event.getAuthor().getId() + "'");
             assert answer != null;
             String country = answer[0];
             boolean sendMsg = false;
@@ -240,9 +234,7 @@ public class cmdSearch implements Command {
                 event.getChannel().sendMessage(embed.build()).queue();
             }
 
-        } else {
-            messageActions.moduleIsDeactivated(event, "search");
-        }
+
     }
 
 

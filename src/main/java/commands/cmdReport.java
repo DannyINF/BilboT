@@ -1,7 +1,6 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -19,9 +18,7 @@ public class cmdReport implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
-        status = modulesChecker.moduleStatus("report", event.getGuild().getId());
-        if (status.equals("activated")) {
+
             SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", event.getGuild().getId());
             if (set_channel.getMsg()) {
                 messageActions.neededChannel(event);
@@ -54,9 +51,7 @@ public class cmdReport implements Command {
                 }
             }
 
-        } else {
-            messageActions.moduleIsDeactivated(event, "report");
-        }
+
 
     }
 

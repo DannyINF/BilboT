@@ -1,7 +1,6 @@
 package listeners;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -16,14 +15,7 @@ public class leaveListener extends ListenerAdapter {
 
 
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
-        String status = null;
-        try {
-            status = modulesChecker.moduleStatus("leaving", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        assert status != null;
-        if (status.equals("activated")) {
+
             SET_CHANNEL set_channel = CHANNEL.getSetChannel("log", event.getGuild().getId());
             if (set_channel.getMsg()) {
                 messageActions.neededChannel(event, "log");
@@ -37,9 +29,14 @@ public class leaveListener extends ListenerAdapter {
                         .replace("[USER]", event.getUser().getName() + "#" + event.getUser().getDiscriminator())).queue();
                 assert welcome != null;
                 welcome.sendMessage("Nam\u00E1ri\u00EB " + event.getMember().getAsMention() + " (" + event.getMember().getEffectiveName() + ")! M\u00F6ge Il\u00FAvatar mit dir sein!").queue();
+                try {
+                    core.databaseHandler.database(event.getGuild().getId(), "update users set ticket = 1 where id = '" + event.getMember().getId() + "'");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
 
             }
-        }
 
     }
 }

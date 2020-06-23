@@ -1,7 +1,6 @@
 package commands;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -18,9 +17,7 @@ public class cmdQuote implements Command {
     //TODO: Update + database
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
-        status = modulesChecker.moduleStatus("quotes", event.getGuild().getId());
-        if (status.equals("activated")) {
+
             String autor = null;
             try {
                 autor = args[0];
@@ -177,9 +174,7 @@ public class cmdQuote implements Command {
             embed.setTitle(title);
             embed.setDescription(msg);
             messageActions.selfDestroyEmbedMSG(embed.build(), 120000, event);
-        } else {
-            messageActions.moduleIsDeactivated(event, "quotes");
-        }
+
 
     }
 

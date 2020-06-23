@@ -46,10 +46,10 @@ public class introListener extends ListenerAdapter {
             boolean isOnServer = false;
             boolean isOnline = false;
             try {
-                isOnServer = event.getGuild().getMemberById("454613079804608522").getUser().getId().equals("454613079804608522");
+                isOnServer = Objects.requireNonNull(event.getGuild().getMemberById("454613079804608522")).getUser().getId().equals("454613079804608522");
                 if (isOnServer) {
                     try {
-                        isOnline = event.getGuild().getMemberById("454613079804608522").getOnlineStatus().equals(OnlineStatus.ONLINE);
+                        isOnline = Objects.requireNonNull(event.getGuild().getMemberById("454613079804608522")).getOnlineStatus().equals(OnlineStatus.ONLINE);
                     } catch (Exception ignored) {}
                 }
             } catch (Exception ignored) {}
@@ -59,17 +59,15 @@ public class introListener extends ListenerAdapter {
                     if (isOnline) {
                         if (event.getJDA().getSelfUser().getId().equals("454613079804608522")) {
                             String intro;
-                            String[] arguments = {"users", "id = '" + event.getMember().getUser().getId() + "'", "1", "intro"};
                             try {
-                                intro = databaseHandler.database(event.getGuild().getId(), "select", arguments)[0].split("#")[0];
+                                intro = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getMember().getId() + "'"))[0].split("#")[0];
                                 playIntro(intro, event.getGuild(), event.getChannelJoined());
                             } catch (NullPointerException | SQLException ignored) { }
                         }
                     } else if (!isStarting){
                         String intro;
-                        String[] arguments = {"users", "id = '" + event.getMember().getUser().getId() + "'", "1", "intro"};
                         try {
-                            intro = databaseHandler.database(event.getGuild().getId(), "select", arguments)[0].split("#")[0];
+                            intro = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getMember().getId() + "'"))[0].split("#")[0];
                             try {
                                 if (!intro.equals("nothing")) {
                                     isStarting = true;
@@ -83,7 +81,7 @@ public class introListener extends ListenerAdapter {
                     } else {
                         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
                         exec.scheduleAtFixedRate(() -> {
-                            if (event.getGuild().getMemberById("454613079804608522").getOnlineStatus().equals(OnlineStatus.ONLINE)) {
+                            if (Objects.requireNonNull(event.getGuild().getMemberById("454613079804608522")).getOnlineStatus().equals(OnlineStatus.ONLINE)) {
                                 Guild guild = null;
                                 VoiceChannel voiceChannel = null;
 
@@ -99,9 +97,8 @@ public class introListener extends ListenerAdapter {
                                 }
 
                                 String intro;
-                                String[] arguments = {"users", "id = '" + event.getMember().getUser().getId() + "'", "1", "intro"};
                                 try {
-                                    intro = databaseHandler.database(event.getGuild().getId(), "select", arguments)[0].split("#")[0];
+                                    intro = Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getMember().getId() + "'"))[0].split("#")[0];
                                     if (!intro.equals("nothing"))
                                         playIntro(intro, guild, voiceChannel);
                                 } catch (NullPointerException | SQLException ignored) { }

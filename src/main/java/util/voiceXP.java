@@ -3,6 +3,7 @@ package util;
 import core.databaseHandler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.IPermissionHolder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
@@ -11,14 +12,13 @@ import java.sql.SQLException;
 import static java.lang.Math.sqrt;
 
 public class voiceXP {
-    public static void giveVoiceXP(JDA jda) throws SQLException, InterruptedException {
+    public static void giveVoiceXP(JDA jda) throws SQLException {
         for (Guild guild : jda.getGuilds()) {
             //if (isReady.isReady(guild)) {
-            Thread.sleep(1000);
             for (VoiceChannel voiceChannel : guild.getVoiceChannels()) {
                 double membercount = voiceChannel.getMembers().size();
                 for (Member m : voiceChannel.getMembers()) {
-                    if (m.getUser().isBot()) {
+                    if (m.getUser().isBot() || core.permissionChecker.checkRole(STATIC.getCam(), m)) {
                         membercount--;
                     }
                 }
@@ -36,21 +36,7 @@ public class voiceXP {
 
                     //statistics
                     if (membercount>1) {
-                        String[] arguments1 = {"users", "id = '" + member.getUser().getId() + "'", "1", "voicetime"};
-                        String[] answer1;
-                        answer1 = databaseHandler.database(guild.getId(), "select", arguments1);
-                        int voicetime;
-                        try {
-                            assert answer1 != null;
-                            voicetime = Integer.parseInt(answer1[0]);
-                        } catch (Exception e) {
-                            voicetime = 0;
-                        }
-
-                        int newVoicetime = voicetime + 1;
-
-                        String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "voicetime", String.valueOf(newVoicetime)};
-                        databaseHandler.database(guild.getId(), "update", arguments3);
+                        databaseHandler.database(guild.getId(), "update users set voicetime = voicetime + 1 where id = '" + member.getId() + "'");
                     }
                 }
             }

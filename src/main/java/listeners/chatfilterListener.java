@@ -1,7 +1,6 @@
 package listeners;
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -19,13 +18,7 @@ import java.sql.SQLException;
 public class chatfilterListener extends ListenerAdapter {
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         //if (isReady.isReady(event.getGuild())) {
-        String status = "deactivated";
-        try {
-            status = modulesChecker.moduleStatus("chatfilter", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        if (status.equals("activated")) {
+
             if (!event.getAuthor().equals(event.getJDA().getSelfUser())) {
                 SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", event.getGuild().getId());
                 if (set_channel.getMsg()) {
@@ -35,6 +28,7 @@ public class chatfilterListener extends ListenerAdapter {
                     String[] ban = {"pisser", "pissa", "hure", "fick", "fotze", "brezelsalzabpopler", "inzest", "bastard", "spast",
                             "wichser", "wixxer", "\u5350", "npd", "nsdap", "hitler", "hodenkobold", "arschloch", "Milf", "slut",
                             "Hurensohn", "Huhrensohn", "Mongo", "gay", "Schwuchtel", "Neger", "Nigga"};
+                    String[] pardon = {"secret"};
                     StringBuilder sb = new StringBuilder();
                     boolean writeReport = false;
                     for (String filter : ban) {
@@ -42,6 +36,10 @@ public class chatfilterListener extends ListenerAdapter {
                             sb.append(filter).append(", ");
                             writeReport = true;
                         }
+                    }
+                    for (String filter : pardon) {
+                        if (event.getMessage().getContentRaw().toLowerCase().replace(" ", "").replace("\n", "").contains(filter.toLowerCase()))
+                            writeReport = false;
                     }
                     if (writeReport) {
                         EmbedBuilder embed = new EmbedBuilder();
@@ -72,7 +70,7 @@ public class chatfilterListener extends ListenerAdapter {
                                 });
                     }
                 }
-            }
+
         }
     }
 }

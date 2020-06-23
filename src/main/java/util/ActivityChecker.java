@@ -11,7 +11,6 @@ import java.util.Objects;
 
 public class ActivityChecker {
     public void activity(JDA jda) throws SQLException {
-        System.out.println("[ACTIVITY] called");
         for (Guild guild : jda.getGuilds()) {
 
             Role role1 = null;
@@ -70,11 +69,10 @@ public class ActivityChecker {
             for (Member member : guild.getMembers()) {
                 if (!member.getUser().isBot() && !member.getRoles().contains(guild.getRolesByName("Vacation", true).get(0))
                         && !member.getRoles().contains(guild.getRolesByName("YouTuber", true).get(0))) {
-                    String[] arguments = {"users", "id = '" + member.getUser().getId() + "'", "1", "activity"};
                     String[] answer;
                     long oldActivity;
                     try {
-                        answer = core.databaseHandler.database(guild.getId(), "select", arguments);
+                        answer = core.databaseHandler.database(guild.getId(), "select activity from users where id = '" + member.getId() + "'");
                         if (answer == null)
                             oldActivity = 120L;
                         else
@@ -117,8 +115,7 @@ public class ActivityChecker {
 
                     long newActivity = oldActivity - 4;
 
-                    String[] arguments2 = {"users", "id = '" + member.getUser().getId() + "'", "activity", String.valueOf(newActivity)};
-                    core.databaseHandler.database(guild.getId(), "update", arguments2);
+                    core.databaseHandler.database(guild.getId(), "update users set activity = " + newActivity + " where id = '" + member.getId() + "'");
 
                     SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", guild.getId());
                     TextChannel modlog = guild.getTextChannelById(set_channel.getChannel());

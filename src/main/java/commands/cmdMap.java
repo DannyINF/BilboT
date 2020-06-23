@@ -2,7 +2,6 @@ package commands;
 
 
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -20,9 +19,7 @@ public class cmdMap implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
-        status = modulesChecker.moduleStatus("maps", event.getGuild().getId());
-        if (status.equals("activated")) {
+
 
             EmbedBuilder embed = new EmbedBuilder();
             embed.setColor(Color.ORANGE);
@@ -276,9 +273,6 @@ public class cmdMap implements Command {
                 }
             }
 
-        } else {
-            messageActions.moduleIsDeactivated(event, "maps");
-        }
     }
 
 

@@ -2,7 +2,6 @@ package commands.user_settings;
 
 import commands.Command;
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.imageio.ImageIO;
@@ -39,9 +38,7 @@ public class cmdProfile implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        String status;
-        status = modulesChecker.moduleStatus("profile", event.getGuild().getId());
-        if (status.equals("activated")) try {
+            try {
             Color user = Color.decode("#ffcc2b");
 
             if (Objects.requireNonNull(event.getMember()).getRoles().contains(event.getGuild().getRolesByName("Adan", true).get(0))) {
@@ -94,11 +91,8 @@ public class cmdProfile implements Command {
             ImageIO.write(source, "JPEG", new File("Bilder/Profiles/" + event.getAuthor().getId() + ".jpg"));
             event.getChannel().sendFile(new File("Bilder/Profiles/" + event.getAuthor().getId() + ".jpg")).queue();
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-        else {
-            messageActions.moduleIsDeactivated(event, "profile");
-        }
+                e.printStackTrace();
+            }
     }
 
 }

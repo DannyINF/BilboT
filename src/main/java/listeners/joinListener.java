@@ -3,7 +3,6 @@ package listeners;
 import core.channelActions;
 import core.databaseHandler;
 import core.messageActions;
-import core.modulesChecker;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,15 +18,8 @@ import static java.lang.Boolean.FALSE;
 
 public class joinListener extends ListenerAdapter {
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        String status1 = null;
-        try {
-            status1 = modulesChecker.moduleStatus("joining", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-        assert status1 != null;
-        if (status1.equals("activated")) {
+
             SET_CHANNEL set_channel = CHANNEL.getSetChannel("log", event.getGuild().getId());
             if (set_channel.getMsg()) {
                 messageActions.neededChannel(event, "log");
@@ -37,10 +29,14 @@ public class joinListener extends ListenerAdapter {
                 channelActions.getChannel(event, "log").sendMessage(messageActions.getLocalizedString("log_user_join", "server", event.getGuild().getId())
                         .replace("[USER]", event.getUser().getAsTag())).queue();
                 if (event.getMember().getUser().isBot() == FALSE) {
-                    String[] arguments2 = {"users", "id = '" + event.getUser().getId() + "'", "1", "verified"};
                     String[] answer2 = null;
                     try {
-                        answer2 = databaseHandler.database("usersettings", "select", arguments2);
+                        answer2 = databaseHandler.database("usersettings", "select verified from users where id = '" + event.getMember().getId() + "'");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        core.databaseHandler.database(event.getGuild().getId(), "update users set ticket = 0 where id = '" + event.getMember().getId() + "'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -53,10 +49,9 @@ public class joinListener extends ListenerAdapter {
                     } catch (Exception ignored) {
                     }
 
-                    String[] arguments3 = {"users", "id = '" + event.getUser().getId() + "'", "1", "verifystatus"};
                     String[] answer3 = null;
                     try {
-                        answer3 = databaseHandler.database(event.getGuild().getId(), "select", arguments3);
+                        answer3 = databaseHandler.database(event.getGuild().getId(), "select verifystatus from users where id = '" + event.getMember().getId() + "'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -82,7 +77,7 @@ public class joinListener extends ListenerAdapter {
                     }
 
                 }
-            }
+
         }
     }
 }

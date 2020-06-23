@@ -66,7 +66,7 @@ class initMusicAddon extends ListenerAdapter {
         }
         try {
             message = Objects.requireNonNull(Objects.requireNonNull(jda.getGuildById(event.getGuild().getId())).getTextChannelById(event.getChannel().getId())).retrieveMessageById(event.getMessage().getId()).complete();
-            Objects.requireNonNull(jda.getTextChannelById(event.getChannel().getId())).retrieveMessageById(event.getMessageId()).complete();
+            Objects.requireNonNull(jda.getTextChannelById(event.getChannel().getId())).retrieveMessageById(event.getMessageId()).queue();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package listeners;
 
-import core.modulesChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.audio.AudioReceiveHandler;
@@ -33,7 +32,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
             event.getMember().mute(false).queue();
         if (event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).isEmpty()) {
             event.getGuild().createRole().setColor(Color.LIGHT_GRAY).setName(event.getChannelJoined().getName())
-                    .setMentionable(true).setHoisted(false).complete();
+                    .setMentionable(true).setHoisted(false).queue();
         }
         Permission[] voicepermission = new Permission[]{Permission.MESSAGE_HISTORY, Permission.MESSAGE_READ,
                 Permission.MESSAGE_WRITE, Permission.VIEW_CHANNEL};
@@ -42,20 +41,14 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
             TextChannel text = event.getGuild().getCategoriesByName(Objects.requireNonNull(event.getChannelJoined().getParent()).getName(), true).get(0)
                     .createTextChannel(event.getChannelJoined().getName()).setTopic("Chat zu " + event.getChannelJoined().getName()).complete();
             text.createPermissionOverride(event.getGuild().getPublicRole())
-                    .setDeny(Permission.ALL_TEXT_PERMISSIONS).complete();
+                    .setDeny(Permission.ALL_TEXT_PERMISSIONS).queue();
             text.createPermissionOverride(event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).get(0))
-                    .setAllow(voicepermission).complete();
+                    .setAllow(voicepermission).queue();
 
         }
         event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
                 .getRolesByName(event.getChannelJoined().getName(), true).get(0)).queue();
-        String status = "deactivated";
-        try {
-            status = modulesChecker.moduleStatus("voice", event.getGuild().getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (status.equals("activated")) {
+
             SET_CHANNEL set_channel2 = CHANNEL.getSetChannel("voicelog", event.getGuild().getId());
             if (set_channel2.getMsg()) {
                 Objects.requireNonNull(event.getGuild().getDefaultChannel())
@@ -68,7 +61,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
                 assert voicelog != null;
                 voicelog.sendMessage(embed.build()).queue();
             }
-        }
+
     }
 
     //TODO: add more xp for narrators
@@ -77,10 +70,6 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
 
 
     public void onGuildVoiceLeave(@NotNull GuildVoiceLeaveEvent event) {
-        if (STATIC.getIsNarration() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
-            if (!event.getMember().getUser().isBot())
-                event.getMember().mute(false).queue();
-        }
         if (event.getGuild().getAudioManager().isConnected()) {
             if (event.getChannelLeft().equals(event.getGuild().getAudioManager().getConnectedChannel())) {
                 boolean onlyBots = true;
@@ -108,14 +97,7 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
                             event.getGuild().getRolesByName("mute", true).get(0)).queue();
                 }
             }
-            String status = null;
-            try {
-                status = modulesChecker.moduleStatus("voice", event.getGuild().getId());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            assert status != null;
-            if (status.equals("activated")) {
+
                 SET_CHANNEL set_channel3 = CHANNEL.getSetChannel("voicelog", event.getGuild().getId());
                 if (set_channel3.getMsg()) {
                     Objects.requireNonNull(event.getGuild().getDefaultChannel())
@@ -128,31 +110,26 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
                     assert voicelog != null;
                     voicelog.sendMessage(embed.build()).queue();
                 }
-            }
+
         }
     }
 
     public void onGuildVoiceMove(@NotNull GuildVoiceMoveEvent event) {
-        if (STATIC.getIsNarration() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
-            if (!event.getMember().getUser().isBot())
-                event.getMember().mute(true).queue();
+        if (STATIC.getIsNarration() && !STATIC.getIsDiscussion()) {
+            if (event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
+                if (!event.getMember().getUser().isBot())
+                    event.getMember().mute(true).queue();
+            } else if (event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
+                if (!event.getMember().getUser().isBot())
+                    event.getMember().mute(false).queue();
+            }
         }
-        if (STATIC.getIsNarration() && event.getChannelLeft().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {
-            if (!event.getMember().getUser().isBot())
-                event.getMember().mute(false).queue();
-        }
+
         event.getGuild().addRoleToMember(event.getMember(), event.getGuild()
                 .getRolesByName(event.getChannelJoined().getName(), true).get(0)).queue();
         event.getGuild().removeRoleFromMember(event.getMember(), event.getGuild().getRolesByName(event.getChannelLeft().getName(), true).get(0)).queue();
 
-        String status = null;
-        try {
-            status = modulesChecker.moduleStatus("voice", event.getGuild().getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        assert status != null;
-        if (status.equals("activated")) {
+
             SET_CHANNEL set_channel4 = CHANNEL.getSetChannel("voicelog", event.getGuild().getId());
             if (set_channel4.getMsg()) {
                 Objects.requireNonNull(event.getGuild().getDefaultChannel())
@@ -166,9 +143,9 @@ public class voiceListener extends ListenerAdapter implements AudioReceiveHandle
                 voicelog.sendMessage(embed.build()).queue();
                 if (event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).isEmpty()) {
                     event.getGuild().createRole().setColor(Color.LIGHT_GRAY).setName(event.getChannelJoined().getName())
-                            .setMentionable(true).setHoisted(false).complete();
+                            .setMentionable(true).setHoisted(false).queue();
                 }
-            }
+
         }
     }
 
