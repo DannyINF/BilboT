@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -46,29 +47,14 @@ public class cmdCoins implements Command {
                 case "gift":
                     if ((Long) answerStart.getValue1() >= 50) {
                         long amount;
-                        Member member = null;
-                        MessageChannel channel = event.getChannel();
-                        if (args[1].contains("<") && args[1].contains(">") && args[1].contains("@")) {
-                            try {
-                                member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", "").replace("!", ""));
-                            } catch (Exception e) {
-                                channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                break;
-                            }
-                        } else {
-                            try {
-                                int i = 1;
-                                StringBuilder sb = new StringBuilder();
-                                while (i < args.length - 2) {
-                                    sb.append(args[i]);
-                                    sb.append(" ");
-                                    i++;
-                                }
-                                sb.append(args[i]);
-                                member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
-                            } catch (Exception e) {
-                                channel.sendMessage("Nutzer nicht gefunden.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                            }
+                        Member member;
+                        TextChannel channel = event.getChannel();
+                        try {
+                            ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(0, args.length - 1));
+                            member = util.getUser.getMemberFromInput((String[]) list.toArray(), event.getAuthor(), event.getGuild(), channel);
+                        } catch (Exception e) {
+                            channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
+                            break;
                         }
 
                         try {
@@ -98,10 +84,8 @@ public class cmdCoins implements Command {
 
                                     event.getChannel().sendMessage("**" + event.getAuthor().getAsTag() + "** hat an **" + member.getUser().getAsTag() + "** `" + amount + "` Coins verschenkt.").queue();
 
-                                    String[] argumentsUpdateAuthor = {"users", "id = '" + event.getAuthor().getId() + "'", "coins", String.valueOf(newcoinsAuthor)};
                                     core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsAuthor + " where id = '" + event.getAuthor().getId() + "'");
 
-                                    String[] argumentsUpdateMember = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoinsMember)};
                                     core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsMember + " where id = '" + member.getId() + "'");
                                 }
                             } catch (Exception e) {
@@ -120,29 +104,14 @@ public class cmdCoins implements Command {
                         } else {
                             TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
                             long amount;
-                            Member member = null;
-                            MessageChannel channel = event.getChannel();
-                            if (args[1].contains("<") && args[1].contains(">") && args[1].contains("@")) {
-                                try {
-                                    member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", ""));
-                                } catch (Exception e) {
-                                    channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                    break;
-                                }
-                            } else {
-                                try {
-                                    int i = 1;
-                                    StringBuilder sb = new StringBuilder();
-                                    while (i < args.length - 2) {
-                                        sb.append(args[i]);
-                                        sb.append(" ");
-                                        i++;
-                                    }
-                                    sb.append(args[i]);
-                                    member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
-                                } catch (Exception e) {
-                                    channel.sendMessage("Nutzer nicht gefunden.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                }
+                            Member member;
+                            TextChannel channel = event.getChannel();
+                            try {
+                                ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(0, args.length - 1));
+                                member = util.getUser.getMemberFromInput((String[]) list.toArray(), event.getAuthor(), event.getGuild(), channel);
+                            } catch (Exception e) {
+                                channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
+                                break;
                             }
 
                             try {
@@ -169,7 +138,6 @@ public class cmdCoins implements Command {
                                 assert modlog != null;
                                 modlog.sendMessage(embed.build()).queue();
 
-                                String[] arguments3 = {"users", "id = '" + member.getUser().getId() + "'", "coins", String.valueOf(newcoins)};
                                 core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoins + " where id = '" + member.getId() + "'");
                             } catch (Exception e) {
                                 e.printStackTrace();

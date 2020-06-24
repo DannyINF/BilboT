@@ -28,7 +28,6 @@ import static com.google.common.base.Stopwatch.*;
 public class commandsListener extends ListenerAdapter {
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-            Stopwatch stopwatch = createStarted();
             String message = event.getMessage().getContentRaw();
 
             if (message.startsWith(STATIC.PREFIX)) {
@@ -59,6 +58,5 @@ public class commandsListener extends ListenerAdapter {
                     e.printStackTrace();
                 }
             }
-            System.out.println(message + " " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
     }
 }

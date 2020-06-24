@@ -17,10 +17,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -65,31 +62,16 @@ public class cmdXp implements Command {
                         } else {
                             TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
                             long amount;
-                            Member member = null;
+                            Member member;
                             MessageChannel channel = event.getChannel();
-                            if (args[1].contains("<") && args[1].contains(">") && args[1].contains("@")) {
-                                try {
-                                    member = event.getGuild().getMemberById(args[1].replace("@", "").replace("<", "").replace(">", "").replace("!", ""));
-                                } catch (Exception e) {
-                                    channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                    break;
-                                }
-                            } else {
-                                try {
-                                    int i = 1;
-                                    StringBuilder sb = new StringBuilder();
-                                    while (i < args.length - 2) {
-                                        sb.append(args[i]);
-                                        sb.append(" ");
-                                        i++;
-                                    }
-                                    sb.append(args[i]);
-                                    member = event.getGuild().getMembersByEffectiveName(sb.toString(), true).get(0);
-                                } catch (Exception e) {
-                                    channel.sendMessage("Nutzer nicht gefunden.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                }
+                            try {
+                                ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(0, args.length - 1));
+                                member = util.getUser.getMemberFromInput((String[]) list.toArray(), event.getAuthor(), event.getGuild(), event.getChannel());
+                            } catch (Exception e) {
+                                channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
+                                break;
                             }
-
+                            assert member != null;
                             try {
                                 amount = Long.parseLong(args[args.length - 1]);
                             } catch (Exception e) {
@@ -98,7 +80,6 @@ public class cmdXp implements Command {
                             }
 
                             try {
-                                assert member != null;
                                 Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
 
                                 long newxp = (Long) answer.getValue0() + amount;
@@ -116,11 +97,9 @@ public class cmdXp implements Command {
 
                                 LevelChecker.checker(member, event.getGuild(), newxp);
 
-                                Member finalMember = member;
                                 STATIC.exec.execute(() -> {
-                                    String[] arguments3 = {"users", "id = '" + finalMember.getUser().getId() + "'", "xp", String.valueOf(newxp)};
                                     try {
-                                        core.databaseHandler.database(event.getGuild().getId(), "update users set xp = " + newxp + " where id = '" + finalMember.getId() + "'");
+                                        core.databaseHandler.database(event.getGuild().getId(), "update users set xp = " + newxp + " where id = '" + member.getId() + "'");
                                     } catch (SQLException e) {
                                         e.printStackTrace();
                                     }
@@ -173,7 +152,6 @@ public class cmdXp implements Command {
                     }
                     break;
                 default:
-                    System.out.println("default");
                     ArrayList<String> args2 = new ArrayList<>();
                     int i = 0;
                     while (i < args.length - 1) {

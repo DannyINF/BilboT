@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class getUser {
     public static Member getMemberFromInput(String[] args, User author, Guild guild, TextChannel tx) {
@@ -38,27 +39,13 @@ public class getUser {
                     }
 
                 } catch (Exception ee) {
-                    Message msg = tx.sendMessage(messageActions.getLocalizedString("user_not_found", "user", author.getId())
-                            .replace("[ARGUMENT]", args[1])).complete();
-
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            msg.delete().queue();
-                        }
-                    }, 4000);
+                    tx.sendMessage(messageActions.getLocalizedString("user_not_found", "user", author.getId())
+                            .replace("[ARGUMENT]", args[1])).queue(msg -> msg.delete().queueAfter(4, TimeUnit.SECONDS));
                 }
             }
         } catch (Exception e) {
-            Message msg = tx.sendMessage(messageActions.getLocalizedString("user_not_found", "user", author.getId())
-                    .replace("[ARGUMENT]", args[1])).complete();
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    msg.delete().queue();
-                }
-            }, 4000);
+            tx.sendMessage(messageActions.getLocalizedString("user_not_found", "user", author.getId())
+                    .replace("[ARGUMENT]", args[1])).queue(msg -> msg.delete().queueAfter(4, TimeUnit.SECONDS));
         }
         return member;
     }

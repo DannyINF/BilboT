@@ -6,69 +6,19 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="updated DB implementation, removed chache system, rework of xp ranking, smaller bug fixes">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_cmu_sphinx_sphinx4_core_5prealpha_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_cmu_sphinx_sphinx4_data_5prealpha_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javatuples_javatuples_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_49.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_50.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_1_1_155.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_1_1_165.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="fixed #">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/initMusicAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdBotinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdBotinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdClear.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCreateRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCreateRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdPropToDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdQuote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdQuote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdRules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdJackpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdJackpot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdLanguage_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdModules_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/cmdOptimalSettings_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/user_settings/cmdLanguage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/user_settings/cmdLanguage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/user_settings/cmdProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/user_settings/cmdProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/channelActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/channelActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/messageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/messageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/modulesChecker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/banListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/banListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/commandsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/commandsListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/introListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/leaveListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/leaveListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/onlineListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/onlineListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/privateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/privateListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/spamListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/spamListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/statisticsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/statisticsListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/verificationListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/voiceListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/special/weeklyTopic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/weeklyTopic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/CHANNEL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/CHANNEL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/lotrQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/lotrQuiz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/giveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/giveXP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/getUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/getUser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -539,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591281420929</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="updated DB implementation, removed chache system, rework of xp ranking, smaller bug fixes">
+      <created>1592916517519</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1592916517519</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

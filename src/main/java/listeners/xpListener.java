@@ -134,7 +134,6 @@ public class xpListener extends ListenerAdapter {
                 }
                 STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, sum);
                 newCoins = coins + sum;
-                System.out.println(newCoins + " = " + coins + " + " + sum + ";");
             }
             // creating level-up msg
             if (!event.getAuthor().isBot()) {

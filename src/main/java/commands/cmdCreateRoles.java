@@ -86,7 +86,6 @@ public class cmdCreateRoles implements Command {
 
             RoleOrderAction action = event.getGuild().modifyRolePositions();
             for (String str : raenge) {
-                System.out.println(str);
                 Role role = event.getGuild().getRolesByName(str, true).get(0);
                 action.selectPosition(role.getPosition()).moveTo(role.getGuild().getRoles().size()-8);
                 try {
@@ -102,13 +101,11 @@ public class cmdCreateRoles implements Command {
     private static void createRank(GuildMessageReceivedEvent event, Color color, String rang, Boolean mentionable, Boolean hoisted) {
         try {
             event.getGuild().getRolesByName(rang, true).get(0);
-            System.out.println("Skipped " + rang);
         } catch (Exception e){
             event.getGuild().createRole().setColor(color).setName(rang)
                     .setMentionable(mentionable).setHoisted(hoisted)
                     .queue();
 
-            System.out.println("Created " + rang);
         }
     }
 }

@@ -155,7 +155,6 @@ public class introListener extends ListenerAdapter {
 
             try {
                 pl_info = PlaylistCheckerScreamBot.check(pl, introindex);
-                System.out.println(pl_info);
             } catch (IOException ignored) {}
 
             String input = null;

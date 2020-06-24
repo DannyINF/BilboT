@@ -81,7 +81,6 @@ public class cmdJackpot implements Command {
         String winstring = "1T";
         while (winstring.contains("T")) {
             winstring = winclass(Integer.parseInt(winstring.split("T")[0]));
-            System.out.println(winstring);
         }
         int coins;
         int lose;
@@ -97,7 +96,6 @@ public class cmdJackpot implements Command {
             try {
                 input2 = new FileInputStream("Properties/XP/xp.properties");
                 prop2.load(input2);
-                System.out.println(1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -107,7 +105,6 @@ public class cmdJackpot implements Command {
             } catch (Exception e) {
                 current_coins = 0;
             }
-            System.out.println(current_coins);
             try {
                 input2.close();
             } catch (IOException e) {

@@ -22,8 +22,6 @@ import static com.google.common.base.Stopwatch.*;
 class cmdXpRanking {
 
     public static void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        System.out.println("ranking");
-        Stopwatch stopwatch = createStarted();
         int start;
         try {
             start = Integer.parseInt(args[1]);
@@ -100,7 +98,6 @@ class cmdXpRanking {
         sb.append("```");
 
         event.getChannel().sendMessage(sb.toString()).queue();
-        System.out.println("ranking " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
 
     }
 

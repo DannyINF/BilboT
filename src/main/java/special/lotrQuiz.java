@@ -64,15 +64,10 @@ class lotrQuiz extends ListenerAdapter {
             //checks start command
             if (command.equals("quiz")) {
                 event.getMessage().delete().queue();
-                System.out.println("delete");
                 TextChannel quizchannel = createQuizChannel(event);
-                System.out.println("channel");
                 postManual(event, quizchannel.getIdLong());
-                System.out.println("manual");
                 postInterrupt(event, quizchannel.getIdLong());
-                System.out.println("interrupt");
                 askQuestion.createQuestion(event, quizchannel.getIdLong(), event.getMember());
-                System.out.println("question");
 
             }
         }
