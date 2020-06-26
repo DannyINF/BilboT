@@ -18,12 +18,13 @@ public class cmdHelp implements Command {
         String Footer;
         String Description;
 
-        String argument1 = "";
+        String argument1;
         String argument2 = "";
 
         try {
             argument1 = args[0].replace("/", "").toLowerCase();
         } catch (Exception ignored) {
+            argument1 = "help";
         }
         try {
             argument2 = args[1].replace("/", "").toLowerCase();

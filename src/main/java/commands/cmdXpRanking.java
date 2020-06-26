@@ -1,23 +1,13 @@
 package commands;
 
-import com.google.common.base.Stopwatch;
 import core.databaseHandler;
 import core.messageActions;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import org.javatuples.Triplet;
-import util.STATIC;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Objects;
-import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Stopwatch.*;
 
 class cmdXpRanking {
 
@@ -43,9 +33,9 @@ class cmdXpRanking {
 
         for (int j = 0; j < 10; j++) {
             try {
-                name = event.getJDA().getUserById(answer[j * 4]).getAsTag();
+                name = Objects.requireNonNull(event.getJDA().getUserById(answer[j * 4])).getAsTag();
             } catch (Exception e) {
-                name = answer[j * 4];
+                name = Objects.requireNonNull(answer)[j * 4];
             }
             xp = answer[j*4+1];
             level = answer[j*4+2];

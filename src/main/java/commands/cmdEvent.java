@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class cmdEvent implements Command {
 
@@ -24,23 +25,21 @@ public class cmdEvent implements Command {
     }
 
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         String chosen_event;
         try {
             chosen_event = args[0];
         } catch (Exception e) {
             chosen_event = null;
         }
-        switch (chosen_event.toLowerCase()) {
-            case "narration":
-                eventNarration(args, event);
-                break;
-            default:
-                EmbedBuilder embed = new EmbedBuilder();
-                embed.setDescription(messageActions.getLocalizedString("event_not_found", "server", event.getGuild().getId()));
-                embed.setTitle(messageActions.getLocalizedString("event_title", "server", event.getGuild().getId()));
-                embed.setColor(Color.RED);
-                event.getChannel().sendMessage(embed.build()).queue();
+        if ("narration".equals(chosen_event.toLowerCase())) {
+            eventNarration(args, event);
+        } else {
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setDescription(messageActions.getLocalizedString("event_not_found", "server", event.getGuild().getId()));
+            embed.setTitle(messageActions.getLocalizedString("event_title", "server", event.getGuild().getId()));
+            embed.setColor(Color.RED);
+            event.getChannel().sendMessage(embed.build()).queue();
         }
     }
 
@@ -59,7 +58,7 @@ public class cmdEvent implements Command {
             case "start":
                 if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                         permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                    if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                    if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                         STATIC.changeIsNarration(true);
                         STATIC.changeNarrationChannel(event.getMember().getVoiceState().getChannel());
                         event.getGuild().getManager().setAfkTimeout(Guild.Timeout.SECONDS_3600).queue();
@@ -73,7 +72,7 @@ public class cmdEvent implements Command {
                         embed.setDescription("The narration has begun.");
                     } else {
                         embed.setColor(Color.RED);
-                        embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                        embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                     }
                 } else {
                     embed.setColor(Color.RED);
@@ -84,7 +83,7 @@ public class cmdEvent implements Command {
                 if (STATIC.getIsNarration()) {
                     if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                         permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                        if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                        if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                             STATIC.changeIsNarration(false);
                             STATIC.changeIsDiscussion(false);
                             event.getGuild().getManager().setAfkTimeout(Guild.Timeout.SECONDS_300).queue();
@@ -97,7 +96,7 @@ public class cmdEvent implements Command {
                             embed.setDescription("The narration has ended.");
                         } else {
                             embed.setColor(Color.RED);
-                            embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                            embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                         }
                     } else {
                         embed.setColor(Color.RED);
@@ -114,7 +113,7 @@ public class cmdEvent implements Command {
                         if (STATIC.getIsNarration()) {
                             if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                         permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                                if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                                if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                                     STATIC.changeIsDiscussion(true);
 
                                     for (Member member : STATIC.getNarrationChannel().getMembers()) {
@@ -127,7 +126,7 @@ public class cmdEvent implements Command {
 
                                 } else {
                                     embed.setColor(Color.RED);
-                                    embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                                    embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                                 }
                             } else {
                                 embed.setColor(Color.RED);
@@ -143,11 +142,11 @@ public class cmdEvent implements Command {
                         if (STATIC.getIsNarration()) {
                             if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                                     permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                                if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                                if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                                     STATIC.changeIsDiscussion(false);
 
                                     for (Member member : STATIC.getNarrationChannel().getMembers()) {
-                                        if (!Arrays.asList(STATIC.getReaders()).contains(member)) {
+                                        if (!Collections.singletonList(STATIC.getReaders()).contains(member)) {
                                             try {
                                                 member.mute(false).queue();
                                             } catch (Exception ignored) {}
@@ -156,7 +155,7 @@ public class cmdEvent implements Command {
                                     embed.setDescription("The discussion has ended.");
                                 } else {
                                     embed.setColor(Color.RED);
-                                    embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                                    embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                                 }
                             } else {
                                 embed.setColor(Color.RED);
@@ -178,7 +177,7 @@ public class cmdEvent implements Command {
                         if (STATIC.getIsNarration()) {
                             if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                                     permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                                if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {//689597232319954966
+                                if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {//689597232319954966
                                     try {
                                         StringBuilder sb = new StringBuilder();
                                         int i = 3;
@@ -190,14 +189,14 @@ public class cmdEvent implements Command {
                                         Member member = util.getUser.getMemberFromInput(sb.toString().split(" "), event.getAuthor(), event.getGuild(), event.getChannel());
                                         member.mute(false).queue();
                                         java.util.List<Member> members = null;
-                                        members.add(member);
+                                        Objects.requireNonNull(members).add(member);
                                         STATIC.addReader(members);
                                         embed.setDescription("**" + member.getUser().getAsTag() + "** is now a narrator.");
                                     } catch (Exception ignored) {
                                     }
                                 } else {
                                     embed.setColor(Color.RED);
-                                    embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                                    embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                                 }
                             } else {
                                 embed.setColor(Color.RED);
@@ -213,7 +212,7 @@ public class cmdEvent implements Command {
                         if (STATIC.getIsNarration()) {
                             if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                                     permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                                if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                                if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                                     try {
                                         StringBuilder sb = new StringBuilder();
                                         int i = 2;
@@ -225,14 +224,14 @@ public class cmdEvent implements Command {
                                         Member member = util.getUser.getMemberFromInput(sb.toString().split(" "), event.getAuthor(), event.getGuild(), event.getChannel());
                                         member.mute(true).queue();
                                         java.util.List<Member> members = null;
-                                        members.add(member);
+                                        Objects.requireNonNull(members).add(member);
                                         STATIC.removeReader(members);
                                         embed.setDescription("**" + member.getUser().getAsTag() + "** is no longer a narrator.");
                                     } catch (Exception ignored) {
                                     }
                                 } else {
                                     embed.setColor(Color.RED);
-                                    embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                                    embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                                 }
                             } else {
                                 embed.setColor(Color.RED);
@@ -270,7 +269,7 @@ public class cmdEvent implements Command {
                         if (STATIC.getIsNarration()) {
                             if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) ||
                         permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Leser", true).get(0)}, event.getMember())) {
-                                if (!(event.getMember().getVoiceState() == null) && event.getMember().getVoiceState().getChannel().getId().equals("469209414218285057")) {
+                                if (!(Objects.requireNonNull(event.getMember()).getVoiceState() == null) && Objects.requireNonNull(event.getMember().getVoiceState().getChannel()).getId().equals("469209414218285057")) {
                                     STATIC.clearReaders();
                                     for (Member member : STATIC.getNarrationChannel().getMembers()) {
                                         try {
@@ -282,7 +281,7 @@ public class cmdEvent implements Command {
                                     embed.setDescription("The list of narrators has been cleared.");
                                 } else {
                                     embed.setColor(Color.RED);
-                                    embed.setDescription("You need to join the voice channel **" + event.getGuild().getVoiceChannelById("469209414218285057").getName() + "** to execute this command.");
+                                    embed.setDescription("You need to join the voice channel **" + Objects.requireNonNull(event.getGuild().getVoiceChannelById("469209414218285057")).getName() + "** to execute this command.");
                                 }
                             } else {
                                 embed.setColor(Color.RED);

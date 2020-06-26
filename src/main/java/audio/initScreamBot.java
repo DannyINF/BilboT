@@ -32,7 +32,6 @@ public class initScreamBot extends ListenerAdapter {
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, " RAAAAAAAAAAAAAAAAAAAAAH"));
 
         addListeners();
-        addCommands();
 
         try {
             screamJda = builder.build();
@@ -60,9 +59,6 @@ public class initScreamBot extends ListenerAdapter {
         introListener il = new introListener();
         il.playIntro(intro, guild, voiceChannel);
         isStarting = false;
-    }
-
-    private static void addCommands() {
     }
 
     private static void addListeners() {

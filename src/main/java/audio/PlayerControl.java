@@ -21,7 +21,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
-import net.dv8tion.jda.internal.requests.Route;
 import util.SECRETS;
 
 import java.awt.*;
@@ -87,7 +86,7 @@ public class PlayerControl implements Command {
 
         VoiceChannel userVoiceChannel = null;
         try {
-            userVoiceChannel = event.getMember().getVoiceState().getChannel();
+            userVoiceChannel = Objects.requireNonNull(event.getMember().getVoiceState()).getChannel();
         } catch (Exception ignored) {
         }
         ArrayList<Member> music_addons = new ArrayList<>();
@@ -107,7 +106,7 @@ public class PlayerControl implements Command {
                 VoiceChannel botchannel = null;
                 boolean inAction = false;
                 try {
-                    botchannel = event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()).getVoiceState().getChannel();
+                    botchannel = Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()).getVoiceState()).getChannel();
                 } catch (Exception ignored) {
                 }
                 if (botchannel != null) {
@@ -121,8 +120,8 @@ public class PlayerControl implements Command {
                         if (m.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
                             addon_available.add(addon_available.size(), m);
                         } else if (m.getOnlineStatus().equals(OnlineStatus.ONLINE)) {
-                            if (m.getVoiceState().inVoiceChannel()) {
-                                if (m.getVoiceState().getChannel().equals(userVoiceChannel)) {
+                            if (Objects.requireNonNull(m.getVoiceState()).inVoiceChannel()) {
+                                if (Objects.requireNonNull(m.getVoiceState().getChannel()).equals(userVoiceChannel)) {
                                     addon_available.add(0, m);
                                     inAction = true;
                                 }
@@ -195,7 +194,7 @@ public class PlayerControl implements Command {
                 if (args.length == 1) //No channel name was provided to search for.
                 {
                     try {
-                        guild.getAudioManager().openAudioConnection(member.getVoiceState().getChannel());
+                        guild.getAudioManager().openAudioConnection(Objects.requireNonNull(member.getVoiceState()).getChannel());
                     } catch (NullPointerException e) {
                         embed.setDescription("No channel name was provided to search with to join.");
                         channel.sendMessage(embed.build()).queue();

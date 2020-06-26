@@ -1,13 +1,8 @@
 package listeners;
 
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
-import java.sql.SQLException;
-import java.util.Objects;
 
 //TODO: Check this!
 public class selfJoinListener extends ListenerAdapter {

@@ -100,7 +100,7 @@ public class xpListener extends ListenerAdapter {
                 STATIC.exec.execute(() -> {
 
                     try {
-                        databaseHandler.database(event.getGuild().getId(), "update users set activity = activity + 5 where id = '" + event.getMember().getId() + "'");
+                        databaseHandler.database(event.getGuild().getId(), "update users set activity = activity + 5 where id = '" + Objects.requireNonNull(event.getMember()).getId() + "'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

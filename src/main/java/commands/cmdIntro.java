@@ -45,6 +45,7 @@ public class cmdIntro implements Command {
                     StringBuilder updatedIntros = new StringBuilder();
 
                     updatedIntros.append(args[1]).append("#");
+                    assert introlist != null;
                     for (String str : introlist) {
                         updatedIntros.append(str).append("&");
                     }
@@ -90,11 +91,6 @@ public class cmdIntro implements Command {
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", args[1]));
                     }
                 }
-                break;
-            // preparing a help msg
-            case "h":
-            case "help":
-                embed.setDescription(messageActions.getLocalizedString("intro_help", "user", event.getAuthor().getId()));
                 break;
             case "i":
             case "inventory":
@@ -173,7 +169,7 @@ public class cmdIntro implements Command {
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", "'" + args[1] + "'"));
                     } else {
                         String pl;
-                        Integer lenght = 0;
+                        int lenght = 0;
                         if (args[1].contains("-")) {
                             int prize = 0;
                             boolean all_right = true;

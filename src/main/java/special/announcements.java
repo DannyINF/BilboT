@@ -7,6 +7,7 @@ import util.STATIC;
 
 import java.awt.*;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class announcements extends ListenerAdapter {
@@ -23,32 +24,32 @@ public class announcements extends ListenerAdapter {
                     case 0:
                         embed.setTitle("\uD83D\uDCDA Der Lyrikabend:");
                         embed.setDescription("Jede Woche findet auf dem Server der Lyrikabend statt. Dabei werden ein oder mehrere Kapitel vorgelesen und danach diskutiert." +
-                                "Um teilnehmen zu k\u00f6nnen, muss man seine Buchausgabe angeben. Mehr Infos in " + event.getGuild().getTextChannelById("470283820881543188").getAsMention());
+                                "Um teilnehmen zu k\u00f6nnen, muss man seine Buchausgabe angeben. Mehr Infos in " + Objects.requireNonNull(event.getGuild().getTextChannelById("470283820881543188")).getAsMention());
                         break;
                     case 1:
                         embed.setTitle("\uD83C\uDFA8 Der Zeichenwettbewerb");
                         embed.setDescription("Einmal im Monat findet der Zeichenwettbewerb statt. Aus drei Themen wird eines gew\u00e4hlt, welches dann gezeichnet wird. Dabei soll kreativ gearbeitet werden und es gibt auch was zu gewinnen. " +
-                                "Alle Informationen in " + event.getGuild().getTextChannelById("557328633606307892").getAsMention());
+                                "Alle Informationen in " + Objects.requireNonNull(event.getGuild().getTextChannelById("557328633606307892")).getAsMention());
                         break;
                     case 2:
                         embed.setTitle("\uD83D\uDCDD Der Schreibwettbewerb");
                         embed.setDescription("Alle zwei Monate findet der Schreibwettbewerb statt. Aus drei Themen wird eines gew\u00e4hlt, zu welchem dann ein Text geschrieben wird. Dabei soll kreativ gearbeitet werden und es gibt auch was zu gewinnen. " +
-                                "Alle Informationen in " + event.getGuild().getTextChannelById("596263709765271552").getAsMention());
+                                "Alle Informationen in " + Objects.requireNonNull(event.getGuild().getTextChannelById("596263709765271552")).getAsMention());
                         break;
                     case 3:
                         embed.setTitle("\u2753 Das Tolkien-Quick-Quiz");
                         embed.setDescription("Jede Woche am Dienstag gibt es 10 Fragen zu Tolkiens Werken. Jeder darf teilnehmen (Au\u00dfer Experten und das Adminteam)\n" +
-                                "In " + event.getGuild().getTextChannelById("631157118942052362").getAsMention() + " findet es statt.");
+                                "In " + Objects.requireNonNull(event.getGuild().getTextChannelById("631157118942052362")).getAsMention() + " findet es statt.");
                         break;
                     case 4:
                         embed.setTitle("\uD83D\uDCC5 W\u00f6chentliches Thema");
                         embed.setDescription("(Fast) jede Woche kommt hier ein neues Thema, \u00fcber das diskutiert werden kann. Dabei muss man nicht die tiefste Einsicht in das Thema haben und kann auch einfach Fragen zu dem Thema stellen. " +
-                                event.getGuild().getTextChannelById("473261177397444620").getAsMention());
+                                Objects.requireNonNull(event.getGuild().getTextChannelById("473261177397444620")).getAsMention());
                         break;
                     case 5:
                         embed.setTitle("\u2754 Fragen zu Tolkiens Werken");
                         embed.setDescription("Du willst wissen, wer Tom Bombadil war oder was die Schattenarmee gemacht hat?\n" +
-                                "Einfach in " + event.getGuild().getTextChannelById("453541314706014228").getAsMention() + " jede erdenkliche Frage zu Tolkien und/oder seinen Werken stellen!");
+                                "Einfach in " + Objects.requireNonNull(event.getGuild().getTextChannelById("453541314706014228")).getAsMention() + " jede erdenkliche Frage zu Tolkien und/oder seinen Werken stellen!");
                         break;
                     case 6:
                         embed.setTitle("\u23ef\ufe0f YouTuber-Kategorien");

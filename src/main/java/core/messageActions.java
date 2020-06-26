@@ -53,6 +53,8 @@ public class messageActions {
     public static void logCommand(GuildMessageReceivedEvent event) {
         StringBuilder command = new StringBuilder();
         for (String s : event.getMessage().getContentRaw().split(" ")) {
+            if (s.startsWith("http"))
+                s = "<" + s + ">";
             command.append(s);
             command.append(" ");
         }
@@ -138,11 +140,13 @@ public class messageActions {
                 .replace("[CHANNEL]", channel)).queue();
     }
 
-    public static void neededChannel(GuildVoiceJoinEvent event, String channel) {
-        Objects.requireNonNull(event.getGuild().getDefaultChannel()).sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())
-                .replace("[CHANNEL]", channel)).queue();
-
-    }
+// --Commented out by Inspection START (25.06.2020 13:43):
+//    public static void neededChannel(GuildVoiceJoinEvent event, String channel) {
+//        Objects.requireNonNull(event.getGuild().getDefaultChannel()).sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())
+//                .replace("[CHANNEL]", channel)).queue();
+//
+//    }
+// --Commented out by Inspection STOP (25.06.2020 13:43)
 
     public static void neededChannel(GuildMemberRemoveEvent event, String channel) {
         Objects.requireNonNull(event.getGuild().getDefaultChannel()).sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())
@@ -159,14 +163,16 @@ public class messageActions {
                 .replace("[CHANNEL]", channel)).queue();
     }
 
-    public static void moduleIsDeactivated(GuildMessageReceivedEvent event, String module) {
-        EmbedBuilder embed = new EmbedBuilder();
-        embed.setTitle(getLocalizedString("modules_title", "server", event.getGuild().getId()));
-        embed.setColor(Color.RED);
-        embed.setDescription(getLocalizedString("modules_is_deactivated", "server", event.getGuild().getId())
-                .replace("[MODUL]", module));
-        event.getChannel().sendMessage(embed.build()).queue();
-    }
+// --Commented out by Inspection START (25.06.2020 13:43):
+//    public static void moduleIsDeactivated(GuildMessageReceivedEvent event, String module) {
+//        EmbedBuilder embed = new EmbedBuilder();
+//        embed.setTitle(getLocalizedString("modules_title", "server", event.getGuild().getId()));
+//        embed.setColor(Color.RED);
+//        embed.setDescription(getLocalizedString("modules_is_deactivated", "server", event.getGuild().getId())
+//                .replace("[MODUL]", module));
+//        event.getChannel().sendMessage(embed.build()).queue();
+//    }
+// --Commented out by Inspection STOP (25.06.2020 13:43)
 
 
 }

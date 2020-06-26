@@ -184,7 +184,7 @@ class Main {
         builder.addEventListeners(new commandsListener());
         builder.addEventListeners(new joinListener());
         builder.addEventListeners(new leaveListener());
-        builder.addEventListeners(new privateListener());
+        builder.addEventListeners(new reportListener());
         builder.addEventListeners(new banListener());
         builder.addEventListeners(new channelListener());
         builder.addEventListeners(new chatfilterListener());
@@ -200,5 +200,6 @@ class Main {
         builder.addEventListeners(new statisticsListener());
         builder.addEventListeners(new verificationListener());
         builder.addEventListeners(new announcements());
+        builder.addEventListeners(new modReactionListener());
     }
 }

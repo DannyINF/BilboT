@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,7 +20,7 @@ class askQuestion {
     private static InputStream input2 = null;
 
     public static void createQuestion(GuildMessageReceivedEvent event, long id, Member member) {
-        event.getGuild().getTextChannelById(id).putPermissionOverride(member).setDeny(Permission.MESSAGE_WRITE).complete();
+        Objects.requireNonNull(event.getGuild().getTextChannelById(id)).putPermissionOverride(member).setDeny(Permission.MESSAGE_WRITE).complete();
         int questiontype = ThreadLocalRandom.current().nextInt(1, 11);
         String right_answer;
         if (questiontype < 10) {
@@ -42,7 +43,7 @@ class askQuestion {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            event.getGuild().getTextChannelById(id).sendMessage("Frage: " + question +
+            Objects.requireNonNull(event.getGuild().getTextChannelById(id)).sendMessage("Frage: " + question +
                     "\n(1) " + answer1 +
                     "\n(2) " + answer2 +
                     "\n(3) " + answer3 +
@@ -64,20 +65,20 @@ class askQuestion {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            event.getGuild().getTextChannelById(id).sendMessage("Frage: " + question + "\n").queue();
+            Objects.requireNonNull(event.getGuild().getTextChannelById(id)).sendMessage("Frage: " + question + "\n").queue();
 
         }
 
         try {
             OutputStream output = new FileOutputStream("Properties/Quiz/quizmaster.properties");
-            prop3.setProperty(event.getGuild().getTextChannelById(id).getName() + "_right_answer", right_answer);
+            prop3.setProperty(Objects.requireNonNull(event.getGuild().getTextChannelById(id)).getName() + "_right_answer", right_answer);
             prop3.store(output, null);
             output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        event.getGuild().getTextChannelById(id).putPermissionOverride(member).setAllow(Permission.MESSAGE_WRITE).complete();
+        Objects.requireNonNull(event.getGuild().getTextChannelById(id)).putPermissionOverride(member).setAllow(Permission.MESSAGE_WRITE).complete();
     }
 
 }

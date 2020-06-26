@@ -30,7 +30,7 @@ public class banListener extends ListenerAdapter {
         } else {
             TextChannel log = event.getGuild().getTextChannelById(set_channel2.getChannel());
             assert log != null;
-            log.sendMessage(messageActions.getLocalizedString("log_ban", "server", event.getUser().getId())
+            log.sendMessage(messageActions.getLocalizedString("log_ban", "server", event.getGuild().getId())
                     .replace("[USER]", event.getUser().getAsTag())).queue();
             assert welcome != null;
             welcome.sendMessage(event.getUser().getAsMention() + " klebt jetzt am Banhammer!").queue();

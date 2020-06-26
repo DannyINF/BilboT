@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.15.9";
+    public static final String VERSION = "v2.16.2";
 
     public static final String PREFIX = "/";
 
@@ -76,7 +76,7 @@ public class STATIC {
         return announcement;
     }
 
-    private static List<Pair<String, Integer>> commandSpammer = new ArrayList<>();
+    private static final List<Pair<String, Integer>> commandSpammer = new ArrayList<>();
 
     public static int addCommandSpammer(String id) {
         int index = 0;
@@ -139,7 +139,7 @@ public class STATIC {
         return CAM;
     }
 
-    public static ExecutorService exec = Executors.newCachedThreadPool();
+    public static final ExecutorService exec = Executors.newCachedThreadPool();
 }
 
 

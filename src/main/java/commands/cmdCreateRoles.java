@@ -4,13 +4,10 @@ import core.permissionChecker;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.api.requests.restaction.RoleAction;
 import net.dv8tion.jda.api.requests.restaction.order.RoleOrderAction;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class cmdCreateRoles implements Command {
 

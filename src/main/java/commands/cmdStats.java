@@ -42,40 +42,58 @@ public class cmdStats implements Command {
         assert member != null;
         String[] answer1 = null;
         try {
-            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime from users where id = '" + member.getId() + "'");
+            answer1 = core.databaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime, xp, level, coins from users where id = '" + member.getId() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int words;
-        int msg;
-        int chars;
-        int voicetime;
+        long words;
+        long msg;
+        long chars;
+        long voicetime;
+        long xp;
+        long level;
+        long coins;
 
         try {
             assert answer1 != null;
-            words = Integer.parseInt(answer1[0]);
+            words = Long.parseLong(answer1[0]);
         } catch (Exception e) {
             words = 0;
         }
         try {
-            msg = Integer.parseInt(answer1[1]);
+            msg = Long.parseLong(answer1[1]);
         } catch (Exception e) {
             msg = 0;
         }
         try {
-            chars = Integer.parseInt(answer1[2]);
+            chars = Long.parseLong(answer1[2]);
         } catch (Exception e) {
             chars = 0;
         }
         try {
-            voicetime = Integer.parseInt(answer1[3]);
+            voicetime = Long.parseLong(answer1[3]);
         } catch (Exception e) {
             voicetime = 0;
         }
+        try {
+            xp = Long.parseLong(answer1[4]);
+        } catch (Exception e) {
+            xp = 0;
+        }
+        try {
+            level = Long.parseLong(answer1[5]);
+        } catch (Exception e) {
+            level = 0;
+        }
+        try {
+            coins = Long.parseLong(answer1[6]);
+        } catch (Exception e) {
+            coins = 0;
+        }
 
-        int hours = voicetime / 60; //since both are ints, you get an int
-        int minutes = voicetime % 60;
-        int days = hours / 24;
+        long hours = voicetime / 60;
+        long minutes = voicetime % 60;
+        long days = hours / 24;
         hours = hours % 24;
 
         EmbedBuilder embed = new EmbedBuilder();
@@ -84,7 +102,14 @@ public class cmdStats implements Command {
         embed.setFooter("seit dem 10.06.2019", null);
         embed.setTimestamp(new CurrentDatetime().getCurrentTimestamp().toLocalDateTime().atZone(ZoneId.of("Europe/Berlin")));
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
-        embed.setDescription("Words: " + numberFormat.format(words) + "\nMessages: " + numberFormat.format(msg) + "\nCharacters: " + numberFormat.format(chars) + "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
+        embed.setDescription(
+                        "XP: " + numberFormat.format(xp) +
+                        "\nLevel: " + numberFormat.format(level) +
+                        "\nCoins: " + numberFormat.format(coins) +
+                        "\n\nWords: " + numberFormat.format(words) +
+                        "\nMessages: " + numberFormat.format(msg) +
+                        "\nCharacters: " + numberFormat.format(chars) +
+                        "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
         event.getChannel().sendMessage(embed.build()).queue();
 
     }

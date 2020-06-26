@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Objects;
 
 public class cmdActivity implements Command {
     @Override
@@ -22,11 +23,11 @@ public class cmdActivity implements Command {
             NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
             String[] data = core.databaseHandler.database(event.getGuild().getId(), "select activity from users where id = '" + member.getId() + "'");
-            activity = Integer.parseInt(data[0]);
+            activity = Integer.parseInt(Objects.requireNonNull(data)[0]);
 
             event.getChannel().sendMessage("**" + member.getUser().getAsTag() + "** besitzt eine Aktivit\u00e4t von **" + numberFormat.format(activity) + "**.").queue();
         } else {
-            core.permissionChecker.noPower(event.getChannel(), event.getMember());
+            core.permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
     }
 }

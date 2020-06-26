@@ -9,6 +9,7 @@ import util.CHANNEL;
 import util.SET_CHANNEL;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 
 public class leaveListener extends ListenerAdapter {
@@ -28,7 +29,7 @@ public class leaveListener extends ListenerAdapter {
                 log.sendMessage(messageActions.getLocalizedString("log_user_leave", "server", event.getGuild().getId())
                         .replace("[USER]", event.getUser().getName() + "#" + event.getUser().getDiscriminator())).queue();
                 assert welcome != null;
-                welcome.sendMessage("Nam\u00E1ri\u00EB " + event.getMember().getAsMention() + " (" + event.getMember().getEffectiveName() + ")! M\u00F6ge Il\u00FAvatar mit dir sein!").queue();
+                welcome.sendMessage("Nam\u00E1ri\u00EB " + Objects.requireNonNull(event.getMember()).getAsMention() + " (" + event.getMember().getEffectiveName() + ")! M\u00F6ge Il\u00FAvatar mit dir sein!").queue();
                 try {
                     core.databaseHandler.database(event.getGuild().getId(), "update users set ticket = 1 where id = '" + event.getMember().getId() + "'");
                 } catch (SQLException e) {

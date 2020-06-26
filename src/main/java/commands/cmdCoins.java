@@ -5,7 +5,6 @@ import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.javatuples.Triplet;
@@ -50,9 +49,10 @@ public class cmdCoins implements Command {
                         Member member;
                         TextChannel channel = event.getChannel();
                         try {
-                            ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(0, args.length - 1));
-                            member = util.getUser.getMemberFromInput((String[]) list.toArray(), event.getAuthor(), event.getGuild(), channel);
+                            ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(1, args.length - 1));
+                            member = util.getUser.getMemberFromInput(list.toArray(new String[0]), event.getAuthor(), event.getGuild(), channel);
                         } catch (Exception e) {
+                            e.printStackTrace();
                             channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                             break;
                         }
@@ -107,8 +107,8 @@ public class cmdCoins implements Command {
                             Member member;
                             TextChannel channel = event.getChannel();
                             try {
-                                ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(0, args.length - 1));
-                                member = util.getUser.getMemberFromInput((String[]) list.toArray(), event.getAuthor(), event.getGuild(), channel);
+                                ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(1, args.length - 1));
+                                member = util.getUser.getMemberFromInput(list.toArray(new String[0]), event.getAuthor(), event.getGuild(), channel);
                             } catch (Exception e) {
                                 channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
                                 break;
@@ -159,6 +159,7 @@ public class cmdCoins implements Command {
                         String[] args3 = new String[args2.size()];
                         args3 = args2.toArray(args3);
                         Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
+                        assert member != null;
                         coins(event, member);
                     } catch (Exception e) {
                         coins(event, Objects.requireNonNull(event.getMember()));

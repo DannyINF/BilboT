@@ -1,7 +1,6 @@
 package commands.user_settings;
 
 import commands.Command;
-import core.messageActions;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.imageio.ImageIO;
@@ -37,7 +36,7 @@ public class cmdProfile implements Command {
     }
 
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
             try {
             Color user = Color.decode("#ffcc2b");
 

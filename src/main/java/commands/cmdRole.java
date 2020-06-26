@@ -24,11 +24,11 @@ public class cmdRole implements Command {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(Color.WHITE);
 
-        String[] arguments = {"ranks", "id = '" + event.getGuild().getId() + "'", "1", "custom"};
         String[] answer;
         answer = core.databaseHandler.database("serversettings", "select custom from ranks where id = '" + event.getGuild().getId() + "'");
 
         List<String> role_list;
+        assert answer != null;
         if (answer[0] == null) {
             role_list = new ArrayList<>();
         } else {
@@ -57,6 +57,7 @@ public class cmdRole implements Command {
                     for (String str : role_list) {
                         if (str.split(":")[0].equals(role.toLowerCase())) {
                             Role add_role = event.getGuild().getRoleById(str.split(":")[1]);
+                            assert add_role != null;
                             event.getGuild().addRoleToMember(Objects.requireNonNull(event.getMember()), add_role).queue();
                             embed.setDescription("Rolle '" + add_role.getName() + "' hinzugef\u00fcgt.");
                         }
@@ -71,6 +72,7 @@ public class cmdRole implements Command {
                     for (String str : role_list) {
                         if (str.split(":")[0].equals(role.toLowerCase())) {
                             Role remove_role = event.getGuild().getRoleById(str.split(":")[1]);
+                            assert remove_role != null;
                             event.getGuild().removeRoleFromMember(Objects.requireNonNull(event.getMember()), remove_role).queue();
                             embed.setDescription("Rolle '" + remove_role.getName() + "' entfernt.");
                         }
@@ -89,7 +91,6 @@ public class cmdRole implements Command {
                             sb.append(str).append("<#>");
                         }
                         sb.append(create_role.getName().toLowerCase()).append(":").append(create_role.getId());
-                        String[] arguments2 = {"ranks", "id = '" + event.getGuild().getId() + "'", "custom", "'" + sb.toString() + "'"};
                         try {
                             core.databaseHandler.database("serversettings", "update ranks set custom = '" + sb.toString() + "' where id = '" + event.getGuild().getId() + "'");
                         } catch (SQLException e) {
@@ -111,7 +112,6 @@ public class cmdRole implements Command {
                         for (String str : role_list) {
                             sb.append(str).append("<#>");
                         }
-                        String[] arguments2 = {"ranks", "id = '" + event.getGuild().getId() + "'", "custom", "'" + sb.toString() + "'"};
                         try {
                             core.databaseHandler.database("serversettings", "update ranks set custom = '" + sb.toString() + "' where id = '" + event.getGuild().getId() + "'");
                         } catch (SQLException e) {

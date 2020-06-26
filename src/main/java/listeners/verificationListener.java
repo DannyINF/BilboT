@@ -4,6 +4,7 @@ import core.databaseHandler;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 
 public class verificationListener extends ListenerAdapter {
     @Override
-    public void onMessageReactionAdd(MessageReactionAddEvent event) {
+    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (Objects.equals(event.getGuild().getDefaultChannel(), event.getChannel())) {
             Message msg;
             msg = event.getGuild().getDefaultChannel().retrieveMessageById(event.getMessageId()).complete();

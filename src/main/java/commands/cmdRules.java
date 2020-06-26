@@ -1,6 +1,5 @@
 package commands;
 
-import core.messageActions;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -18,7 +17,7 @@ public class cmdRules implements Command {
 
     //TODO: Update to database-usage
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setColor(Color.red);

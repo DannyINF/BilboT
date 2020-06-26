@@ -39,7 +39,7 @@ public class cmdClear implements Command {
     }
 
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
             // only members with the permission "ADMINISTRATOR" are able to perform this command
             if (core.permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
                 //getting number of msgs that shall be deleted

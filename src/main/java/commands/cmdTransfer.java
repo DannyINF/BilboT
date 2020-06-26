@@ -7,8 +7,8 @@ import java.util.Properties;
 
 //TODO: Update -> convert to extra class + implement for all-server-support
 public class cmdTransfer implements Command {
-    private final Properties prop2 = new Properties();
-    private InputStream input2 = null;
+    // --Commented out by Inspection (25.06.2020 13:43):private final Properties prop2 = new Properties();
+    // --Commented out by Inspection (25.06.2020 13:43):private InputStream input2 = null;
 
     @Override
     public boolean called() {

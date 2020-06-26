@@ -12,7 +12,6 @@ import util.SET_CHANNEL;
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.SQLException;
 
 
 public class chatfilterListener extends ListenerAdapter {

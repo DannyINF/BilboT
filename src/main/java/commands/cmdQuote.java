@@ -16,7 +16,7 @@ public class cmdQuote implements Command {
 
     //TODO: Update + database
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
             String autor = null;
             try {

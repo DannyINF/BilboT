@@ -1,6 +1,5 @@
 package commands;
 
-import core.messageActions;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -215,24 +214,21 @@ public class cmdSearch implements Command {
                 assert clean != null;
                 clean = clean.replace("[" + i + "]", " ");
             }
-            assert siteurl != null;
-            siteurl = siteurl.replace(" ", "%20");
+        siteurl = siteurl.replace(" ", "%20");
 
-            if (sendMsg) {
-                // sending msg
-                embed.setThumbnail(url);
-                embed.setColor(Color.lightGray);
-                if (link) {
-                    embed.setDescription("[" + describer + "](" + clean + ")");
-                } else {
-                    embed.setDescription(clean);
-                }
-                embed.setDescription(clean);
-                embed.setTitle(site + ": " + sb.toString());
-                embed.addField("Source:", "[" + siteurl + "](" + siteurl + ")", true);
-                embed.setTimestamp(OffsetDateTime.now());
-                event.getChannel().sendMessage(embed.build()).queue();
-            }
+        // sending msg
+        embed.setThumbnail(url);
+        embed.setColor(Color.lightGray);
+        if (link) {
+            embed.setDescription("[" + describer + "](" + clean + ")");
+        } else {
+            embed.setDescription(clean);
+        }
+        embed.setDescription(clean);
+        embed.setTitle(site + ": " + sb.toString());
+        embed.addField("Source:", "[" + siteurl + "](" + siteurl + ")", true);
+        embed.setTimestamp(OffsetDateTime.now());
+        event.getChannel().sendMessage(embed.build()).queue();
 
 
     }
