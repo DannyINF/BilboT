@@ -43,21 +43,26 @@ public class reportListener extends ListenerAdapter {
                     }
                     break;
                 case "2":
+                    if (event.getMessage().getContentRaw().length() > 100) {
+                        event.getChannel().sendMessage("Deine Angabe ist zu groß. (**" + event.getMessage().getContentRaw().length() + "**/100)\n\n" +
+                                "Wo hat sich der Vorfall abgespielt? Gib hier bestenfalls die Channel-ID oder den Namen des Chats (egal ob Text oder Voice) an.").queue();
+                        break;
+                    }
                     event.getChannel().sendMessage(">>> Wie w\u00fcrdest du den Vorfall einfach kategorisieren? (beispielsweise \"Beleidigung\", \"Hetze\" oder \"Spam\")\n " +
                             "Halte diese Angabe so allgemein und unpers\u00f6nlich wie m\u00f6glich!").queue();
                     Guild guild = event.getJDA().getGuildById("388969412889411585");
                     String channel;
                     assert guild != null;
                     try {
-                        channel = Objects.requireNonNull(guild.getTextChannelById(answer[3])).getAsMention();
+                        channel = Objects.requireNonNull(guild.getTextChannelById(event.getMessage().getContentRaw())).getAsMention();
                     } catch (Exception e) {
                         try {
-                            channel = Objects.requireNonNull(guild.getTextChannelsByName(answer[3], true).get(0)).getAsMention();
+                            channel = Objects.requireNonNull(guild.getTextChannelsByName(event.getMessage().getContentRaw(), true).get(0)).getAsMention();
                         } catch (Exception ex) {
                             try {
-                                channel = Objects.requireNonNull(guild.getGuildChannelById(answer[3])).getName();
+                                channel = Objects.requireNonNull(guild.getGuildChannelById(event.getMessage().getContentRaw())).getName();
                             } catch (Exception exc) {
-                                channel = answer[3];
+                                channel = event.getMessage().getContentRaw();
                             }
                         }
                     }
@@ -68,6 +73,12 @@ public class reportListener extends ListenerAdapter {
                     }
                     break;
                 case "3":
+                    if (event.getMessage().getContentRaw().length() > 200) {
+                        event.getChannel().sendMessage("Deine Angabe ist zu groß. (**" + event.getMessage().getContentRaw().length() + "**/200)\n\n" +
+                                "Wie w\u00fcrdest du den Vorfall einfach kategorisieren? (beispielsweise \"Beleidigung\", \"Hetze\" oder \"Spam\")\n " +
+                                "Halte diese Angabe so allgemein und unpers\u00f6nlich wie m\u00f6glich!").queue();
+                        break;
+                    }
                     event.getChannel().sendMessage(">>> Gibt es noch weitere Details oder Beschreibungen, die du angeben m\u00f6chtest? " +
                             "Je besser die Admins \u00fcber die Situation in Kenntnis gesetzt werden, desto genauer und fairer werden m\u00f6gliche Konsequenzen ausfallen!").queue();
                     try {
@@ -77,6 +88,12 @@ public class reportListener extends ListenerAdapter {
                     }
                     break;
                 case "4":
+                    if (event.getMessage().getContentRaw().length() > 1024) {
+                        event.getChannel().sendMessage("Deine Angabe ist zu groß. (**" + event.getMessage().getContentRaw().length() + "**/1.024)\n\n" +
+                                "Gibt es noch weitere Details oder Beschreibungen, die du angeben m\u00f6chtest? " +
+                                "Je besser die Admins \u00fcber die Situation in Kenntnis gesetzt werden, desto genauer und fairer werden m\u00f6gliche Konsequenzen ausfallen!").queue();
+                        break;
+                    }
                     event.getChannel().sendMessage(">>> Wenn du den Report absenden m\u00f6chtest, dann klicke hier auf den Haken!").queue(msg -> msg.addReaction("\u2705").queue());
                     try {
                         core.databaseHandler.database("388969412889411585", "update reports set report_id = '5', info = '" + event.getMessage().getContentRaw() + "' where victim_id = '" + event.getAuthor().getId() + "' and report_id = '4'");
@@ -105,19 +122,7 @@ public class reportListener extends ListenerAdapter {
             embed.setTitle("REPORT");
             embed.setDescription("Der Nutzer **" + Objects.requireNonNull(guild.getMemberById(answer[1])).getUser().getAsTag() + "** hat den Nutzer **" + Objects.requireNonNull(guild.getMemberById(answer[2])).getUser().getAsTag() + "** reportet.");
             embed.addField("Grund:", answer[4], true);
-            try {
-                embed.addField("Channel:", Objects.requireNonNull(guild.getTextChannelById(answer[3])).getAsMention(), true);
-            } catch (Exception e) {
-                try {
-                    embed.addField("Channel:", Objects.requireNonNull(guild.getTextChannelsByName(answer[3], true).get(0)).getAsMention(), true);
-                } catch (Exception ex) {
-                    try {
-                        embed.addField("Channel:", Objects.requireNonNull(guild.getGuildChannelById(answer[3])).getName(), true);
-                    } catch (Exception exc) {
-                        embed.addField("Channel:", answer[3], true);
-                    }
-                }
-            }
+            embed.addField("Channel:", answer[3], true);
             embed.addField("Beschreibung:", answer[5], true);
             assert modlog != null;
             modlog.sendMessage(embed.build()).queue(msg -> {
@@ -133,6 +138,8 @@ public class reportListener extends ListenerAdapter {
                     e.printStackTrace();
                 }
             });
+            event.getChannel().sendMessage(">>> Dein Report wurde abgesendet und wird schnellstm\u00f6glichst bearbeitet. Vielen Dank!").queue();
+
         }
     }
 }

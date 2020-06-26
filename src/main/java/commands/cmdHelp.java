@@ -151,11 +151,15 @@ public class cmdHelp implements Command {
                 break;
 
             case "help":
-                Title = "/help <commands/features/modules>";
-                Description = "`/help commands` - Zeigt eine Liste aller Befehle an.\n`/help features` - Zeigt eine Liste aller Features an.\n`/help modules` - Zeigt eine Lister aller Module an.\n\n" +
-                        "`/help <command>` - Gibt die Hilfe zu einem bestimmten Befehl oder Unterbefehl <command> an.\n" +
+                Title = "/help <commands/features" +
+                        //"/modules" +
+                        ">";
+                Description = "`/help commands` - Zeigt eine Liste aller Befehle an.\n`/help features` - Zeigt eine Liste aller Features an.\n" +
+                        //"'/help modules` - Zeigt eine Lister aller Module an.\n\n" +
+                        "\n`/help <command>` - Gibt die Hilfe zu einem bestimmten Befehl oder Unterbefehl <command> an.\n" +
                         "`/help feature <feature>` - Gibt eine Hilfestellung f\u00fcr ein bestimmtes Feature aus.\n" +
-                        "`/help module <module>` - Gibt eine Hilfestellung f\u00fcr ein bestimmtes Feature aus.\n\n M\u00f6gliche Argumente werden dabei in geschweiften Klammern dargestellt {argument}, w\u00e4hrend zwingend notwendige Argumente in Guillemets angegeben werden <argument>.";
+                        //"`/help module <module>` - Gibt eine Hilfestellung f\u00fcr ein bestimmtes Module aus.\n" +
+                        "\n M\u00f6gliche Argumente werden dabei in geschweiften Klammern dargestellt {argument}, w\u00e4hrend zwingend notwendige Argumente in Guillemets angegeben werden <argument>.";
                 Footer = "Module: Help";
                 break;
 
@@ -179,9 +183,15 @@ public class cmdHelp implements Command {
                 break;
 
             case "report":
-                Title = "/report <user> <reason>";
-                Description = "Erstellt einen Report \u00fcber den Nutzer <user> (Nickname) mit dem Grund <reason>.";
+                Title = "/report";
+                Description = "Der BilboT kontaktiert dich, um ein Reportformular auszuf\u00fcllen.";
                 Footer = "Module: Administration";
+                break;
+
+            case "stats":
+                Title = "/stats {user}";
+                Description = "Gibt alle nutzerrelevanten Statistiken an.";
+                Footer = "Module: XP, Voice";
                 break;
 
             case "map":

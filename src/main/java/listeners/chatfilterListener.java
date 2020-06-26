@@ -46,7 +46,7 @@ public class chatfilterListener extends ListenerAdapter {
                         embed.setTitle(messageActions.getLocalizedString("report_auto_title", "server", event.getGuild().getId()));
                         URL jump = null;
                         try {
-                            jump = new URL("https://discordapp.com/channels/" + event.getGuild().getId() + "/" + event.getChannel().getId() + "/" + event.getMessageId());
+                            jump = new URL("https://discord.com/channels/" + event.getGuild().getId() + "/" + event.getChannel().getId() + "/" + event.getMessageId());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }

@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.16.2";
+    public static final String VERSION = "v2.17.5";
 
     public static final String PREFIX = "/";
 
