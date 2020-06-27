@@ -1,6 +1,5 @@
 package listeners;
 
-import core.messageActions;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -10,7 +9,6 @@ import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -106,7 +104,7 @@ public class modReactionListener extends ListenerAdapter {
                 pm.setDescription("Dein Report \u00fcber **" + offender.getUser().getAsTag() + "** mit dem Grund `" + answer[4] + "` wurde als Trolling eingestuft.\n" +
                         "Als Bestrafung wurden dir auf dem **Tolkien Discord** 5% deiner Coins abgezogen.\n" +
                         "Unterlasse in Zukunft das Erstellen von Trollreports, da sonst zu h\u00e4rteren Strafen gegriffen wird!");
-                offender.getUser().openPrivateChannel().queue(channel ->
+                victim.getUser().openPrivateChannel().queue(channel ->
                         channel.sendMessage(pm.build()).queue()
                 );
 
@@ -140,6 +138,11 @@ public class modReactionListener extends ListenerAdapter {
                 event.getChannel().sendMessage(embed.build()).queue();
                 break;
             case "exil":
+                Role exil = event.getGuild().getRolesByName("exil", true).get(0);
+                if (offender.getRoles().contains(exil)) {
+                    event.getReaction().removeReaction(event.getUser()).queue();
+                    break;
+                }
                 embed = new EmbedBuilder();
                 embed.setColor(Color.ORANGE);
                 embed.setTitle("Report bearbeitet: EXIL");
@@ -159,29 +162,11 @@ public class modReactionListener extends ListenerAdapter {
                         channel.sendMessage(pm.build()).queue()
                 );
 
-                Role exil = event.getGuild().getRolesByName("exil", true).get(0);
-                List<Role> rolelist = new ArrayList<>();
-                rolelist.add(event.getGuild().getRolesByName("dark-memes", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("lyrikecke", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("leser", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("experte", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("Lyrikabend - Verwalter", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("verified", true).get(0));
-
-                for (Role role : rolelist) {
-                    try {
-                        event.getGuild().removeRoleFromMember(offender, role).queue();
-                    } catch (Exception ignored) {
-                    }
+                try {
+                    commands.cmdExil.exileMember(event.getGuild(), offender);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                for (VoiceChannel vc : event.getGuild().getVoiceChannels()) {
-                    try {
-                        Role vcr = event.getGuild().getRolesByName(vc.getName(), true).get(0);
-                        event.getGuild().removeRoleFromMember(offender, vcr).queue();
-                    } catch (Exception ignored) {
-                    }
-                }
-                event.getGuild().addRoleToMember(offender, exil).queue();
 
                 msg.clearReactions().queue();
                 msg.addReaction("\u2611").queue();

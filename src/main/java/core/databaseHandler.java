@@ -16,6 +16,7 @@ public class databaseHandler {
      * - users(id, xp, level, coins, ticket, intro, profile, words, msg, chars, voicetime, reports, moderations, loginstreak,
      * nextlogin, verifystatus, activity, banlog)
      * - reports(report_id, victim_id, offender_id, channel, cause, info)
+     * - exil(id, roles, duration)
      * <p>
      * serversettings
      * - addons(id, screambot, music1, music2, music3, embed, roles, kirinki, muede)
@@ -42,6 +43,7 @@ public class databaseHandler {
      * words bigint, msg bigint, chars bigint, voicetime bigint, report bigint, moderations bigint, loginstreak bigint,
      * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000))
      * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000))
+     * - exil(id varchar(20), roles clob(2000), duration int)
      * <p>
      * serversettings
      * - addons(id varchar(20), screambot boolean, music1 boolean, music2 boolean, music3 boolean, embed boolean,

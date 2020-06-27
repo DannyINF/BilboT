@@ -1,12 +1,14 @@
 package commands;
 
 import core.permissionChecker;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.getUser;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,34 +20,11 @@ public class cmdExil implements Command {
     }
 
     @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         if (permissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember())) {
             if (args.length > 0) {
                 Member member = getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
-                Role exil = event.getGuild().getRolesByName("exil", true).get(0);
-                List<Role> rolelist = new ArrayList<>();
-                rolelist.add(event.getGuild().getRolesByName("dark-memes", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("lyrikecke", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("leser", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("experte", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("Lyrikabend - Verwalter", true).get(0));
-                rolelist.add(event.getGuild().getRolesByName("verified", true).get(0));
-
-                for (Role role : rolelist) {
-                    try {
-                        event.getGuild().removeRoleFromMember(member, role).queue();
-                    } catch (Exception ignored) {
-                    }
-                }
-                for (VoiceChannel vc : event.getGuild().getVoiceChannels()) {
-                    try {
-                        Role vcr = event.getGuild().getRolesByName(vc.getName(), true).get(0);
-                        event.getGuild().removeRoleFromMember(member, vcr).queue();
-                    } catch (Exception ignored) {
-                    }
-                }
-                event.getGuild().addRoleToMember(member, exil).queue();
-
+                exileMember(event.getGuild(), member);
             } else {
                 event.getChannel().sendMessage("Please provide an user.").queue();
             }
@@ -53,5 +32,49 @@ public class cmdExil implements Command {
             permissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
         }
 
+    }
+    public static void exileMember(Guild guild, Member member) throws SQLException {
+        String[] answer = core.databaseHandler.database(guild.getId(), "select id from exil");
+        
+        Role exil = guild.getRolesByName("exil", true).get(0);
+        assert member != null;
+        assert answer != null;
+        boolean isExil = false;
+        for (String str : answer) {
+            if (str.equals(member.getId()))
+                isExil = true;
+        }
+        if (isExil) {
+            String[] rolesFromDB = core.databaseHandler.database(guild.getId(), "select roles from exil where id = '" + member.getId() + "'");
+            guild.removeRoleFromMember(member, exil).queue();
+            assert rolesFromDB != null;
+            for (String id : rolesFromDB[0].split(",")) {
+                try {
+                    guild.addRoleToMember(member, guild.getRoleById(id)).queue();
+                } catch (Exception ignored) {}
+            }
+            core.databaseHandler.database(guild.getId(), "delete from exil where id = '" + member.getId() + "'");
+        } else {
+            //TODO: implement duration
+            int duration = -1;
+            StringBuilder sb = new StringBuilder();
+            List<String> voiceroles = new ArrayList<>();
+            for (VoiceChannel vc : guild.getVoiceChannels()) {
+                voiceroles.add(vc.getName().toLowerCase());
+            }
+            for (Role role : member.getRoles()) {
+                if (!voiceroles.contains(role.getName().toLowerCase())) {
+                    sb.append(role.getId());
+                    sb.append(",");
+                }
+                guild.removeRoleFromMember(member, role).queue();
+            }
+            sb.deleteCharAt(sb.length()-1);
+
+            core.databaseHandler.database(guild.getId(), "insert into exil (id, roles, duration) values ('" + member.getId() + "', '" + sb.toString() + "', " + duration + ")");
+
+            guild.addRoleToMember(member, exil).queue();
+            guild.kickVoiceMember(member).queue();
+        }
     }
 }

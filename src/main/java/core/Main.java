@@ -78,8 +78,15 @@ class Main {
         if (now.compareTo(nextActivityRun) > 0)
             nextActivityRun = nextActivityRun.plusDays(1);
 
+        ZonedDateTime nextRankingRun = now.withHour(9).withMinute(0).withSecond(0);
+        if (now.compareTo(nextRankingRun) > 0)
+            nextRankingRun = nextRankingRun.plusDays(1);
+
         Duration durationActivity = Duration.between(now, nextActivityRun);
         long initialDelayActivity = durationActivity.getSeconds();
+
+        Duration durationRanking = Duration.between(now, nextRankingRun);
+        long initialDelayRanking = durationRanking.getSeconds();
 
         ScheduledExecutorService schedulerActivity = Executors.newScheduledThreadPool(1);
         schedulerActivity.scheduleAtFixedRate(() -> {
@@ -90,6 +97,17 @@ class Main {
                     }
                 },
                 initialDelayActivity,
+                TimeUnit.DAYS.toSeconds(1),
+                TimeUnit.SECONDS);
+
+        ScheduledExecutorService schedulerRanking = Executors.newScheduledThreadPool(1);
+        JDA finalJda = jda;
+        schedulerRanking.scheduleAtFixedRate(() -> {
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 1").queue();
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 11").queue();
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 21").queue();
+                    },
+                initialDelayRanking,
                 TimeUnit.DAYS.toSeconds(1),
                 TimeUnit.SECONDS);
 

@@ -6,15 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="fixed #55, #52, #40 (new report system, more stats and QoL changes)">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="implemented #22, smaller bugfixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdHelp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/chatfilterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/joinListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/modReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/modReactionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -506,7 +504,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593134908206</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="implemented #22, smaller bugfixes">
+      <created>1593177730368</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1593177730368</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -523,7 +528,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="/coins is functioning now without providing an user" />
     <MESSAGE value="bugfix" />
     <MESSAGE value="bugfixes v2" />
     <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
@@ -548,7 +552,8 @@
     <MESSAGE value="updated DB implementation, removed chache system, rework of xp ranking, smaller bug fixes" />
     <MESSAGE value="fixed #48 (regarding xp give, coins give and coins gift), cleaning up unused printing" />
     <MESSAGE value="fixed #55, #52, #40 (new report system, more stats and QoL changes)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed #55, #52, #40 (new report system, more stats and QoL changes)" />
+    <MESSAGE value="implemented #22, smaller bugfixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented #22, smaller bugfixes" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
