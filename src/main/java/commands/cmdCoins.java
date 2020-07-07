@@ -1,5 +1,6 @@
 package commands;
 
+import core.databaseHandler;
 import core.messageActions;
 import core.permissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -41,10 +42,11 @@ public class cmdCoins implements Command {
             } catch (Exception e) {
                 argument = "-1-1-";
             }
-            Triplet answerStart = STATIC.getExperienceUser(event.getAuthor().getId(), event.getGuild().getId());
+            String[] coins_level = databaseHandler.database(event.getGuild().getId(), "select coins, level from users where id = '" + event.getAuthor().getId() + "'");
+            assert coins_level != null;
             switch (argument) {
                 case "gift":
-                    if ((Long) answerStart.getValue1() >= 50) {
+                    if (Long.parseLong(coins_level[1]) >= 50) {
                         long amount;
                         Member member;
                         TextChannel channel = event.getChannel();
@@ -68,25 +70,15 @@ public class cmdCoins implements Command {
                             channel.sendMessage("Du kannst nicht weniger als 0 Coins verschenken!").queue();
                         } else {
                             try {
-                                if ((Long)answerStart.getValue2() < amount) {
+                                if (Long.parseLong(coins_level[0]) < amount) {
                                     channel.sendMessage("Du kannst nicht mehr Coins verschenken, als du besitzt!").queue();
                                 } else {
-                                    long newcoinsAuthor = (Long) answerStart.getValue2() - amount;
-
-                                    STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, -amount);
+                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = coins - " + amount + " where id = '" + event.getAuthor().getId() + "'");
 
                                     assert member != null;
-                                    Triplet answerSelectMember = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
-
-                                    long newcoinsMember = (Long) answerSelectMember.getValue2() + amount;
-
-                                    STATIC.updateExperienceUser(member.getId(), event.getGuild().getId(), 0L, 0L, amount);
+                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = coins + " + amount + " where id = '" + member.getId() + "'");
 
                                     event.getChannel().sendMessage("**" + event.getAuthor().getAsTag() + "** hat an **" + member.getUser().getAsTag() + "** `" + amount + "` Coins verschenkt.").queue();
-
-                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsAuthor + " where id = '" + event.getAuthor().getId() + "'");
-
-                                    core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoinsMember + " where id = '" + member.getId() + "'");
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -123,11 +115,6 @@ public class cmdCoins implements Command {
 
                             try {
                                 assert member != null;
-                                Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
-
-                                long newcoins = (Long) answer.getValue2() + amount;
-
-                                STATIC.updateExperienceUser(member.getId(), event.getGuild().getId(), 0L, 0L, amount);
 
                                 EmbedBuilder embed = new EmbedBuilder();
                                 embed.setColor(Color.RED);
@@ -138,7 +125,7 @@ public class cmdCoins implements Command {
                                 assert modlog != null;
                                 modlog.sendMessage(embed.build()).queue();
 
-                                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newcoins + " where id = '" + member.getId() + "'");
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = coins + " + amount + " where id = '" + member.getId() + "'");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -171,20 +158,18 @@ public class cmdCoins implements Command {
     }
 
 
-    private void coins(GuildMessageReceivedEvent event, Member member) throws SQLException {
+    private void coins(GuildMessageReceivedEvent event, Member member) {
 
-        String coins;
+        long coins;
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
-        // sending msg with number of coins
-        Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
         try {
-            coins = String.valueOf(answer.getValue2());
+            coins = Long.parseLong(Objects.requireNonNull(databaseHandler.database(event.getGuild().getId(), "select coins from users where id = '" + member.getId() + "'"))[0]);
         } catch (Exception e) {
-            coins = "0";
+            coins = 0L;
         }
         event.getChannel().sendMessage(messageActions.getLocalizedString("coins_msg", "user", event.getAuthor().getId())
-                .replace("[USER]", member.getUser().getAsTag()).replace("[COINS]", numberFormat.format(Integer.parseInt(coins)))).queue();
+                .replace("[USER]", member.getUser().getAsTag()).replace("[COINS]", numberFormat.format(coins))).queue();
 
     }
 }

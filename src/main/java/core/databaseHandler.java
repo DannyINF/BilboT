@@ -15,7 +15,7 @@ public class databaseHandler {
      * [SERVERID]
      * - users(id, xp, level, coins, ticket, intro, profile, words, msg, chars, voicetime, reports, moderations, loginstreak,
      * nextlogin, verifystatus, activity, banlog)
-     * - reports(report_id, victim_id, offender_id, channel, cause, info)
+     * - reports(report_id, victim_id, offender_id, channel, cause, info, ruling)
      * - exil(id, roles, duration)
      * <p>
      * serversettings
@@ -42,7 +42,7 @@ public class databaseHandler {
      * - users(id varchar(20), xp bigint, level bigint, coins bigint, ticket bigint, intro clob(64000), profile clob(64000),
      * words bigint, msg bigint, chars bigint, voicetime bigint, report bigint, moderations bigint, loginstreak bigint,
      * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000))
-     * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000))
+     * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000), ruling varchar(20))
      * - exil(id varchar(20), roles clob(2000), duration int)
      * <p>
      * serversettings

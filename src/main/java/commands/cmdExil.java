@@ -74,7 +74,10 @@ public class cmdExil implements Command {
             core.databaseHandler.database(guild.getId(), "insert into exil (id, roles, duration) values ('" + member.getId() + "', '" + sb.toString() + "', " + duration + ")");
 
             guild.addRoleToMember(member, exil).queue();
-            guild.kickVoiceMember(member).queue();
+            try {
+                guild.kickVoiceMember(member).queue();
+            } catch (Exception ignored) {}
+
         }
     }
 }

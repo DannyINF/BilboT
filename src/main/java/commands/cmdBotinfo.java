@@ -17,8 +17,6 @@ public class cmdBotinfo implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
-
-
             int i = 0;
 
             // getting all guild + their members

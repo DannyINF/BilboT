@@ -14,6 +14,7 @@ import util.STATIC;
 import java.awt.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.concurrent.TimeUnit;
 
 import static core.databaseHandler.database;
 
@@ -42,22 +43,19 @@ public class loginListener extends ListenerAdapter {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (emsg != null) {
-            messageActions.selfDestroyEmbedMSG(emsg, 3000, event);
-        }
+        assert emsg != null;
+        event.getGuild().getTextChannelsByName(event.getChannelJoined().getName(), true).get(0).sendMessage(emsg).queue(msg -> msg.delete().queueAfter(3, TimeUnit.SECONDS));
     }
 
     private MessageEmbed login(String guild_id, User author) throws SQLException {
         MessageEmbed emsg = null;
         if (!author.isBot()) {
 
-
                 int loginint = LocalDate.now().getDayOfYear() + LocalDate.now().getYear() * 365;
                 int next_loginint = LocalDate.now().plusDays(1).getDayOfYear() + LocalDate.now().plusDays(1).getYear() * 365;
 
                 int getint;
                 int streak;
-                String[] selectArgs = {"users", "id = '" + author.getId() + "'", "2", "nextlogin", "loginstreak"};
                 String[] answer = {};
                 try {
                     answer = database(guild_id, "select nextlogin, loginstreak from users where id = '" + author.getId() + "'");
@@ -84,55 +82,36 @@ public class loginListener extends ListenerAdapter {
                 }
 
                 if (loginint >= getint) {
-
-                    STATIC.exec.execute(() -> {
-                        String[] arguments = {"users", "id = '" + author.getId() + "'", "1", "activity"};
-                        String[] answer3 = null;
-                        try {
-                            answer3 = core.databaseHandler.database(guild_id, "select activity from users where id = '" + author.getId() + "'");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        assert answer3 != null;
-                        long activity = Long.parseLong(answer3[0]);
-
-                        long newActivity;
-
-                        if (activity < 120) {
-                            newActivity = 120;
-                        } else {
-                            newActivity = activity + 5;
-                        }
-
-                        String[] arguments2 = {"users", "id = '" + author.getId() + "'", "activity", String.valueOf(newActivity)};
-                        try {
-                            core.databaseHandler.database(guild_id, "update users set activity = " + activity + " where id = '" + author.getId() + "'");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    });
-
-                    long Xp;
-
-                    Triplet answer2 = STATIC.getExperienceUser(author.getId(), guild_id);
+                    String[] answer3 = null;
                     try {
-                        Xp = (Long) answer2.getValue0();
-                    } catch (Exception e) {
-                        Xp = 0;
+                        answer3 = core.databaseHandler.database(guild_id, "select activity from users where id = '" + author.getId() + "'");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
 
-                    long newXP;
+                    assert answer3 != null;
+                    long activity = Long.parseLong(answer3[0]);
+
+                    long newActivity;
+
+                    if (activity < 120) {
+                        newActivity = 120;
+                    } else {
+                        newActivity = activity + 5;
+                    }
+
+                    try {
+                        core.databaseHandler.database(guild_id, "update users set activity = " + newActivity + " where id = '" + author.getId() + "'");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
                     long streakboost;
                     if (streak < 8) {
                         streakboost = 30 + streak * 10;
                     } else {
                         streakboost = 100;
                     }
-
-                    newXP = streakboost + Xp;
-
-                    STATIC.updateExperienceUser(author.getId(), guild_id, streakboost, 0L, 0L);
 
                     EmbedBuilder msg = new EmbedBuilder();
                     msg.setColor(Color.GREEN);
@@ -141,17 +120,7 @@ public class loginListener extends ListenerAdapter {
                             .replace("[USER]", author.getAsMention()).replace("[XP]", String.valueOf(streakboost)));
                     emsg = msg.build();
 
-                    int finalStreak = streak;
-                    STATIC.exec.execute(() -> {
-                        String[] updateArgs = {"users", "id = '" + author.getId() + "'", "xp", String.valueOf(newXP), "nextlogin",
-                                String.valueOf(next_loginint), "loginstreak", String.valueOf(finalStreak)};
-                        try {
-                            database(guild_id, "update users set xp = " + newXP + ", nextlogin = " + next_loginint + ", loginstreak = " + finalStreak + " where id = '" + author.getId() + "'");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    });
-
+                    database(guild_id, "update users set xp = xp + " + streakboost + ", nextlogin = " + next_loginint + ", loginstreak = " + streak + " where id = '" + author.getId() + "'");
             }
         }
         return emsg;

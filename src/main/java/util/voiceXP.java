@@ -13,7 +13,6 @@ import static java.lang.Math.sqrt;
 public class voiceXP {
     public static void giveVoiceXP(JDA jda) throws SQLException {
         for (Guild guild : jda.getGuilds()) {
-            //if (isReady.isReady(guild)) {
             for (VoiceChannel voiceChannel : guild.getVoiceChannels()) {
                 double membercount = voiceChannel.getMembers().size();
                 for (Member m : voiceChannel.getMembers()) {
@@ -39,7 +38,6 @@ public class voiceXP {
                     }
                 }
             }
-            //}
         }
     }
 }

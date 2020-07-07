@@ -1,59 +1,51 @@
 package listeners;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+
+import java.sql.SQLException;
+import java.util.Objects;
 
 //TODO: Check this!
 public class selfJoinListener extends ListenerAdapter {
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
-        //while (!isReady.isReady(event.getGuild())) {
-        //try {
-        //     Thread.sleep(10);
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-        //}
-        //}
-        /*try {
+        try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String[] createArgs3 = {"addons", "id varchar(20)", "screambot boolean", "music1 boolean",
-                "music2 boolean", "music3 boolean", "embed boolean", "roles boolean", "kirinki boolean", "muede boolean", "defender boolean"};
         try {
             core.databaseHandler.database("serversettings", "create table addons (id varchar(20), screambot boolean, music1 boolean, music2 boolean, " +
-                    "music3 boolean, embed boolean, roles boolean, kirinki boolean, muede boolean, defender boolean);");
+                    "music3 boolean, embed boolean, roles boolean, kirinki boolean, muede boolean, defender boolean)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String[] insertArgs2 = {"addons", "id", "'" + event.getGuild().getId() + "'", "screambot", "FALSE", "music1", "FALSE",
-                "music2", "FALSE", "music3", "FALSE", "embed", "FALSE", "roles", "FALSE", "kirinki", "FALSE", "defender", "FALSE"};
         try {
             core.databaseHandler.database("serversettings", "insert into addons (id, screambot, music1, music2, musci3, embed, roles, kirinki, defender) values " +
-                    "'" + event.getGuild().getId() + "', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);");
+                    "'" + event.getGuild().getId() + "', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String[] createArgs = {"users", "id varchar(20)", "xp bigint", "level bigint", "coins bigint", "ticket bigint",
-                "intro clob(64000)", "profile clob(64000)", "words bigint", "msg bigint", "chars bigint", "voicetime bigint",
-                "reports bigint", "moderations bigint", "loginstreak bigint", "nextlogin bigint", "verifystatus boolean",
-                "activity bigint", "banlog clob(64000)"};
         try {
-            core.databaseHandler.database(event.getGuild().getId(), "create", createArgs);
+            core.databaseHandler.database(event.getGuild().getId(), "create table users (id varchar(20), xp bigint, level bigint, coins bigint, ticket bigint," +
+                    " intro clob(64000), profile clob(64000), words bigint, msg bigint, chars bigint, voicetime bigint," +
+                    " reports bigint, moderations bigint, loginstreak bigint, nextlogin bigint, verifystatus boolean," +
+                    " activity bigint, banlog clob(64000))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String[] createArgs2 = {"modules", "id varchar(20)", "rules varchar(20)", "clear varchar(20)", "botinfo varchar(20)",
-                "maps varchar(20)", "quotes varchar(20)", "language varchar(20)", "profiles varchar(20)",
-                "joining varchar(20)", "leaving varchar(20)", "xp varchar(20)", "event varchar(20)",
-                "voicechannel varchar(20)", "quiz varchar(20)", "search varchar(20)", "report varchar(20)",
-                "voice varchar(20)", "chatfilter varchar(20)", "welcome varchar(20)", "verification varchar(20)",
-                "lottery varchar(20)", "voicelog varchar(20)", "modlog varchar(20)", "log varchar(20)",
-                "spam varchar(20)", "intro varchar(20)", "addons varchar(20)", "activity varchar(20)"};
         try {
-            core.databaseHandler.database("serversettings", "create", createArgs2);
+            core.databaseHandler.database("serversettings", "create table modules (id varchar(20), rules varchar(20), clear varchar(20), botinfo varchar(20)," +
+                    " maps varchar(20), quotes varchar(20), language varchar(20), profiles varchar(20)," +
+                    " joining varchar(20), leaving varchar(20), xp varchar(20), event varchar(20)," +
+                    " voicechannel varchar(20), quiz varchar(20), search varchar(20), report varchar(20)," +
+                    " voice varchar(20), chatfilter varchar(20), welcome varchar(20), verification varchar(20)," +
+                    " lottery varchar(20), voicelog varchar(20), modlog varchar(20), log varchar(20)," +
+                    " spam varchar(20), intro varchar(20), addons varchar(20), activity varchar(20))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -65,6 +57,7 @@ public class selfJoinListener extends ListenerAdapter {
                 "verification", "'deactivated'", "lottery", "'deactivated'", "voicelog", "'deactivated'", "modlog",
                 "'activated'", "log", "'deactivated'", "spam", "'activated'", "intro", "'deactivated'", "addons",
                 "'activated'", "activity", "'deactivated'"};
+        /*
         try {
             core.databaseHandler.database("serversettings", "insert", insertArgs);
         } catch (SQLException e) {
@@ -161,19 +154,6 @@ public class selfJoinListener extends ListenerAdapter {
             core.databaseHandler.database("serversettings", "insert", createArgs12);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        Permission[] channelperm = new Permission[]{Permission.VIEW_CHANNEL, Permission.MESSAGE_READ,
-                Permission.MESSAGE_WRITE};
-        TextChannel tc = event.getGuild().createTextChannel("bilbot-communication-channel").setTopic("Please mute this channel!").complete();
-        String[] ids = {"393375474056953856", "454613079804608522", "486085339530788894", "486085339530788894", "486089728437780480", "447320058918600714", "467696459941412884", "476175371809587200", "466006333624156170"};
-        for (String id : ids) {
-            try {
-                tc.createPermissionOverride(Objects.requireNonNull(event.getGuild().getMemberById(id))).setAllow(channelperm).queue();
-            } catch (Exception ignored) {
-            }
-        }
-
-        tc.createPermissionOverride(event.getGuild().getPublicRole()).setDeny(channelperm).queue();*/
+        }*/
     }
 }

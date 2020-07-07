@@ -1,19 +1,15 @@
 package util;
 
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
-import org.javatuples.Triplet;
 
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.17.5";
+    public static final String VERSION = "v2.18.4";
 
     public static final String PREFIX = "/";
 
@@ -98,27 +94,6 @@ public class STATIC {
         return 1;
     }
 
-    public static Triplet getExperienceUser(String id, String guildId) throws SQLException {
-        String[] answer;
-        answer = core.databaseHandler.database(guildId, "select xp, level, coins from users where id = '" + id + "'");
-        assert answer != null;
-        Long xp = Long.valueOf(answer[0]);
-        Long level = Long.valueOf(answer[1]);
-        Long coins = Long.valueOf(answer[2]);
-
-        return Triplet.with(xp, level, coins);
-    }
-
-    public static void updateExperienceUser(String id, String guildId, Long xp, Long level, Long coins) {
-        STATIC.exec.execute(() -> {
-            try {
-                core.databaseHandler.database(guildId, "update users set xp = xp + " + xp + ", level = level + " + level + ", coins = coins + " + coins + " where id = '" + id + "'");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     private static Role[] VERIFIED;
 
     public static void setVerified(Role[] role) {
@@ -140,8 +115,15 @@ public class STATIC {
     }
 
     public static final ExecutorService exec = Executors.newCachedThreadPool();
+
+    public static String getInvite(Guild guild) {
+        String url = null;
+        for (Invite inv : guild.retrieveInvites().complete())
+            if (!inv.isTemporary() && Objects.equals(inv.getInviter(), Objects.requireNonNull(guild.getOwner()).getUser()))
+                url = inv.getUrl();
+
+        if (url == null)
+            url = guild.retrieveInvites().complete().get(0).getUrl();
+        return url;
+    }
 }
-
-
-
-

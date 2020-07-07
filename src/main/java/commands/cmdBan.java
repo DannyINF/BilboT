@@ -38,6 +38,7 @@ public class cmdBan implements Command {
                 String[] args3 = new String[args2.size()];
                 args3 = args2.toArray(args3);
                 Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
+                assert member != null;
                 User user = member.getUser();
                 int delay = Integer.parseInt(args[1]);
 

@@ -5,7 +5,6 @@ import core.messageActions;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.javatuples.Triplet;
 import org.jetbrains.annotations.NotNull;
 import util.STATIC;
 import util.giveXP;
@@ -63,7 +62,6 @@ public class xpListener extends ListenerAdapter {
 
         giveXP.giveXPToMember(event.getMember(), event.getGuild(), xp);
     }
-    //}
 
     /**
      * @param event GuildMessageReceivedEvent
@@ -73,54 +71,30 @@ public class xpListener extends ListenerAdapter {
             return;
 
         long currentlevel;
-        long currentXp;
 
         // getting level and xp of the user
-        Triplet answer = STATIC.getExperienceUser(event.getAuthor().getId(), event.getGuild().getId());
+        String[] level = core.databaseHandler.database(event.getGuild().getId(), "select level from users where id = '" + event.getAuthor().getId() + "'");
 
         try {
-            currentXp = (Long) answer.getValue0();
-        } catch (Exception e) {
-            currentXp = 0;
-        }
-        try {
-            currentlevel = (Long) answer.getValue1();
+            currentlevel = Long.parseLong(level[0]);
         } catch (Exception e) {
             currentlevel = 0;
         }
 
-        long newlevel = util.LevelChecker.checker(event.getMember(), event.getGuild(), currentXp);
+        long newlevel = util.LevelChecker.checker(Objects.requireNonNull(event.getMember()), event.getGuild());
 
-        STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, newlevel - currentlevel, 0L);
+        core.databaseHandler.database(event.getGuild().getId(), "update users set level = " + newlevel + " where id = '" + event.getAuthor().getId() + "'");
 
         // if your current xp are bigger than the xp needed for the next level you receive a level up
         if (newlevel != currentlevel) {
 
             if (newlevel > currentlevel) {
-                STATIC.exec.execute(() -> {
-
-                    try {
-                        databaseHandler.database(event.getGuild().getId(), "update users set activity = activity + 5 where id = '" + Objects.requireNonNull(event.getMember()).getId() + "'");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                });
-
-            }
-
-            long coins;
-
-            try {
-                coins = (Long) answer.getValue2();
-            } catch (NullPointerException e) {
-                coins = 0;
+                databaseHandler.database(event.getGuild().getId(), "update users set activity = activity + 5 where id = '" + Objects.requireNonNull(event.getMember()).getId() + "'");
             }
 
             //adding the coins received through level-up to the total coins-count
-            long newCoins;
             if (newlevel > 50) {
-                newCoins = (25 * (newlevel - currentlevel)) + coins;
-                STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, (25 * (newlevel - currentlevel)));
+                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = coins + " + (25 * (newlevel - currentlevel)) + " where id = '" + event.getAuthor().getId() + "'");
             } else {
                 long sum = 0;
                 if (newlevel < currentlevel) {
@@ -128,12 +102,11 @@ public class xpListener extends ListenerAdapter {
                         sum -= i / 2;
                     }
                 } else {
-                    for (long i = currentlevel+1; i < newlevel+1; i++) {
+                    for (long i = currentlevel + 1; i < newlevel + 1; i++) {
                         sum += i / 2;
                     }
                 }
-                STATIC.updateExperienceUser(event.getAuthor().getId(), event.getGuild().getId(), 0L, 0L, sum);
-                newCoins = coins + sum;
+                core.databaseHandler.database(event.getGuild().getId(), "update users set coins = coins + " + sum + " where id = '" + event.getAuthor().getId() + "'");
             }
             // creating level-up msg
             if (!event.getAuthor().isBot()) {
@@ -149,32 +122,14 @@ public class xpListener extends ListenerAdapter {
                         }
                     }, 15000);
                 }
-
             }
-
-            STATIC.exec.execute(() -> {
-                try {
-                    databaseHandler.database(event.getGuild().getId(), "update users set coins = " + newCoins + " where id = '" + event.getAuthor().getId() + "'");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
-
-
-
         }
-        STATIC.exec.execute(() -> {
-            // storing level
-            try {
-                databaseHandler.database(event.getGuild().getId(), "update users set level = " + newlevel + " where id = '" + event.getAuthor().getId() + "'");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+
+        databaseHandler.database(event.getGuild().getId(), "update users set level = " + newlevel + " where id = '" + event.getAuthor().getId() + "'");
+
     }
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        //if (isReady.isReady(event.getGuild())) {
         if (event.getAuthor().isFake())
             return;
         try {
@@ -216,18 +171,15 @@ public class xpListener extends ListenerAdapter {
             }
         }
 
-
-
-            try {
-                giveXP(event);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                checkLevel(event);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+        try {
+            giveXP(event);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            checkLevel(event);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

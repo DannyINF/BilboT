@@ -19,9 +19,10 @@ public class cmdActivity implements Command {
     public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
         if (permissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
             Member member = util.getUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
-            int activity = 0;
+            int activity;
             NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
+            assert member != null;
             String[] data = core.databaseHandler.database(event.getGuild().getId(), "select activity from users where id = '" + member.getId() + "'");
             activity = Integer.parseInt(Objects.requireNonNull(data)[0]);
 

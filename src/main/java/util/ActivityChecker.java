@@ -121,18 +121,10 @@ public class ActivityChecker {
                     TextChannel modlog = guild.getTextChannelById(set_channel.getChannel());
 
                     if (newActivity < 1) {
-                        String url = null;
-                        for (Invite inv : guild.retrieveInvites().complete())
-                            if (!inv.isTemporary() && Objects.equals(inv.getInviter(), Objects.requireNonNull(guild.getOwner()).getUser()))
-                                url = inv.getUrl();
-
-                        if (url == null)
-                            url = guild.retrieveInvites().complete().get(0).getUrl();
-
                         EmbedBuilder embed = new EmbedBuilder();
                         embed.setColor(Color.RED);
                         embed.setTitle("Kick!");
-                        embed.setDescription("Du wurdest aufgrund von Inaktivit\u00e4t vom Server **" + guild.getName() + "** gekickt. Wenn du wieder joinen willst, findest du hier eine Einladung: " + url);
+                        embed.setDescription("Du wurdest aufgrund von Inaktivit\u00e4t vom Server **" + guild.getName() + "** gekickt. Wenn du wieder joinen willst, findest du hier eine Einladung: " + STATIC.getInvite(guild));
                         embed.setThumbnail(guild.getIconUrl());
 
                         EmbedBuilder embed1 = new EmbedBuilder();

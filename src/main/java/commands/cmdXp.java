@@ -8,7 +8,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import org.javatuples.Triplet;
 import util.*;
 
 import java.awt.*;
@@ -27,17 +26,14 @@ public class cmdXp implements Command {
         String strmember;
         strmember = xpmember.getUser().getAsTag();
 
-        String xp;
-        String level;
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
 
-        Triplet data = STATIC.getExperienceUser(xpmember.getId(), event.getGuild().getId());
+        String[] xp_level = core.databaseHandler.database(event.getGuild().getId(), "select xp, level from users where id = '" + xpmember.getId() + "'");
 
-        xp = String.valueOf(data.getValue0());
-        level = String.valueOf(data.getValue1());
+        assert xp_level != null;
         event.getChannel().sendMessage(messageActions.getLocalizedString("xp_msg", "user", event.getAuthor().getId())
-                .replace("[USER]", strmember).replace("[LEVEL]", numberFormat.format(Integer.parseInt(level)))
-                .replace("[XP]", numberFormat.format(Integer.parseInt(xp)))).queue();
+                .replace("[USER]", strmember).replace("[LEVEL]", numberFormat.format(Long.parseLong(xp_level[1])))
+                .replace("[XP]", numberFormat.format(Long.parseLong(xp_level[0])))).queue();
 
     }
 
@@ -79,11 +75,7 @@ public class cmdXp implements Command {
                             }
 
                             try {
-                                Triplet answer = STATIC.getExperienceUser(member.getId(), event.getGuild().getId());
-
-                                long newxp = (Long) answer.getValue0() + amount;
-
-                                STATIC.updateExperienceUser(member.getId(), event.getGuild().getId(), amount, 0L, 0L);
+                                core.databaseHandler.database(event.getGuild().getId(), "update users set xp = xp + " + amount + " where id = '" + member.getId() + "'");
 
                                 EmbedBuilder embed = new EmbedBuilder();
                                 embed.setColor(Color.RED);
@@ -94,15 +86,7 @@ public class cmdXp implements Command {
                                 assert modlog != null;
                                 modlog.sendMessage(embed.build()).queue();
 
-                                LevelChecker.checker(member, event.getGuild(), newxp);
-
-                                STATIC.exec.execute(() -> {
-                                    try {
-                                        core.databaseHandler.database(event.getGuild().getId(), "update users set xp = " + newxp + " where id = '" + member.getId() + "'");
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
+                                LevelChecker.checker(member, event.getGuild());
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -114,10 +98,11 @@ public class cmdXp implements Command {
                     break;
                 case "next":
                     try {
-                        Triplet answer = STATIC.getExperienceUser(event.getAuthor().getId(), event.getGuild().getId());
+                        String[] xp_level = core.databaseHandler.database(event.getGuild().getId(), "select xp, level from users where id = '" + event.getAuthor().getId() + "'");
 
-                        long newxp = (Long) answer.getValue0();
-                        long level = (Long) answer.getValue1();
+                        assert xp_level != null;
+                        long newxp = Long.parseLong(xp_level[0]);
+                        long level = Long.parseLong(xp_level[1]);
 
                         Color color;
                         if (level > 1049) {
@@ -162,12 +147,12 @@ public class cmdXp implements Command {
                     String[] args3 = new String[args2.size()];
                     args3 = args2.toArray(args3);
                     Member member = getUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
+                    assert member != null;
                     xp(event, member);
 
                     break;
             }
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+        } catch (Exception e) {
             xp(event, Objects.requireNonNull(event.getMember()));
         }
     }
