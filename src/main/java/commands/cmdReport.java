@@ -14,6 +14,7 @@ public class cmdReport implements Command {
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         //TODO: close reports that are open
         core.databaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getAuthor().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
+        core.databaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getAuthor().getId() + "' and status < 14");
         core.databaseHandler.database(event.getGuild().getId(), "insert into reports (report_id, victim_id, offender_id, channel, cause, info) " +
                 "values ('1', '" + event.getAuthor().getId() + "', '', '', '', '')");
         event.getAuthor().openPrivateChannel().queue(channel -> {

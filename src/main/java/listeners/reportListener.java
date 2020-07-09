@@ -121,9 +121,9 @@ public class reportListener extends ListenerAdapter {
             embed.setColor(Color.RED);
             embed.setTitle("REPORT");
             embed.setDescription("Der Nutzer **" + Objects.requireNonNull(guild.getMemberById(answer[1])).getUser().getAsTag() + "** hat den Nutzer **" + Objects.requireNonNull(guild.getMemberById(answer[2])).getUser().getAsTag() + "** reportet.");
-            embed.addField("Grund:", answer[4], true);
-            embed.addField("Channel:", answer[3], true);
-            embed.addField("Beschreibung:", answer[5], true);
+            embed.addField("Grund:", answer[4], false);
+            embed.addField("Channel:", answer[3], false);
+            embed.addField("Beschreibung:", answer[5], false);
             assert modlog != null;
             modlog.sendMessage(embed.build()).queue(msg -> {
                 msg.addReaction("\u21A9").queue();

@@ -28,10 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-//TODO: Tidying up and simplifying the usage of databases
-//TODO: make command to export database to JSON-file for transfer
 //TODO: comment fucking everything
-//TODO: more efficient loading of information (only safe / one-time-pull)
 
 class Main {
     private static JDABuilder builder;
@@ -194,6 +191,8 @@ class Main {
         commandHandler.commands.put("edit", new cmdEdit());
 
         commandHandler.commands.put("activity", new cmdActivity());
+
+        commandHandler.commands.put("quiz", new cmdQuiz());
     }
 
     private static void addListeners() {
@@ -219,5 +218,7 @@ class Main {
         builder.addEventListeners(new verificationListener());
         builder.addEventListeners(new announcements());
         builder.addEventListeners(new modReactionListener());
+        builder.addEventListeners(new newQuestionListener());
+        builder.addEventListeners(new expertReactionListener());
     }
 }

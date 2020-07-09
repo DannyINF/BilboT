@@ -20,7 +20,6 @@ class cmdXpRanking {
         }
         if (start <= 0)
             start = 1;
-        int i = 0;
         int k;
         String name;
         String level;

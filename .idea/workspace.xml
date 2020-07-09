@@ -6,24 +6,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="better exil, fixed #42">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="fixed #59, fixed #58">
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/cmdQuiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdBan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdBotinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdBotinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdCoins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdExil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/modReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/modReactionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/selfJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/xpListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/giveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/giveXP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/voiceXP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -529,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593277613021</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="fixed #59, fixed #58">
+      <created>1594127769302</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1594127769302</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -546,7 +545,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bugfixes v2" />
     <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
     <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
     <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
@@ -571,7 +569,8 @@
     <MESSAGE value="fixed #55, #52, #40 (new report system, more stats and QoL changes)" />
     <MESSAGE value="implemented #22, smaller bugfixes" />
     <MESSAGE value="better exil, fixed #42" />
-    <option name="LAST_COMMIT_MESSAGE" value="better exil, fixed #42" />
+    <MESSAGE value="fixed #59, fixed #58" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed #59, fixed #58" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -46,6 +46,7 @@ public class cmdXp implements Command {
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
         try {
             switch (args[0]) {
+                case "leaderboard":
                 case "ranking":
                     cmdXpRanking.action(args, event);
                     break;

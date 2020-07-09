@@ -17,6 +17,16 @@ public class databaseHandler {
      * nextlogin, verifystatus, activity, banlog)
      * - reports(report_id, victim_id, offender_id, channel, cause, info, ruling)
      * - exil(id, roles, duration)
+     * - quizcasual(id, streak, question_id)
+     * - quizranked(id, question, quest1, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10, elo)
+     * - quizusers(id, season, casual_correct, casual_false, ranked_correct, ranked_false, casual_streak, ranked_streak, ranked_building_streak, elo, peak, casual_games, ranked_games)
+     * - quizquestions(id, question, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id, report_id, reason)
+     * - TODO: quizreport-command
+     * Zeit für Antwort: insg. Zeichen * 1 Sekunde * antworten / threshhold
+     * maximale Zeit für Antwort: insg. Zeichen * 3 Sekunde * antworten / threshhold + Zeichen der Frage / 20
+     * 0-30; 10-40; 20-50; 30-60; 40-70; 50-80; 60-90; 70+
+     * Start: -9.000, pro Frage max. +2.000; 10 Fragen = ELO = Punkte / 10 (e.g. 1.234; 4.546; ...)
+     *
      * <p>
      * serversettings
      * - addons(id, screambot, music1, music2, music3, embed, roles, kirinki, muede)
@@ -44,6 +54,13 @@ public class databaseHandler {
      * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000))
      * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000), ruling varchar(20))
      * - exil(id varchar(20), roles clob(2000), duration int)
+     * - quizcasual(id varchar(20), streak bigint, question_id bigint)
+     * - quizranked(id varchar(20), question bigint, quest1 boolean, quest2 boolean, quest3 boolean, quest4 boolean, quest5 boolean, quest6 boolean, quest7 boolean, quest8 boolean,
+     * quest9 boolean, quest10 boolean, elo bigint)
+     * - quizusers(id varchar(20), season bigint, casual_correct bigint, casual_false bigint, ranked_correct bigint, ranked_false bigint, casual_streak bigint, ranked_streak bigint,
+     * ranked_building_streak bigint, elo bigint, peak bigint, casual_games bigint, ranked_games bigint)
+     * - quizquestions(id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), question clob(2000), answer1 clob(2000), answer2 clob(2000), answer3 clob(2000), answer4 clob(2000), answer5 clob(2000), answer6 clob(2000),
+     * answer7 clob(2000), answer8 clob(2000), answer9 clob(2000), answer10 clob(2000), threshhold bigint, correct bigint, incorrect bigint, status bigint, author_id varchar(20), report_id varchar(20), reason clob(2000))
      * <p>
      * serversettings
      * - addons(id varchar(20), screambot boolean, music1 boolean, music2 boolean, music3 boolean, embed boolean,
