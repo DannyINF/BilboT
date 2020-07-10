@@ -57,15 +57,15 @@ public class newQuestionListener extends ListenerAdapter {
                         e.printStackTrace();
                     }
                     event.getChannel().sendMessage(">>> Gib bitte an, wie viele Antworten gegeben werden m\u00fcssen. (Wenn du m\u00f6chtest, dass 3 der 9 Ringgef\u00e4hrten genannt werden, dann klicke bitte die \u0033 unter dieser Nachricht an.)").queue(msg -> {
-                        msg.addReaction("\u0031").queue();
-                        msg.addReaction("\u0032").queue();
-                        msg.addReaction("\u0033").queue();
-                        msg.addReaction("\u0034").queue();
-                        msg.addReaction("\u0035").queue();
-                        msg.addReaction("\u0036").queue();
-                        msg.addReaction("\u0037").queue();
-                        msg.addReaction("\u0038").queue();
-                        msg.addReaction("\u0039").queue();
+                        msg.addReaction("1\u20E3").queue();
+                        msg.addReaction("2\u20E3").queue();
+                        msg.addReaction("3\u20E3").queue();
+                        msg.addReaction("4\u20E3").queue();
+                        msg.addReaction("5\u20E3").queue();
+                        msg.addReaction("6\u20E3").queue();
+                        msg.addReaction("7\u20E3").queue();
+                        msg.addReaction("8\u20E3").queue();
+                        msg.addReaction("9\u20E3").queue();
                         msg.addReaction("\uD83D\uDD1F").queue();
                     });
                     break;
@@ -166,7 +166,7 @@ public class newQuestionListener extends ListenerAdapter {
                     expert.setDescription("Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
                             "Insgesamt m\u00fcssen bei dieser Frage " + question[12] + " Antworten gegeben werden.");
                     expert.addField("Frage", question[1], false);
-                    ArrayList<String> list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 4));
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
                     for (int i = 0; i < 10; i++) {
                         if (list.get(i).length() != 0)
                             expert.addField((i + 1) + ". Antwort", list.get(i), false);

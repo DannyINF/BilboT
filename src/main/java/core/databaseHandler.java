@@ -20,7 +20,7 @@ public class databaseHandler {
      * - quizcasual(id, streak, question_id)
      * - quizranked(id, question, quest1, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10, elo)
      * - quizusers(id, season, casual_correct, casual_false, ranked_correct, ranked_false, casual_streak, ranked_streak, ranked_building_streak, elo, peak, casual_games, ranked_games)
-     * - quizquestions(id, question, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id, report_id, reason)
+     * - quizquestions(id, question, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id, report_id, reason, edit_id)
      * - TODO: quizreport-command
      * Zeit für Antwort: insg. Zeichen * 1 Sekunde * antworten / threshhold
      * maximale Zeit für Antwort: insg. Zeichen * 3 Sekunde * antworten / threshhold + Zeichen der Frage / 20
@@ -60,7 +60,7 @@ public class databaseHandler {
      * - quizusers(id varchar(20), season bigint, casual_correct bigint, casual_false bigint, ranked_correct bigint, ranked_false bigint, casual_streak bigint, ranked_streak bigint,
      * ranked_building_streak bigint, elo bigint, peak bigint, casual_games bigint, ranked_games bigint)
      * - quizquestions(id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), question clob(2000), answer1 clob(2000), answer2 clob(2000), answer3 clob(2000), answer4 clob(2000), answer5 clob(2000), answer6 clob(2000),
-     * answer7 clob(2000), answer8 clob(2000), answer9 clob(2000), answer10 clob(2000), threshhold bigint, correct bigint, incorrect bigint, status bigint, author_id varchar(20), report_id varchar(20), reason clob(2000))
+     * answer7 clob(2000), answer8 clob(2000), answer9 clob(2000), answer10 clob(2000), threshhold bigint, correct bigint, incorrect bigint, status bigint, author_id varchar(20), report_id varchar(20), reason clob(2000), edit_id varchar(20))
      * <p>
      * serversettings
      * - addons(id varchar(20), screambot boolean, music1 boolean, music2 boolean, music3 boolean, embed boolean,

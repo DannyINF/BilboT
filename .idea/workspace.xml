@@ -6,16 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="fixed #59, fixed #58">
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/cmdQuiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" afterDir="false" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="quizquestions... :smirk:">
+      <change afterPath="$PROJECT_DIR$/src/main/java/listeners/editQuestionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdXpRanking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/databaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -528,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594127769302</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="quizquestions... :smirk:">
+      <created>1594332831787</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1594332831787</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -545,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding rolecheck, announcements&#10;reworking narration to vBETA2" />
     <MESSAGE value="updating dependencies, fixing bugs @ music addons" />
     <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
     <MESSAGE value="test for discord webhook" />
@@ -570,7 +572,8 @@
     <MESSAGE value="implemented #22, smaller bugfixes" />
     <MESSAGE value="better exil, fixed #42" />
     <MESSAGE value="fixed #59, fixed #58" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed #59, fixed #58" />
+    <MESSAGE value="quizquestions... :smirk:" />
+    <option name="LAST_COMMIT_MESSAGE" value="quizquestions... :smirk:" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

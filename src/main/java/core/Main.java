@@ -219,6 +219,7 @@ class Main {
         builder.addEventListeners(new announcements());
         builder.addEventListeners(new modReactionListener());
         builder.addEventListeners(new newQuestionListener());
+        builder.addEventListeners(new editQuestionListener());
         builder.addEventListeners(new expertReactionListener());
     }
 }
