@@ -158,7 +158,7 @@ public class newQuestionListener extends ListenerAdapter {
                     assert question != null;
                     EmbedBuilder expert = new EmbedBuilder();
                     expert.setTitle("\u00dcbersicht");
-                    expert.setDescription("Das ist deine Frage bisher. Es m\u00fcssen **" + threshold + "** Antworten angegeben werden.");
+                    expert.setDescription("Das ist deine Frage bisher. Es m\u00fcssen **" + threshold + " Antworten** angegeben werden.");
                     expert.addField("Frage", question[1], false);
                     ArrayList<String> list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
                     for (int i = 0; i < 10; i++) {
@@ -180,7 +180,7 @@ public class newQuestionListener extends ListenerAdapter {
                     expert = new EmbedBuilder();
                     expert.setTitle("Frage #" + answer[0] + " von " + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + " kontrollieren!");
                     expert.setDescription("Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
-                            "Insgesamt m\u00fcssen bei dieser Frage " + question[12] + " Antworten gegeben werden.");
+                            "Insgesamt m\u00fcssen bei dieser Frage **" + question[12] + " Antworten** gegeben werden.");
                     expert.addField("Frage", question[1], false);
                     list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
                     for (int i = 0; i < 10; i++) {

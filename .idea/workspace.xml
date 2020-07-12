@@ -6,15 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="mehr quizquestions... :smirk:">
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="fixed #69, fixed #72, fixes #74, fixed #78, fixed #80, fixed #81, fixed #82, fixed #83">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdIntro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/cmdQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/cmdQuiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/editQuestionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/editQuestionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/loginListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/newQuestionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/reportListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -197,13 +192,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1513863139121</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Updating to v.2.3.2">
-      <created>1572087992424</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1572087992424</updated>
     </task>
     <task id="LOCAL-00002" summary="Updating to v.2.3.2">
       <created>1572089513777</created>
@@ -541,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594418570196</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="fixed #69, fixed #72, fixes #74, fixed #78, fixed #80, fixed #81, fixed #82, fixed #83">
+      <created>1594584994602</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1594584994604</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -558,7 +553,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implementing GatewayIntents, minor bugfixes" />
     <MESSAGE value="test for discord webhook" />
     <MESSAGE value="adding activity command" />
     <MESSAGE value="adding &quot;You have no power here!&quot;" />
@@ -583,7 +577,8 @@
     <MESSAGE value="fixed #59, fixed #58" />
     <MESSAGE value="quizquestions... :smirk:" />
     <MESSAGE value="mehr quizquestions... :smirk:" />
-    <option name="LAST_COMMIT_MESSAGE" value="mehr quizquestions... :smirk:" />
+    <MESSAGE value="fixed #69, fixed #72, fixes #74, fixed #78, fixed #80, fixed #81, fixed #82, fixed #83" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed #69, fixed #72, fixes #74, fixed #78, fixed #80, fixed #81, fixed #82, fixed #83" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -199,7 +199,7 @@ public class cmdQuiz implements Command {
                         expert.setDescription("Die Frage **#" + question[0] + "** von **" + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + "**" +
                                         " wurde von **" + event.getAuthor().getAsTag() + "** mit dem Grund `" + reason.toString() + "` reportet!\n" +
                                 "Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
-                                "Insgesamt m\u00fcssen bei dieser Frage " + question[12] + " Antworten gegeben werden.");
+                                "Insgesamt m\u00fcssen bei dieser Frage **" + question[12] + " Antworten** gegeben werden.");
                         expert.addField("Frage", question[1], false);
                         ArrayList<String> answer_list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 4));
                         for (int i = 0; i < 10; i++) {
