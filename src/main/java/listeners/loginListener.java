@@ -43,8 +43,9 @@ public class loginListener extends ListenerAdapter {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        assert emsg != null;
-        event.getGuild().getTextChannelsByName(event.getChannelJoined().getName(), true).get(0).sendMessage(emsg).queue(msg -> msg.delete().queueAfter(3, TimeUnit.SECONDS));
+        try {
+            event.getGuild().getTextChannelsByName(event.getChannelJoined().getName(), true).get(0).sendMessage(emsg).queue(msg -> msg.delete().queueAfter(3, TimeUnit.SECONDS));
+        } catch (Exception ignored) {}
     }
 
     private MessageEmbed login(String guild_id, User author) throws SQLException {

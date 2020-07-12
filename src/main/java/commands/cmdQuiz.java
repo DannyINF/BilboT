@@ -24,10 +24,10 @@ public class cmdQuiz implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
-        if (!event.getAuthor().getId().equals("277746420281507841")) {
+        /*if (!(event.getAuthor().getId().equals("277746420281507841") || event.getAuthor().getId().equals("209272591532163073") || event.getAuthor().getId().equals("305256757398339585") || event.getAuthor().getId().equals("354354147614654465"))) {
             event.getChannel().sendMessage("Still beta, dude \uD83D\uDE0F").queue();
             return;
-        }
+        }*/
         if (args.length > 0) {
             switch (args[0]) {
                 case "casual":
@@ -214,7 +214,7 @@ public class cmdQuiz implements Command {
                             msg.addReaction("\u21A9").queue();
                             msg.addReaction("\uD83C\uDFAD").queue();
                             try {
-                                core.databaseHandler.database("388969412889411585", "update quizquestions set status = " + msg.getId() + " where id = " + finalQuestion[0]);
+                                core.databaseHandler.database("388969412889411585", "update quizquestions set status = " + msg.getId() + ", report_id = '" + event.getAuthor().getId() + "', reason = '" + reason.toString() + "' where id = " + finalQuestion[0]);
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -226,12 +226,12 @@ public class cmdQuiz implements Command {
                     core.databaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getAuthor().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
                     core.databaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getAuthor().getId() + "' and status < 14");
                     core.databaseHandler.database(event.getGuild().getId(), "insert into quizquestions (question, answer1, answer2, answer3, answer4, answer5, " +
-                            "answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id) " +
-                            "values ('', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, 1, '" + event.getAuthor().getId() + "')");
+                            "answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id, report_id, reason, edit_id) " +
+                            "values ('', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, 1, '" + event.getAuthor().getId() + "', '', '', '')");
                     event.getAuthor().openPrivateChannel().queue(channel -> {
                         channel.sendMessage(">>> Hey **" + event.getAuthor().getAsTag() + "**,\n" +
-                                "um eine Frage f\u00fcr das Quiz zu erstellen, musst du mir noch folgende Antworten geben:").queue();
-                        channel.sendMessage(">>> Welche Frage m\u00f6chtest du hinzuf\u00fcgen? Achte hier bitte darauf, die korrekte Rechtschreibung und Grammatik zu benutzen.\n" +
+                                "um eine Frage f\u00fcr das Quiz zu erstellen, musst du folgende Dinge angeben:").queue();
+                        channel.sendMessage(">>> **Welche Frage m\u00f6chtest du hinzuf\u00fcgen?** Achte hier bitte darauf, die korrekte Rechtschreibung und Grammatik zu benutzen.\n" +
                                 "Du kannst jederzeit neu anfangen, in dem du auf dem Server wieder den Befehl `/quiz add` ausf\u00fchrst.").queue();
                     });
                     break;

@@ -62,7 +62,7 @@ public class reportListener extends ListenerAdapter {
                             try {
                                 channel = Objects.requireNonNull(guild.getGuildChannelById(event.getMessage().getContentRaw())).getName();
                             } catch (Exception exc) {
-                                channel = event.getMessage().getContentRaw();
+                                channel = event.getMessage().getContentRaw().replace("'", "\"");
                             }
                         }
                     }
@@ -82,7 +82,7 @@ public class reportListener extends ListenerAdapter {
                     event.getChannel().sendMessage(">>> Gibt es noch weitere Details oder Beschreibungen, die du angeben m\u00f6chtest? " +
                             "Je besser die Admins \u00fcber die Situation in Kenntnis gesetzt werden, desto genauer und fairer werden m\u00f6gliche Konsequenzen ausfallen!").queue();
                     try {
-                        core.databaseHandler.database("388969412889411585", "update reports set report_id = '4', cause = '" + event.getMessage().getContentRaw() + "' where victim_id = '" + event.getAuthor().getId() + "' and report_id = '3'");
+                        core.databaseHandler.database("388969412889411585", "update reports set report_id = '4', cause = '" + event.getMessage().getContentRaw().replace("'", "\"") + "' where victim_id = '" + event.getAuthor().getId() + "' and report_id = '3'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -96,7 +96,7 @@ public class reportListener extends ListenerAdapter {
                     }
                     event.getChannel().sendMessage(">>> Wenn du den Report absenden m\u00f6chtest, dann klicke hier auf den Haken!").queue(msg -> msg.addReaction("\u2705").queue());
                     try {
-                        core.databaseHandler.database("388969412889411585", "update reports set report_id = '5', info = '" + event.getMessage().getContentRaw() + "' where victim_id = '" + event.getAuthor().getId() + "' and report_id = '4'");
+                        core.databaseHandler.database("388969412889411585", "update reports set report_id = '5', info = '" + event.getMessage().getContentRaw().replace("'", "\"") + "' where victim_id = '" + event.getAuthor().getId() + "' and report_id = '4'");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

@@ -169,7 +169,7 @@ public class cmdIntro implements Command {
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[INTRO]", "'" + args[1] + "'"));
                     } else {
                         String pl;
-                        int lenght = 0;
+                        int lenght;
                         if (args[1].contains("-")) {
                             int prize = 0;
                             boolean all_right = true;

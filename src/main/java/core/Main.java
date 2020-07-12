@@ -49,7 +49,7 @@ class Main {
                 GatewayIntent.GUILD_MESSAGES);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help | " + STATIC.VERSION));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help | " + STATIC.VERSION + " | [GitHub](https://github.com/MoorhuhnHD/BilboT/issues)"));
 
         addListeners();
         addCommands();

@@ -24,7 +24,7 @@ public class newQuestionListener extends ListenerAdapter {
             switch (answer[0]) {
                 case "1":
                     try {
-                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = 2, question = '" + event.getMessage().getContentRaw() + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
+                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = 2, question = '" + event.getMessage().getContentRaw().replace("'", "\"") + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -44,7 +44,7 @@ public class newQuestionListener extends ListenerAdapter {
                 case "9":
                 case "10":
                     try {
-                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = " + (Integer.parseInt(answer[0]) + 1) + ", answer" + (Integer.parseInt(answer[0]) - 1) + " = '" + event.getMessage().getContentRaw() + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
+                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = " + (Integer.parseInt(answer[0]) + 1) + ", answer" + (Integer.parseInt(answer[0]) - 1) + " = '" + event.getMessage().getContentRaw().replace("'", "\"") + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -52,11 +52,11 @@ public class newQuestionListener extends ListenerAdapter {
                     break;
                 case "11":
                     try {
-                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = 12, answer10 = '" + event.getMessage().getContentRaw() + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
+                        core.databaseHandler.database("388969412889411585", "update quizquestions set status = 12, answer10 = '" + event.getMessage().getContentRaw().replace("'", "\"") + "' where author_id = '" + event.getAuthor().getId() + "' and status < 14");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    event.getChannel().sendMessage(">>> Gib bitte an, wie viele Antworten gegeben werden m\u00fcssen. (Wenn du m\u00f6chtest, dass 3 der 9 Ringgef\u00e4hrten genannt werden, dann klicke bitte die \u0033 unter dieser Nachricht an.)").queue(msg -> {
+                    event.getChannel().sendMessage(">>> Gib bitte an, wie viele Antworten gegeben werden m\u00fcssen. (Beispiel: Wenn du m\u00f6chtest, dass 3 der 9 Ringgef\u00e4hrten genannt werden, dann klicke bitte die \u0033 unter dieser Nachricht an.)").queue(msg -> {
                         msg.addReaction("1\u20E3").queue();
                         msg.addReaction("2\u20E3").queue();
                         msg.addReaction("3\u20E3").queue();
@@ -85,7 +85,6 @@ public class newQuestionListener extends ListenerAdapter {
         assert answer != null;
         if (answer.length != 0 && answer[0].length() > 0) {
             switch (answer[0]) {
-                case "2":
                 case "3":
                 case "4":
                 case "5":
@@ -150,10 +149,6 @@ public class newQuestionListener extends ListenerAdapter {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    event.getChannel().sendMessage(">>> Um die Frage einzusenden, musst du nur noch auf \u2705 unter dieser Nachricht klicken!").queue(msg -> msg.addReaction("\u2705").queue());
-                    break;
-                case "13":
-                    //einsenden
                     String[] question = null;
                     try {
                         question = core.databaseHandler.database("388969412889411585", "select * from quizquestions where author_id = '" + event.getUserId() + "' and status < 14");
@@ -162,11 +157,32 @@ public class newQuestionListener extends ListenerAdapter {
                     }
                     assert question != null;
                     EmbedBuilder expert = new EmbedBuilder();
-                    expert.setTitle("Frage von " + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + " kontrollieren!");
+                    expert.setTitle("\u00dcbersicht");
+                    expert.setDescription("Das ist deine Frage bisher. Es m\u00fcssen **" + threshold + "** Antworten angegeben werden.");
+                    expert.addField("Frage", question[1], false);
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
+                    for (int i = 0; i < 10; i++) {
+                        if (list.get(i).length() != 0)
+                            expert.addField((i + 1) + ". Antwort", list.get(i), false);
+                    }
+                    event.getChannel().sendMessage(expert.build()).queue();
+                    event.getChannel().sendMessage(">>> Um die Frage einzusenden, musst du nur noch auf \u2705 unter dieser Nachricht klicken!").queue(msg -> msg.addReaction("\u2705").queue());
+                    break;
+                case "13":
+                    //einsenden
+                    question = null;
+                    try {
+                        question = core.databaseHandler.database("388969412889411585", "select * from quizquestions where author_id = '" + event.getUserId() + "' and status < 14");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    assert question != null;
+                    expert = new EmbedBuilder();
+                    expert.setTitle("Frage #" + answer[0] + " von " + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + " kontrollieren!");
                     expert.setDescription("Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
                             "Insgesamt m\u00fcssen bei dieser Frage " + question[12] + " Antworten gegeben werden.");
                     expert.addField("Frage", question[1], false);
-                    ArrayList<String> list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
+                    list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 8));
                     for (int i = 0; i < 10; i++) {
                         if (list.get(i).length() != 0)
                             expert.addField((i + 1) + ". Antwort", list.get(i), false);
