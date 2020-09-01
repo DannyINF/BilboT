@@ -14,7 +14,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import commands.Command;
-import core.permissionChecker;
+import core.PermissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
@@ -140,7 +140,7 @@ public class PlayerControl implements Command {
                         case "486085339530788894":
                             embed.setFooter("Player: Thorin", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                initMusicAddon.main(SECRETS.TOKENTHORIN, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENTHORIN, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486085339530788894")) {
                                     musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
@@ -150,7 +150,7 @@ public class PlayerControl implements Command {
                         case "486089278019993611":
                             embed.setFooter("Player: Balin", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                initMusicAddon.main(SECRETS.TOKENBALIN, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENBALIN, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089278019993611")) {
                                     musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
@@ -160,7 +160,7 @@ public class PlayerControl implements Command {
                         case "486089728437780480":
                             embed.setFooter("Player: Bombur", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                initMusicAddon.main(SECRETS.TOKENBOMBUR, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENBOMBUR, args, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089728437780480")) {
                                     musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
@@ -312,8 +312,8 @@ public class PlayerControl implements Command {
                 channel.sendMessage(embed.build()).queue();
                 break;
             case "volume":
-                if (permissionChecker.checkRole(new Role[]{guild.getRolesByName("Vala", true).get(0)}, member) ||
-                        permissionChecker.checkRole(new Role[]{guild.getRolesByName("Leser", true).get(0)}, member)) {
+                if (PermissionChecker.checkRole(new Role[]{guild.getRolesByName("Vala", true).get(0)}, member) ||
+                        PermissionChecker.checkRole(new Role[]{guild.getRolesByName("Leser", true).get(0)}, member)) {
                     if (args.length == 1) {
                         embed.setDescription("Current player volume: **" + player.getVolume() + "**");
                         channel.sendMessage(embed.build()).queue();
@@ -330,7 +330,7 @@ public class PlayerControl implements Command {
                         }
                     }
                 } else {
-                    permissionChecker.noPower(channel, member);
+                    PermissionChecker.noPower(channel, member);
                 }
                 break;
             case "restart":

@@ -1,5 +1,6 @@
 package util;
 
+import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
@@ -7,7 +8,6 @@ import net.dv8tion.jda.api.entities.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
 public class ActivityChecker {
     public void activity(JDA jda) throws SQLException {
@@ -72,7 +72,7 @@ public class ActivityChecker {
                     String[] answer;
                     long oldActivity;
                     try {
-                        answer = core.databaseHandler.database(guild.getId(), "select activity from users where id = '" + member.getId() + "'");
+                        answer = DatabaseHandler.database(guild.getId(), "select activity from users where id = '" + member.getId() + "'");
                         if (answer == null)
                             oldActivity = 120L;
                         else
@@ -115,7 +115,7 @@ public class ActivityChecker {
 
                     long newActivity = oldActivity - 4;
 
-                    core.databaseHandler.database(guild.getId(), "update users set activity = " + newActivity + " where id = '" + member.getId() + "'");
+                    DatabaseHandler.database(guild.getId(), "update users set activity = " + newActivity + " where id = '" + member.getId() + "'");
 
                     SET_CHANNEL set_channel = CHANNEL.getSetChannel("modlog", guild.getId());
                     TextChannel modlog = guild.getTextChannelById(set_channel.getChannel());

@@ -1,19 +1,36 @@
 package util;
 
+import com.google.common.base.Stopwatch;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
+import org.javatuples.Triplet;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+
+import static listeners.CasualQuizListener.failure;
 
 public class STATIC {
 
-    public static final String VERSION = "v2.18.4";
+    public static final String VERSION = "v2.22.2";
 
     public static final String PREFIX = "/";
 
     public static final String BOT_ID = "393375474056953856";
+
+    public static final String QUESTION_CHANNEL = "740691553689010226";
+
+    public static final String GUILD_ID = "388969412889411585";
+
+    public static final String SEASON = "0";
+
+    public static boolean is2x = false;
+
+    public static boolean toggle2x() {
+        is2x = !is2x;
+        return is2x;
+    }
 
     private static boolean isNarration = false;
 
@@ -116,6 +133,8 @@ public class STATIC {
 
     public static final ExecutorService exec = Executors.newCachedThreadPool();
 
+    public static final ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
+
     public static String getInvite(Guild guild) {
         String url = null;
         for (Invite inv : guild.retrieveInvites().complete())
@@ -125,5 +144,33 @@ public class STATIC {
         if (url == null)
             url = guild.retrieveInvites().complete().get(0).getUrl();
         return url;
+    }
+
+    private static ArrayList<Triplet<String, Stopwatch, ScheduledFuture>> quizStopwatch = new ArrayList<>();
+
+    public static long getQuizStopwatch(PrivateMessageReceivedEvent event) {
+        long stopwatch = 0L;
+        Triplet target = null;
+        for (Triplet<String, Stopwatch, ScheduledFuture> triplet : quizStopwatch) {
+            if (triplet.getValue0().equals(event.getAuthor().getId())) {
+                if (triplet.getValue1().isRunning())
+                    triplet.getValue1().stop();
+                stopwatch = triplet.getValue1().elapsed(TimeUnit.MILLISECONDS);
+                triplet.getValue1().reset();
+                triplet.getValue2().cancel(true);
+                target = triplet;
+            }
+        }
+        if (target != null)
+            System.out.println(quizStopwatch.remove(target));
+        return stopwatch;
+    }
+
+    public static void restartQuizStopwatch(PrivateMessageReceivedEvent event, long timeInMillies) {
+        ScheduledFuture future = ses.schedule(() -> {
+            event.getChannel().sendMessage(">>> Deine Zeit ist abgelaufen!").queue();
+            failure(event);
+        }, timeInMillies, TimeUnit.MILLISECONDS);
+        quizStopwatch.add(new Triplet<>(event.getAuthor().getId(), Stopwatch.createStarted(), future));
     }
 }

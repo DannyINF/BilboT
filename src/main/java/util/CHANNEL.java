@@ -1,6 +1,6 @@
 package util;
 
-import core.databaseHandler;
+import core.DatabaseHandler;
 
 import java.util.Objects;
 
@@ -12,7 +12,7 @@ public class CHANNEL {
         boolean msg;
 
         try {
-            channelid = Objects.requireNonNull(databaseHandler.database("serversettings", "select " + channel + " from channels where id = '" + id + "'"))[0];
+            channelid = Objects.requireNonNull(DatabaseHandler.database("serversettings", "select " + channel + " from channels where id = '" + id + "'"))[0];
             msg = false;
         } catch (Exception e) {
             msg = true;

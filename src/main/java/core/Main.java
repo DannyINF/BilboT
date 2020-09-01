@@ -2,11 +2,11 @@ package core;
 
 import audio.PlayerControl;
 import commands.*;
-import commands.server_settings.cmdLanguage_Server;
-import commands.server_settings.cmdModules_Server;
-import commands.server_settings.cmdOptimalSettings_Server;
-import commands.user_settings.cmdLanguage;
-import commands.user_settings.cmdProfile;
+import commands.server_settings.CmdLanguage_Server;
+import commands.server_settings.CmdModules_Server;
+import commands.server_settings.CmdOptimalSettings_Server;
+import commands.user_settings.CmdLanguage;
+import commands.user_settings.CmdProfile;
 import listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -14,11 +14,11 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import special.announcements;
+import special.Announcements;
 import util.ActivityChecker;
 import util.SECRETS;
 import util.STATIC;
-import util.voiceXP;
+import util.VoiceXP;
 
 import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-//TODO: comment fucking everything
+//TODO: comment fucking everything!
 
 class Main {
     private static JDABuilder builder;
@@ -49,7 +49,7 @@ class Main {
                 GatewayIntent.GUILD_MESSAGES);
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help | " + STATIC.VERSION + " | [GitHub](https://github.com/MoorhuhnHD/BilboT/issues)"));
+        builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help | " + STATIC.VERSION + " | shorturl.at/aHQ23"));
 
         addListeners();
         addCommands();
@@ -67,8 +67,8 @@ class Main {
         assert jda != null;
         jda.awaitReady();
 
-        STATIC.setVerified(new Role[]{Objects.requireNonNull(jda.getGuildById(388969412889411585L)).getRolesByName("verified", true).get(0)});
-        STATIC.setCam(new Role[]{Objects.requireNonNull(jda.getGuildById(388969412889411585L)).getRolesByName("Cam", true).get(0)});
+        STATIC.setVerified(new Role[]{Objects.requireNonNull(jda.getGuildById(STATIC.GUILD_ID)).getRolesByName("verified", true).get(0)});
+        STATIC.setCam(new Role[]{Objects.requireNonNull(jda.getGuildById(STATIC.GUILD_ID)).getRolesByName("Cam", true).get(0)});
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
         ZonedDateTime nextActivityRun = now.withHour(3).withMinute(30).withSecond(30);
@@ -100,9 +100,9 @@ class Main {
         ScheduledExecutorService schedulerRanking = Executors.newScheduledThreadPool(1);
         JDA finalJda = jda;
         schedulerRanking.scheduleAtFixedRate(() -> {
-                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 1").queue();
-                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 11").queue();
-                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById("388969412889411585")).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 21").queue();
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById(STATIC.GUILD_ID)).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 1").queue();
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById(STATIC.GUILD_ID)).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 11").queue();
+                    Objects.requireNonNull(Objects.requireNonNull(finalJda.getGuildById(STATIC.GUILD_ID)).getTextChannelById("409055450802159616")).sendMessage("/xp ranking 21").queue();
                     },
                 initialDelayRanking,
                 TimeUnit.DAYS.toSeconds(1),
@@ -111,7 +111,7 @@ class Main {
         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
         exec.scheduleAtFixedRate(() -> {
             try {
-                voiceXP.giveVoiceXP(finalJDA);
+                VoiceXP.giveVoiceXP(finalJDA);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -121,105 +121,110 @@ class Main {
 
 
     private static void addCommands() {
-        commandHandler.commands.put("map", new cmdMap());
-        commandHandler.commands.put("maps", new cmdMap());
+        CommandHandler.commands.put("map", new CmdMap());
+        CommandHandler.commands.put("maps", new CmdMap());
 
-        commandHandler.commands.put("help", new cmdHelp());
+        CommandHandler.commands.put("help", new CmdHelp());
 
-        commandHandler.commands.put("botinfo", new cmdBotinfo());
+        CommandHandler.commands.put("botinfo", new CmdBotinfo());
 
-        commandHandler.commands.put("rules", new cmdRules());
+        CommandHandler.commands.put("rules", new CmdRules());
 
-        commandHandler.commands.put("clear", new cmdClear());
+        CommandHandler.commands.put("clear", new CmdClear());
 
-        commandHandler.commands.put("talk", new cmdTalk());
+        CommandHandler.commands.put("talk", new CmdTalk());
 
-        commandHandler.commands.put("xp", new cmdXp());
+        CommandHandler.commands.put("xp", new CmdXp());
 
-        commandHandler.commands.put("language", new cmdLanguage());
+        CommandHandler.commands.put("language", new CmdLanguage());
 
-        commandHandler.commands.put("zitate", new cmdQuote());
+        CommandHandler.commands.put("zitate", new CmdQuote());
 
-        commandHandler.commands.put("report", new cmdReport());
+        CommandHandler.commands.put("report", new CmdReport());
 
-        commandHandler.commands.put("search", new cmdSearch());
+        CommandHandler.commands.put("search", new CmdSearch());
 
-        commandHandler.commands.put("setprofile", new cmdSetProfile());
+        CommandHandler.commands.put("setprofile", new CmdSetProfile());
 
-        commandHandler.commands.put("profile", new cmdProfile());
+        CommandHandler.commands.put("profile", new CmdProfile());
 
-        commandHandler.commands.put("deleteroles", new cmdDeleteRoles());
-        commandHandler.commands.put("createroles", new cmdCreateRoles());
+        CommandHandler.commands.put("deleteroles", new CmdDeleteRoles());
+        CommandHandler.commands.put("createroles", new CmdCreateRoles());
 
-        commandHandler.commands.put("coins", new cmdCoins());
+        CommandHandler.commands.put("coins", new CmdCoins());
 
-        commandHandler.commands.put("music", new PlayerControl());
+        CommandHandler.commands.put("music", new PlayerControl());
 
-        commandHandler.commands.put("intro", new cmdIntro());
+        CommandHandler.commands.put("intro", new CmdIntro());
 
-        commandHandler.commands.put("ban", new cmdBan());
+        CommandHandler.commands.put("ban", new CmdBan());
 
-        commandHandler.commands.put("kick", new cmdKick());
+        CommandHandler.commands.put("kick", new CmdKick());
 
-        commandHandler.commands.put("event", new cmdEvent());
+        CommandHandler.commands.put("event", new CmdEvent());
 
-        commandHandler.commands.put("newspaper", new cmdNewspaper());
+        CommandHandler.commands.put("newspaper", new CmdNewspaper());
 
-        commandHandler.commands.put("jackpot", new cmdJackpot());
+        CommandHandler.commands.put("jackpot", new CmdJackpot());
 
-        commandHandler.commands.put("channel", new cmdChannel());
+        CommandHandler.commands.put("channel", new CmdChannel());
 
-        commandHandler.commands.put("transfer", new cmdTransfer());
+        CommandHandler.commands.put("transfer", new CmdTransfer());
 
-        commandHandler.commands.put("statistik", new cmdStats());
-        commandHandler.commands.put("statistic", new cmdStats());
-        commandHandler.commands.put("statistics", new cmdStats());
+        CommandHandler.commands.put("statistik", new CmdStats());
+        CommandHandler.commands.put("statistic", new CmdStats());
+        CommandHandler.commands.put("statistics", new CmdStats());
 
-        commandHandler.commands.put("stats", new cmdStats());
+        CommandHandler.commands.put("stats", new CmdStats());
 
-        commandHandler.commands.put("roles", new cmdRole());
-        commandHandler.commands.put("role", new cmdRole());
+        CommandHandler.commands.put("roles", new CmdRole());
+        CommandHandler.commands.put("role", new CmdRole());
 
-        commandHandler.commands.put("server modules", new cmdModules_Server());
+        CommandHandler.commands.put("server modules", new CmdModules_Server());
 
-        commandHandler.commands.put("server optimalsettings", new cmdOptimalSettings_Server());
+        CommandHandler.commands.put("server optimalsettings", new CmdOptimalSettings_Server());
 
-        commandHandler.commands.put("server language", new cmdLanguage_Server());
+        CommandHandler.commands.put("server language", new CmdLanguage_Server());
 
-        commandHandler.commands.put("exil", new cmdExil());
+        CommandHandler.commands.put("exil", new CmdExil());
 
-        commandHandler.commands.put("edit", new cmdEdit());
+        CommandHandler.commands.put("edit", new CmdEdit());
 
-        commandHandler.commands.put("activity", new cmdActivity());
+        CommandHandler.commands.put("activity", new CmdActivity());
 
-        commandHandler.commands.put("quiz", new cmdQuiz());
+        CommandHandler.commands.put("quiz", new CmdQuiz());
+
+        CommandHandler.commands.put("shutdown", new CmdShutdown());
+
+        CommandHandler.commands.put("2x", new Cmd2x());
     }
 
     private static void addListeners() {
-        builder.addEventListeners(new readyListener());
-        builder.addEventListeners(new voiceListener());
-        builder.addEventListeners(new commandsListener());
-        builder.addEventListeners(new joinListener());
-        builder.addEventListeners(new leaveListener());
-        builder.addEventListeners(new reportListener());
-        builder.addEventListeners(new banListener());
-        builder.addEventListeners(new channelListener());
-        builder.addEventListeners(new chatfilterListener());
-        builder.addEventListeners(new xpListener());
-        builder.addEventListeners(new onlineListener());
-        builder.addEventListeners(new loginListener());
-        builder.addEventListeners(new introListener());
-        builder.addEventListeners(new muteListener());
-        builder.addEventListeners(new afkListener());
-        builder.addEventListeners(new selfJoinListener());
-        builder.addEventListeners(new spamListener());
-        builder.addEventListeners(new emptyChannelListener());
-        builder.addEventListeners(new statisticsListener());
-        builder.addEventListeners(new verificationListener());
-        builder.addEventListeners(new announcements());
-        builder.addEventListeners(new modReactionListener());
-        builder.addEventListeners(new newQuestionListener());
-        builder.addEventListeners(new editQuestionListener());
-        builder.addEventListeners(new expertReactionListener());
+        builder.addEventListeners(new ReadyListener());
+        builder.addEventListeners(new VoiceListener());
+        builder.addEventListeners(new CommandsListener());
+        builder.addEventListeners(new JoinListener());
+        builder.addEventListeners(new LeaveListener());
+        builder.addEventListeners(new ReportListener());
+        builder.addEventListeners(new BanListener());
+        builder.addEventListeners(new ChannelListener());
+        builder.addEventListeners(new ChatfilterListener());
+        builder.addEventListeners(new XpListener());
+        builder.addEventListeners(new OnlineListener());
+        builder.addEventListeners(new LoginListener());
+        builder.addEventListeners(new IntroListener());
+        builder.addEventListeners(new MuteListener());
+        builder.addEventListeners(new AfkListener());
+        builder.addEventListeners(new SelfJoinListener());
+        builder.addEventListeners(new SpamListener());
+        builder.addEventListeners(new EmptyChannelListener());
+        builder.addEventListeners(new StatisticsListener());
+        builder.addEventListeners(new VerificationListener());
+        builder.addEventListeners(new Announcements());
+        builder.addEventListeners(new ModReactionListener());
+        builder.addEventListeners(new NewQuestionListener());
+        builder.addEventListeners(new EditQuestionListener());
+        builder.addEventListeners(new ExpertReactionListener());
+        builder.addEventListeners(new CasualQuizListener());
     }
 }

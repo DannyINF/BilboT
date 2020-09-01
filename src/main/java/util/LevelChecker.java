@@ -1,6 +1,6 @@
 package util;
 
-import core.databaseHandler;
+import core.DatabaseHandler;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class LevelChecker {
     public static long checker(Member member, Guild guild) throws SQLException {
-        long xp = Long.parseLong(Objects.requireNonNull(databaseHandler.database(guild.getId(), "select xp from users where id = '" + member.getId() + "'"))[0]);
+        long xp = Long.parseLong(Objects.requireNonNull(DatabaseHandler.database(guild.getId(), "select xp from users where id = '" + member.getId() + "'"))[0]);
         long level;
 
         if (xp <= 50000) {
