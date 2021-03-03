@@ -22,7 +22,7 @@ public class CmdExil implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        if (PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember())) {
+        if (PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) || PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName(".", true).get(0)}, event.getMember())) {
             if (args.length > 0) {
                 Member member = GetUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
                 exileMember(event.getGuild(), member);

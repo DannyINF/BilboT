@@ -1,11 +1,13 @@
 package listeners;
 
+import audio.InitScreamBot;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import util.STREAM;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -31,10 +33,52 @@ public class VoiceListenerAddon extends ListenerAdapter {
                 }
 
                 if (onlyBotsEverywhere) {
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        STREAM.streamJda.shutdown();
+                    }
                     event.getJDA().shutdown();
                 } else if (onlyBotsHere) {
-                    event.getGuild().getAudioManager().setSendingHandler(null);
-                    event.getGuild().getAudioManager().closeAudioConnection();
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().setReceivingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                    } else {
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                    }
                 }
             }
         }
@@ -60,10 +104,52 @@ public class VoiceListenerAddon extends ListenerAdapter {
                 }
 
                 if (onlyBotsEverywhere) {
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        STREAM.streamJda.shutdown();
+                    }
                     event.getJDA().shutdown();
                 } else if (onlyBotsHere) {
-                    event.getGuild().getAudioManager().setSendingHandler(null);
-                    event.getGuild().getAudioManager().closeAudioConnection();
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().setReceivingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                    } else {
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                    }
                 }
             } else if (event.getChannelJoined().equals(event.getGuild().getAudioManager().getConnectedChannel())){
                 boolean onlyBotsHere = true;
@@ -82,10 +168,52 @@ public class VoiceListenerAddon extends ListenerAdapter {
                 }
 
                 if (onlyBotsEverywhere) {
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        STREAM.streamJda.shutdown();
+                    }
                     event.getJDA().shutdown();
                 } else if (onlyBotsHere) {
-                    event.getGuild().getAudioManager().setSendingHandler(null);
-                    event.getGuild().getAudioManager().closeAudioConnection();
+                    if (event.getJDA().equals(InitScreamBot.screamJda)) {
+                        STREAM.streammanager.setSendingHandler(null);
+                        STREAM.streammanager.setReceivingHandler(null);
+                        STREAM.streammanager.closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().setReceivingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                    } else {
+                        event.getGuild().getAudioManager().setSendingHandler(null);
+                        event.getGuild().getAudioManager().closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(event.getGuild());
+                        }
+                    }
                 }
             }
         }

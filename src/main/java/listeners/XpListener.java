@@ -157,8 +157,9 @@ public class XpListener extends ListenerAdapter {
             if (test == null) {
                 try {
                     DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
-                            "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog) values (" +
-                            "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '')");
+                            "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog, first_join) values (" +
+                            "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', " +
+                            event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +")");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -166,8 +167,9 @@ public class XpListener extends ListenerAdapter {
         } catch (Exception e) {
             try {
                 DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
-                        "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog) values (" +
-                        "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '')");
+                        "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog, first_join) values (" +
+                        "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', " +
+                        event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +")");
             } catch (SQLException ignored) {
             }
         }

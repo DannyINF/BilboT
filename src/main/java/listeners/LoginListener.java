@@ -120,6 +120,7 @@ public class LoginListener extends ListenerAdapter {
                             .replace("[USER]", author.getAsMention()).replace("[XP]", String.valueOf(streakboost)));
                     emsg = msg.build();
 
+
                     database(guild_id, "update users set xp = xp + " + streakboost + ", nextlogin = " + next_loginint + ", loginstreak = " + streak + " where id = '" + author.getId() + "'");
             }
         }

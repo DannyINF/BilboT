@@ -13,7 +13,7 @@ public class CmdChannel implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        if ("set".equals(args[0].toLowerCase())) {
+        if ("set".equalsIgnoreCase(args[0])) {
             String channeltype = args[1];
             String channel = args[2].replace(">", "").replace("<", "")
                     .replace("#", "");

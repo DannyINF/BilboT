@@ -31,7 +31,7 @@ public class CmdEvent implements Command {
         } catch (Exception e) {
             chosen_event = null;
         }
-        if ("narration".equals(chosen_event.toLowerCase())) {
+        if ("narration".equalsIgnoreCase(chosen_event)) {
             eventNarration(args, event);
         } else {
             EmbedBuilder embed = new EmbedBuilder();
@@ -145,7 +145,7 @@ public class CmdEvent implements Command {
                                     STATIC.changeIsDiscussion(false);
 
                                     for (Member member : STATIC.getNarrationChannel().getMembers()) {
-                                        if (!Collections.singletonList(STATIC.getReaders()).contains(member)) {
+                                        if (!Objects.equals(STATIC.getReaders(), member)) {
                                             try {
                                                 member.mute(false).queue();
                                             } catch (Exception ignored) {}

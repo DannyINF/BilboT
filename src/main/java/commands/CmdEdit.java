@@ -9,8 +9,6 @@ import java.util.Objects;
 
 public class CmdEdit implements Command {
 
-    //TODO: create
-
     @Override
     public boolean called() {
         return false;

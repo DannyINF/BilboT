@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import util.SHOPS;
 import util.STATIC;
 
 import java.awt.*;
@@ -108,6 +109,7 @@ public class ReportListener extends ListenerAdapter {
     }
 
     public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
+
         String[] answer = null;
         try {
             answer = DatabaseHandler.database(STATIC.GUILD_ID, "select * from reports where victim_id = '" + event.getUserId() + "' and report_id = '5'");

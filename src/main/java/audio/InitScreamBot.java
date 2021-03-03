@@ -6,9 +6,11 @@ import listeners.ReadyListener;
 import listeners.VoiceListenerAddon;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import util.STREAM;
 
 import javax.security.auth.login.LoginException;
 
@@ -17,7 +19,7 @@ public class InitScreamBot extends ListenerAdapter {
     public static boolean isStarting;
     public static JDA screamJda;
 
-    public static void main(String token, GuildVoiceJoinEvent event, VoiceChannel userVoiceChannel, String intro) throws InterruptedException {
+    public static void main(String token, GenericEvent event, Guild guild, VoiceChannel userVoiceChannel, String intro) throws InterruptedException {
         WebSocketFactory ws = new WebSocketFactory();
         ws.setVerifyHostname(false);
 
@@ -32,6 +34,7 @@ public class InitScreamBot extends ListenerAdapter {
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, " RAAAAAAAAAAAAAAAAAAAAAH"));
 
         addListeners();
+        addCommands();
 
         try {
             screamJda = builder.build();
@@ -42,11 +45,11 @@ public class InitScreamBot extends ListenerAdapter {
         assert screamJda != null;
         screamJda.awaitReady();
 
-        Guild guild = null;
+        Guild guild1 = null;
         VoiceChannel voiceChannel = null;
 
         try {
-            guild = screamJda.getGuildById(event.getGuild().getId());
+            guild1 = screamJda.getGuildById(guild.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,12 +60,22 @@ public class InitScreamBot extends ListenerAdapter {
         }
 
         IntroListener il = new IntroListener();
-        il.playIntro(intro, guild, voiceChannel);
+        il.playIntro(intro, guild1, voiceChannel);
         isStarting = false;
+        if (!STREAM.isTargeted)
+            if (!STREAM.isStarted)
+                STREAM.startStream(guild);
+            else
+                STREAM.switchStream(guild);
+        else
+            STREAM.saveStream(guild);
+    }
+
+    private static void addCommands() {
+
     }
 
     private static void addListeners() {
-        builder.addEventListeners(new ReadyListener());
         builder.addEventListeners(new IntroListener());
         builder.addEventListeners(new VoiceListenerAddon());
     }

@@ -43,7 +43,7 @@ public class CmdStats implements Command {
         assert member != null;
         String[] answer1 = null;
         try {
-            answer1 = DatabaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime, xp, level, coins from users where id = '" + member.getId() + "'");
+            answer1 = DatabaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime, xp, level, coins, first_join from users where id = '" + member.getId() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,6 +54,7 @@ public class CmdStats implements Command {
         long xp;
         long level;
         long coins;
+        String date;
 
         try {
             assert answer1 != null;
@@ -92,6 +93,12 @@ public class CmdStats implements Command {
             coins = 0;
         }
 
+        try {
+            date = answer1[7].split(".")[2] + "." + answer1[7].split(".")[1] + "." + answer1[7].split(".")[0]; //reformat date
+        } catch (Exception e) {
+            date = "10.06.2019"; //date of launch of feature
+        }
+
         long hours = voicetime / 60;
         long minutes = voicetime % 60;
         long days = hours / 24;
@@ -100,7 +107,7 @@ public class CmdStats implements Command {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(191, 255, 178));
         embed.setTitle("Statistiken f\u00fcr " + member.getUser().getAsTag());
-        embed.setFooter("seit dem 10.06.2019", null);
+        embed.setFooter("seit dem " + date, null);
         embed.setTimestamp(new CurrentDatetime().getCurrentTimestamp().toLocalDateTime().atZone(ZoneId.of("Europe/Berlin")));
         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
         embed.setDescription(

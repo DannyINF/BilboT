@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import util.STREAM;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -30,6 +31,15 @@ public class EmptyChannelListener extends ListenerAdapter {
                     if (shouldLeave) {
                         g.getAudioManager().setSendingHandler(null);
                         g.getAudioManager().closeAudioConnection();
+                        if (STREAM.receivemanager.getGuild().equals(g)) {
+                            try {
+                                STREAM.switchStream(STREAM.streams.get(0));
+                            } catch (Exception ignored) {
+
+                            }
+                        } else {
+                            STREAM.removeStream(g);
+                        }
                     }
                 }
             }

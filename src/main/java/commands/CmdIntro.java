@@ -32,7 +32,7 @@ public class CmdIntro implements Command {
                 break;
             case "s":
             case "set":
-                if (args[1].toLowerCase().equals("nothing")) {
+                if (args[1].equalsIgnoreCase("nothing")) {
                     String[] answerIntrolist = DatabaseHandler.database(event.getGuild().getId(), "select intro from users where id = '" + event.getAuthor().getId() + "'");
                     String[] introlist;
                     try {

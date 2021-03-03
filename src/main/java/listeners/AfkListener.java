@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import util.STATIC;
+import util.STREAM;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -26,6 +27,15 @@ public class AfkListener extends ListenerAdapter {
             guild = event.getGuild();
             skip(guild);
             guild.getAudioManager().closeAudioConnection();
+            if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                try {
+                    STREAM.switchStream(STREAM.streams.get(0));
+                } catch (Exception ignored) {
+
+                }
+            } else {
+                STREAM.removeStream(event.getGuild());
+            }
         }
 
     }

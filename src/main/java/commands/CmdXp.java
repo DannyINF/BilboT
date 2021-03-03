@@ -45,6 +45,7 @@ public class CmdXp implements Command {
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+
         try {
             switch (args[0]) {
                 case "leaderboard":

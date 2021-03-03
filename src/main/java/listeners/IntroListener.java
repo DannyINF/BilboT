@@ -71,7 +71,7 @@ public class IntroListener extends ListenerAdapter {
                             try {
                                 if (!intro.equals("nothing")) {
                                     isStarting = true;
-                                    InitScreamBot.main(SECRETS.TOKENSCREAM, event, event.getChannelJoined(), intro);
+                                    InitScreamBot.main(SECRETS.TOKENSCREAM, event, event.getGuild(), event.getChannelJoined(), intro);
                                 }
                             } catch (InterruptedException e) {
                                 isStarting = false;
@@ -131,7 +131,7 @@ public class IntroListener extends ListenerAdapter {
         String pl = null;
         String introindex;
 
-        if (intro.contains("-")) {
+        if (intro != null && intro.contains("-")) {
             switch (intro.split("-")[0]) {
                 case "common":
                     pl = "PL_epOfFugDagfFqqNqvykuieqyxngEISt";
@@ -173,6 +173,9 @@ public class IntroListener extends ListenerAdapter {
             guild.getAudioManager().openAudioConnection(userVoiceChannel);
 
             loadAndPlay(mng, input);
+        } else {
+            guild.getAudioManager().setSendingHandler(mng.sendHandler);
+            guild.getAudioManager().openAudioConnection(userVoiceChannel);
         }
     }
 

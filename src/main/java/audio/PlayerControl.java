@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
 import util.SECRETS;
+import util.STREAM;
 
 import java.awt.*;
 import java.util.List;
@@ -195,7 +196,14 @@ public class PlayerControl implements Command {
                 {
                     try {
                         guild.getAudioManager().openAudioConnection(Objects.requireNonNull(member.getVoiceState()).getChannel());
-                    } catch (NullPointerException e) {
+                        if (!STREAM.isTargeted)
+                            if (!STREAM.isStarted)
+                                STREAM.startStream(guild);
+                            else
+                                STREAM.switchStream(guild);
+                        else
+                            STREAM.saveStream(guild);
+                    } catch (NullPointerException | InterruptedException e) {
                         embed.setDescription("No channel name was provided to search with to join.");
                         channel.sendMessage(embed.build()).queue();
                     }
@@ -216,11 +224,20 @@ public class PlayerControl implements Command {
 
                         try {
                             guild.getAudioManager().openAudioConnection(chan);
+                            if (!STREAM.isTargeted)
+                                if (!STREAM.isStarted)
+                                    STREAM.startStream(guild);
+                                else
+                                    STREAM.switchStream(guild);
+                            else
+                                STREAM.saveStream(guild);
                         } catch (PermissionException e) {
                             if (e.getPermission() == Permission.VOICE_CONNECT) {
                                 embed.setDescription("The bot does not have permission to connect to: " + chan.getName());
                                 channel.sendMessage(embed.build()).queue();
                             }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -228,6 +245,15 @@ public class PlayerControl implements Command {
             case "leave":
                 guild.getAudioManager().setSendingHandler(null);
                 guild.getAudioManager().closeAudioConnection();
+                if (STREAM.receivemanager.getGuild().equals(guild)) {
+                    try {
+                        STREAM.switchStream(STREAM.streams.get(0));
+                    } catch (Exception ignored) {
+
+                    }
+                } else {
+                    STREAM.removeStream(guild);
+                }
                 break;
             case "play":
                 if (args.length == 1) //It is only the command to start playback (probably after pause)
@@ -249,12 +275,21 @@ public class PlayerControl implements Command {
                         guild.getAudioManager().setSendingHandler(mng.sendHandler);
                         try {
                             guild.getAudioManager().openAudioConnection(userVoiceChannel);
+                            if (!STREAM.isTargeted)
+                                if (!STREAM.isStarted)
+                                    STREAM.startStream(guild);
+                                else
+                                    STREAM.switchStream(guild);
+                            else
+                                STREAM.saveStream(guild);
                         } catch (PermissionException e) {
                             if (e.getPermission() == Permission.VOICE_CONNECT) {
                                 assert userVoiceChannel != null;
                                 embed.setDescription("BilboT does not have permission to connect to: " + userVoiceChannel.getName());
                                 channel.sendMessage(embed.build()).queue();
                             }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                     loadAndPlay(mng, channel, args[1], member.getUser(), false);
@@ -265,12 +300,21 @@ public class PlayerControl implements Command {
                     guild.getAudioManager().setSendingHandler(mng.sendHandler);
                     try {
                         guild.getAudioManager().openAudioConnection(userVoiceChannel);
+                        if (!STREAM.isTargeted)
+                            if (!STREAM.isStarted)
+                                STREAM.startStream(guild);
+                            else
+                                STREAM.switchStream(guild);
+                        else
+                            STREAM.saveStream(guild);
                     } catch (PermissionException e) {
                         if (e.getPermission() == Permission.VOICE_CONNECT) {
                             assert userVoiceChannel != null;
                             embed.setDescription("BilboT does not have permission to connect to: " + userVoiceChannel.getName());
                             channel.sendMessage(embed.build()).queue();
                         }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
                 if (args.length == 2) {

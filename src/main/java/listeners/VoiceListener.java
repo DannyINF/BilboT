@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import util.CHANNEL;
 import util.SET_CHANNEL;
 import util.STATIC;
+import util.STREAM;
 
 import java.awt.*;
 import java.util.Objects;
@@ -80,6 +81,15 @@ public class VoiceListener extends ListenerAdapter implements AudioReceiveHandle
                 if (onlyBots) {
                     event.getGuild().getAudioManager().setSendingHandler(null);
                     event.getGuild().getAudioManager().closeAudioConnection();
+                    if (STREAM.receivemanager.getGuild().equals(event.getGuild())) {
+                        try {
+                            STREAM.switchStream(STREAM.streams.get(0));
+                        } catch (Exception ignored) {
+
+                        }
+                    } else {
+                        STREAM.removeStream(event.getGuild());
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 package audio;
 
 import com.neovisionaries.ws.client.WebSocketFactory;
+import commands.CmdTarget;
 import core.CommandHandlerMusic;
 import listeners.CommandsMusicListener;
 import listeners.ReadyListener;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import util.STREAM;
 
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
@@ -83,6 +85,7 @@ class InitMusicAddon extends ListenerAdapter {
 
         PlayerControl pc = new PlayerControl();
         pc.musicPlayer(textChannel, member, message, guild, args, embed, voiceChannel);
+
     }
 
     private static void addCommands() {
@@ -90,7 +93,6 @@ class InitMusicAddon extends ListenerAdapter {
     }
 
     private static void addListeners() {
-        builder.addEventListeners(new ReadyListener());
         builder.addEventListeners(new VoiceListenerAddon());
         builder.addEventListeners(new CommandsMusicListener());
     }

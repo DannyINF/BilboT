@@ -146,7 +146,7 @@ public class STATIC {
         return url;
     }
 
-    private static ArrayList<Triplet<String, Stopwatch, ScheduledFuture>> quizStopwatch = new ArrayList<>();
+    private static final ArrayList<Triplet<String, Stopwatch, ScheduledFuture>> quizStopwatch = new ArrayList<>();
 
     public static long getQuizStopwatch(PrivateMessageReceivedEvent event) {
         long stopwatch = 0L;
@@ -172,5 +172,15 @@ public class STATIC {
             failure(event);
         }, timeInMillies, TimeUnit.MILLISECONDS);
         quizStopwatch.add(new Triplet<>(event.getAuthor().getId(), Stopwatch.createStarted(), future));
+    }
+
+    public static int shopstep = 0;
+
+    public static void changeShopstep(int number) {
+        shopstep = number;
+    }
+
+    public static int getShopstep() {
+        return shopstep;
     }
 }

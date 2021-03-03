@@ -15,10 +15,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import special.Announcements;
-import util.ActivityChecker;
-import util.SECRETS;
-import util.STATIC;
-import util.VoiceXP;
+import util.*;
 
 import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
@@ -50,6 +47,8 @@ class Main {
         builder.setAutoReconnect(true);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.of(Activity.ActivityType.DEFAULT, "/help | " + STATIC.VERSION + " | shorturl.at/aHQ23"));
+
+        SHOPS.initShop();
 
         addListeners();
         addCommands();
@@ -197,13 +196,15 @@ class Main {
         CommandHandler.commands.put("shutdown", new CmdShutdown());
 
         CommandHandler.commands.put("2x", new Cmd2x());
+
+        CommandHandler.commands.put("shop", new ShopCommand());
     }
 
     private static void addListeners() {
         builder.addEventListeners(new ReadyListener());
-        builder.addEventListeners(new VoiceListener());
+        //builder.addEventListeners(new VoiceListener());
         builder.addEventListeners(new CommandsListener());
-        builder.addEventListeners(new JoinListener());
+        /*builder.addEventListeners(new JoinListener());
         builder.addEventListeners(new LeaveListener());
         builder.addEventListeners(new ReportListener());
         builder.addEventListeners(new BanListener());
@@ -225,6 +226,7 @@ class Main {
         builder.addEventListeners(new NewQuestionListener());
         builder.addEventListeners(new EditQuestionListener());
         builder.addEventListeners(new ExpertReactionListener());
-        builder.addEventListeners(new CasualQuizListener());
+        builder.addEventListeners(new CasualQuizListener());*/
+        builder.addEventListeners(new ShopReactionListener());
     }
 }

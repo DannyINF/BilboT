@@ -58,7 +58,7 @@ public class JoinListener extends ListenerAdapter {
                         boolean isVerifiedUser = false;
                         try {
                             assert answer2 != null;
-                            if (answer2[0].toLowerCase().equals("true")) {
+                            if (answer2[0].equalsIgnoreCase("true")) {
                                 isVerifiedUser = true;
                             }
                         } catch (Exception ignored) {
@@ -73,7 +73,7 @@ public class JoinListener extends ListenerAdapter {
                         boolean isVerifiedServer = false;
                         try {
                             assert answer3 != null;
-                            if (answer3[0].toLowerCase().equals("true")) {
+                            if (answer3[0].equalsIgnoreCase("true")) {
                                 isVerifiedServer = true;
                             }
                         } catch (Exception ignored) {

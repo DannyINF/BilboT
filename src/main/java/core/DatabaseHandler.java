@@ -12,7 +12,7 @@ public class DatabaseHandler {
      * <p>
      * [SERVERID]
      * - users(id, xp, level, coins, ticket, intro, profile, words, msg, chars, voicetime, reports, moderations, loginstreak,
-     * nextlogin, verifystatus, activity, banlog)
+     * nextlogin, verifystatus, activity, banlog, first_join)
      * - reports(report_id, victim_id, offender_id, channel, cause, info, ruling)
      * - exil(id, roles, duration)
      * - quizcasual(id, streak, question_id, revived, past_questions)
@@ -48,7 +48,7 @@ public class DatabaseHandler {
      * <p>
      * - users(id varchar(20), xp bigint, level bigint, coins bigint, ticket bigint, intro clob(64000), profile clob(64000),
      * words bigint, msg bigint, chars bigint, voicetime bigint, report bigint, moderations bigint, loginstreak bigint,
-     * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000))
+     * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000), date first_join)
      * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000), ruling varchar(20))
      * - exil(id varchar(20), roles clob(2000), duration int)
      * - quizcasual(id varchar(20), streak bigint, question_id bigint, revived boolean, past_questions clob(64000))
@@ -85,12 +85,18 @@ public class DatabaseHandler {
      */
     private static Connection conn;
 
+    /**
+     * @param database
+     * @param statement_string
+     * @return console output
+     */
+
     public static String[] database(String database, String statement_string) throws SQLException {
         DatabaseHandler app = new DatabaseHandler();
 
         app.connectionToDerby(database);
         Statement statement = conn.createStatement();
-        if (statement_string.split(" ")[0].toLowerCase().equals("select")) {
+        if (statement_string.split(" ")[0].equalsIgnoreCase("select")) {
             ResultSet resultSet = statement.executeQuery(statement_string);
             ArrayList<String> list = new ArrayList<>();
             while (resultSet.next()) {
