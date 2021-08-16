@@ -1,6 +1,7 @@
 package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import org.w3c.dom.Element;
@@ -28,18 +29,14 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ShopCommand implements Command {
-    @Override
-    public boolean called()
-    {
-        return false;
-    }
+public class CmdShop {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception
+    public static void shop(SlashCommandEvent event)
     {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
+
         if (event.getMember().getId().equals("277746420281507841")) {
-            SHOPS.shop.first_page.postMenuPage(event);
+            //SHOPS.shop.first_page.postMenuPage(event);
         } else {
             event.getChannel().sendMessage("Oh no no no no no no no :smirk:").queue();
         }

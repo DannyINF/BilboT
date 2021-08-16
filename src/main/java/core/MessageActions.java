@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 
@@ -110,6 +111,10 @@ public class MessageActions {
     }
 
     public static void neededChannel(GuildMessageReceivedEvent event) {
+        event.getChannel().sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())).queue();
+    }
+
+    public static void neededChannel(SlashCommandEvent event) {
         event.getChannel().sendMessage(getLocalizedString("channel_need", "server", event.getGuild().getId())).queue();
     }
 

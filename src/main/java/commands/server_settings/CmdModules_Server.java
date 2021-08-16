@@ -126,7 +126,7 @@ public class CmdModules_Server implements Command {
             }
             event.getChannel().sendMessage(embed.build()).queue();
         } else {
-            PermissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
+            PermissionChecker.noPower(event);
         }
 
     }

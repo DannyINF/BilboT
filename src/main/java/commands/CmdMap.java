@@ -3,28 +3,24 @@ package commands;
 
 import core.MessageActions;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CmdMap implements Command {
+public class CmdMap {
 
-    @Override
-    public boolean called() {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
+    public static void map(SlashCommandEvent event) {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
 
 
-            EmbedBuilder embed = new EmbedBuilder();
+        EmbedBuilder embed = new EmbedBuilder();
             embed.setColor(Color.ORANGE);
-            embed.addField(MessageActions.getLocalizedString("map_title", "user", event.getAuthor().getId()), "", true);
+            embed.addField(MessageActions.getLocalizedString("map_title", "user", event.getUser().getId()), "", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_arda", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_arda", "user", event.getUser().getId()),
                     "```/map     <arda/ad0>                   \n" +
                             "/map     <arda_1/arda_zeit-vor-der-zeit/ad1>                \n" +
                             "/map     <arda_2/arda_nach-zerst\u00F6rung-der-leuchten/ad2>\n" +
@@ -32,90 +28,90 @@ public class CmdMap implements Command {
                             "/map     <arda_4/arda_zeitalter-2/ad4>                   \n" +
                             "/map     <arda_5/arda_zeitalter-3/ad5>                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_beleriand", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_beleriand", "user", event.getUser().getId()),
                     "```/map     <beleriand/b>                        ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_battle_of_beleriand", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_battle_of_beleriand", "user", event.getUser().getId()),
                     "```/map     <schlacht-von-beleriand_1/battle-of-beleriand_1/bb1>\n" +
                             "/map     <schlacht-von-beleriand_2/battle-of-beleriand_2/bb2>\n" +
                             "/map     <schlacht-von-beleriand_3/battle-of-beleriand_3/bb3>\n" +
                             "/map     <schlacht-von-beleriand_4/battle-of-beleriand_4/bb4>\n" +
                             "/map     <schlacht-von-beleriand_5/battle-of-beleriand_5/bb5>```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_middleearth", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_middleearth", "user", event.getUser().getId()),
                     "```/map     <middle-earth/mittelerde/me>          ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_gondolin", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_gondolin", "user", event.getUser().getId()),
                     "```/map     <gondolin/gd>                                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_menegroth", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_menegroth", "user", event.getUser().getId()),
                     "```/map     <menegroth/mg>                                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_nargothrond", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_nargothrond", "user", event.getUser().getId()),
                     "```/map     <nargothrond/ng>                                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_valinor", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_valinor", "user", event.getUser().getId()),
                     "```/map     <valinor/vl>                                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_numenor", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_numenor", "user", event.getUser().getId()),
                     "```/map     <numenor/nm>                                   ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_thangorodrim", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_thangorodrim", "user", event.getUser().getId()),
                     "```/map     <thangorodrim/thg>                              ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_arnor", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_arnor", "user", event.getUser().getId()),
                     "```/map     <arnor/ar>                                     ```", true);
             embed.addBlankField(true);
-            embed.addField(MessageActions.getLocalizedString("map_arnor&gondor", "user", event.getAuthor().getId()),
+            embed.addField(MessageActions.getLocalizedString("map_arnor&gondor", "user", event.getUser().getId()),
                     "```/map     <arnor_gondor/arg>                              ```", true);
             embed.addBlankField(true);
             EmbedBuilder embed1 = new EmbedBuilder();
             embed1.setColor(Color.ORANGE);
-            embed1.addField(MessageActions.getLocalizedString("map_arrival_of_the_humans", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_arrival_of_the_humans", "user", event.getUser().getId()),
                     "```/map     <ankunft-der-menschen/arrival-of-the-humans/ah>```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_beren_and_luthien", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_beren_and_luthien", "user", event.getUser().getId()),
                     "```/map     <beren_luthien/bl>                               ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_great_journey", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_great_journey", "user", event.getUser().getId()),
                     "```/map     <die-gro\u00DFe-wanderung/gj>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_turin_and_nienor", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_turin_and_nienor", "user", event.getUser().getId()),
                     "```/map     <turin_nienor/tn>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_battle_of_the_last_alliance", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_battle_of_the_last_alliance", "user", event.getUser().getId()),
                     "```/map     <battle-of-the-last-alliance/schlacht-des-letzten-b\u00FCndnis/bla>```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_kingdom_of_human", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_kingdom_of_human", "user", event.getUser().getId()),
                     "```/map     <menschenreiche-zeitalter-2/hk>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_kingdom_of_elves", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_kingdom_of_elves", "user", event.getUser().getId()),
                     "```/map     <elbenreiche-zeitalter-1/ek>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_war_of_wrath", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_war_of_wrath", "user", event.getUser().getId()),
                     "```/map     <krieg-des-zorns/ww>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_journey_of_noldor", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_journey_of_noldor", "user", event.getUser().getId()),
                     "```/map     <reise-der-noldor/jn>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_journey_of_numenors", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_journey_of_numenors", "user", event.getUser().getId()),
                     "```/map     <fahrten-der-numenorer/jnu>                    ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_immigrants_second_age", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_immigrants_second_age", "user", event.getUser().getId()),
                     "```/map     <neusiedlung-fl\u00FCchtlinge-zeitalter-2/im> ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_saurons_kingdom", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_saurons_kingdom", "user", event.getUser().getId()),
                     "```/map     <saurons-reich-h\u00F6hepunkt/sk>          ```", true);
             embed1.addBlankField(true);
-            embed1.addField(MessageActions.getLocalizedString("map_tolkien_original_map", "user", event.getAuthor().getId()),
+            embed1.addField(MessageActions.getLocalizedString("map_tolkien_original_map", "user", event.getUser().getId()),
                     "```/map     <tolkien-originalkarte/tom>                    ```", true);
             embed1.addBlankField(true);
             EmbedBuilder embed2 = new EmbedBuilder();
             embed2.setColor(Color.ORANGE);
-            embed2.addField(MessageActions.getLocalizedString("map_tolkien_first_map", "user", event.getAuthor().getId()),
+            embed2.addField(MessageActions.getLocalizedString("map_tolkien_first_map", "user", event.getUser().getId()),
                     "```/map     <tolkien-first-map/tolkien-erste-karte/tfm>```", true);
             embed2.addBlankField(true);
-            embed2.addField(MessageActions.getLocalizedString("map_time_bar", "user", event.getAuthor().getId()),
+            embed2.addField(MessageActions.getLocalizedString("map_time_bar", "user", event.getUser().getId()),
                     "```/map     <zeitstrahl/timeline/t1>                               ```\n" +
                             "```/map     <zeitstrahl2/timeline2/t2>                               ```", true);
             embed2.addBlankField(true);
@@ -130,17 +126,11 @@ public class CmdMap implements Command {
             embed2.addField("KANONKREIS",
                     "```/map     <kanonkreis/canoncircle/cc>                               ```", true);
             embed2.addBlankField(true);
-            embed2.addField(MessageActions.getLocalizedString("map_random", "user", event.getAuthor().getId()),
+            embed2.addField(MessageActions.getLocalizedString("map_random", "user", event.getUser().getId()),
                     "```/map     <random/r>                                        ```", true);
 
-            String map = null;
+            String map = event.getOption("map").getAsString();
 
-            try {
-                map = args[0].toLowerCase();
-            } catch (ArrayIndexOutOfBoundsException ignored) {
-            }
-
-            assert map != null;
             if (map.equals("random") || map.equals("r")) {
                 String[] search = {"arda", "beleriand", "middle-earth", "ankunft-der-menschen", "beren_luthien",
                         "die-gro\u00DFe-wanderung", "schlacht-von-beleriand_1", "schlacht-von-beleriand_2",
@@ -244,21 +234,21 @@ public class CmdMap implements Command {
         } else if (map.equals("kanonkreis") || map.equals("canoncircle") || map.equals("cc")) {
             event.getChannel().sendFile(new File("Bilder/Sonstiges/Kanonkreis.png")).queue();
         } else if (map.equals("") || map.equals(" ")) {
-            if (!event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+            if (!event.getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed.build()).queue());
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed1.build()).queue());
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed2.build()).queue());
             }
         } else {
-            if (!event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+            if (!event.getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed.build()).queue());
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed1.build()).queue());
-                event.getAuthor().openPrivateChannel().queue((channel) ->
+                event.getUser().openPrivateChannel().queue((channel) ->
                         channel.sendMessage(embed2.build()).queue());
             }
         }

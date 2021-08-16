@@ -40,7 +40,7 @@ public class CmdOptimalSettings_Server implements Command {
             embed1.setDescription("Deactivated verification, event");
             event.getChannel().sendMessage(embed1.build()).queue();
         } else {
-            PermissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
+            PermissionChecker.noPower(event);
         }
     }
     //TODO: Überarbeitung

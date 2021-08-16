@@ -131,8 +131,6 @@ public class XpListener extends ListenerAdapter {
     }
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        if (event.getAuthor().isFake())
-            return;
         try {
             String test = Objects.requireNonNull(DatabaseHandler.database("usersettings", "select id from users where id = '" + event.getAuthor().getId() + "'"))[0];
             if (test == null) {
@@ -156,20 +154,20 @@ public class XpListener extends ListenerAdapter {
             String test = Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select id from users where id = '" + event.getAuthor().getId() + "'"))[0];
             if (test == null) {
                 try {
-                    DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
+                    DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, equipped_intro, backgrounds, equipped_background, borders, equipped_border, texts, equipped_text, symbols, equipped_symbol, profile, words, msg, chars, " +
                             "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog, first_join) values (" +
-                            "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', " +
-                            event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +")");
+                            "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '','','','','','','','','','', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', '" +
+                            event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +"')");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
             }
         } catch (Exception e) {
             try {
-                DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, profile, words, msg, chars, " +
+                DatabaseHandler.database(event.getGuild().getId(), "insert into users (id, xp, level, coins, ticket, intro, equipped_intro, backgrounds, equipped_background, borders, equipped_border, texts, equipped_text, symbols, equipped_symbol, profile, words, msg, chars, " +
                         "voicetime, reports, moderations, loginstreak, nextlogin, verifystatus, activity, banlog, first_join) values (" +
-                        "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', " +
-                        event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +")");
+                        "'" + event.getAuthor().getId() + "', 0, 0, 0, 0, '', '','','','','','','','','','', 0, 0, 0, 0, 0, 0, 0, 0, TRUE, 120, '', '" +
+                        event.getMember().getTimeJoined().getYear() + "-" + event.getMember().getTimeJoined().getMonthValue() + "-" + event.getMember().getTimeJoined().getDayOfMonth() +"')");
             } catch (SQLException ignored) {
             }
         }

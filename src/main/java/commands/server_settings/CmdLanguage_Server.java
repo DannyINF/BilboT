@@ -45,7 +45,7 @@ public class CmdLanguage_Server implements Command {
                 }
             }
         } else {
-            PermissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
+            PermissionChecker.noPower(event);
         }
     }
 

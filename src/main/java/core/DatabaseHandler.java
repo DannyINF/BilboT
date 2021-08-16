@@ -11,7 +11,7 @@ public class DatabaseHandler {
      * === without data types ===
      * <p>
      * [SERVERID]
-     * - users(id, xp, level, coins, ticket, intro, profile, words, msg, chars, voicetime, reports, moderations, loginstreak,
+     * - users(id, xp, level, coins, ticket, intro, equipped_intro, backgrounds, equipped_background, borders, equipped_border, texts, equipped_text, symbols, equipped_symbol, profile, words, msg, chars, voicetime, reports, moderations, loginstreak,
      * nextlogin, verifystatus, activity, banlog, first_join)
      * - reports(report_id, victim_id, offender_id, channel, cause, info, ruling)
      * - exil(id, roles, duration)
@@ -46,7 +46,8 @@ public class DatabaseHandler {
      * <p>
      * [SERVERID]
      * <p>
-     * - users(id varchar(20), xp bigint, level bigint, coins bigint, ticket bigint, intro clob(64000), profile clob(64000),
+     * - users(id varchar(20), xp bigint, level bigint, coins bigint, ticket bigint, intro clob(64000), equipped_intro varchar(200), backgrounds clob(64000), equipped_background varchar(200), borders clob(64000),
+     * equipped_border varchar(200), texts clob(64000), equipped_text varchar(200), symbols clob(64000), equipped_symbol varchar(200), profile clob(64000),
      * words bigint, msg bigint, chars bigint, voicetime bigint, report bigint, moderations bigint, loginstreak bigint,
      * nextlogin bigint, verifystatus boolean, activity bigint, banlog clob(64000), date first_join)
      * - reports(report_id varchar(20), victim_id varchar(20), offender_id varchar(20), channel varchar(100), cause varchar(200), info clob(2000), ruling varchar(20))

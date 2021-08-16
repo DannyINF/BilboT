@@ -57,8 +57,8 @@ public class SpamListener extends ListenerAdapter {
                 }
                 if (!event.getAuthor().isBot() && !event.getChannel().getName().contains("spam")) {
                     if (maxcounter > 3) {
-                        new CmdBan().action(new String[]{event.getAuthor().getAsMention(), "1",
-                                MessageActions.getLocalizedString("spam_reason", "user", event.getAuthor().getId()).replace("[MESSAGE]", string1)}, event);
+                        //new CmdBan().ban(new String[]{event.getAuthor().getAsMention(), "1",
+                        //        MessageActions.getLocalizedString("spam_reason", "user", event.getAuthor().getId()).replace("[MESSAGE]", string1)}, event); TODO: FIX
                     } else if (maxcounter > 2) {
                         MessageBuilder builder = new MessageBuilder();
                         builder.setContent(MessageActions.getLocalizedString("spam_warn2", "user", event.getAuthor().getId())

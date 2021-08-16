@@ -1,19 +1,15 @@
 package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 
-public class CmdHelp implements Command {
+public class CmdHelp {
 
-    @Override
-    public boolean called() {
-        return false;
-    }
+    public static void help(SlashCommandEvent event) {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
         String Title;
         String Footer;
         String Description;
@@ -22,12 +18,12 @@ public class CmdHelp implements Command {
         String argument2 = "";
 
         try {
-            argument1 = args[0].replace("/", "").toLowerCase();
+            argument1 = event.getOption("help_topic").getAsString().replace("/", "").toLowerCase();
         } catch (Exception ignored) {
             argument1 = "help";
         }
         try {
-            argument2 = args[1].replace("/", "").toLowerCase();
+            argument2 = event.getOption("help_topic").getAsString().split(" ")[1].replace("/", "").toLowerCase();
         } catch (Exception ignored) {
         }
 
@@ -406,6 +402,6 @@ public class CmdHelp implements Command {
         embed.setFooter(Footer, null);
         embed.setDescription(Description);
 
-        event.getChannel().sendMessage(embed.build()).queue();
+        event.replyEmbeds(embed.build()).queue();
     }
 }

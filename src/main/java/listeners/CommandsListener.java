@@ -37,13 +37,6 @@ public class CommandsListener extends ListenerAdapter {
                 if (STATIC.addCommandSpammer(event.getAuthor().getId()) == 0)
                     event.getChannel().sendMessage(Objects.requireNonNull(event.getMember()).getAsMention() + ", bitte f\u00fchre Befehle nur im Channel " + Objects.requireNonNull(event.getGuild().getTextChannelById("409055450802159616")).getAsMention() + " aus!").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
             }
-
-            try {
-                if (!message.startsWith(STATIC.PREFIX + "music"))
-                    event.getMessage().delete().queue();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

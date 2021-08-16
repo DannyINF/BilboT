@@ -1,5 +1,8 @@
-package audio;
+package core;
 
+import audio.GuildMusicManager;
+import audio.InitMusicAddon;
+import audio.TrackScheduler;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -13,30 +16,133 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import commands.Command;
-import core.PermissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import util.SECRETS;
 import util.STREAM;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Queue;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 
-public class PlayerControl implements Command {
+public class SlashCommandHandler extends ListenerAdapter {
+
+    @Override
+    public void onSlashCommand(SlashCommandEvent event) {
+        // Only accept commands from guilds
+        if (event.getGuild() == null) 
+            return;
+        
+        try {
+            switch (event.getName()) {
+                case "2x":
+                    commands.Cmd2x.TwoX(event);
+                    break;
+                case "activity":
+                    Member member = event.getOption("activity_user").getAsMember();
+                    commands.CmdActivity.activity(event, member);
+                    break;
+                case "ban":
+                    User user = event.getOption("ban_user").getAsUser();
+                    int del_days = (int) event.getOption("del_days").getAsLong();
+                    String reason = event.getOption("ban_reason").getAsString();
+                    commands.CmdBan.ban(event, user, del_days, reason);
+                    break;
+                case "botinfo":
+                    commands.CmdBotinfo.botinfo(event);
+                    break;
+                case "channel":
+                    commands.CmdChannel.channel(event);
+                    break;
+                case "clear":
+                    commands.CmdClear.clear(event);
+                    break;
+                case "coins":
+                    commands.CmdCoins.coins(event);
+                    break;
+                case "edit":
+                    String id = event.getOption("edit_id").getAsString();
+                    String query = event.getOption("edit_query").getAsString();
+                    commands.CmdEdit.edit(event, id, query);
+                    break;
+                case "narration":
+                    commands.CmdEvent.narration(event);
+                    break;
+                case "exil":
+                    member = event.getOption("exil_user").getAsMember();
+                    commands.CmdExil.exil(event, member);
+                    break;
+                case "fakejoin":
+                    commands.CmdFakeJoin.fakejoin(event);
+                    break;
+                case "help":
+                    commands.CmdHelp.help(event);
+                    break;
+                case "intro":
+                    commands.CmdIntro.intro(event);
+                    break;
+                case "kick":
+                    commands.CmdKick.kick(event);
+                    break;
+                case "map":
+                    commands.CmdMap.map(event);
+                    break;
+                case "quiz":
+                    commands.CmdQuiz.quiz(event);
+                    break;
+                case "report":
+                    commands.CmdReport.action(event);
+                    break;
+                case "role":
+                    commands.CmdRole.role(event);
+                    break;
+                case "search":
+                    String site = event.getOption("search_site").getAsString();
+                    query = event.getOption("search_query").getAsString();
+                    commands.CmdSearch.search(event, site, query);
+                    break;
+                case "shutdown":
+                    commands.CmdShutdown.shutdown(event);
+                    break;
+                case "stats":
+                    commands.CmdStats.stats(event);
+                    break;
+                case "say":
+                    query = event.getOption("say_query").getAsString();
+                    commands.CmdTalk.talk(event, query);
+                    break;
+                case "target":
+                    commands.CmdTarget.target(event);
+                    break;
+                case "xp":
+                    commands.CmdXp.xp(event);
+                    break;
+                case "shop":
+                    commands.CmdShop.shop(event);
+                    break;
+                case "music":
+                    action(event);
+                default:
+                    event.reply("I can't handle that command right now :(").setEphemeral(true).queue();
+            }
+        } catch (Exception ignored) {}
+
+    }
     public static final int DEFAULT_VOLUME = 35; //(0 - 100, where 100 is default max volume)
 
     private final AudioPlayerManager playerManager;
     private final Map<String, GuildMusicManager> musicManagers;
 
-    public PlayerControl() {
+    public SlashCommandHandler() {
         java.util.logging.Logger.getLogger("org.apache.http.client.protocol.ResponseProcessCookies").setLevel(Level.OFF);
 
         this.playerManager = new DefaultAudioPlayerManager();
@@ -79,8 +185,8 @@ public class PlayerControl implements Command {
     // restart      - Restarts the current song or restarts the previous song if there is no current song playing.
     // repeat       - Makes the player repeat the currently playing song
     // reset        - Completely resets the player, fixing all errors and clearing the queue.
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
+
+    public void action(SlashCommandEvent event) throws Exception {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(new Color(33, 237, 90));
         embed.setTitle("Music");
@@ -141,43 +247,43 @@ public class PlayerControl implements Command {
                         case "486085339530788894":
                             embed.setFooter("Player: Thorin", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                InitMusicAddon.main(SECRETS.TOKENTHORIN, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENTHORIN, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486085339530788894")) {
-                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getGuild(), embed, userVoiceChannel, event);
                                 }
                             }
                             break;
                         case "486089278019993611":
                             embed.setFooter("Player: Balin", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                InitMusicAddon.main(SECRETS.TOKENBALIN, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENBALIN, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089278019993611")) {
-                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getGuild(), embed, userVoiceChannel, event);
                                 }
                             }
                             break;
                         case "486089728437780480":
                             embed.setFooter("Player: Bombur", null);
                             if (addon_available.get(0).getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                InitMusicAddon.main(SECRETS.TOKENBOMBUR, args, event, embed, userVoiceChannel);
+                                InitMusicAddon.main(SECRETS.TOKENBOMBUR, event, embed, userVoiceChannel);
                             } else {
                                 if (event.getJDA().getSelfUser().getId().equals("486089728437780480")) {
-                                    musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                    musicPlayer(event.getTextChannel(), event.getMember(), event.getGuild(), embed, userVoiceChannel, event);
                                 }
                             }
                             break;
                         case "441962292297596928":
                             embed.setFooter("Player: BilboT-BETA", null);
                             if (event.getJDA().getSelfUser().getId().equals("441962292297596928")) {
-                                musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                musicPlayer(event.getTextChannel(), event.getMember(), event.getGuild(), embed, userVoiceChannel, event);
                             }
                             break;
                         case "393375474056953856":
                             embed.setFooter("Player: BilboT", null);
                             if (event.getJDA().getSelfUser().getId().equals("393375474056953856")) {
-                                musicPlayer(event.getChannel(), event.getMember(), event.getMessage(), event.getGuild(), args, embed, userVoiceChannel);
+                                musicPlayer(event.getTextChannel(), event.getMember(), event.getGuild(), embed, userVoiceChannel, event);
                             }
                             break;
                     }
@@ -186,13 +292,17 @@ public class PlayerControl implements Command {
         }
     }
 
-    void musicPlayer(TextChannel channel, Member member, Message msg, Guild guild, String[] args, EmbedBuilder embed, VoiceChannel userVoiceChannel) {
+    public void musicPlayer(TextChannel channel, Member member, Guild guild, EmbedBuilder embed, VoiceChannel userVoiceChannel, SlashCommandEvent event) {
         GuildMusicManager mng = getMusicManager(guild);
         AudioPlayer player = mng.player;
         TrackScheduler scheduler = mng.scheduler;
-        switch (args[0].toLowerCase()) {
+        switch (event.getSubcommandName()) {
             case "join":
-                if (args.length == 1) //No channel name was provided to search for.
+                String id = null;
+                try {
+                    id = event.getOption("music_join_channel").getAsString();
+                } catch (Exception ignored) {}
+                if (id == null) //No channel name was provided to search for.
                 {
                     try {
                         guild.getAudioManager().openAudioConnection(Objects.requireNonNull(member.getVoiceState()).getChannel());
@@ -205,20 +315,20 @@ public class PlayerControl implements Command {
                             STREAM.saveStream(guild);
                     } catch (NullPointerException | InterruptedException e) {
                         embed.setDescription("No channel name was provided to search with to join.");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     }
                 } else {
                     VoiceChannel chan = null;
                     try {
-                        chan = guild.getVoiceChannelById(args[1]);
+                        chan = guild.getVoiceChannelById(id);
                     } catch (NumberFormatException ignored) {
                     }
 
                     if (chan == null)
-                        chan = guild.getVoiceChannelsByName(args[1], true).stream().findFirst().orElse(null);
+                        chan = guild.getVoiceChannelsByName(id, true).stream().findFirst().orElse(null);
                     if (chan == null) {
-                        embed.setDescription("Could not find VoiceChannel by name: " + args[1]);
-                        channel.sendMessage(embed.build()).queue();
+                        embed.setDescription("Could not find VoiceChannel by name: " + id);
+                        event.replyEmbeds(embed.build()).queue();
                     } else {
                         guild.getAudioManager().setSendingHandler(mng.sendHandler);
 
@@ -234,7 +344,7 @@ public class PlayerControl implements Command {
                         } catch (PermissionException e) {
                             if (e.getPermission() == Permission.VOICE_CONNECT) {
                                 embed.setDescription("The bot does not have permission to connect to: " + chan.getName());
-                                channel.sendMessage(embed.build()).queue();
+                                event.replyEmbeds(embed.build()).queue();
                             }
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -256,18 +366,22 @@ public class PlayerControl implements Command {
                 }
                 break;
             case "play":
-                if (args.length == 1) //It is only the command to start playback (probably after pause)
+                String url = null;
+                try {
+                    url = event.getOption("music_play_url").getAsString();
+                } catch (Exception ignored) {}
+                if (url == null) //It is only the command to start playback (probably after pause)
                 {
                     if (player.isPaused()) {
                         player.setPaused(false);
                         embed.setDescription("Playback as been resumed.");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     } else if (player.getPlayingTrack() != null) {
                         embed.setDescription("Player is already playing!");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     } else if (scheduler.queue.isEmpty()) {
                         embed.setDescription("The current audio queue is empty! Add something to the queue first!");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     }
                 } else    //Commands has 2 parts, play and url.
                 {
@@ -286,13 +400,13 @@ public class PlayerControl implements Command {
                             if (e.getPermission() == Permission.VOICE_CONNECT) {
                                 assert userVoiceChannel != null;
                                 embed.setDescription("BilboT does not have permission to connect to: " + userVoiceChannel.getName());
-                                channel.sendMessage(embed.build()).queue();
+                                event.replyEmbeds(embed.build()).queue();
                             }
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    loadAndPlay(mng, channel, args[1], member.getUser(), false);
+                    loadAndPlay(mng, channel, url, member.getUser(), false, event);
                 }
                 break;
             case "pplay":
@@ -311,38 +425,33 @@ public class PlayerControl implements Command {
                         if (e.getPermission() == Permission.VOICE_CONNECT) {
                             assert userVoiceChannel != null;
                             embed.setDescription("BilboT does not have permission to connect to: " + userVoiceChannel.getName());
-                            channel.sendMessage(embed.build()).queue();
+                            event.replyEmbeds(embed.build()).queue();
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                if (args.length == 2) {
-                    loadAndPlay(mng, channel, args[1], member.getUser(), true);
-                } else {
-                    embed.setDescription("A second argument is needed.");
-                    channel.sendMessage(embed.build()).queue();
-                }
+                loadAndPlay(mng, channel, event.getOption("music_pplay_url").getAsString(), member.getUser(), true, event);
                 break;
             case "skip":
                 scheduler.nextTrack();
                 embed.setDescription("The current track was skipped.");
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
                 break;
             case "pause":
                 if (player.getPlayingTrack() == null) {
                     embed.setDescription("Cannot pause or resume player because no track is loaded for playing.");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                     return;
                 }
 
                 player.setPaused(!player.isPaused());
                 if (player.isPaused()) {
                     embed.setDescription("The player has been paused.");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                 } else {
                     embed.setDescription("The player has resumed playing.");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                 }
                 break;
             case "stop":
@@ -353,28 +462,32 @@ public class PlayerControl implements Command {
                 player.stopTrack();
                 player.setPaused(false);
                 embed.setDescription("Playback has been completely stopped and the queue has been cleared.");
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
                 break;
             case "volume":
                 if (PermissionChecker.checkRole(new Role[]{guild.getRolesByName("Vala", true).get(0)}, member) ||
                         PermissionChecker.checkRole(new Role[]{guild.getRolesByName("Leser", true).get(0)}, member)) {
-                    if (args.length == 1) {
+                    int amount = -1;
+                    try {
+                        amount = (int) event.getOption("music_volume_amount").getAsLong();
+                    } catch (Exception ignored) {}
+                    if (amount == -1) {
                         embed.setDescription("Current player volume: **" + player.getVolume() + "**");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     } else {
                         try {
-                            int newVolume = Math.max(10, Math.min(100, Integer.parseInt(args[1])));
+                            int newVolume = Math.max(10, Math.min(100, amount));
                             int oldVolume = player.getVolume();
                             player.setVolume(newVolume);
                             embed.setDescription("Player volume changed from `" + oldVolume + "` to `" + newVolume + "`");
-                            channel.sendMessage(embed.build()).queue();
+                            event.replyEmbeds(embed.build()).queue();
                         } catch (NumberFormatException e) {
-                            embed.setDescription("`" + args[1] + "` is not a valid integer. (10 - 100)");
-                            channel.sendMessage(embed.build()).queue();
+                            embed.setDescription("`" + amount + "` is not a valid integer. (10 - 100)");
+                            event.replyEmbeds(embed.build()).queue();
                         }
                     }
                 } else {
-                    PermissionChecker.noPower(channel, member);
+                    PermissionChecker.noPower(event);
                 }
                 break;
             case "restart":
@@ -384,17 +497,17 @@ public class PlayerControl implements Command {
 
                 if (track != null) {
                     embed.setDescription("Restarting track: " + track.getInfo().title);
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                     player.playTrack(track.makeClone());
                 } else {
                     embed.setDescription("No track has been previously started, so the player cannot replay a track!");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                 }
                 break;
             case "repeat":
                 scheduler.setRepeating(!scheduler.isRepeating());
                 embed.setDescription("Player was set to: **" + (scheduler.isRepeating() ? "repeat" : "not repeat") + "**");
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
                 break;
             case "reset":
                 synchronized (musicManagers) {
@@ -407,7 +520,7 @@ public class PlayerControl implements Command {
                 mng = getMusicManager(guild);
                 guild.getAudioManager().setSendingHandler(mng.sendHandler);
                 embed.setDescription("The player has been completely reset!");
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
                 break;
             case "info":
             case "nowplaying":
@@ -422,18 +535,18 @@ public class PlayerControl implements Command {
                     String nowplaying = String.format("**Playing:** %s\n**Time:** [%s / %s] added by **" + currentTrack.getUserData() + "**",
                             title, position, duration);
                     embed.setDescription(nowplaying);
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                 } else {
                     embed.setDescription("The player is not currently playing anything!");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                 }
                 break;
             case "list":
-                Queue<AudioTrack> queue = scheduler.queue;
+                java.util.Queue<AudioTrack> queue = scheduler.queue;
                 synchronized (queue) {
                     if (queue.isEmpty()) {
                         embed.setDescription("The queue is currently empty!");
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     } else {
                         int trackCount = 0;
                         long queueLength = 0;
@@ -450,30 +563,25 @@ public class PlayerControl implements Command {
                         sb.append("\n").append("Total Queue Time Length: ").append(getTimestamp(queueLength));
 
                         embed.setDescription(sb.toString());
-                        channel.sendMessage(embed.build()).queue();
+                        event.replyEmbeds(embed.build()).queue();
                     }
                 }
                 break;
             case "shuffle":
                 if (scheduler.queue.isEmpty()) {
                     embed.setDescription("The queue is currently empty!");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                     return;
                 }
 
                 scheduler.shuffle();
                 embed.setDescription("The queue has been shuffled!");
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
                 break;
         }
-        try {
-            msg.delete().queue();
-        } catch (Exception ignored) {
-        }
-
     }
 
-    private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, User user, final boolean addPlaylist) {
+    private void loadAndPlay(GuildMusicManager mng, final MessageChannel channel, String url, User user, final boolean addPlaylist, SlashCommandEvent event) {
         final String trackUrl;
 
         //Strip <>'s that prevent discord from embedding link resources
@@ -495,7 +603,7 @@ public class PlayerControl implements Command {
                 embed.setColor(new Color(33, 237, 90));
                 embed.setTitle("Music");
                 embed.setDescription(msg);
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
             }
 
             @Override
@@ -513,14 +621,14 @@ public class PlayerControl implements Command {
                     embed.setColor(new Color(33, 237, 90));
                     embed.setTitle("Music");
                     embed.setDescription("Adding **" + playlist.getTracks().size() + "** tracks to queue from playlist: " + playlist.getName());
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                     tracks.forEach(mng.scheduler::queue);
                 } else {
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setColor(new Color(33, 237, 90));
                     embed.setTitle("Music");
                     embed.setDescription("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")");
-                    channel.sendMessage(embed.build()).queue();
+                    event.replyEmbeds(embed.build()).queue();
                     mng.scheduler.queue(firstTrack);
                 }
             }
@@ -531,7 +639,7 @@ public class PlayerControl implements Command {
                 embed.setColor(new Color(33, 237, 90));
                 embed.setTitle("Music");
                 embed.setDescription("Nothing found by " + trackUrl);
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
             }
 
             @Override
@@ -540,7 +648,7 @@ public class PlayerControl implements Command {
                 embed.setColor(new Color(33, 237, 90));
                 embed.setTitle("Music");
                 embed.setDescription("Could not play: " + exception.getMessage());
-                channel.sendMessage(embed.build()).queue();
+                event.replyEmbeds(embed.build()).queue();
             }
         });
     }
@@ -561,8 +669,4 @@ public class PlayerControl implements Command {
         return mng;
     }
 
-    @Override
-    public boolean called() {
-        return false;
-    }
 }

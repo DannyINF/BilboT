@@ -3,6 +3,7 @@ package commands;
 import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,44 +16,36 @@ import java.time.OffsetDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CmdSearch implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdSearch {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws IOException, SQLException {
+    public static void search(SlashCommandEvent event, String str_site, String query) throws IOException, SQLException {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
 
-            EmbedBuilder embed = new EmbedBuilder();
+
+        EmbedBuilder embed = new EmbedBuilder();
             StringBuilder sb = new StringBuilder();
             String clean = null;
             String site = null;
             String url = null;
             String siteurl = null;
             String[] answer;
-            answer = DatabaseHandler.database("usersettings", "select language from users where id = '" + event.getAuthor().getId() + "'");
+            answer = DatabaseHandler.database("usersettings", "select language from users where id = '" + event.getUser().getId() + "'");
             assert answer != null;
             String country = answer[0];
             boolean sendMsg = false;
             boolean link = false;
             String describer = null;
 
-            switch (args[0].toLowerCase()) {
+            switch (str_site.toLowerCase()) {
                 case "ardapedia":
                     sendMsg = true;
-                    int j = 1;
+                    int j = 0;
                     site = "Ardapedia";
                     // building the question-string
-                    while (j < args.length) {
-                        sb.append(args[j]);
-                        sb.append(" ");
-                        j++;
-                    }
 
                     // sending "search" msg
 
-                    Message msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    Message msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -62,7 +55,7 @@ public class CmdSearch implements Command {
                     }, 4000);
 
                     Document doc;
-                    siteurl = "http://ardapedia.herr-der-ringe-film.de/index.php/" + sb.toString();
+                    siteurl = "http://ardapedia.herr-der-ringe-film.de/index.php/" + query;
                     // connecting to ardapedia
                     doc = Jsoup.connect(siteurl).get();
 
@@ -96,18 +89,13 @@ public class CmdSearch implements Command {
                     break;
                 case "wikipedia":
                     sendMsg = true;
-                    j = 1;
                     site = "Wikipedia";
                     // building the question-string
-                    while (j < args.length) {
-                        sb.append(args[j]);
-                        sb.append(" ");
-                        j++;
-                    }
+
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -115,7 +103,7 @@ public class CmdSearch implements Command {
                             msg.delete().queue();
                         }
                     }, 4000);
-                    siteurl = "https://" + country + ".wikipedia.org/wiki/" + sb.toString();
+                    siteurl = "https://" + country + ".wikipedia.org/wiki/" + query;
                     // connecting to wikipedia
                     doc = Jsoup.connect(siteurl).get();
 
@@ -136,18 +124,12 @@ public class CmdSearch implements Command {
                     break;
                 case "lotrfandom":
                     sendMsg = true;
-                    j = 1;
                     site = "lotr.fandom.com";
                     // building the question-string
-                    while (j < args.length) {
-                        sb.append(args[j]);
-                        sb.append(" ");
-                        j++;
-                    }
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -155,7 +137,7 @@ public class CmdSearch implements Command {
                             msg.delete().queue();
                         }
                     }, 4000);
-                    siteurl = "https://lotr.fandom.com/wiki/" + sb.toString();
+                    siteurl = "https://lotr.fandom.com/wiki/" + query;
                     // connecting to wikipedia
                     doc = Jsoup.connect(siteurl).get();
 
@@ -177,18 +159,12 @@ public class CmdSearch implements Command {
                 case "youtube":
                     link = true;
                     sendMsg = true;
-                    j = 1;
                     site = "YouTube";
                     // building the question-string
-                    while (j < args.length) {
-                        sb.append(args[j]);
-                        sb.append(" ");
-                        j++;
-                    }
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + sb.toString() + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -196,7 +172,7 @@ public class CmdSearch implements Command {
                             msg.delete().queue();
                         }
                     }, 4000);
-                    siteurl = "https://www.youtube.com/results?search_query=" + sb.toString();
+                    siteurl = "https://www.youtube.com/results?search_query=" + query;
                     // connecting to youtube
                     doc = Jsoup.connect(siteurl).get();
                     wl = Whitelist.simpleText();
@@ -229,10 +205,6 @@ public class CmdSearch implements Command {
         embed.setTitle(site + ": " + sb.toString());
         embed.addField("Source:", "[" + siteurl + "](" + siteurl + ")", true);
         embed.setTimestamp(OffsetDateTime.now());
-        event.getChannel().sendMessage(embed.build()).queue();
-
-
+        event.getTextChannel().sendMessage(embed.build()).queue();
     }
-
-
 }

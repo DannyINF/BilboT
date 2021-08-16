@@ -8,7 +8,9 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import util.*;
 
 import java.awt.*;
@@ -20,9 +22,9 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-public class CmdXp implements Command {
+public class CmdXp {
 
-    private static void xp(GuildMessageReceivedEvent event, Member xpmember) throws SQLException {
+    private static void xp(SlashCommandEvent event, Member xpmember) throws SQLException {
 
         String strmember;
         strmember = xpmember.getUser().getAsTag();
@@ -32,25 +34,101 @@ public class CmdXp implements Command {
         String[] xp_level = DatabaseHandler.database(event.getGuild().getId(), "select xp, level from users where id = '" + xpmember.getId() + "'");
 
         assert xp_level != null;
-        event.getChannel().sendMessage(MessageActions.getLocalizedString("xp_msg", "user", event.getAuthor().getId())
+        event.reply(MessageActions.getLocalizedString("xp_msg", "user", event.getUser().getId())
                 .replace("[USER]", strmember).replace("[LEVEL]", numberFormat.format(Long.parseLong(xp_level[1])))
                 .replace("[XP]", numberFormat.format(Long.parseLong(xp_level[0])))).queue();
 
     }
 
-    @Override
-    public boolean called() {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public static void xp(SlashCommandEvent event) throws SQLException {
 
         try {
-            switch (args[0]) {
-                case "leaderboard":
+            switch (event.getSubcommandName()) {
                 case "ranking":
-                    CmdXpRanking.action(args, event);
+                    event.deferReply(false).queue();
+                    InteractionHook hook = event.getHook(); // This is a special webhook that allows you to send messages without having permissions in the channel and also allows ephemeral messages
+                    hook.setEphemeral(false); // All messages here will now be ephemeral implicitly
+
+                    int int_start = 0;
+                    try {
+                        int_start = (int) event.getOption("xp_rank").getAsLong();
+                    } catch (Exception ignored) {
+                    }
+                    int start;
+                    if (int_start != 0) {
+                        start = int_start;
+                    } else {
+                        start = Integer.parseInt(Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select * from (select row_number() over (), id from (select id, xp, level, coins from users where ticket = 0 and not profile like 'bot' order by xp desc) as tmp) as temp where id = '" + event.getUser().getId() + "'"))[0]) - 5;
+                    }
+                    if (start <= 0)
+                        start = 1;
+                    int k;
+                    String name;
+                    String level;
+                    String xp;
+                    String coins;
+
+                    String[] answer = DatabaseHandler.database(event.getGuild().getId(), "select id, xp, level, coins from users where ticket = 0 and not profile like 'bot' order by xp desc offset " + (start - 1) + " rows fetch next 10 rows only");
+
+                    StringBuilder sb = new StringBuilder();
+
+                    for (int j = 0; j < 10; j++) {
+                        try {
+                            name = Objects.requireNonNull(event.getJDA().getUserById(answer[j * 4])).getAsTag();
+                        } catch (Exception e) {
+                            name = Objects.requireNonNull(answer)[j * 4];
+                        }
+                        xp = answer[j*4+1];
+                        level = answer[j*4+2];
+                        coins = answer[j*4+3];
+
+                        if (name.equals(event.getUser().getAsTag()) && j == 0) {
+                            sb.append("```css\n");
+                        } else if (!name.equals(event.getUser().getAsTag()) && j == 0) {
+                            sb.append("```");
+                        } else if (name.equals(event.getUser().getAsTag())) {
+                            sb.append("\n``````css\n");
+                        }
+
+                        sb.append(start + j);
+                        sb.append(". ");
+                        sb.append(name);
+                        k = name.length();
+                        while (k < 35) {
+                            sb.append(" ");
+                            k++;
+                        }
+                        NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
+                        sb.append(MessageActions.getLocalizedString("xp_ranking_level", "user", event.getUser().getId()));
+                        sb.append(numberFormat.format(Long.parseLong(level)));
+                        k = level.length();
+                        while (k < 10) {
+                            sb.append(" ");
+                            k++;
+                        }
+                        sb.append(MessageActions.getLocalizedString("xp_ranking_xp", "user", event.getUser().getId()));
+                        sb.append(numberFormat.format(Long.parseLong(xp)));
+                        k = xp.length();
+                        while (k < 10) {
+                            sb.append(" ");
+                            k++;
+                        }
+                        sb.append(MessageActions.getLocalizedString("xp_ranking_coins", "user", event.getUser().getId()));
+                        sb.append(numberFormat.format(Long.parseLong(coins)));
+                        k = coins.length();
+                        while (k < 10) {
+                            sb.append(" ");
+                            k++;
+                        }
+                        sb.append("\n");
+                        if (name.equals(event.getUser().getAsTag()) && !(j == 9)) {
+                            sb.append("\n``````");
+                        }
+
+                    }
+                    sb.append("```");
+
+                    hook.editOriginal(sb.toString()).queue();
                     break;
                 case "give":
                     if (PermissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
@@ -61,21 +139,9 @@ public class CmdXp implements Command {
                             TextChannel modlog = event.getGuild().getTextChannelById(set_channel.getChannel());
                             long amount;
                             Member member;
-                            MessageChannel channel = event.getChannel();
-                            try {
-                                ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(1, args.length - 1));
-                                member = GetUser.getMemberFromInput(list.toArray(new String[0]), event.getAuthor(), event.getGuild(), event.getChannel());
-                            } catch (Exception e) {
-                                channel.sendMessage("Gib bitte einen Nutzer an.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                break;
-                            }
-                            assert member != null;
-                            try {
-                                amount = Long.parseLong(args[args.length - 1]);
-                            } catch (Exception e) {
-                                channel.sendMessage("Gib bitte die Anzahl an XP an, die du hinzuf\u00fcgen willst.").queue(msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS));
-                                break;
-                            }
+                            member = event.getOption("xp_give_user").getAsMember();
+
+                            amount = event.getOption("xp_give_amount").getAsLong();
 
                             try {
                                 DatabaseHandler.database(event.getGuild().getId(), "update users set xp = xp + " + amount + " where id = '" + member.getId() + "'");
@@ -83,7 +149,7 @@ public class CmdXp implements Command {
                                 EmbedBuilder embed = new EmbedBuilder();
                                 embed.setColor(Color.RED);
                                 NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
-                                embed.setDescription("**" + event.getAuthor().getAsTag() + "** hat dem Nutzer **" + member.getUser().getAsTag() + "**" +
+                                embed.setDescription("**" + event.getUser().getAsTag() + "** hat dem Nutzer **" + member.getUser().getAsTag() + "**" +
                                         " `" + numberFormat.format(amount) + "` XP hinzugef\u00fcgt.");
                                 embed.setTimestamp(Instant.now());
                                 assert modlog != null;
@@ -95,62 +161,56 @@ public class CmdXp implements Command {
                             }
                         }
                     } else {
-                        PermissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
+                        PermissionChecker.noPower(event);
                     }
 
                     break;
                 case "next":
                     try {
-                        String[] xp_level = DatabaseHandler.database(event.getGuild().getId(), "select xp, level from users where id = '" + event.getAuthor().getId() + "'");
+                        event.deferReply(false).queue();
+                        hook = event.getHook(); // This is a special webhook that allows you to send messages without having permissions in the channel and also allows ephemeral messages
+                        hook.setEphemeral(false); // All messages here will now be ephemeral implicitly
+
+                        String[] xp_level = DatabaseHandler.database(event.getGuild().getId(), "select xp, level from users where id = '" + event.getUser().getId() + "'");
 
                         assert xp_level != null;
                         long newxp = Long.parseLong(xp_level[0]);
-                        long level = Long.parseLong(xp_level[1]);
+                        long long_level = Long.parseLong(xp_level[1]);
 
                         Color color;
-                        if (level > 1049) {
+                        if (long_level > 1049) {
                             color = Color.decode("#ca2a1a");
-                        } else if (level > 749)
+                        } else if (long_level > 749)
                             color = Color.decode("#bf3636");
-                        else if (level > 499)
+                        else if (long_level > 499)
                             color = Color.decode("#f25511");
-                        else if (level > 299)
+                        else if (long_level > 299)
                             color = Color.decode("#f3730d");
-                        else if (level > 149)
+                        else if (long_level > 149)
                             color = Color.decode("#e68f0a");
-                        else if (level > 49)
+                        else if (long_level > 49)
                             color = Color.decode("#f7bf16");
-                        else if (level > 9)
+                        else if (long_level > 9)
                             color = Color.decode("#fff53d");
                         else
                             color = Color.decode("#fff9ba");
 
                         EmbedBuilder embed = new EmbedBuilder();
                         embed.setColor(color);
-                        embed.setTitle("Next level / next rank for " + event.getAuthor().getAsTag());
+                        embed.setTitle("Next level / next rank for " + event.getUser().getAsTag());
                         NumberFormat numberFormat = new DecimalFormat("###,###,###,###,###");
                         embed.setDescription(
                                 "Next level: " + numberFormat.format(LevelChecker.nextLevel(newxp)) + " XP remaining\n" +
                                         "Next rank: " + LevelChecker.nextRank(newxp)[1] + " (" + numberFormat.format(Long.parseLong(LevelChecker.nextRank(newxp)[0])) + " XP remaining)"
                         );
-                        event.getChannel().sendMessage(embed.build()).queue();
+                        hook.editOriginalEmbeds(embed.build()).queue();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
+                case "get":
                 default:
-                    ArrayList<String> args2 = new ArrayList<>();
-                    int i = 0;
-                    while (i < args.length - 1) {
-                        args2.add(args[i]);
-                        args2.add(" ");
-                        i++;
-                    }
-                    args2.add(args[i]);
-                    String[] args3 = new String[args2.size()];
-                    args3 = args2.toArray(args3);
-                    Member member = GetUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), event.getChannel());
-                    assert member != null;
+                    Member member = event.getOption("xp_user").getAsMember();
                     xp(event, member);
 
                     break;

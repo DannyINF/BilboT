@@ -4,6 +4,7 @@ import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import util.GetUser;
@@ -15,32 +16,15 @@ import java.text.NumberFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
-public class CmdStats implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdStats {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
-        Member member;
-        TextChannel channel = event.getChannel();
-        if (args.length > 0) {
-            ArrayList<String> args2 = new ArrayList<>();
-            int i = 0;
-            while (i < args.length - 1) {
-                args2.add(args[i]);
-                args2.add(" ");
-                i++;
-            }
-            args2.add(args[i]);
-            String[] args3 = new String[args2.size()];
-            args3 = args2.toArray(args3);
-            member = GetUser.getMemberFromInput(args3, event.getAuthor(), event.getGuild(), channel);
-        } else {
-            member = event.getMember();
-        }
-        assert member != null;
+    public static void stats(SlashCommandEvent event) {
+
+        Member member = event.getMember();
+        try {
+            member = event.getOption("stats_user").getAsMember();
+        } catch (Exception ignored) { }
+
         String[] answer1 = null;
         try {
             answer1 = DatabaseHandler.database(event.getGuild().getId(), "select words, msg, chars, voicetime, xp, level, coins, first_join from users where id = '" + member.getId() + "'");
@@ -94,7 +78,7 @@ public class CmdStats implements Command {
         }
 
         try {
-            date = answer1[7].split(".")[2] + "." + answer1[7].split(".")[1] + "." + answer1[7].split(".")[0]; //reformat date
+            date = answer1[7].split("-")[2] + "." + answer1[7].split("-")[1] + "." + answer1[7].split("-")[0]; //reformat date
         } catch (Exception e) {
             date = "10.06.2019"; //date of launch of feature
         }
@@ -118,7 +102,6 @@ public class CmdStats implements Command {
                         "\nMessages: " + numberFormat.format(msg) +
                         "\nCharacters: " + numberFormat.format(chars) +
                         "\nVoicetime: " + days + " days, " + hours + " hours, " + minutes + " minutes");
-        event.getChannel().sendMessage(embed.build()).queue();
-
+        event.replyEmbeds(embed.build()).queue();
     }
 }

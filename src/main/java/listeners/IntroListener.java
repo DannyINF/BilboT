@@ -15,6 +15,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import core.DatabaseHandler;
+import core.SlashCommandHandler;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -32,7 +33,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-import static audio.PlayerControl.DEFAULT_VOLUME;
 import static audio.InitScreamBot.isStarting;
 import static audio.InitScreamBot.screamJda;
 
@@ -221,7 +221,7 @@ public class IntroListener extends ListenerAdapter {
                 mng = musicManagers.get(guildId);
                 if (mng == null) {
                     mng = new GuildMusicManager(playerManager);
-                    mng.player.setVolume(DEFAULT_VOLUME);
+                    mng.player.setVolume(SlashCommandHandler.DEFAULT_VOLUME);
                     musicManagers.put(guildId, mng);
                 }
             }

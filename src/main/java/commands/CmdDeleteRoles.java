@@ -1,15 +1,13 @@
 package commands;
 
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-public class CmdDeleteRoles implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdDeleteRoles {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
+    public static void deleteroles(SlashCommandEvent event) {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
+
 
         System.out.println(event.getGuild().getRolesByName("Lyrikabend - Verwalter", true).get(0).getPosition());
 

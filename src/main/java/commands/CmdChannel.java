@@ -1,21 +1,19 @@
 package commands;
 
 import core.DatabaseHandler;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.sql.SQLException;
 
-public class CmdChannel implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdChannel {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
-        if ("set".equalsIgnoreCase(args[0])) {
-            String channeltype = args[1];
-            String channel = args[2].replace(">", "").replace("<", "")
+    public static void channel(SlashCommandEvent event) throws SQLException {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
+
+        if ("set".equalsIgnoreCase(event.getSubcommandName())) {
+            String channeltype = event.getOption("channel_type").getAsString();
+            String channel = event.getOption("channel_channel").getAsMentionable().getAsMention().replace(">", "").replace("<", "")
                     .replace("#", "");
             if (channeltype.equals("log") || channeltype.equals("modlog") || channeltype.equals("spam") ||
                     channeltype.equals("voicelog") || channeltype.equals("cmdlog")) {

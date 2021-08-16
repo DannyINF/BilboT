@@ -3,21 +3,18 @@ package commands;
 import core.PermissionChecker;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.requests.restaction.order.RoleOrderAction;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CmdCreateRoles implements Command {
+public class CmdCreateRoles {
 
-    @Override
-    public boolean called() {
-        return false;
-    }
+    public static void createroles(SlashCommandEvent event) {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) {
         if (PermissionChecker.checkPermission(new Permission[]{Permission.ADMINISTRATOR}, event.getMember())) {
             ArrayList<String> raenge = new ArrayList<>();
             int rangzahl = 0;
@@ -95,7 +92,7 @@ public class CmdCreateRoles implements Command {
         }
     }
 
-    private static void createRank(GuildMessageReceivedEvent event, Color color, String rang, Boolean mentionable, Boolean hoisted) {
+    private static void createRank(SlashCommandEvent event, Color color, String rang, Boolean mentionable, Boolean hoisted) {
         try {
             event.getGuild().getRolesByName(rang, true).get(0);
         } catch (Exception e){

@@ -3,6 +3,7 @@ package commands;
 import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import util.STATIC;
@@ -17,32 +18,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class CmdQuiz implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdQuiz {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
-        /*if (!(event.getAuthor().getId().equals("277746420281507841") || event.getAuthor().getId().equals("209272591532163073") || event.getAuthor().getId().equals("305256757398339585") || event.getAuthor().getId().equals("354354147614654465"))) {
+    public static void quiz(SlashCommandEvent event) throws Exception {
+        event.deferReply(true).queue(); // Let the user know we received the command before doing anything else
+
+        /*if (!(event.getUser().getId().equals("277746420281507841") || event.getUser().getId().equals("209272591532163073") || event.getUser().getId().equals("305256757398339585") || event.getUser().getId().equals("354354147614654465"))) {
             event.getChannel().sendMessage("Still beta, dude \uD83D\uDE0F").queue();
             return;
         }*/
-        if (args.length > 0) {
-            switch (args[0].toLowerCase()) {
+        try {
+            switch (event.getSubcommandName()) {
                 case "casual":
-                    DatabaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getAuthor().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
-                    DatabaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getAuthor().getId() + "' and status < 14");
+                    DatabaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getUser().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
+                    DatabaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getUser().getId() + "' and status < 14");
                     DatabaseHandler.database(event.getGuild().getId(), "insert into quizcasual (id, streak, question_id, revived, past_questions) values " +
-                            "('" + event.getAuthor().getId() + "', 0, 0, FALSE, '')");
-                    String[] test = Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select season from quizusers where id = '" + event.getAuthor().getId() + "' and season = " + STATIC.SEASON));
+                            "('" + event.getUser().getId() + "', 0, 0, FALSE, '')");
+                    String[] test = Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select season from quizusers where id = '" + event.getUser().getId() + "' and season = " + STATIC.SEASON));
                     if (test.length == 0)
                         DatabaseHandler.database(event.getGuild().getId(), "insert into quizusers (id, season, casual_correct, casual_false, ranked_correct, " +
                                 "ranked_false, casual_streak, ranked_streak, ranked_building_streak, elo, peak, casual_games, ranked_games) values " +
-                                "('" + event.getAuthor().getId() + "', " + STATIC.SEASON + ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)");
+                                "('" + event.getUser().getId() + "', " + STATIC.SEASON + ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)");
 
-                    event.getAuthor().openPrivateChannel().queue(channel -> channel.sendMessage(">>> Wenn du bereit bist zu starten, schreibe `START`!").queue());
+                    event.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(">>> Wenn du bereit bist zu starten, schreibe `START`!").queue());
                     break;
                 case "ranked":
                     //start ranked match
@@ -52,18 +50,13 @@ public class CmdQuiz implements Command {
                     EmbedBuilder stats = new EmbedBuilder();
                     stats.setColor(Color.WHITE);
                     int season = -1;
-                    if (args.length > 1) {
-                        season = Integer.parseInt(args[1]);
-                    }
-                    Member member;
-                    if (args.length > 2) {
-                        //getUser
-                        ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(2, args.length));
-                        member = GetUser.getMemberFromInput(list.toArray(new String[0]), event.getAuthor(), event.getGuild(), event.getChannel());
-                    } else {
-                        //self
-                        member = event.getMember();
-                    }
+                    try {
+                        season = (int) event.getOption("quiz_stats_season").getAsLong();
+                    } catch (Exception ignored) {}
+                    Member member = event.getMember();
+                    try {
+                        member = event.getOption("quiz_stats_user").getAsMember();
+                    } catch (Exception ignored) {}
                     assert member != null;
                     stats.setTitle("Quiz-Statistiken f\u00fcr " + member.getUser().getAsTag());
                     String seasonal = "";
@@ -80,7 +73,7 @@ public class CmdQuiz implements Command {
                                     "max(peak), sum(casual_games), sum(ranked_games) from quizusers where id = '" + member.getId() + "'" + seasonal);
                     assert stats_answer != null;
                     if (stats_answer.length == 0) {
-                        event.getChannel().sendMessage(">>> " + event.getAuthor().getAsMention() + ", du musst mindestens ein Spiel insgesamt bzw. ein Spiel in dieser Season gespielt haben, damit deine Statistiken einsehbar sind.").queue();
+                        event.getChannel().sendMessage(">>> " + event.getUser().getAsMention() + ", du musst mindestens ein Spiel insgesamt bzw. ein Spiel in dieser Season gespielt haben, damit deine Statistiken einsehbar sind.").queue();
                         return;
                     }
                     String statsall = "";
@@ -109,17 +102,17 @@ public class CmdQuiz implements Command {
                 case "leaderboard":
                     //send leaderboard
                     season = -1;
-                    if (args.length > 1) {
-                        season = Integer.parseInt(args[1]);
-                    }
+                    try {
+                        season = (int) event.getOption("quiz_ranking_season").getAsLong();
+                    } catch (Exception ignored) {}
                     seasonal = "";
                     if (season != -1)
                         seasonal = " where season = " + season;
                     int start;
                     try {
-                        start = Integer.parseInt(args[2]);
+                        start = (int) event.getOption("quiz_ranking_rank").getAsLong();
                     } catch (Exception e) {
-                        start = Integer.parseInt(Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select * from (select row_number() over (), id from (select id, max(elo), sum(ranked_games), avg(ranked_false / (ranked_correct + ranked_false)) from quizusers" + seasonal + " group by id order by max(elo) desc) as tmp) as temp where id = '" + event.getAuthor().getId() + "'"))[0]) - 5;
+                        start = Integer.parseInt(Objects.requireNonNull(DatabaseHandler.database(event.getGuild().getId(), "select * from (select row_number() over (), id from (select id, max(elo), sum(ranked_games), avg(ranked_false / (ranked_correct + ranked_false)) from quizusers" + seasonal + " group by id order by max(elo) desc) as tmp) as temp where id = '" + event.getUser().getId() + "'"))[0]) - 5;
                     }
                     if (start <= 0)
                         start = 1;
@@ -143,11 +136,11 @@ public class CmdQuiz implements Command {
                         games = answer[j*4+2];
                         quote = String.valueOf(Math.round(Float.parseFloat(answer[j*4+3])));
 
-                        if (name.equals(event.getAuthor().getAsTag()) && j == 0) {
+                        if (name.equals(event.getUser().getAsTag()) && j == 0) {
                             sb.append("```css\n");
-                        } else if (!name.equals(event.getAuthor().getAsTag()) && j == 0) {
+                        } else if (!name.equals(event.getUser().getAsTag()) && j == 0) {
                             sb.append("```");
-                        } else if (name.equals(event.getAuthor().getAsTag())) {
+                        } else if (name.equals(event.getUser().getAsTag())) {
                             sb.append("\n``````css\n");
                         }
 
@@ -182,7 +175,7 @@ public class CmdQuiz implements Command {
                             k++;
                         }
                         sb.append("\n");
-                        if (name.equals(event.getAuthor().getAsTag()) && !(j == 9)) {
+                        if (name.equals(event.getUser().getAsTag()) && !(j == 9)) {
                             sb.append("\n``````");
                         }
 
@@ -193,58 +186,51 @@ public class CmdQuiz implements Command {
                     break;
                 case "report":
                     //TODO: Errorhandling
-                    if (args.length > 2) {
-                        String id = args[1].replace("#", "");
-                        ArrayList<String> list = new ArrayList<>(Arrays.asList(args).subList(2, args.length));
-                        StringBuilder reason = new StringBuilder();
-                        for (String str : list) {
-                            reason.append(str);
-                            reason.append(" ");
-                        }
-                        String[] question = null;
+                    String id = event.getOption("report_question").getAsString().replace("#", "");
+                    String[] question = null;
+                    try {
+                        question = DatabaseHandler.database(STATIC.GUILD_ID, "select * from quizquestions where id = " + id);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    assert question != null;
+                    EmbedBuilder expert = new EmbedBuilder();
+                    expert.setColor(Color.RED);
+                    expert.setTitle("Eine Frage von " + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + " wurde reportet!");
+                    expert.setDescription("Die Frage **#" + question[0] + "** von **" + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + "**" +
+                                    " wurde von **" + event.getUser().getAsTag() + "** mit dem Grund `" + event.getOption("quiz_report_reason").getAsString() + "` reportet!\n" +
+                            "Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
+                            "Insgesamt m\u00fcssen bei dieser Frage **" + question[12] + " Antworten** gegeben werden.");
+                    expert.addField("Frage", question[1], false);
+                    ArrayList<String> answer_list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 4));
+                    for (int i = 0; i < 10; i++) {
+                        if (answer_list.get(i).length() != 0)
+                            expert.addField((i + 1) + ". Antwort", answer_list.get(i), false);
+                    }
+                    String[] finalQuestion = question;
+                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessage(expert.build()).queue(msg -> {
+                        msg.addReaction("\u2705").queue();
+                        msg.addReaction("\u26D4").queue();
+                        msg.addReaction("\u270F").queue();
+                        msg.addReaction("\u21A9").queue();
+                        msg.addReaction("\uD83C\uDFAD").queue();
                         try {
-                            question = DatabaseHandler.database(STATIC.GUILD_ID, "select * from quizquestions where id = " + id);
+                            DatabaseHandler.database(STATIC.GUILD_ID, "update quizquestions set status = " + msg.getId() + ", report_id = '" + event.getUser().getId() + "', reason = '" + event.getOption("quiz_report_reason").getAsString() + "' where id = " + finalQuestion[0]);
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                        assert question != null;
-                        EmbedBuilder expert = new EmbedBuilder();
-                        expert.setColor(Color.RED);
-                        expert.setTitle("Eine Frage von " + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + " wurde reportet!");
-                        expert.setDescription("Die Frage **#" + question[0] + "** von **" + Objects.requireNonNull(event.getJDA().getUserById(question[16])).getAsTag() + "**" +
-                                        " wurde von **" + event.getAuthor().getAsTag() + "** mit dem Grund `" + reason.toString() + "` reportet!\n" +
-                                "Bitte kontrolliert folgende Frage und ihre Antworten und reagiert mit den entsprechenden Emotes.\n" +
-                                "Insgesamt m\u00fcssen bei dieser Frage **" + question[12] + " Antworten** gegeben werden.");
-                        expert.addField("Frage", question[1], false);
-                        ArrayList<String> answer_list = new ArrayList<>(Arrays.asList(question).subList(2, question.length - 4));
-                        for (int i = 0; i < 10; i++) {
-                            if (answer_list.get(i).length() != 0)
-                                expert.addField((i + 1) + ". Antwort", answer_list.get(i), false);
-                        }
-                        String[] finalQuestion = question;
-                        Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessage(expert.build()).queue(msg -> {
-                            msg.addReaction("\u2705").queue();
-                            msg.addReaction("\u26D4").queue();
-                            msg.addReaction("\u270F").queue();
-                            msg.addReaction("\u21A9").queue();
-                            msg.addReaction("\uD83C\uDFAD").queue();
-                            try {
-                                DatabaseHandler.database(STATIC.GUILD_ID, "update quizquestions set status = " + msg.getId() + ", report_id = '" + event.getAuthor().getId() + "', reason = '" + reason.toString() + "' where id = " + finalQuestion[0]);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                    }
+                    });
+                    
                     break;
                 case "add":
                     //add question
-                    DatabaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getAuthor().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
-                    DatabaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getAuthor().getId() + "' and status < 14");
+                    DatabaseHandler.database(event.getGuild().getId(), "delete from reports where victim_id = '" + event.getUser().getId() + "' and (report_id = '1' or report_id = '2' or report_id = '3' or report_id = '4' or report_id = '5')");
+                    DatabaseHandler.database(event.getGuild().getId(), "delete from quizquestions where author_id = '" + event.getUser().getId() + "' and status < 14");
                     DatabaseHandler.database(event.getGuild().getId(), "insert into quizquestions (question, answer1, answer2, answer3, answer4, answer5, " +
                             "answer6, answer7, answer8, answer9, answer10, threshhold, correct, incorrect, status, author_id, report_id, reason, edit_id) " +
-                            "values ('', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, 1, '" + event.getAuthor().getId() + "', '', '', '')");
-                    event.getAuthor().openPrivateChannel().queue(channel -> {
-                        channel.sendMessage(">>> Hey **" + event.getAuthor().getAsTag() + "**,\n" +
+                            "values ('', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, 1, '" + event.getUser().getId() + "', '', '', '')");
+                    event.getUser().openPrivateChannel().queue(channel -> {
+                        channel.sendMessage(">>> Hey **" + event.getUser().getAsTag() + "**,\n" +
                                 "um eine Frage f\u00fcr das Quiz zu erstellen, musst du folgende Dinge angeben:").queue();
                         channel.sendMessage(">>> **Welche Frage m\u00f6chtest du hinzuf\u00fcgen?** Achte hier bitte darauf, die korrekte Rechtschreibung und Grammatik zu benutzen.\n" +
                                 "Du kannst jederzeit neu anfangen, in dem du auf dem Server wieder den Befehl `/quiz add` ausf\u00fchrst.").queue();
@@ -254,9 +240,8 @@ public class CmdQuiz implements Command {
                     //send help
                     break;
             }
-        } else {
+        } catch (Exception ignored){
             //send help
         }
-
     }
 }

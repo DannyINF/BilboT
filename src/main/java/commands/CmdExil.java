@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.GetUser;
 
@@ -14,25 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CmdExil implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdExil {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws SQLException {
+    public static void exil(SlashCommandEvent event, Member member) throws SQLException {
+
         if (PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) || PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName(".", true).get(0)}, event.getMember())) {
-            if (args.length > 0) {
-                Member member = GetUser.getMemberFromInput(args, event.getAuthor(), event.getGuild(), event.getChannel());
-                exileMember(event.getGuild(), member);
-            } else {
-                event.getChannel().sendMessage("Please provide an user.").queue();
-            }
+            exileMember(event.getGuild(), member);
+            event.reply("Done!").queue();
         } else {
-            PermissionChecker.noPower(event.getChannel(), Objects.requireNonNull(event.getMember()));
+            PermissionChecker.noPower(event);
         }
-
     }
     public static void exileMember(Guild guild, Member member) throws SQLException {
         String[] answer = DatabaseHandler.database(guild.getId(), "select id from exil");

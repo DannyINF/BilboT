@@ -3,6 +3,7 @@ package commands;
 import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
@@ -12,16 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class CmdRole implements Command {
-    @Override
-    public boolean called() {
-        return false;
-    }
+public class CmdRole {
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event) throws Exception {
-        String command;
-        String role;
+    public static void role(SlashCommandEvent event) throws Exception {
+
+        String role = null;
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(Color.WHITE);
 
@@ -40,18 +36,10 @@ public class CmdRole implements Command {
         for (String str : role_list) {
             roles.add(str.split(":")[0]);
         }
-        try {
-            command = args[0];
-        } catch (Exception e) {
-            command = null;
-        }
-        try {
-            role = args[1];
-        } catch (Exception e) {
-            role = null;
-        }
-        switch (command) {
+
+        switch (event.getSubcommandName()) {
             case "add":
+                role = event.getOption("add_role").getAsString();
                 embed.setTitle("Rolle hinzuf\u00fcgen");
                 embed.setDescription("Diese Rolle existiert nicht.");
                 if (roles.contains(role.toLowerCase())) {
@@ -67,6 +55,7 @@ public class CmdRole implements Command {
                 break;
 
             case "remove":
+                role = event.getOption("remove_role").getAsString();
                 embed.setTitle("Rolle entfernen");
                 embed.setDescription("Diese Rolle existiert nicht.");
                 if (roles.contains(role.toLowerCase())) {
@@ -82,6 +71,7 @@ public class CmdRole implements Command {
                 break;
 
             case "create":
+                role = event.getOption("create_role").getAsString();
                 embed.setTitle("Rolle erstellen");
                 embed.setDescription("Diese Rolle existiert schon.");
                 if (!roles.contains(role.toLowerCase())) {
@@ -103,6 +93,7 @@ public class CmdRole implements Command {
                 break;
 
             case "delete":
+                role = event.getOption("delete_role").getAsString();
                 embed.setTitle("Rolle l\u00f6schen");
                 embed.setDescription("Diese Rolle existiert nicht.");
                 if (roles.contains(role.toLowerCase())) {
@@ -139,8 +130,7 @@ public class CmdRole implements Command {
 
                 break;
 
-
         }
-        event.getChannel().sendMessage(embed.build()).queue();
+        event.replyEmbeds(embed.build()).setEphemeral(true).queue();
     }
 }
