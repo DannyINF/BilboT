@@ -32,63 +32,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding roots of the shop system&#10;implement /exil for community-mods">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_2_1_272.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/core/SlashCommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_api_1_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_api_1_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_natives_1_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_natives_1_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_71.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_77.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_natives_1_3_13.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_natives_1_3_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_2_0_228.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/InitMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/InitMusicAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/TrackScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/TrackScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Cmd2x.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Cmd2x.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBotinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdBotinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdClear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdCreateRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdCreateRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdDeleteRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdDeleteRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdRules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdShutdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdShutdown.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdTalk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdTalk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdXp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdXpRanking.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdLanguage_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdLanguage_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdModules_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdModules_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdOptimalSettings_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdOptimalSettings_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/CommandHandlerMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CommandHandlerMusic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/MessageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/MessageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/PermissionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/PermissionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/CommandsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/CommandsListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" afterDir="false" />
-    </list>
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="slash commands" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +48,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="cleanup" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -254,14 +203,7 @@
       <workItem from="1626253683673" duration="3606000" />
       <workItem from="1627315575657" duration="50000" />
       <workItem from="1629123076263" duration="637000" />
-      <workItem from="1629123760551" duration="444000" />
-    </task>
-    <task id="LOCAL-00005" summary="Updating to v.2.3.2">
-      <created>1572516934506</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1572516934507</updated>
+      <workItem from="1629123760551" duration="930000" />
     </task>
     <task id="LOCAL-00006" summary="Fixing bug where users couldn't receive coins on level-up">
       <created>1573242308254</created>
@@ -599,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614796984824</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="slash commands">
+      <created>1629124317796</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1629124317797</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +559,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="shop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -618,7 +584,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="giving xp or coins logs in modlog" />
     <MESSAGE value="adding textchannel to command log" />
     <MESSAGE value="updating chatfilter" />
     <MESSAGE value="little bugfix" />
@@ -643,7 +608,8 @@
     <MESSAGE value="small bugfixes" />
     <MESSAGE value="renaming classes" />
     <MESSAGE value="adding roots of the shop system&#10;implement /exil for community-mods" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding roots of the shop system&#10;implement /exil for community-mods" />
+    <MESSAGE value="slash commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="slash commands" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
