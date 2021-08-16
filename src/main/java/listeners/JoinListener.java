@@ -18,6 +18,7 @@ import static java.lang.Boolean.FALSE;
 
 
 public class JoinListener extends ListenerAdapter {
+    //TODO: comment
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
             SET_CHANNEL set_channel = CHANNEL.getSetChannel("log", event.getGuild().getId());
             if (set_channel.getMsg()) {

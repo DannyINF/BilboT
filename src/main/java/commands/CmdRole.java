@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CmdRole {
-
+    //TODO: comment
     public static void role(SlashCommandEvent event) throws Exception {
 
         String role = null;

@@ -5,7 +5,7 @@ import core.DatabaseHandler;
 import java.util.Objects;
 
 public class CHANNEL {
-
+    //TODO: remove setting channel in database mb?
     public static SET_CHANNEL getSetChannel(String channel, String id) {
 
         String channelid = null;

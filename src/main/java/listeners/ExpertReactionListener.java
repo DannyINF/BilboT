@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ExpertReactionListener extends ListenerAdapter {
+    //TODO: comment
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (event.getChannel().getId().equals(STATIC.QUESTION_CHANNEL)) {
             if (event.getMember().getUser().isBot())

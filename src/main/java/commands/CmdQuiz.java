@@ -4,10 +4,8 @@ import core.DatabaseHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.derby.impl.sql.execute.CurrentDatetime;
 import util.STATIC;
-import util.GetUser;
 
 import java.awt.*;
 import java.sql.SQLException;

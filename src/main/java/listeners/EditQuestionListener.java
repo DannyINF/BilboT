@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class EditQuestionListener extends ListenerAdapter {
+    //TODO: comment everything
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
         String[] answer = null;
         try {

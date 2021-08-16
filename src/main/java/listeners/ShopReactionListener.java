@@ -9,6 +9,7 @@ import util.STATIC;
 
 public class ShopReactionListener extends ListenerAdapter
 {
+    //TODO: comment
     @Override
     public void onPrivateMessageReactionAdd(@NotNull PrivateMessageReactionAddEvent event)
     {

@@ -5,9 +5,6 @@ import core.PermissionChecker;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.interactions.InteractionHook;
-import util.GetUser;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

@@ -8,24 +8,19 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.SET_CHANNEL;
-import util.GetUser;
 
 import java.awt.*;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 
 public class CmdCoins {
-
+    //TODO: comment
     public static void coins(SlashCommandEvent event) throws SQLException {
 
         try {

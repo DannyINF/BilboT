@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class VerificationListener extends ListenerAdapter {
+    //TODO: comment
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (Objects.equals(event.getGuild().getDefaultChannel(), event.getChannel())) {

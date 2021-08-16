@@ -16,7 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class XpListener extends ListenerAdapter {
-
+    //TODO: initialize user in different function
     /**
      * @param event GuildMessageReceivedEvent
      */

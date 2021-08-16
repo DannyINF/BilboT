@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ActivityChecker {
+    //TODO: update and comment
     public void activity(JDA jda) throws SQLException {
         for (Guild guild : jda.getGuilds()) {
 

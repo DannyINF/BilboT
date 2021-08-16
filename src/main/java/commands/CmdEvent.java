@@ -1,24 +1,20 @@
 package commands;
 
-import core.MessageActions;
 import core.PermissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import util.GetUser;
 import util.STATIC;
 
 import java.awt.*;
 import java.time.Instant;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class CmdEvent {
-
+    //TODO: comment
     public static void narration(SlashCommandEvent event) {
         eventNarration(event);
     }

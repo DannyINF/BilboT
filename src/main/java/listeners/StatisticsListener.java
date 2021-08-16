@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.SQLException;
 
 public class StatisticsListener extends ListenerAdapter {
+    //TODO: comment
+    //TODO: concentrate all statistics into this file
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         String[] answer1 = null;

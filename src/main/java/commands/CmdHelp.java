@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.awt.*;
 
 public class CmdHelp {
-
+    //TODO: add more help
     public static void help(SlashCommandEvent event) {
 
         String Title;

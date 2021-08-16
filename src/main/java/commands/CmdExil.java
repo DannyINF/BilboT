@@ -7,16 +7,13 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import util.GetUser;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CmdExil {
-
+    //TODO: comment
     public static void exil(SlashCommandEvent event, Member member) throws SQLException {
 
         if (PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName("Vala", true).get(0)}, event.getMember()) || PermissionChecker.checkRole(new Role[]{event.getGuild().getRolesByName(".", true).get(0)}, event.getMember())) {

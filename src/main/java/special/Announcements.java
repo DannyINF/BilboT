@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Announcements extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        //TODO: comment and update
         if (event.getChannel().getName().toLowerCase().contains("chat") && !event.getChannel().getName().toLowerCase().contains("diskussion")) {
             int i = STATIC.getAnnouncement();
             if (i >= 250) {

@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class VoiceListenerAddon extends ListenerAdapter {
+    //TODO: comment
     @Override
     public void onGuildVoiceLeave(@NotNull GuildVoiceLeaveEvent event) {
         if (event.getGuild().getAudioManager().isConnected()) {

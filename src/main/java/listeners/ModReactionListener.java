@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ModReactionListener extends ListenerAdapter {
-
+    //TODO: comment and update
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (event.getChannel().getId().equals("434007950852489216")) {
             if (event.getMember().getUser().isBot())

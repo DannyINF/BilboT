@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LevelChecker {
+    //TODO: comment
     public static long checker(Member member, Guild guild) throws SQLException {
         long xp = Long.parseLong(Objects.requireNonNull(DatabaseHandler.database(guild.getId(), "select xp from users where id = '" + member.getId() + "'"))[0]);
         long level;

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class ReportListener extends ListenerAdapter {
-//TODO: make this multi-guild-usable
+//TODO: comment
     public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
         String[] answer = null;
         try {

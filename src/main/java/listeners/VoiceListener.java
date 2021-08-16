@@ -22,7 +22,7 @@ import util.STREAM;
 import java.awt.*;
 import java.util.Objects;
 
-//TODO: Check this out as well
+//TODO: comment and rewrite
 public class VoiceListener extends ListenerAdapter implements AudioReceiveHandler {
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
         if (STATIC.getIsNarration() && event.getChannelJoined().equals(event.getGuild().getVoiceChannelById("469209414218285057")) && !STATIC.getIsDiscussion()) {

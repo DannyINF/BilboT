@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.Role;
 import java.sql.SQLException;
 
 public class GiveXP {
+    //TODO: comment
     public static void giveXPToMember(Member member, Guild guild, long amount) throws SQLException {
         if (amount != 0 && !PermissionChecker.checkRole(STATIC.getCam(), member)) {
             long xp;

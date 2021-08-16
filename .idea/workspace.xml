@@ -32,7 +32,64 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="slash commands" />
+    <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="update pom">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_3_0_309.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_77.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_78.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBooster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdJackpot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdNewspaper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdModules_Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdOptimalSettings_Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/AfkListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/AfkListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/BanListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/BanListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/BoosterListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/CasualQuizListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/CasualQuizListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ChannelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ChannelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ChatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ChatfilterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/EditQuestionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/EditQuestionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/EmptyChannelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/EmptyChannelListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ExpertReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ExpertReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/JoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/JoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/LeaveListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/LeaveListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ModReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ModReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/MuteListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/MuteListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/NewQuestionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/NewQuestionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ReportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ReportListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/SelfJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/SelfJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ShopReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ShopReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/StatisticsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/StatisticsListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/VerificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/VerificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/VoiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/VoiceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/VoiceListenerAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/VoiceListenerAddon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/Announcements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/Announcements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/AskQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/VoiceRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/WeeklyTopic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/XpGewinne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/CHANNEL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/CHANNEL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/GetUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/GiveXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/GiveXP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/LevelChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/QuizActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/QuizActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/STATIC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/STATIC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/VoiceXP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/VoiceXP.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,6 +196,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="recording" autostart="true" />
       <option name="TEST_OBJECT" value="class" />
@@ -203,14 +271,7 @@
       <workItem from="1626253683673" duration="3606000" />
       <workItem from="1627315575657" duration="50000" />
       <workItem from="1629123076263" duration="637000" />
-      <workItem from="1629123760551" duration="930000" />
-    </task>
-    <task id="LOCAL-00006" summary="Fixing bug where users couldn't receive coins on level-up">
-      <created>1573242308254</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1573242308254</updated>
+      <workItem from="1629123760551" duration="2819000" />
     </task>
     <task id="LOCAL-00007" summary="Updating to v.2.4.0">
       <created>1576174265151</created>
@@ -548,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629124317797</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="update pom">
+      <created>1629124749108</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1629124749108</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +652,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding textchannel to command log" />
     <MESSAGE value="updating chatfilter" />
     <MESSAGE value="little bugfix" />
     <MESSAGE value="permission fix for activity check" />
@@ -609,7 +676,8 @@
     <MESSAGE value="renaming classes" />
     <MESSAGE value="adding roots of the shop system&#10;implement /exil for community-mods" />
     <MESSAGE value="slash commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="slash commands" />
+    <MESSAGE value="update pom" />
+    <option name="LAST_COMMIT_MESSAGE" value="update pom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

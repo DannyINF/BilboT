@@ -1,6 +1,7 @@
 package util;
 
 public class QuizActions {
+    //TODO: simplify
     public static String simplifyString(String string) {
         return string
                 .toLowerCase()

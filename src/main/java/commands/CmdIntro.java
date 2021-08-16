@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CmdIntro {
-
+    //TODO: comment and rework
     public static void intro(SlashCommandEvent event) throws Exception {
         // preparing msg
         EmbedBuilder embed = new EmbedBuilder();

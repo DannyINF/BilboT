@@ -4,17 +4,12 @@ import core.MessageActions;
 import core.PermissionChecker;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import util.CHANNEL;
 import util.SET_CHANNEL;
-import util.GetUser;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class CmdKick {

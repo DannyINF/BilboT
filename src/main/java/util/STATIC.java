@@ -12,12 +12,11 @@ import java.util.concurrent.*;
 import static listeners.CasualQuizListener.failure;
 
 public class STATIC {
+    //TODO: clean
 
     public static final String VERSION = "v2.22.2";
 
     public static final String PREFIX = "/";
-
-    public static final String BOT_ID = "393375474056953856";
 
     public static final String QUESTION_CHANNEL = "740691553689010226";
 

@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class NewQuestionListener extends ListenerAdapter {
-
+    //TODO: comment
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
         String[] answer = null;
         try {

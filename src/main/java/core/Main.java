@@ -2,8 +2,6 @@ package core;
 
 import commands.*;
 import commands.server_settings.CmdLanguage_Server;
-import commands.server_settings.CmdModules_Server;
-import commands.server_settings.CmdOptimalSettings_Server;
 import commands.user_settings.CmdLanguage;
 import commands.user_settings.CmdProfile;
 import listeners.*;
@@ -132,26 +130,9 @@ class Main {
 
     private static void addCommands() {
 
-        CommandHandler.commands.put("rules", new CmdRules());
-
         CommandHandler.commands.put("language", new CmdLanguage());
 
-        CommandHandler.commands.put("zitate", new CmdQuote());
-
-        CommandHandler.commands.put("setprofile", new CmdSetProfile());
-
         CommandHandler.commands.put("profile", new CmdProfile());
-
-        CommandHandler.commands.put("newspaper", new CmdNewspaper());
-
-        CommandHandler.commands.put("jackpot", new CmdJackpot());
-
-        CommandHandler.commands.put("transfer", new CmdTransfer());
-
-
-        CommandHandler.commands.put("server modules", new CmdModules_Server());
-
-        CommandHandler.commands.put("server optimalsettings", new CmdOptimalSettings_Server());
 
         CommandHandler.commands.put("server language", new CmdLanguage_Server());
     }

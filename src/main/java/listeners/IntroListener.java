@@ -37,7 +37,7 @@ import static audio.InitScreamBot.isStarting;
 import static audio.InitScreamBot.screamJda;
 
 public class IntroListener extends ListenerAdapter {
-
+    //TODO: rewrite and comment
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
         if (!event.getMember().getUser().isBot()) {

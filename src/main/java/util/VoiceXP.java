@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import static java.lang.Math.sqrt;
 
 public class VoiceXP {
+    //TODO: comment
     public static void giveVoiceXP(JDA jda) throws SQLException {
         for (Guild guild : jda.getGuilds()) {
             for (VoiceChannel voiceChannel : guild.getVoiceChannels()) {
