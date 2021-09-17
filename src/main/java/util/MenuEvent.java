@@ -98,12 +98,12 @@ public class MenuEvent {
                     buyArticle(arguments[3], arguments[4], user.getId());
                     embedBuilder.setDescription("Die Transaktion \u00FCber `" + neededValue + "` Coins war erfolgreich!");
                     embedBuilder.setColor(Color.GREEN);
-                    event.getChannel().sendMessage(embedBuilder.build());
+                    event.getChannel().sendMessageEmbeds(embedBuilder.build());
                     success.postMenuPage(event);
                 } else {
                     embedBuilder.setDescription("Die Transaktion \u00FCber `" + neededValue + "` Coins war nicht erfolgreich!\nDu besitzt nicht gen\u00FCgend Coins.");
                     embedBuilder.setColor(Color.RED);
-                    event.getChannel().sendMessage(embedBuilder.build());
+                    event.getChannel().sendMessageEmbeds(embedBuilder.build());
                     failure.postMenuPage(event);
                 }
 

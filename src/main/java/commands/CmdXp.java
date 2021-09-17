@@ -153,7 +153,7 @@ public class CmdXp {
                                         " `" + numberFormat.format(amount) + "` XP hinzugef\u00fcgt.");
                                 embed.setTimestamp(Instant.now());
                                 assert modlog != null;
-                                modlog.sendMessage(embed.build()).queue();
+                                modlog.sendMessageEmbeds(embed.build()).queue();
 
                                 LevelChecker.checker(member, event.getGuild());
                             } catch (Exception e) {

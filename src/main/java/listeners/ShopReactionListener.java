@@ -43,7 +43,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -62,7 +62,7 @@ public class ShopReactionListener extends ListenerAdapter
                                             "\uD83C\uDDEA - Epic\n" +
                                             "\uD83C\uDDF1 - Legendary\n" +
                                             "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                    event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                    event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                         message.addReaction("\uD83C\uDDE8").queue();
                                         message.addReaction("\uD83C\uDDF7").queue();
                                         message.addReaction("\uD83C\uDDEA").queue();
@@ -74,7 +74,7 @@ public class ShopReactionListener extends ListenerAdapter
                                     embedBuilder = new EmbedBuilder();
                                     embedBuilder.setTitle("Shop - Aktivierung des Willkommensbanners");
                                     embedBuilder.setDescription("Zuerst musst du deinen Banner f\u00FCr `500` Coins aktivieren! M\u00F6chtest du dies jetzt tun?\n");
-                                    event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                    event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                         message.addReaction("\u2705").queue();
                                         message.addReaction("\uD83D\uDEAB").queue();
                                     });
@@ -98,7 +98,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         (!(STATIC.fakeDB.texts.split(",").length == 0 || STATIC.fakeDB.texts.split(",")[0].equals("") )?"\uD83C\uDDF9 Texte angucken\n" : "") +
                                         (!(STATIC.fakeDB.symbols.split(",").length == 0 || STATIC.fakeDB.symbols.split(",")[0].equals("") )?"\uD83C\uDDF8 Symbole unter die Lupe nehmen\n" : "") +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     if (!(STATIC.fakeDB.intros.split(",").length == 0 || STATIC.fakeDB.intros.split(",")[0].equals("")))
                                         message.addReaction("\uD83C\uDDEE").queue();
                                     if (!(STATIC.fakeDB.backgrounds.split(",").length == 0 || STATIC.fakeDB.backgrounds.split(",")[0].equals("")))
@@ -139,7 +139,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDFA7 Voiceintros\n" +
                                         "\uD83D\uDC8C Willkommensbanner\n" +
                                         "\uD83D\uDCBC Inventar");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDFA7").queue();
                                     message.addReaction("\uD83D\uDC8C").queue();
                                     message.addReaction("\uD83D\uDCBC").queue();
@@ -159,7 +159,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDF7 - Rahmen\n" +
                                         "\uD83C\uDDF9 - Text\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDED").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDF9").queue();
@@ -176,7 +176,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDF9 - Text\n" +
                                         "\uD83C\uDDF8 - Symbol\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDED").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDF9").queue();
@@ -194,7 +194,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDF9 - Text\n" +
                                         "\uD83C\uDDF8 - Symbol\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDED").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDF9").queue();
@@ -212,7 +212,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDF9 - Text\n" +
                                         "\uD83C\uDDF8 - Symbol\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDED").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDF9").queue();
@@ -233,7 +233,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -251,7 +251,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDFA7 Voiceintros\n" +
                                         "\uD83D\uDC8C Willkommensbanner\n" +
                                         "\uD83D\uDCBC Inventar");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDFA7").queue();
                                     message.addReaction("\uD83D\uDC8C").queue();
                                     message.addReaction("\uD83D\uDCBC").queue();
@@ -270,7 +270,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Hintergrund ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Hintergrund kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -284,7 +284,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Rahmen ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Rahmen kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -298,7 +298,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Text ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Text kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -315,7 +315,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -336,7 +336,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Hintergrund ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Hintergrund kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -350,7 +350,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Rahmen ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Rahmen kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -364,7 +364,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Text ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Text kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -378,7 +378,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmtes Symbol ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lliges Symbol kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -394,7 +394,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -415,7 +415,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Hintergrund ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Hintergrund kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -429,7 +429,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Rahmen ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Rahmen kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -443,7 +443,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Text ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Text kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -457,7 +457,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmtes Symbol ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lliges Symbol kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -473,7 +473,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -494,7 +494,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Hintergrund ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Hintergrund kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -508,7 +508,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Rahmen ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Rahmen kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -522,7 +522,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmten Text ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lligen Text kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -536,7 +536,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83D\uDD0E  - bestimmtes Symbol ausw\u00E4hlen\n" +
                                         "\uD83C\uDFB2 - zuf\u00E4lliges Symbol kaufen\n" +
                                         "\u21A9\uFE0F zur\u00FCck zur Auswahl");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDD0E").queue();
                                     message.addReaction("\uD83C\uDFB2").queue();
                                     message.addReaction("\u21A9\uFE0F").queue();
@@ -552,7 +552,7 @@ public class ShopReactionListener extends ListenerAdapter
                                         "\uD83C\uDDEA - Epic\n" +
                                         "\uD83C\uDDF1 - Legendary\n" +
                                         "\u21A9\uFE0F zur\u00FCck zum Shop");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83C\uDDE8").queue();
                                     message.addReaction("\uD83C\uDDF7").queue();
                                     message.addReaction("\uD83C\uDDEA").queue();
@@ -569,7 +569,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Hintergrund - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Hintergrundes ein, den du f\u00FCr `150` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -578,7 +578,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Hintergrund - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Hintergrund f\u00FCr `75` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -595,7 +595,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Rahmen - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Rahmens ein, den du f\u00FCr `150` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -604,7 +604,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Rahmen - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Rahmen f\u00FCr `75` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -621,7 +621,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Text - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Textes ein, den du f\u00FCr `200` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -630,7 +630,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Common' Text - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Text f\u00FCr `100` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -647,7 +647,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Hintergrund - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Hintergrundes ein, den du f\u00FCr `300` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -656,7 +656,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Hintergrund - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Hintergrund f\u00FCr `150` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -673,7 +673,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Rahmen - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Rahmens ein, den du f\u00FCr `300` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -682,7 +682,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Rahmen - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Rahmen f\u00FCr `150` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -699,7 +699,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Text - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Textes ein, den du f\u00FCr `400` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -708,7 +708,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Text - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Text f\u00FCr `200` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -725,7 +725,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Symbol - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Symbols ein, das du f\u00FCr `600` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -734,7 +734,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Rare' Symbol - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du ein zuf\u00E4lliges Symbol f\u00FCr `300` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -751,7 +751,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Hintergrund - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Hintergrundes ein, den du f\u00FCr `700` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -760,7 +760,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Hintergrund - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Hintergrund f\u00FCr `350` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -777,7 +777,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Rahmen - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Rahmens ein, den du f\u00FCr `700` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -786,7 +786,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Rahmen - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Rahmen f\u00FCr `350` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -803,7 +803,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Text - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Textes ein, den du f\u00FCr `1.000` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -812,7 +812,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Text - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Text f\u00FCr `500` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -829,7 +829,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Symbol - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Symbols ein, das du f\u00FCr `1.600` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -838,7 +838,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Epic' Symbol - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du ein zuf\u00E4lliges Symbol f\u00FCr `800` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -855,7 +855,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Hintergrund - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Hintergrundes ein, den du f\u00FCr `1.500` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -864,7 +864,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Hintergrund - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Hintergrund f\u00FCr `750` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -881,7 +881,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Rahmen - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Rahmens ein, den du f\u00FCr `1.500` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -890,7 +890,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Rahmen - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Rahmen f\u00FCr `750` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -907,7 +907,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Text - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Textes ein, den du f\u00FCr `3.000` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -916,7 +916,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Text - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du einen zuf\u00E4lligen Text f\u00FCr `1.500` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
@@ -933,7 +933,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 EmbedBuilder embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Symbol - Kaufoption: Auswahl");
                                 embedBuilder.setDescription("Bitte gib die Nummer des Symbols ein, das du f\u00FCr `4.000` Coins kaufen m\u00F6chtest.\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });
                                 break;
@@ -942,7 +942,7 @@ public class ShopReactionListener extends ListenerAdapter
                                 embedBuilder = new EmbedBuilder();
                                 embedBuilder.setTitle("Shop - Willkommensbanner 'Legendary' Symbol - Kaufoption: Zufall");
                                 embedBuilder.setDescription("M\u00F6chtest du ein zuf\u00E4lliges Symbol f\u00FCr `2.000` Coins kaufen?\n");
-                                event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+                                event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
                                     message.addReaction("\u2705").queue();
                                     message.addReaction("\uD83D\uDEAB").queue();
                                 });

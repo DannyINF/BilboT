@@ -80,7 +80,7 @@ public class CmdCoins {
                                         " `" + numberFormat.format(amount) + "` Coins hinzugef\u00fcgt.");
                                 embed.setTimestamp(Instant.now());
                                 assert modlog != null;
-                                modlog.sendMessage(embed.build()).queue();
+                                modlog.sendMessageEmbeds(embed.build()).queue();
 
                                 DatabaseHandler.database(event.getGuild().getId(), "update users set coins = coins + " + amount + " where id = '" + member.getId() + "'");
                             } catch (Exception e) {

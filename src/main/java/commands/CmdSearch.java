@@ -45,7 +45,7 @@ public class CmdSearch {
 
                     // sending "search" msg
 
-                    Message msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + query + " . . .").build()).complete();
+                    Message msg = event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Ardapedia").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -95,7 +95,7 @@ public class CmdSearch {
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + query + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("Wikipedia").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -129,7 +129,7 @@ public class CmdSearch {
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + query + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("lotr.fandom.com").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -164,7 +164,7 @@ public class CmdSearch {
 
                     // sending "search" msg
 
-                    msg = event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + query + " . . .").build()).complete();
+                    msg = event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.LIGHT_GRAY).setTitle("YouTube").setDescription("Suche nach " + query + " . . .").build()).complete();
 
                     new Timer().schedule(new TimerTask() {
                         @Override
@@ -205,6 +205,6 @@ public class CmdSearch {
         embed.setTitle(site + ": " + sb.toString());
         embed.addField("Source:", "[" + siteurl + "](" + siteurl + ")", true);
         embed.setTimestamp(OffsetDateTime.now());
-        event.getTextChannel().sendMessage(embed.build()).queue();
+        event.getTextChannel().sendMessageEmbeds(embed.build()).queue();
     }
 }

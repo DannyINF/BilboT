@@ -29,7 +29,7 @@ public class CmdKick {
                     embed.setTitle(MessageActions.getLocalizedString("kick_title", "user", event.getUser().getId()));
                     embed.setDescription("**" + MessageActions.getLocalizedString("kick_msg_priv", "user", event.getUser().getId()) + "**\n" + event.getOption("kick_reason").getAsString());
                     event.getOption("kick_user").getAsUser().openPrivateChannel().queue(channel ->
-                            channel.sendMessage(embed.build()).queue()
+                            channel.sendMessageEmbeds(embed.build()).queue()
                     );
                     EmbedBuilder embed1 = new EmbedBuilder();
                     embed1.setColor(Color.RED);
@@ -37,7 +37,7 @@ public class CmdKick {
                     embed1.setDescription(MessageActions.getLocalizedString("kick_msg", "server", event.getGuild().getId())
                             .replace("[USER]", event.getOption("kick_user").getAsUser().getAsMention()).replace("[REASON]", event.getOption("kick_reason").getAsString()));
                     assert modlog != null;
-                    modlog.sendMessage(embed1.build()).queue(msg -> event.getGuild().kick(event.getOption("kick_user").getAsUser().getId(), event.getOption("kick_reason").getAsString()).queue());
+                    modlog.sendMessageEmbeds(embed1.build()).queue(msg -> event.getGuild().kick(event.getOption("kick_user").getAsUser().getId(), event.getOption("kick_reason").getAsString()).queue());
                 }
             }
         } else {

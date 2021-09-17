@@ -66,7 +66,7 @@ public class Announcements extends ListenerAdapter {
                     STATIC.changeAnnouncement(1);
                 } else {
                     STATIC.changeAnnouncement(-i);
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
 
             } else {

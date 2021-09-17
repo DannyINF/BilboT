@@ -236,20 +236,20 @@ public class CmdMap {
         } else if (map.equals("") || map.equals(" ")) {
             if (!event.getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed.build()).queue());
+                        channel.sendMessageEmbeds(embed.build()).queue());
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed1.build()).queue());
+                        channel.sendMessageEmbeds(embed1.build()).queue());
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed2.build()).queue());
+                        channel.sendMessageEmbeds(embed2.build()).queue());
             }
         } else {
             if (!event.getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed.build()).queue());
+                        channel.sendMessageEmbeds(embed.build()).queue());
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed1.build()).queue());
+                        channel.sendMessageEmbeds(embed1.build()).queue());
                 event.getUser().openPrivateChannel().queue((channel) ->
-                        channel.sendMessage(embed2.build()).queue());
+                        channel.sendMessageEmbeds(embed2.build()).queue());
             }
         }
 
