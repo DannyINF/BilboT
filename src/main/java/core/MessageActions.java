@@ -28,7 +28,7 @@ public class MessageActions {
     }
 
     public static void selfDestroyEmbedMSG(MessageEmbed msg, int time_in_millis, GuildMessageReceivedEvent event) {
-        Message send = event.getChannel().sendMessage(msg).complete();
+        Message send = event.getChannel().sendMessageEmbeds(msg).complete();
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -39,7 +39,7 @@ public class MessageActions {
     }
 
     public static void selfDestroyEmbedMSG(MessageEmbed msg, int time_in_millis, GuildVoiceJoinEvent event) {
-        Message send = event.getGuild().getTextChannelsByName(event.getChannelJoined().getName(), true).get(0).sendMessage(msg).complete();
+        Message send = event.getGuild().getTextChannelsByName(event.getChannelJoined().getName(), true).get(0).sendMessageEmbeds(msg).complete();
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -173,7 +173,7 @@ public class MessageActions {
 //        embed.setColor(Color.RED);
 //        embed.setDescription(getLocalizedString("modules_is_deactivated", "server", event.getGuild().getId())
 //                .replace("[MODUL]", module));
-//        event.getChannel().sendMessage(embed.build()).queue();
+//        event.getChannel().sendMessageEmbeds(embed.build()).queue();
 //    }
 // --Commented out by Inspection STOP (25.06.2020 13:43)
 

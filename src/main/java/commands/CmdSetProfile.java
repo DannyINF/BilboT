@@ -63,7 +63,7 @@ public class CmdSetProfile implements Command {
             embed.setTitle("Profil erstellt!");
             embed.setTitle("Es wurde ein Profil f\u00FCr " + event.getAuthor().getName() + " erstellt!");
         }
-        event.getChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
     }
 

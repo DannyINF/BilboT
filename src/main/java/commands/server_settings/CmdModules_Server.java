@@ -124,7 +124,7 @@ public class CmdModules_Server implements Command {
                 embed.setDescription(MessageActions.getLocalizedString("modules_status", "server", event.getGuild().getId()).replace("[MODUL]", answer[0])
                         .replace("[STATUS]", status_str));
             }
-            event.getChannel().sendMessage(embed.build()).queue();
+            event.getChannel().sendMessageEmbeds(embed.build()).queue();
         } else {
             PermissionChecker.noPower(event);
         }

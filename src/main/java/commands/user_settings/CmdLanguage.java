@@ -36,7 +36,7 @@ public class CmdLanguage implements Command {
                             "country = '" + language.split("_")[1].toUpperCase() + "' where id = '" + event.getAuthor().getId() + "'");
                     embed.setDescription(MessageActions.getLocalizedString("lang_set_user", "user", event.getAuthor().getId())
                             .replace("[USER]", event.getAuthor().getAsMention()));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 } else {
                     event.getChannel().sendMessage(MessageActions.getLocalizedString("lang_syntax_user", "user", event.getAuthor().getId())).queue();
                 }

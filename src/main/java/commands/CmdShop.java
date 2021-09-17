@@ -58,7 +58,7 @@ public class CmdShop {
                         "\uD83C\uDFA7 Voiceintros\n" +
                         "\uD83D\uDC8C Willkommensbanner\n" +
                         "\uD83D\uDCBC Inventar");
-                privateChannel.sendMessage(embedBuilder.build()).queue(msg -> {
+                privateChannel.sendMessageEmbeds(embedBuilder.build()).queue(msg -> {
                     msg.addReaction("\uD83C\uDFA7").queue();
                     msg.addReaction("\uD83D\uDC8C").queue();
                     msg.addReaction("\uD83D\uDCBC").queue();

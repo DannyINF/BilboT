@@ -33,61 +33,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="863d672a-82fe-4540-bbe7-2912edd5f713" name="Default" comment="adding roots of the shop system&#10;implement /exil for community-mods">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_2_1_272.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/core/SlashCommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_api_1_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_api_1_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_natives_1_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_natives_1_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_71.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_1_3_77.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_natives_1_3_13.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sedmelluq_lavaplayer_natives_1_3_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_2_0_228.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BilboT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BilboT.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/InitMusicAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/InitMusicAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/PlayerControl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/audio/TrackScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/audio/TrackScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Cmd2x.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Cmd2x.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdBan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdBotinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdBotinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdClear.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdCoins.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdCreateRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdCreateRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdDeleteRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdDeleteRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdExil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdHelp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdIntro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdKick.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdQuiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdNewspaper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdNewspaper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdRules.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdShutdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdShutdown.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdTalk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdTalk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdSetProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdSetProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdShop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdXp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdXp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/CmdXpRanking.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/CmdShop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdLanguage_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdLanguage_Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdModules_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdModules_Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdOptimalSettings_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/server_settings/CmdOptimalSettings_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/CommandHandlerMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CommandHandlerMusic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/user_settings/CmdLanguage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/user_settings/CmdLanguage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/MessageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/MessageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/PermissionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/PermissionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/CommandsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/CommandsListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/IntroListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/SpamListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/XpListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ChatfilterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ChatfilterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ExpertReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ExpertReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ModReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ModReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ReportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ReportListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/ShopReactionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/ShopReactionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/listeners/VoiceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/listeners/VoiceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/Announcements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/Announcements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/special/XpGewinne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/special/XpGewinne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ActivityChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/MenuEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/MenuEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/MenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/MenuPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

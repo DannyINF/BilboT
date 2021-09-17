@@ -57,7 +57,7 @@ public class ChatfilterListener extends ListenerAdapter {
                                 "\n" + sb.substring(0, sb.toString().length() - 2) +
                                 "\n[jump](" + jump + ")");
                         assert modlog != null;
-                        modlog.sendMessage(embed.build()).queue();
+                        modlog.sendMessageEmbeds(embed.build()).queue();
                     }
                     if (event.getMessage().getContentRaw().toLowerCase().contains("#feanordidnothingwrong") &&
                             (event.getChannel().getId().equals("388970700372705280") ||

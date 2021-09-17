@@ -272,7 +272,7 @@ public class EditQuestionListener extends ListenerAdapter {
                             expert.addField((i + 1) + ". Antwort", list.get(i), false);
                     }
                     String[] finalAnswer = answer;
-                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessage(expert.build()).queue(msg -> {
+                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessageEmbeds(expert.build()).queue(msg -> {
                         msg.addReaction("\u2705").queue();
                         msg.addReaction("\u26D4").queue();
                         msg.addReaction("\u270F").queue();
@@ -284,7 +284,7 @@ public class EditQuestionListener extends ListenerAdapter {
                     });
                     expert.setTitle("Deine Frage wurde editiert!");
                     expert.setDescription("Deine Frage wurde editiert und erneut eingesendet.");
-                    Objects.requireNonNull(event.getJDA().getUserById(answer[16])).openPrivateChannel().queue(channel -> channel.sendMessage(expert.build()).queue());
+                    Objects.requireNonNull(event.getJDA().getUserById(answer[16])).openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(expert.build()).queue());
 
                     event.getChannel().sendMessage(">>> Die editierte Frage wurde eingesendet. Vielen Dank!").queue();
                     break;

@@ -96,7 +96,7 @@ public class CmdQuiz {
                     stats.setDescription(
                            statsall + statscasual //+ statsranked
                     );
-                    event.getChannel().sendMessage(stats.build()).queue();
+                    event.getChannel().sendMessageEmbeds(stats.build()).queue();
                     break;
                 case "ranking":
                 case "leaderboard":
@@ -208,7 +208,7 @@ public class CmdQuiz {
                             expert.addField((i + 1) + ". Antwort", answer_list.get(i), false);
                     }
                     String[] finalQuestion = question;
-                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessage(expert.build()).queue(msg -> {
+                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessageEmbeds(expert.build()).queue(msg -> {
                         msg.addReaction("\u2705").queue();
                         msg.addReaction("\u26D4").queue();
                         msg.addReaction("\u270F").queue();

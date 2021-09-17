@@ -37,7 +37,7 @@ public class CmdLanguage_Server implements Command {
                     DatabaseHandler.database("serversettings", "update msgs set language = '" + language.split("_")[0] + "', " +
                             "country = '" + language.split("_")[1].toUpperCase() + "' where id = '" + event.getGuild().getId() + "'");
                     embed.setDescription(MessageActions.getLocalizedString("lang_set_server", "server", event.getGuild().getId()));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                     Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId())).modifyNickname(
                             MessageActions.getLocalizedString("bilbot_name", "server", event.getGuild().getId())).queue();
                 } else {

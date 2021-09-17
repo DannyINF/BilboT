@@ -120,13 +120,13 @@ public class ExpertReactionListener extends ListenerAdapter {
                             " \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde geschlossen.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_reporter.setColor(Color.GREEN);
                     pm_reporter.setTitle("Dein Report wurde geschlossen!");
                     pm_reporter.setDescription("Dein Report \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" + answer[18] + "` wurde geschlossen.");
                     user_reporter.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_reporter.build()).queue()
+                            channel.sendMessageEmbeds(pm_reporter.build()).queue()
                     );
                     try {
                         DatabaseHandler.database(event.getGuild().getId(), "update quizquestions set status = 111 where id = " + answer[0]);
@@ -139,7 +139,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                     assert user_question != null;
                     embed_expert.setDescription("Die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** wurde angenommen.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
                     //status = 111 -> ready
                     try {
                         DatabaseHandler.database(event.getGuild().getId(), "update quizquestions set status = 111 where id = " + answer[0]);
@@ -166,7 +166,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                     pm_question.setTitle("Deine Frage wurde angenommen!");
                     pm_question.setDescription("Deine Frage `" + answer[1] + "` wurde angenommen und du erh\u00e4ltst `" + coins + "` Coins.");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
                 }
                 msg.delete().queue();
@@ -182,14 +182,14 @@ public class ExpertReactionListener extends ListenerAdapter {
                             " \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde diese gel\u00f6scht.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_question = new EmbedBuilder();
                     pm_question.setColor(Color.red);
                     pm_question.setTitle("Deine Frage wurde gel\u00f6scht.");
                     pm_question.setDescription("Aufgrund von `" + answer[18] + "` wurde deine Frage **#" + answer[0] + "** `" + answer[1] + "` gel\u00f6scht.");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
 
                     pm_reporter = new EmbedBuilder();
@@ -197,7 +197,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                     pm_reporter.setTitle("Eine Frage wurde entfernt!");
                     pm_reporter.setDescription("Aufgrund deines Reports mit dem Grund `" + answer[18] + "` wurde die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** gel\u00f6scht!");
                     user_reporter.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_reporter.build()).queue()
+                            channel.sendMessageEmbeds(pm_reporter.build()).queue()
                     );
                 } else {
                     embed_expert = new EmbedBuilder();
@@ -206,14 +206,14 @@ public class ExpertReactionListener extends ListenerAdapter {
                     assert user_question != null;
                     embed_expert.setDescription("Die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** wurde abgelehnt.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_question = new EmbedBuilder();
                     pm_question.setColor(Color.red);
                     pm_question.setTitle("Deine Frage wurde abgelehnt.");
                     pm_question.setDescription("Deine Frage `" + answer[1] + "` wurde abgelehnt.");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
                 }
                 try {
@@ -234,14 +234,14 @@ public class ExpertReactionListener extends ListenerAdapter {
                             " \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde geschlossen und die Frage von **" + stimmen.toString() + "** wird editiert.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_reporter = new EmbedBuilder();
                     pm_reporter.setColor(Color.GREEN);
                     pm_reporter.setTitle("Eine Frage wird editiert!");
                     pm_reporter.setDescription("Aufgrund deines Reports mit dem Grund `" + answer[18] + "` wird die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** editiert!");
                     user_reporter.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_reporter.build()).queue()
+                            channel.sendMessageEmbeds(pm_reporter.build()).queue()
                     );
                 } else {
                     embed_expert = new EmbedBuilder();
@@ -250,14 +250,14 @@ public class ExpertReactionListener extends ListenerAdapter {
                     assert user_question != null;
                     embed_expert.setDescription("Die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** wird editiert.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_question = new EmbedBuilder();
                     pm_question.setColor(Color.GREEN);
                     pm_question.setTitle("Deine Frage wird editiert!");
                     pm_question.setDescription("Deine Frage `" + answer[1] + "` wird editiert.");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
                 }
                 msg.delete().queue();
@@ -306,7 +306,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                             " \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde als Trolling eingestuft.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_reporter = new EmbedBuilder();
                     pm_reporter.setColor(Color.red);
@@ -316,7 +316,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                             "Als Bestrafung wurden dir auf dem **Tolkien Discord** `7` Coins abgezogen.\n" +
                             "Unterlasse in Zukunft das Erstellen von Trollreports, da sonst zu h\u00e4rteren Strafen gegriffen wird!");
                     user_reporter.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_reporter.build()).queue()
+                            channel.sendMessageEmbeds(pm_reporter.build()).queue()
                     );
                     try {
                         DatabaseHandler.database(event.getGuild().getId(), "update quizquestions set status = 111 where id = " + answer[0]);
@@ -335,7 +335,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                     embed_expert.setTitle("Frage bearbeitet: TROLL");
                     embed_expert.setDescription("Die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** wurde als Trolling eingestuft.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_question = new EmbedBuilder();
                     pm_question.setColor(Color.red);
@@ -344,7 +344,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                             "Als Bestrafung wurden dir auf dem **Tolkien Discord** `7` Coins abgezogen.\n" +
                             "Unterlasse in Zukunft das Erstellen von Trollfragen, da sonst zu h\u00e4rteren Strafen gegriffen wird!");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
                     try {
                         DatabaseHandler.database(event.getGuild().getId(), "delete from quizquestions where id = " + answer[0]);
@@ -369,7 +369,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                             " \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde an die Administratoren weitergeleitet.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_reporter = new EmbedBuilder();
                     pm_reporter.setColor(Color.GREEN);
@@ -377,7 +377,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                     pm_reporter.setDescription("Dein Report \u00fcber die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** mit dem Grund `" +
                             answer[18] + "` wurde an die Administratoren weitergeleitet.");
                     user_reporter.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_reporter.build()).queue()
+                            channel.sendMessageEmbeds(pm_reporter.build()).queue()
                     );
                     victim_id = user_reporter.getId();
                 } else {
@@ -387,14 +387,14 @@ public class ExpertReactionListener extends ListenerAdapter {
                     assert user_question != null;
                     embed_expert.setDescription("Die Frage **#" + answer[0] + "** von **" + user_question.getAsTag() + "** wurde an die Administratoren weitergeleitet.\n" +
                             "Zust\u00e4ndige Experten: " + stimmen.toString());
-                    event.getChannel().sendMessage(embed_expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed_expert.build()).queue();
 
                     pm_question = new EmbedBuilder();
                     pm_question.setColor(Color.red);
                     pm_question.setTitle("Deine Frage wurde abgelehnt.");
                     pm_question.setDescription("Deine Frage `" + answer[1] + "` wurde abgelehnt.");
                     user_question.openPrivateChannel().queue(channel ->
-                            channel.sendMessage(pm_question.build()).queue()
+                            channel.sendMessageEmbeds(pm_question.build()).queue()
                     );
                     for (User user : users)
                         if (!user.isBot()) {
@@ -411,7 +411,7 @@ public class ExpertReactionListener extends ListenerAdapter {
                 String finalVictim_id = victim_id;
                 URL finalJump = jump;
                 User finalUser_question = user_question;
-                Objects.requireNonNull(event.getGuild().getTextChannelById(434007950852489216L)).sendMessage(report.build()).queue(message -> {
+                Objects.requireNonNull(event.getGuild().getTextChannelById(434007950852489216L)).sendMessageEmbeds(report.build()).queue(message -> {
                     message.addReaction("\u21A9").queue();
                     message.addReaction("\u2705").queue();
                     message.addReaction("\uD83C\uDFAD").queue();

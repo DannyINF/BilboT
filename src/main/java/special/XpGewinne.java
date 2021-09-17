@@ -87,7 +87,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 ////                    } catch (IOException e) {
 ////                        e.printStackTrace();
 ////                    }
-////                    event.getChannel().sendMessage(embed.build()).queue();
+////                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
 ////                }
 ////            }
 ////            try {

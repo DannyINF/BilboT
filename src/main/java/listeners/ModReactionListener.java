@@ -109,7 +109,7 @@ public class ModReactionListener extends ListenerAdapter {
                         answer[4] + "` wurde geschlossen. \nDem Nutzer **" + victim.getUser().getAsTag() + "**" +
                         " wurden f\u00fcr Trolling 5% seiner Coins abgezogen (`-" + victim_coins + "` Coins)!\n" +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 EmbedBuilder pm_victim = new EmbedBuilder();
                 pm_victim.setColor(Color.red);
@@ -118,7 +118,7 @@ public class ModReactionListener extends ListenerAdapter {
                         "Als Bestrafung wurden dir auf dem **Tolkien Discord** 5% deiner Coins abgezogen (`-" + victim_coins + "` Coins).\n" +
                         "Unterlasse in Zukunft das Erstellen von Trollreports, da sonst zu h\u00e4rteren Strafen gegriffen wird!");
                 victim.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_victim.build()).queue()
+                        channel.sendMessageEmbeds(pm_victim.build()).queue()
                 );
 
                 mode = mode + "#" + victim_coins;
@@ -134,14 +134,14 @@ public class ModReactionListener extends ListenerAdapter {
                         " \u00fcber **" + offender.getUser().getAsTag() + "** mit dem Grund `" +
                         answer[4] + "` wurde geschlossen.\n" +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 pm_victim = new EmbedBuilder();
                 pm_victim.setColor(Color.GREEN);
                 pm_victim.setTitle("Dein Report wurde geschlossen!");
                 pm_victim.setDescription("Dein Report \u00fcber **" + offender.getUser().getAsTag() + "** mit dem Grund `" + answer[4] + "` wurde geschlossen.");
                 victim.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_victim.build()).queue()
+                        channel.sendMessageEmbeds(pm_victim.build()).queue()
                 );
 
                 msg.clearReactions().queue();
@@ -158,7 +158,7 @@ public class ModReactionListener extends ListenerAdapter {
                 embed.setDescription("Seht euch mal diesen [Report](" + jump + ") von **" + victim.getUser().getAsTag() + "**" +
                         " \u00fcber **" + offender.getUser().getAsTag() + "** mit dem Grund `" +
                         answer[4] + "` an!");
-                Objects.requireNonNull(event.getGuild().getTextChannelById("461434087857586177")).sendMessage(embed.build()).queue();
+                Objects.requireNonNull(event.getGuild().getTextChannelById("461434087857586177")).sendMessageEmbeds(embed.build()).queue();
                 break;
             case "exil":
                 Role exil = event.getGuild().getRolesByName("exil", true).get(0);
@@ -174,7 +174,7 @@ public class ModReactionListener extends ListenerAdapter {
                         answer[4] + "` wurde geschlossen.\n" +
                         "Der Nutzer **" + offender.getUser().getAsTag() + "** wurde in das Exil verschoben.\n" +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 EmbedBuilder pm_offender = new EmbedBuilder();
                 pm_offender.setColor(Color.ORANGE);
@@ -182,7 +182,7 @@ public class ModReactionListener extends ListenerAdapter {
                 pm_offender.setDescription("Aufgrund von `" + answer[4] + "` wurdest du auf dem **Tolkien Discord** in das Exil verschoben.\n" +
                         "Im Exilchannel kannst du nun alles Weitere mit den Administratoren besprechen.");
                 offender.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_offender.build()).queue()
+                        channel.sendMessageEmbeds(pm_offender.build()).queue()
                 );
 
                 pm_victim = new EmbedBuilder();
@@ -190,7 +190,7 @@ public class ModReactionListener extends ListenerAdapter {
                 pm_victim.setTitle(offender.getUser().getAsTag() + " wurde in das Exil verschoben!");
                 pm_victim.setDescription("Aufgrund deines Reports mit dem Grund `" + answer[4] + "` wurde **" + offender.getUser().getAsTag() + "** in das Exil verschoben!");
                 victim.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_victim.build()).queue()
+                        channel.sendMessageEmbeds(pm_victim.build()).queue()
                 );
 
                 try {
@@ -211,7 +211,7 @@ public class ModReactionListener extends ListenerAdapter {
                         answer[4] + "` wurde geschlossen.\n" +
                         "Der Nutzer **" + offender.getUser().getAsTag() + "** wurde vom Server gekickt.\n" +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 pm_offender = new EmbedBuilder();
                 pm_offender.setColor(Color.red);
@@ -220,7 +220,7 @@ public class ModReactionListener extends ListenerAdapter {
                         "Du kannst weiterhin dem Server beitreten.");
                 String[] finalAnswer1 = answer;
                 offender.getUser().openPrivateChannel().queue(channel -> {
-                    channel.sendMessage(pm_offender.build()).queue();
+                    channel.sendMessageEmbeds(pm_offender.build()).queue();
                     offender.kick(finalAnswer1[4]).queue();
                 });
 
@@ -229,7 +229,7 @@ public class ModReactionListener extends ListenerAdapter {
                 pm_victim.setTitle(offender.getUser().getAsTag() + " wurde gekickt!");
                 pm_victim.setDescription("Aufgrund deines Reports mit dem Grund `" + answer[4] + "` wurde **" + offender.getUser().getAsTag() + "** vom **Tolkien Discord** gekickt!");
                 victim.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_victim.build()).queue()
+                        channel.sendMessageEmbeds(pm_victim.build()).queue()
                 );
 
                 msg.clearReactions().queue();
@@ -244,7 +244,7 @@ public class ModReactionListener extends ListenerAdapter {
                         answer[4] + "` wurde geschlossen.\n" +
                         "Der Nutzer **" + offender.getUser().getAsTag() + "** wurde vom Server gebannt.\n" +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 pm_offender = new EmbedBuilder();
                 pm_offender.setColor(Color.red);
@@ -253,7 +253,7 @@ public class ModReactionListener extends ListenerAdapter {
                         "Kontaktiere einen Administrator, falls du mehr \u00fcber deine Banstrafe erfahren m\u00f6chtest.");
                 String[] finalAnswer = answer;
                 offender.getUser().openPrivateChannel().queue(channel -> {
-                    channel.sendMessage(pm_offender.build()).queue();
+                    channel.sendMessageEmbeds(pm_offender.build()).queue();
                     offender.ban(1, finalAnswer[4]).queue();
                 });
 
@@ -262,7 +262,7 @@ public class ModReactionListener extends ListenerAdapter {
                 pm_victim.setTitle(offender.getUser().getAsTag() + " wurde gebannt!");
                 pm_victim.setDescription("Aufgrund deines Reports mit dem Grund `" + answer[4] + "` wurde **" + offender.getUser().getAsTag() + "** vom **Tolkien Discord** gebannt!");
                 victim.getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(pm_victim.build()).queue()
+                        channel.sendMessageEmbeds(pm_victim.build()).queue()
                 );
 
                 msg.clearReactions().queue();
@@ -379,7 +379,7 @@ public class ModReactionListener extends ListenerAdapter {
                         answer[4] + "` wurde wieder ge\u00f6ffnet.\n" +
                         revert_ruling +
                         "Zust\u00e4ndige Administratoren: " + stimmen.toString());
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
                 if (!answer[6].split("#")[0].equals("troll")) {
                     pm_offender = new EmbedBuilder();
@@ -388,7 +388,7 @@ public class ModReactionListener extends ListenerAdapter {
                     pm_offender.setDescription("Der Report \u00fcber dich mit dem Grund `" + answer[4] + "` wurde auf dem **Tolkien Discord** wieder er\u00f6ffnet.\n" +
                             revert_ruling_offender);
                     try {
-                        offender.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(pm_offender.build()).queue());
+                        offender.getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(pm_offender.build()).queue());
                     } catch (Exception ignored) {}
                 }
 
@@ -398,7 +398,7 @@ public class ModReactionListener extends ListenerAdapter {
                 pm_victim.setDescription("Dein Report \u00fcber **" + offender.getUser().getAsTag() + "** mit dem Grund `" + answer[4] + "` wurde auf dem **Tolkien Discord** wieder er\u00f6ffnet.\n" +
                         revert_ruling_victim);
                 try {
-                    victim.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(pm_victim.build()).queue());
+                    victim.getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(pm_victim.build()).queue());
                 } catch (Exception ignored) {}
                 break;
         }

@@ -129,7 +129,7 @@ public class ReportListener extends ListenerAdapter {
             embed.addField("Channel:", answer[3], false);
             embed.addField("Beschreibung:", answer[5], false);
             assert modlog != null;
-            modlog.sendMessage(embed.build()).queue(msg -> {
+            modlog.sendMessageEmbeds(embed.build()).queue(msg -> {
                 msg.addReaction("\u21A9").queue();
                 msg.addReaction("\u2705").queue();
                 msg.addReaction("\uD83C\uDFAD").queue();

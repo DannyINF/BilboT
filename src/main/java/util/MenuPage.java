@@ -37,7 +37,7 @@ public class MenuPage {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(headline);
         embedBuilder.setDescription(description + "\n" + linked_menupages);
-        event.getChannel().sendMessage(embedBuilder.build()).queue(message -> {
+        event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue(message -> {
             for (String str : icons) {
                 message.addReaction(str).queue();
             }
@@ -61,7 +61,7 @@ public class MenuPage {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(headline);
         embedBuilder.setDescription(description + "\n" + linked_menupages);
-        event.getMember().getUser().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(embedBuilder.build()).queue(message -> {
+        event.getMember().getUser().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessageEmbeds(embedBuilder.build()).queue(message -> {
             for (String str : icons) {
                 message.addReaction(str).queue();
             }

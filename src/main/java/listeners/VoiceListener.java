@@ -59,7 +59,7 @@ public class VoiceListener extends ListenerAdapter implements AudioReceiveHandle
                 embed.setColor(Color.green);
                 embed.setDescription("[" + java.time.LocalDate.now() + " " + java.time.LocalTime.now() + "] **" + event.getVoiceState().getMember().getUser().getName() + "** joined **" + event.getChannelJoined().getName() + "**!");
                 assert voicelog != null;
-                voicelog.sendMessage(embed.build()).queue();
+                voicelog.sendMessageEmbeds(embed.build()).queue();
             }
 
     }
@@ -117,7 +117,7 @@ public class VoiceListener extends ListenerAdapter implements AudioReceiveHandle
                     embed.setColor(Color.red);
                     embed.setDescription("[" + java.time.LocalDate.now() + " " + java.time.LocalTime.now() + "] **" + event.getVoiceState().getMember().getUser().getName() + "** left **" + event.getChannelLeft().getName() + "**!");
                     assert voicelog != null;
-                    voicelog.sendMessage(embed.build()).queue();
+                    voicelog.sendMessageEmbeds(embed.build()).queue();
                 }
 
         }
@@ -149,7 +149,7 @@ public class VoiceListener extends ListenerAdapter implements AudioReceiveHandle
                 embed.setColor(Color.orange);
                 embed.setDescription("[" + java.time.LocalDate.now() + " " + java.time.LocalTime.now() + "] **" + event.getVoiceState().getMember().getUser().getName() + "** moved to **" + event.getChannelJoined().getName() + "**!");
                 assert voicelog != null;
-                voicelog.sendMessage(embed.build()).queue();
+                voicelog.sendMessageEmbeds(embed.build()).queue();
                 if (event.getGuild().getRolesByName(event.getChannelJoined().getName(), true).isEmpty()) {
                     event.getGuild().createRole().setColor(Color.LIGHT_GRAY).setName(event.getChannelJoined().getName())
                             .setMentionable(true).setHoisted(false).queue();

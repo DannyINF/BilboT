@@ -132,10 +132,10 @@ public class ActivityChecker {
                         embed1.setTitle("Kick!");
                         embed1.setDescription(member.getAsMention() + " wurde aufgrund von Inaktivit\u00e4t gekickt.");
                         assert modlog != null;
-                        modlog.sendMessage(embed1.build()).queue();
+                        modlog.sendMessageEmbeds(embed1.build()).queue();
 
                         PrivateChannel channel = member.getUser().openPrivateChannel().complete();
-                        channel.sendMessage(embed.build()).queue();
+                        channel.sendMessageEmbeds(embed.build()).queue();
                         guild.kick(member, "Inaktivit\u00e4t").queue();
                         try {
                             Thread.sleep(1000);
@@ -157,10 +157,10 @@ public class ActivityChecker {
                         embed1.setDescription(member.getUser().getAsTag() + " wurde aufgrund von Inaktivit\u00e4t verwarnt.");
 
                         assert modlog != null;
-                        modlog.sendMessage(embed1.build()).queue();
+                        modlog.sendMessageEmbeds(embed1.build()).queue();
 
                         PrivateChannel channel = member.getUser().openPrivateChannel().complete();
-                        channel.sendMessage(embed.build()).queue();
+                        channel.sendMessageEmbeds(embed.build()).queue();
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {

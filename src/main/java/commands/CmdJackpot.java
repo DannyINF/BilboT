@@ -160,7 +160,7 @@ public class CmdJackpot implements Command {
         win.setTitle("Gewinn");
         win.setDescription(event.getAuthor().getAsMention() + " hat einen Tier-" + tier + "-Gewinn! \n" +
                 gewinnstr);
-        event.getChannel().sendMessage(win.build()).queue();
+        event.getChannel().sendMessageEmbeds(win.build()).queue();
 
 
     }
@@ -170,7 +170,7 @@ public class CmdJackpot implements Command {
         error.setDescription(description.toString());
         error.setTitle("Error");
         error.setColor(Color.RED);
-        event.getChannel().sendMessage(error.build()).queue();
+        event.getChannel().sendMessageEmbeds(error.build()).queue();
     }
 
     private String winclass(int winning_class) {

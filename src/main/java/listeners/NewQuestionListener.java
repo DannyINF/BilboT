@@ -167,7 +167,7 @@ public class NewQuestionListener extends ListenerAdapter {
                         if (list.get(i).length() != 0)
                             expert.addField((i + 1) + ". Antwort", list.get(i), false);
                     }
-                    event.getChannel().sendMessage(expert.build()).queue();
+                    event.getChannel().sendMessageEmbeds(expert.build()).queue();
                     event.getChannel().sendMessage(">>> Um die Frage einzusenden, musst du nur noch auf \u2705 unter dieser Nachricht klicken!").queue(msg -> msg.addReaction("\u2705").queue());
                     break;
                 case "13":
@@ -189,7 +189,7 @@ public class NewQuestionListener extends ListenerAdapter {
                         if (list.get(i).length() != 0)
                             expert.addField((i + 1) + ". Antwort", list.get(i), false);
                     }
-                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessage(expert.build()).queue(msg -> {
+                    Objects.requireNonNull(Objects.requireNonNull(event.getJDA().getGuildById(STATIC.GUILD_ID)).getTextChannelById(STATIC.QUESTION_CHANNEL)).sendMessageEmbeds(expert.build()).queue(msg -> {
                         msg.addReaction("\u2705").queue();
                         msg.addReaction("\u26D4").queue();
                         msg.addReaction("\u270F").queue();

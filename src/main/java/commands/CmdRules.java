@@ -55,19 +55,19 @@ public class CmdRules implements Command {
 
                 embed.setTitle("\u00A71 G\u00FCltigkeit des Regelwerks\n");
                 embed.setDescription(paragraf1);
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 embed.setTitle("\u00A72 Durchsetzung des Regelwerks\n");
                 embed.setDescription(paragraf2);
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 embed.setTitle("\u00A73 Verhalten in Text Channels\n");
                 embed.setDescription(paragraf3);
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 embed.setTitle("\u00A74 Verhalten in Voice Channels\n");
                 embed.setDescription(paragraf4);
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 embed.setTitle("\u00A75 Sonstiges\n");
                 embed.setDescription(paragraf5);
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 
 
         } else {

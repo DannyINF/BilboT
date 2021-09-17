@@ -71,11 +71,11 @@ public class CmdNewspaper implements Command {
                         transaktion.setTitle(MessageActions.getLocalizedString("newspaper_transaction", "user", event.getAuthor().getId()));
                         transaktion.setDescription(MessageActions.getLocalizedString("newspaper_normal_internal", "server", event.getGuild().getId())
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[COINS]", String.valueOf(prize / 2)));
-                        Objects.requireNonNull(event.getGuild().getMemberById("471366682263289886")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessage(transaktion.build()).queue());
-                        Objects.requireNonNull(event.getGuild().getMemberById("354354147614654465")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessage(transaktion.build()).queue());
+                        Objects.requireNonNull(event.getGuild().getMemberById("471366682263289886")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessageEmbeds(transaktion.build()).queue());
+                        Objects.requireNonNull(event.getGuild().getMemberById("354354147614654465")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessageEmbeds(transaktion.build()).queue());
                         transaktion.setDescription(MessageActions.getLocalizedString("newspaper_normal_buyer", "user", event.getAuthor().getId()));
                         event.getAuthor().openPrivateChannel().queue((channel) -> {
-                            channel.sendMessage(transaktion.build()).queue();
+                            channel.sendMessageEmbeds(transaktion.build()).queue();
                             channel.sendFile(new File("Properties/Newspaper/Normal.pdf")).queue();
                         });
                         break;
@@ -101,12 +101,12 @@ public class CmdNewspaper implements Command {
                         transaktion.setTitle(MessageActions.getLocalizedString("newspaper_transaction", "user", event.getAuthor().getId()));
                         transaktion.setDescription(MessageActions.getLocalizedString("newspaper_premium_internal", "server", event.getGuild().getId())
                                 .replace("[USER]", event.getAuthor().getAsMention()).replace("[COINS]", String.valueOf(prize / 2)));
-                        Objects.requireNonNull(event.getGuild().getMemberById("471366682263289886")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessage(transaktion.build()).queue());
-                        Objects.requireNonNull(event.getGuild().getMemberById("354354147614654465")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessage(transaktion.build()).queue());
+                        Objects.requireNonNull(event.getGuild().getMemberById("471366682263289886")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessageEmbeds(transaktion.build()).queue());
+                        Objects.requireNonNull(event.getGuild().getMemberById("354354147614654465")).getUser().openPrivateChannel().queue((channel) -> channel.sendMessageEmbeds(transaktion.build()).queue());
                         Thread.sleep(10);
                         transaktion.setDescription(MessageActions.getLocalizedString("newspaper_premium_buyer", "user", event.getAuthor().getId()));
                         event.getAuthor().openPrivateChannel().queue((channel) -> {
-                            channel.sendMessage(transaktion.build()).queue();
+                            channel.sendMessageEmbeds(transaktion.build()).queue();
                             channel.sendFile(new File("Properties/Newspaper/Premium.pdf")).queue();
                         });
                         break;
@@ -117,7 +117,7 @@ public class CmdNewspaper implements Command {
                 }
             }
         }
-        event.getChannel().sendMessage(embed.build()).queue();
+        event.getChannel().sendMessageEmbeds(embed.build()).queue();
     }
 
 

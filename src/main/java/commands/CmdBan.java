@@ -35,7 +35,7 @@ public class CmdBan {
                 embed.setTitle(MessageActions.getLocalizedString("banned_msg_title", "user", event.getUser().getId()));
                 embed.setDescription("**" + MessageActions.getLocalizedString("banned_msg_content", "user", event.getUser().getId()) + "**\n" + reason);
                 user.openPrivateChannel().queue(channel ->
-                        channel.sendMessage(embed.build()).queue()
+                        channel.sendMessageEmbeds(embed.build()).queue()
                 );
                 // setting up and sending the msg for the #modlog
                 EmbedBuilder embed1 = new EmbedBuilder();
@@ -44,7 +44,7 @@ public class CmdBan {
                 embed1.setDescription(MessageActions.getLocalizedString("log_mod_ban", "server", event.getGuild().getId())
                         .replace("[USER]", user.getAsTag()).replace("[REASON]", reason));
                 assert modlog != null;
-                modlog.sendMessage(embed1.build()).queue(msg -> event.getGuild().ban(user, del_days, reason).queue());
+                modlog.sendMessageEmbeds(embed1.build()).queue(msg -> event.getGuild().ban(user, del_days, reason).queue());
 
             }
         } else {
